@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class SearchManager : MonoBehaviourPunCallbacks
 {
-    // Multiplayer
-    private bool isMultiplayerGame = false;
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -28,10 +26,10 @@ public class SearchManager : MonoBehaviourPunCallbacks
     {
         int randomRoomNumber = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
-        PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOps); 
+        PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOps);
     }
 
-    public override void OnCreateRoomFailed(short returnCode, string message) 
+    public override void OnCreateRoomFailed(short returnCode, string message)
     {
         CreateRoom();
     }
@@ -52,10 +50,5 @@ public class SearchManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("Game");
         }
-    }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log("Disconnect");
     }
 }

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
+using Photon.Realtime;
 
-public class SessionManager : MonoBehaviour
+public class SessionManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     [SerializeField] DecitionManager decitionManager;
@@ -16,6 +18,12 @@ public class SessionManager : MonoBehaviour
     [SerializeField] SlaveStatus slaveStatus;
 
     PhotonView photonView;
+
+    public enum GameResult
+    {
+        Lose,
+        Win
+    }
     void Start()
     {
         photonView = PhotonView.Get(this);
@@ -59,6 +67,10 @@ public class SessionManager : MonoBehaviour
         if (resultResolver.isResultResolverDone)
         {
             ResetSession();
+        }
+        if (SessionEnd())
+        {
+            SceneManager.LoadScene("EndGame");
         }
     }
 
@@ -140,5 +152,38 @@ public class SessionManager : MonoBehaviour
         isSessionLock = false;
         decitionManager.gameObject.SetActive(true);
         resultResolver.gameObject.SetActive(false);
+    }
+    bool SessionEnd()
+    {
+        if (masterStatus.GetHealthBar() == 0)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PlayerPrefs.SetInt("LastResult", (int)GameResult.Lose);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("LastResult", (int)GameResult.Win);
+            }
+            return true;
+        }
+        else if (slaveStatus.GetHealthBar() == 0)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PlayerPrefs.SetInt("LastResult", (int)GameResult.Win);
+            }
+            else
+            {
+                PlayerPrefs.SetInt("LastResult", (int)GameResult.Lose);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.LogError("disconnented");
     }
 }
