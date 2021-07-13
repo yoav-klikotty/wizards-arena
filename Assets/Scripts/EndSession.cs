@@ -32,8 +32,11 @@ public class EndSession : MonoBehaviour
     }
 
     void Disconnect(){
-        PhotonNetwork.Disconnect();
-        PlayAgainBtn.interactable = true;
+        if (PhotonNetwork.IsConnected)
+        {
+            PhotonNetwork.Disconnect();
+            PlayAgainBtn.interactable = true;
+        }
     }
 
     

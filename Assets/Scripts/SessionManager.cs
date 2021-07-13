@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using UnityEngine.SceneManagement;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class SessionManager : MonoBehaviourPunCallbacks
 {
@@ -13,7 +11,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool isSessionLock = false;
     DecitionManager.Option masterOption = DecitionManager.Option.Random;
     DecitionManager.Option slaveOption = DecitionManager.Option.Random;
-
+    [SerializeField] bool isOnline;
     [SerializeField] MasterStatus masterStatus;
     [SerializeField] SlaveStatus slaveStatus;
 
@@ -40,25 +38,15 @@ public class SessionManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (decitionManager.IsDecitionMakingOver())
+        if (isOnline)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                photonView.RPC("UpdateMasterDecition", RpcTarget.All, decitionManager.GetOption());
-            }
-            else
-            {
-                photonView.RPC("UpdateSlaveDecition", RpcTarget.All, decitionManager.GetOption());
-            }
-
+            HandleUpdateForOnlineGame();
         }
-        if (
-            masterOption != DecitionManager.Option.Random
-            &&
-            slaveOption != DecitionManager.Option.Random
-            &&
-            !isSessionLock
-            )
+        else
+        {
+            HandleUpdateForBotGame();
+        }
+        if (IsBothSidesTookDecition())
         {
             isSessionLock = true;
             resultResolver.ResetResultResolver();
@@ -71,6 +59,45 @@ public class SessionManager : MonoBehaviourPunCallbacks
         if (SessionEnd())
         {
             SceneManager.LoadScene("EndGame");
+        }
+    }
+
+    bool IsBothSidesTookDecition()
+    {
+        if (masterOption != DecitionManager.Option.Random
+            &&
+            slaveOption != DecitionManager.Option.Random
+            &&
+            !isSessionLock)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    void HandleUpdateForOnlineGame()
+    {
+        if (decitionManager.IsDecitionMakingOver())
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                photonView.RPC("UpdateMasterDecition", RpcTarget.All, decitionManager.GetOption());
+            }
+            else
+            {
+                photonView.RPC("UpdateSlaveDecition", RpcTarget.All, decitionManager.GetOption());
+            }
+
+        }
+        
+    }
+
+    void HandleUpdateForBotGame()
+    {
+        if (decitionManager.IsDecitionMakingOver())
+        {
+            UpdateMasterDecition(decitionManager.GetOption());
+            UpdateSlaveDecition(DecitionManager.Option.Ammo);
         }
     }
 
@@ -140,8 +167,8 @@ public class SessionManager : MonoBehaviourPunCallbacks
         {
             masterStatus.ReduceAmmo();
             slaveStatus.ReduceAmmo();
-            masterStatus.ReduceHealthBar();
             slaveStatus.ReduceHealthBar();
+            masterStatus.ReduceHealthBar();
         }
 
     }
