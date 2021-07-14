@@ -7,6 +7,7 @@ using Photon.Pun;
 
 public class SlaveStatus : MonoBehaviour
 {
+
     int lifeAmount = 2;
     [SerializeField] TMP_Text LifeAmount;
     int ammoAmount = 0;
@@ -15,7 +16,6 @@ public class SlaveStatus : MonoBehaviour
     [SerializeField] Slider HealthBar;
     PhotonView photonView;
     [SerializeField] Image background;
-
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +27,6 @@ public class SlaveStatus : MonoBehaviour
             photonView.RPC("SetLife", RpcTarget.All, lifeAmount);
             photonView.RPC("SetHealthBar", RpcTarget.All, healthBarAmmount);
         }
-
     }
 
     // Update is called once per frame

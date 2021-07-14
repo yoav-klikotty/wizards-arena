@@ -13,16 +13,6 @@ public class ResultResolver : MonoBehaviour
     public Sprite Shoot;
     public bool isResultResolverDone;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void ResetResultResolver(){
         isResultResolverDone = false;
     }
@@ -34,10 +24,10 @@ public class ResultResolver : MonoBehaviour
     }
 
     void RenderDecition(DecitionManager.Option decition, Image image){
-        if (decition == DecitionManager.Option.Ammo){
+        if (decition == DecitionManager.Option.Reload){
             image.sprite = Ammo;
         }
-        else if (decition == DecitionManager.Option.Shield){
+        else if (decition == DecitionManager.Option.Protect){
             image.sprite = Shield;
         }
         else {

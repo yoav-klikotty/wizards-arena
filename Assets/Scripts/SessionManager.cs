@@ -1,51 +1,34 @@
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 using UnityEngine.SceneManagement;
 
 public class SessionManager : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
-    [SerializeField] DecitionManager decitionManager;
+    [SerializeField] GameObject decitionManagerPrefab;
+    DecitionManager decitionManager;
     [SerializeField] ResultResolver resultResolver;
     bool isSessionLock = false;
-    DecitionManager.Option masterOption = DecitionManager.Option.Random;
-    DecitionManager.Option slaveOption = DecitionManager.Option.Random;
+    public DecitionManager.Option opponentOption = DecitionManager.Option.None;
+    public DecitionManager.Option playerOption = DecitionManager.Option.None;
     [SerializeField] bool isOnline;
-    [SerializeField] MasterStatus masterStatus;
-    [SerializeField] SlaveStatus slaveStatus;
-
-    PhotonView photonView;
-
+    [SerializeField] Player opponent;
+    [SerializeField] Player player;
     public enum GameResult
     {
         Lose,
         Win
     }
+
     void Start()
     {
-        photonView = PhotonView.Get(this);
-        if (PhotonNetwork.IsMasterClient)
-        {
-            masterStatus.SetBackgroud();
-        }
-        else
-        {
-            slaveStatus.SetBackgroud();
-        }
+        decitionManager = Instantiate(decitionManagerPrefab, transform.root).GetComponent<DecitionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isOnline)
-        {
-            HandleUpdateForOnlineGame();
-        }
-        else
-        {
-            HandleUpdateForBotGame();
-        }
+        
         if (IsBothSidesTookDecition())
         {
             isSessionLock = true;
@@ -62,11 +45,12 @@ public class SessionManager : MonoBehaviourPunCallbacks
         }
     }
 
+
     bool IsBothSidesTookDecition()
     {
-        if (masterOption != DecitionManager.Option.Random
+        if (opponentOption != DecitionManager.Option.None
             &&
-            slaveOption != DecitionManager.Option.Random
+            playerOption != DecitionManager.Option.None
             &&
             !isSessionLock)
         {
@@ -75,142 +59,96 @@ public class SessionManager : MonoBehaviourPunCallbacks
         return false;
     }
 
-    void HandleUpdateForOnlineGame()
-    {
-        if (decitionManager.IsDecitionMakingOver())
-        {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                photonView.RPC("UpdateMasterDecition", RpcTarget.All, decitionManager.GetOption());
-            }
-            else
-            {
-                photonView.RPC("UpdateSlaveDecition", RpcTarget.All, decitionManager.GetOption());
-            }
-
-        }
-        
-    }
-
-    void HandleUpdateForBotGame()
-    {
-        if (decitionManager.IsDecitionMakingOver())
-        {
-            UpdateMasterDecition(decitionManager.GetOption());
-            UpdateSlaveDecition(DecitionManager.Option.Ammo);
-        }
-    }
-
-    [PunRPC]
-    void UpdateMasterDecition(DecitionManager.Option option)
-    {
-        masterOption = option;
-    }
-
-    [PunRPC]
-    void UpdateSlaveDecition(DecitionManager.Option option)
-    {
-        slaveOption = option;
-    }
     void RevealDecitions()
     {
-        decitionManager.ResetDecitionManager();
-        decitionManager.gameObject.SetActive(false);
+        Destroy(decitionManager.gameObject);
         resultResolver.gameObject.SetActive(true);
         RenderDecitions();
         HandleResults();
     }
+
     void RenderDecitions()
     {
-        resultResolver.RenderDecitions(masterOption, slaveOption);
+        resultResolver.RenderDecitions(playerOption, opponentOption);
     }
 
     void HandleResults()
     {
-        if (masterOption == DecitionManager.Option.Ammo && slaveOption == DecitionManager.Option.Ammo)
+        if (playerOption == DecitionManager.Option.Reload && opponentOption == DecitionManager.Option.Reload)
         {
-            masterStatus.IncreaseAmmo();
-            slaveStatus.IncreaseAmmo();
+            player.IncreaseAmmo();
+            opponent.IncreaseAmmo();
         }
-        else if (masterOption == DecitionManager.Option.Ammo && slaveOption == DecitionManager.Option.Shield)
+        else if (playerOption == DecitionManager.Option.Reload && opponentOption == DecitionManager.Option.Protect)
         {
-            masterStatus.IncreaseAmmo();
+            player.IncreaseAmmo();
         }
-        else if (masterOption == DecitionManager.Option.Ammo && slaveOption == DecitionManager.Option.Shoot)
+        else if (playerOption == DecitionManager.Option.Reload && opponentOption == DecitionManager.Option.Shoot)
         {
-            masterStatus.IncreaseAmmo();
-            masterStatus.ReduceHealthBar();
-            slaveStatus.ReduceAmmo();
+            player.IncreaseAmmo();
+            player.ReduceHealthBar();
+            opponent.ReduceAmmo();
         }
-        else if (masterOption == DecitionManager.Option.Shield)
+        else if (playerOption == DecitionManager.Option.Protect)
         {
-            if (slaveOption == DecitionManager.Option.Ammo)
+            if (opponentOption == DecitionManager.Option.Reload)
             {
-                slaveStatus.IncreaseAmmo();
+                opponent.IncreaseAmmo();
             }
-            else if (slaveOption == DecitionManager.Option.Shoot)
+            else if (opponentOption == DecitionManager.Option.Shoot)
             {
-                slaveStatus.ReduceAmmo();
+                opponent.ReduceAmmo();
             }
         }
-        else if (masterOption == DecitionManager.Option.Shoot && slaveOption == DecitionManager.Option.Shield)
+        else if (playerOption == DecitionManager.Option.Shoot && opponentOption == DecitionManager.Option.Protect)
         {
-            masterStatus.ReduceAmmo();
+            player.ReduceAmmo();
         }
-        else if (masterOption == DecitionManager.Option.Shoot && slaveOption == DecitionManager.Option.Ammo)
+        else if (playerOption == DecitionManager.Option.Shoot && opponentOption == DecitionManager.Option.Reload)
         {
-            masterStatus.ReduceAmmo();
-            slaveStatus.ReduceHealthBar();
-            slaveStatus.IncreaseAmmo();
+            player.ReduceAmmo();
+            opponent.ReduceHealthBar();
+            opponent.IncreaseAmmo();
         }
-        else if (masterOption == DecitionManager.Option.Shoot && slaveOption == DecitionManager.Option.Shoot)
+        else if (playerOption == DecitionManager.Option.Shoot && opponentOption == DecitionManager.Option.Shoot)
         {
-            masterStatus.ReduceAmmo();
-            slaveStatus.ReduceAmmo();
-            slaveStatus.ReduceHealthBar();
-            masterStatus.ReduceHealthBar();
+            player.ReduceAmmo();
+            opponent.ReduceAmmo();
+            opponent.ReduceHealthBar();
+            player.ReduceHealthBar();
         }
 
     }
+
     void ResetSession()
     {
-        masterOption = DecitionManager.Option.Random;
-        slaveOption = DecitionManager.Option.Random;
+        playerOption = DecitionManager.Option.None;
+        opponentOption = DecitionManager.Option.None;
         isSessionLock = false;
-        decitionManager.gameObject.SetActive(true);
+        if (decitionManager == null)
+        {
+            decitionManager = Instantiate(decitionManagerPrefab, transform.root).GetComponent<DecitionManager>();
+        }
         resultResolver.gameObject.SetActive(false);
     }
+
     bool SessionEnd()
     {
-        if (masterStatus.GetHealthBar() == 0)
+        if (player.GetHealthBar() == 0)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PlayerPrefs.SetInt("LastResult", (int)GameResult.Lose);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("LastResult", (int)GameResult.Win);
-            }
+            PlayerPrefs.SetInt("LastResult", (int)GameResult.Lose);
             return true;
         }
-        else if (slaveStatus.GetHealthBar() == 0)
+        else if (opponent.GetHealthBar() == 0)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PlayerPrefs.SetInt("LastResult", (int)GameResult.Win);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("LastResult", (int)GameResult.Lose);
-            }
+            PlayerPrefs.SetInt("LastResult", (int)GameResult.Win);
             return true;
         }
         return false;
     }
 
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.LogError("disconnented");
-    }
+    //public override void OnDisconnected(DisconnectCause cause)
+    //{
+    //    Debug.LogError("disconnented");
+    //}
 }

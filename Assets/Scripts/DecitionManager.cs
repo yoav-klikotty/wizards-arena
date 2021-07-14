@@ -9,59 +9,57 @@ public class DecitionManager : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] Counter counter;
     [SerializeField] Option option;
-    [SerializeField] MasterStatus masterStatus;
-    [SerializeField] SlaveStatus slaveStatus;
-
+    Player playerStatus;
+    Syncronizer syncronizer;
     [SerializeField] Button shootBtn;
 
     [SerializeField] Button ammoBtn;
     [SerializeField] Button shieldBtn;
 
      public enum Option{
-        Ammo,
-        Shield,
+        Reload,
+        Protect,
         Shoot,
-        Random
+        None
     }
+
     void Start()
     {
-        
+        playerStatus = GameObject.Find("PlayerStatus").GetComponent<Player>();
+        syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (counter.IsCounterEnd() && option == Option.Random){
+        if (counter.IsCounterEnd() && option == Option.None)
+        {
             ChooseRandom();
         }
-        if (PhotonNetwork.IsMasterClient)
+        if (playerStatus.GetAmmo() == 0)
         {
-            if (masterStatus.GetAmmo() == 0){
-                shootBtn.interactable = false;
-            }
-            else {
-                if (!IsDecitionMakingOver()){
-                    shootBtn.interactable = true;
-                }
-            }
+            shootBtn.interactable = false;
         }
-        else {
-            if (slaveStatus.GetAmmo() == 0){
-                shootBtn.interactable = false;
-            }
-            else {
-                if (!IsDecitionMakingOver()){
-                    shootBtn.interactable = true;
-                }
+        else
+        {
+            if (!IsDecitionMakingOver())
+            {
+                shootBtn.interactable = true;
             }
         }
     }
+
     public Option GetOption(){
+
         return option;
+
     }
+
     public void ChooseAmmo(){
+
         if (!IsDecitionMakingOver()){
-            option = Option.Ammo;
+            syncronizer.HandleUpdateForOnlineGame(Option.Reload);
+            option = Option.Reload;
             shootBtn.interactable = false;
             shieldBtn.interactable = false;
         }
@@ -69,32 +67,37 @@ public class DecitionManager : MonoBehaviour
     }
 
     public void ChooseShield(){
+
         if (!IsDecitionMakingOver()){
-            option = Option.Shield;
+            syncronizer.HandleUpdateForOnlineGame(Option.Protect);
+            option = Option.Protect;
             ammoBtn.interactable = false;
             shootBtn.interactable = false;
         }
+
     }
+
     public void ChooseShoot(){
+
         if (!IsDecitionMakingOver()){
+            syncronizer.HandleUpdateForOnlineGame(Option.Shoot);
             option = Option.Shoot;
             ammoBtn.interactable = false;
             shieldBtn.interactable = false;
         }
     }
+
     public void ChooseRandom(){
-        option = Option.Ammo;
+
+        syncronizer.HandleUpdateForOnlineGame(Option.Reload);
+        option = Option.Reload;
+
     }
 
     public bool IsDecitionMakingOver(){
-        return option != Option.Random;
+
+        return option != Option.None;
+
     }
 
-    public void ResetDecitionManager(){
-        counter.ResetCounter();
-        option = Option.Random;
-        ammoBtn.interactable = true;
-        shieldBtn.interactable = true;
-        shootBtn.interactable = true;
-    }
 }
