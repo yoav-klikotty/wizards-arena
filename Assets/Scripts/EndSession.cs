@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using UnityEngine.UI;
-
 public class EndSession : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -14,7 +11,7 @@ public class EndSession : MonoBehaviour
 
     void Start()
     {
-        SessionManager.GameResult result = (SessionManager.GameResult)PlayerPrefs.GetInt("LastResult");
+        SessionManager.GameResult result = LocalStorage.GetLastSessionResult();
         if (result == SessionManager.GameResult.Lose)
         {
             Result.text = "You Lose";

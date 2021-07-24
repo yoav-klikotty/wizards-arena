@@ -15,18 +15,31 @@ public class Syncronizer : MonoBehaviour
     {
         sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         photonView = PhotonView.Get(this);
+        // photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, player);
     }
 
-    public void HandleUpdateForOnlineGame(DecitionManager.Option option)
+    public void UpdatePlayersDecision(DecisionManager.Option option)
     {
+        Debug.Log("HandleUpdateForOnlineGame " + option);
         sessionManager.playerOption = option;
-        photonView.RPC("SyncDecition", RpcTarget.Others, option);
+        photonView.RPC("SyncOpponentDecision", RpcTarget.Others, option);
     }
 
     [PunRPC]
-    void SyncDecition(DecitionManager.Option option)
+    void SyncOpponentDecision(DecisionManager.Option option)
     {
         sessionManager.opponentOption = option;
     }
 
+    [PunRPC]
+    void SyncOpponentPlayer(Player player)
+    {
+        opponent.SetAmmo(player.GetAmmo());
+        opponent.SetLife(player.GetLife());
+    }
+
+    //public override void OnDisconnected(DisconnectCause cause)
+    //{
+    //    Debug.LogError("disconnented");
+    //}
 }

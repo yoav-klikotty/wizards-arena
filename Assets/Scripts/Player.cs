@@ -4,13 +4,18 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    int lifeAmount = 2;
+    [SerializeField] int lifeAmount;
     [SerializeField] TMP_Text LifeAmount;
-    int ammoAmount = 0;
+    [SerializeField] int ammoAmount;
     [SerializeField] TMP_Text AmmoAmount;
-    int healthBarAmmount = 5;
+    [SerializeField] int healthBarAmount;
     [SerializeField] Slider HealthBar;
 
+    void Start()
+    {
+        AmmoAmount.text = ammoAmount + "";
+        LifeAmount.text = lifeAmount + "";
+    }
     public void ReduceAmmo()
     {
         int ammo = GetAmmo();
@@ -22,8 +27,8 @@ public class Player : MonoBehaviour
 
     public void IncreaseAmmo()
     {
-        int ammo = GetAmmo();
-        SetAmmo(ammo + 1);
+        int ammo = GetAmmo() + 1;
+        SetAmmo(ammo);
     }
 
     public void SetAmmo(int ammo)
@@ -48,10 +53,12 @@ public class Player : MonoBehaviour
         return lifeAmount;
     }
 
-    public void ReduceHealthBar()
+    public void ReduceHealthBar(int damage)
     {
+        Debug.Log(damage);
         float healthBar = GetHealthBar();
-        SetHealthBar((int)healthBar - 1);
+        Debug.Log(healthBar);
+        SetHealthBar((int)healthBar - damage);
     }
 
     public void SetHealthBar(int health)

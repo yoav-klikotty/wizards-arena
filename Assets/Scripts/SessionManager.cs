@@ -1,19 +1,21 @@
 using UnityEngine;
-using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class SessionManager : MonoBehaviourPunCallbacks
+public class SessionManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject decitionManagerPrefab;
-    DecitionManager decitionManager;
-    [SerializeField] ResultResolver resultResolver;
+    [SerializeField] GameObject DecisionManagerPrefab;
+    DecisionManager DecisionManager;
+    [SerializeField] GameObject resultResolverPrefab;
+    ResultResolver resultResolver;
     bool isSessionLock = false;
-    public DecitionManager.Option opponentOption = DecitionManager.Option.None;
-    public DecitionManager.Option playerOption = DecitionManager.Option.None;
+    public DecisionManager.Option opponentOption = DecisionManager.Option.None;
+    public DecisionManager.Option playerOption = DecisionManager.Option.None;
     [SerializeField] bool isOnline;
     [SerializeField] Player opponent;
+    [SerializeField] Inventory opponentInventory;
     [SerializeField] Player player;
+    [SerializeField] Inventory playerInventory;
     public enum GameResult
     {
         Lose,
@@ -22,22 +24,17 @@ public class SessionManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        decitionManager = Instantiate(decitionManagerPrefab, transform.root).GetComponent<DecitionManager>();
+        DecisionManager = Instantiate(DecisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (IsBothSidesTookDecition())
+
+        if (IsBothSidesTookDecision())
         {
             isSessionLock = true;
-            resultResolver.ResetResultResolver();
-            RevealDecitions();
-        }
-        if (resultResolver.isResultResolverDone)
-        {
-            ResetSession();
+            RevealDecisions();
         }
         if (SessionEnd())
         {
@@ -46,11 +43,11 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
 
 
-    bool IsBothSidesTookDecition()
+    bool IsBothSidesTookDecision()
     {
-        if (opponentOption != DecitionManager.Option.None
+        if (opponentOption != DecisionManager.Option.None
             &&
-            playerOption != DecitionManager.Option.None
+            playerOption != DecisionManager.Option.None
             &&
             !isSessionLock)
         {
@@ -59,96 +56,96 @@ public class SessionManager : MonoBehaviourPunCallbacks
         return false;
     }
 
-    void RevealDecitions()
+    void RevealDecisions()
     {
-        Destroy(decitionManager.gameObject);
-        resultResolver.gameObject.SetActive(true);
-        RenderDecitions();
+        Destroy(DecisionManager.gameObject);
+        if (resultResolver == null)
+        {
+            resultResolver = Instantiate(resultResolverPrefab, transform.root).GetComponent<ResultResolver>();
+        }
+        RenderDecisions();
         HandleResults();
     }
 
-    void RenderDecitions()
+    void RenderDecisions()
     {
-        resultResolver.RenderDecitions(playerOption, opponentOption);
+        resultResolver.RenderDecisions(playerOption, opponentOption);
     }
 
     void HandleResults()
     {
-        if (playerOption == DecitionManager.Option.Reload && opponentOption == DecitionManager.Option.Reload)
+        if (playerOption == DecisionManager.Option.Reload && opponentOption == DecisionManager.Option.Reload)
         {
             player.IncreaseAmmo();
             opponent.IncreaseAmmo();
         }
-        else if (playerOption == DecitionManager.Option.Reload && opponentOption == DecitionManager.Option.Protect)
+        else if (playerOption == DecisionManager.Option.Reload && opponentOption == DecisionManager.Option.Protect)
         {
             player.IncreaseAmmo();
         }
-        else if (playerOption == DecitionManager.Option.Reload && opponentOption == DecitionManager.Option.Shoot)
+        else if (playerOption == DecisionManager.Option.Reload && opponentOption == DecisionManager.Option.Shoot)
         {
             player.IncreaseAmmo();
-            player.ReduceHealthBar();
+            player.ReduceHealthBar(opponentInventory.GetCurrentWeapon().damage);
             opponent.ReduceAmmo();
         }
-        else if (playerOption == DecitionManager.Option.Protect)
+        else if (playerOption == DecisionManager.Option.Protect)
         {
-            if (opponentOption == DecitionManager.Option.Reload)
+            if (opponentOption == DecisionManager.Option.Reload)
             {
                 opponent.IncreaseAmmo();
             }
-            else if (opponentOption == DecitionManager.Option.Shoot)
+            else if (opponentOption == DecisionManager.Option.Shoot)
             {
                 opponent.ReduceAmmo();
             }
         }
-        else if (playerOption == DecitionManager.Option.Shoot && opponentOption == DecitionManager.Option.Protect)
+        else if (playerOption == DecisionManager.Option.Shoot && opponentOption == DecisionManager.Option.Protect)
         {
             player.ReduceAmmo();
         }
-        else if (playerOption == DecitionManager.Option.Shoot && opponentOption == DecitionManager.Option.Reload)
+        else if (playerOption == DecisionManager.Option.Shoot && opponentOption == DecisionManager.Option.Reload)
         {
             player.ReduceAmmo();
-            opponent.ReduceHealthBar();
+            opponent.ReduceHealthBar(playerInventory.GetCurrentWeapon().damage);
             opponent.IncreaseAmmo();
         }
-        else if (playerOption == DecitionManager.Option.Shoot && opponentOption == DecitionManager.Option.Shoot)
+        else if (playerOption == DecisionManager.Option.Shoot && opponentOption == DecisionManager.Option.Shoot)
         {
             player.ReduceAmmo();
             opponent.ReduceAmmo();
-            opponent.ReduceHealthBar();
-            player.ReduceHealthBar();
+            opponent.ReduceHealthBar(playerInventory.GetCurrentWeapon().damage);
+            player.ReduceHealthBar(opponentInventory.GetCurrentWeapon().damage);
         }
 
     }
 
-    void ResetSession()
+    public void ResetSession()
     {
-        playerOption = DecitionManager.Option.None;
-        opponentOption = DecitionManager.Option.None;
-        isSessionLock = false;
-        if (decitionManager == null)
+        playerOption = DecisionManager.Option.None;
+        opponentOption = DecisionManager.Option.None;
+        Destroy(resultResolver.gameObject);
+        if (DecisionManager == null)
         {
-            decitionManager = Instantiate(decitionManagerPrefab, transform.root).GetComponent<DecitionManager>();
+            DecisionManager = Instantiate(DecisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
         }
-        resultResolver.gameObject.SetActive(false);
+        isSessionLock = false;
     }
 
     bool SessionEnd()
     {
         if (player.GetHealthBar() == 0)
         {
-            PlayerPrefs.SetInt("LastResult", (int)GameResult.Lose);
+            LocalStorage.SetLastSessionResult(GameResult.Lose);
             return true;
         }
         else if (opponent.GetHealthBar() == 0)
         {
-            PlayerPrefs.SetInt("LastResult", (int)GameResult.Win);
+            LocalStorage.SetLastSessionResult(GameResult.Win);
             return true;
         }
         return false;
     }
 
-    //public override void OnDisconnected(DisconnectCause cause)
-    //{
-    //    Debug.LogError("disconnented");
-    //}
+
 }

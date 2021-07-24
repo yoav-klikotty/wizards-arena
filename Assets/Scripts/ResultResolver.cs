@@ -1,40 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultResolver : MonoBehaviour
 {
-    // Start is called before the first frame update
+    SessionManager sessionManager;
     public Image OpponentChoice;
     public Image PlayerChoice;
     public Sprite Shield;
     public Sprite Ammo;
-    public Sprite Shoot;
-    public bool isResultResolverDone;
+    Inventory opponentInventory;
+    Inventory playerInventory;
+    void Awake()
+    {
+        sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        playerInventory = GameObject.Find("PlayerHUD").transform.Find("Inventory").GetComponent<Inventory>();
+        opponentInventory = GameObject.Find("OpponentHUD").transform.Find("Inventory").GetComponent<Inventory>();
 
-    public void ResetResultResolver(){
-        isResultResolverDone = false;
     }
-
-    public void RenderDecitions(DecitionManager.Option playerDecition, DecitionManager.Option opponentDecition){
-        RenderDecition(opponentDecition, OpponentChoice);
-        RenderDecition(playerDecition, PlayerChoice);
+    public void RenderDecisions(DecisionManager.Option playerDecision, DecisionManager.Option opponentDecision){
+        RenderDecision(opponentDecision, OpponentChoice, opponentInventory);
+        RenderDecision(playerDecision, PlayerChoice, playerInventory);
         InvokeRepeating("FinishResolving", 1, 0);
     }
 
-    void RenderDecition(DecitionManager.Option decition, Image image){
-        if (decition == DecitionManager.Option.Reload){
+    void RenderDecision(DecisionManager.Option Decision, Image image, Inventory Inventory){
+        if (Decision == DecisionManager.Option.Reload){
             image.sprite = Ammo;
         }
-        else if (decition == DecitionManager.Option.Protect){
+        else if (Decision == DecisionManager.Option.Protect){
             image.sprite = Shield;
         }
         else {
-            image.sprite = Shoot;
+            image.sprite = Inventory.GetCurrentWeapon().sprite;
         }
     }
     void FinishResolving(){
-        isResultResolverDone = true;
+        sessionManager.ResetSession();
     }
 }

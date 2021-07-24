@@ -638,3 +638,4 @@ MonoBehaviour:
   shootBtn: {fileID: 5906512550544769264}
   ammoBtn: {fileID: 5906512549431304246}
   shieldBtn: {fileID: 5906512549022143971}
+  weapon: []
