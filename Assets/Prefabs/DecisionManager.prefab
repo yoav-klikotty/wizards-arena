@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 270, y: -257.97}
-  m_SizeDelta: {x: 190.4445, y: 196.0626}
+  m_AnchoredPosition: {x: 131, y: -227}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5906512549022143968
 CanvasRenderer:
@@ -167,8 +167,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.4203, y: 294}
-  m_SizeDelta: {x: 300, y: 241.4797}
+  m_AnchoredPosition: {x: 279, y: -233}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5906512549431304247
 CanvasRenderer:
@@ -299,7 +299,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 5.6879}
-  m_SizeDelta: {x: 200, y: 205.47}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5906512550008666126
 CanvasRenderer:
@@ -356,8 +356,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 200
-  m_fontSizeBase: 200
+  m_fontSize: 100
+  m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -433,7 +433,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.4203, y: 4.4203}
-  m_SizeDelta: {x: 300, y: 300}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5906512550327680372
 MonoBehaviour:
@@ -484,8 +484,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -191.35, y: -356}
-  m_SizeDelta: {x: 208.9167, y: 196.07}
+  m_AnchoredPosition: {x: 17, y: -277}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.78091335, y: 0.000000044703484}
 --- !u!222 &5906512550544769265
 CanvasRenderer:
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 5906512550948728990}
   - component: {fileID: 5906512550948728985}
   m_Layer: 5
-  m_Name: DecitionManager
+  m_Name: DecisionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -638,4 +638,3 @@ MonoBehaviour:
   shootBtn: {fileID: 5906512550544769264}
   ammoBtn: {fileID: 5906512549431304246}
   shieldBtn: {fileID: 5906512549022143971}
-  weapon: []

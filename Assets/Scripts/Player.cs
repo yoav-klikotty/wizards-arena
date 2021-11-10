@@ -8,8 +8,11 @@ public class Player : MonoBehaviour
     [SerializeField] TMP_Text LifeAmount;
     [SerializeField] int ammoAmount;
     [SerializeField] TMP_Text AmmoAmount;
-    [SerializeField] int healthBarAmount;
     [SerializeField] Slider HealthBar;
+
+    [SerializeField] Item wand;
+    [SerializeField] Item cape;
+    [SerializeField] Item hat;
 
     void Start()
     {
@@ -69,5 +72,25 @@ public class Player : MonoBehaviour
     public float GetHealthBar()
     {
         return HealthBar.value;
+    }
+
+    public void setWand(Item wand){
+        this.wand = wand;
+    }
+    public Item getWand(){
+        return this.wand;
+    }
+
+    public void setCape(Item cape){
+        this.cape = cape;
+    }
+    public Item getCape(){
+        return this.cape;
+    }
+    public void setHat(Item hat){
+        this.hat = hat;
+    }
+    public Item getHat(){
+        return this.hat;
     }
 }

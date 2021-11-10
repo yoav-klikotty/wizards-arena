@@ -5,7 +5,6 @@ public class DecisionManager : MonoBehaviour
 {
     [SerializeField] Counter counter;
     [SerializeField] Option option;
-    Player playerHUD;
     Syncronizer syncronizer;
     [SerializeField] Button shootBtn;
     [SerializeField] Button ammoBtn;
@@ -21,25 +20,14 @@ public class DecisionManager : MonoBehaviour
 
     void Start()
     {
-        playerHUD = GameObject.Find("PlayerHUD").GetComponent<Player>();
-        playerInventory = playerHUD.transform.Find("Inventory").GetComponent<Inventory>();
         syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
         Image shootBtnSprite = shootBtn.gameObject.GetComponent<Image>();
-        shootBtnSprite.sprite = playerInventory.GetCurrentWeapon().sprite;
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (counter.IsCounterEnd() && option == Option.None)
         {
             ChooseRandom();
-        }
-        if (playerHUD.GetAmmo() == 0){
-            shootBtn.interactable = false;
-        }
-        else{
-            shootBtn.interactable = true;
         }
     }
 
