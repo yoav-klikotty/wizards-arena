@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
 using System.Diagnostics;
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
+    [SerializeField] NavigationPanel navigationPanel;
     private Vector3 panelLocation;
     public float percentThreshold = 0.5f;
     public float easing = 0.5f;
@@ -32,9 +33,11 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
             if(percentage > 0 && currentPage < totalPages){
                 currentPage++;
                 newLocation += new Vector3(-Screen.width, 0, 0);
+                navigationPanel.PageChange(currentPage);
             }else if(percentage < 0 && currentPage > 1){
                 currentPage--;
                 newLocation += new Vector3(Screen.width, 0, 0);
+                navigationPanel.PageChange(currentPage);
             }
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
             panelLocation = newLocation;
