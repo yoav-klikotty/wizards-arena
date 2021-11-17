@@ -54,7 +54,8 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     public void setPage(int page) {
         int delta = page - currentPage;
         currentPage = page;
-        Vector3 newLocation = new Vector3((-1*delta*Screen.width), 0, 0);
+        Vector3 newLocation = transform.position;
+        newLocation += new Vector3((-1*delta*Screen.width), 0, 0);
         StartCoroutine(SmoothMove(transform.position, newLocation, easing));
     }
 
