@@ -17,16 +17,16 @@ public class PlaterStats : MonoBehaviour
 
     void Start()
     {   
-        // var playerData = getData
+        // var playerData = getData;
         
         nameObj.text = "testPlayer";
-        // nameObj.text = playerData.name
+        // nameObj.text = playerData.name;
 
         coinsObj.text = coins.ToString();
-        // coinsObj.text = playerData.coins
+        // coinsObj.text = playerData.coins;
 
         energyObj.text = energy + "/20";
-        // energyObj.text = playerData.energy + "/" + playerData.maxEnergy
+        // energyObj.text = playerData.energy + "/" + playerData.maxEnergy;
 
         levelObj.text = "level: " + level;
         // levelObj.text = "level: " + playerData.level;
