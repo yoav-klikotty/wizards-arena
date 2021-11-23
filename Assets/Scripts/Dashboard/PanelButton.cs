@@ -7,9 +7,7 @@ public class PanelButton : MonoBehaviour
 {
     [SerializeField] PageSwiper pageSwiper;
     [SerializeField] int panelNum;
-    [SerializeField] Image image;
     [SerializeField] GameObject activeFiller;
-    [SerializeField] Sprite buttonImage;
     private bool isActive;
     private bool disabled = false;
 
