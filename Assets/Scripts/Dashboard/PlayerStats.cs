@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class PlaterStats : MonoBehaviour
+public class PlayerStats : MonoBehaviour
 {
     [SerializeField] TMP_Text nameObj;
     [SerializeField] TMP_Text levelObj;

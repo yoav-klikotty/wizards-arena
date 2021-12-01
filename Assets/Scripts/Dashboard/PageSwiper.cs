@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     [SerializeField] NavigationPanel navigationPanel;
+    [SerializeField] DashboardWizardObject wizard;
     private Vector3 panelLocation;
     public float percentThreshold = 0.5f;
     public float easing = 0.5f;
@@ -63,6 +64,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         Vector3 newLocation = transform.position;
         newLocation += new Vector3((-1*delta*Screen.width), 0, 0);
         StartCoroutine(SmoothMove(transform.position, newLocation, easing, true));
+        wizard.ChangePage(page);
     }
 
     public int getPage() {

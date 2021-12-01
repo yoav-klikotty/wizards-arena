@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Wizard : MonoBehaviour {
 
-	public const string IDLE	= "Wizard_Idle";
-	public const string RUN		= "Wizard_Run";
-	public const string ATTACK	= "Wizard_Attack";
-	public const string SKILL	= "Wizard_Skill";
-	public const string DAMAGE	= "Wizard_Damage";
-	public const string STUN	= "Wizard_Stun";
-	public const string DEATH	= "Wizard_Death";
+	public const string IDLE	 = "Wizard_Idle";
+	public const string RUN		 = "Wizard_Run";
+	public const string ATTACK	 = "Wizard_Attack";
+	public const string SKILL	 = "Wizard_Skill";
+	public const string DAMAGE	 = "Wizard_Damage";
+	public const string STUN	 = "Wizard_Stun";
+	public const string DEATH	 = "Wizard_Death";
     public Player player;
 	Animation anim;
 
@@ -44,6 +44,10 @@ public class Wizard : MonoBehaviour {
 
 	public void DeathAni (){
 		anim.CrossFade (DEATH);
+	}
+
+	public void StopAni (){
+		anim.Stop();
 	}
 		
 }
