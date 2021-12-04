@@ -5,32 +5,32 @@ using UnityEngine;
 
 public class PanelButton : MonoBehaviour
 {
-    [SerializeField] PageSwiper pageSwiper;
-    [SerializeField] int panelNum;
-    [SerializeField] GameObject activeFiller;
-    private bool isActive;
-    private bool disabled = false;
+    [SerializeField] PageSwiper _pageSwiper;
+    [SerializeField] int _panelNum;
+    [SerializeField] GameObject _activeFiller;
+    private bool _isActive;
+    private bool _disabled = false;
 
     void Start(){
-        isActive = pageSwiper.getPage() == panelNum;
-        if(isActive) {
-            activeFiller.SetActive(true);
+        _isActive = _pageSwiper.getPage() == _panelNum;
+        if(_isActive) {
+            _activeFiller.SetActive(true);
             Scale(true);
         }
     }
 
     public void setPage(int page) {
-        if(!disabled) {
-            disabled = true;
-            if (page == panelNum) {
-                pageSwiper.setPage(panelNum);
-                isActive = true;
-                activeFiller.SetActive(true);
+        if(!_disabled) {
+            _disabled = true;
+            if (page == _panelNum) {
+                _pageSwiper.setPage(_panelNum);
+                _isActive = true;
+                _activeFiller.SetActive(true);
                 Scale(true);
             }
             else {
-                isActive = false;
-                activeFiller.SetActive(false);
+                _isActive = false;
+                _activeFiller.SetActive(false);
                 Scale(false);
             }
         }
@@ -46,6 +46,6 @@ public class PanelButton : MonoBehaviour
     }
 
     public void EnableButtons() {
-        disabled = false;
+        _disabled = false;
     }
 }

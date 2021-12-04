@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DashboardWizardObject : MonoBehaviour
 {
-    [SerializeField] Wizard wizard;
-    [SerializeField] Canvas gearCanvas;
+    [SerializeField] Wizard _wizard;
+    [SerializeField] Canvas _gearCanvas;
 
     public void ChangePage (int page){
         switch(page) {
@@ -28,17 +28,17 @@ public class DashboardWizardObject : MonoBehaviour
         gameObject.SetActive(true);
         Vector3 newLocation = new Vector3(-1.1f, 0.7f, 0);
         StartCoroutine(SmoothMove(newLocation));
-        wizard.transform.localRotation = Quaternion.Euler(0,180,0);
-        wizard.StopAni();
-        gearCanvas.gameObject.SetActive(true);
+        _wizard.transform.localRotation = Quaternion.Euler(0,180,0);
+        _wizard.StopAni();
+        _gearCanvas.gameObject.SetActive(true);
     }
     private void ArenaPage() {
         gameObject.SetActive(true);
         Vector3 newLocation = new Vector3(-0.05f, 0.7f, 0);
         StartCoroutine(SmoothMove(newLocation));
-        wizard.transform.localRotation = Quaternion.Euler(0,160,0);
-        wizard.IdleAni();
-        gearCanvas.gameObject.SetActive(false);
+        _wizard.transform.localRotation = Quaternion.Euler(0,160,0);
+        _wizard.IdleAni();
+        _gearCanvas.gameObject.SetActive(false);
     }
     private void StorePage() {
         gameObject.SetActive(false);

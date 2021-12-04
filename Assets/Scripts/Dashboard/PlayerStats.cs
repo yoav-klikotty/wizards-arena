@@ -5,44 +5,44 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] TMP_Text nameObj;
-    [SerializeField] TMP_Text levelObj;
-    [SerializeField] TMP_Text coinsObj;
-    [SerializeField] TMP_Text energyObj;
+    [SerializeField] TMP_Text _nameInput;
+    [SerializeField] TMP_Text _levelInput;
+    [SerializeField] TMP_Text _coinsInput;
+    [SerializeField] TMP_Text _energyInput;
 
     // defautls
-    public int level;
-    public int energy;
-    public int coins;
+    public int Level;
+    public int Energy;
+    public int Coins;
 
     void Start()
     {   
         // var playerData = getData;
         
-        nameObj.text = "testPlayer";
-        // nameObj.text = playerData.name;
+        _nameInput.text = "testPlayer";
+        // _nameInput.text = playerData.name;
 
-        coinsObj.text = coins.ToString();
-        // coinsObj.text = playerData.coins;
+        _coinsInput.text = Coins.ToString();
+        // _coinsInput.text = playerData.coins;
 
-        energyObj.text = energy + "/20";
-        // energyObj.text = playerData.energy + "/" + playerData.maxEnergy;
+        _energyInput.text = Energy + "/20";
+        // _energyInput.text = playerData.energy + "/" + playerData.maxEnergy;
 
-        levelObj.text = "level: " + level;
-        // levelObj.text = "level: " + playerData.level;
+        _levelInput.text = "level: " + Level;
+        // _levelInput.text = "level: " + playerData.level;
     }
 
     public void AddCoins (int num) {
-        coins += num;
-        coinsObj.text = coins.ToString();
+        Coins += num;
+        _coinsInput.text = Coins.ToString();
     }
     public void LevelUp (int num) {
-        level++;
-        levelObj.text = "level: " + level;
+        Level++;
+        _levelInput.text = "level: " + Level;
     }
     public void AddEnergy (int num) {
-        energy += num;
-        energyObj.text = energy + "/20";
-        // energyObj.text = level + "/" + playerData.maxEnergy;
+        Energy += num;
+        _energyInput.text = Energy + "/20";
+        // _energyInput.text = level + "/" + playerData.maxEnergy;
     }
 }

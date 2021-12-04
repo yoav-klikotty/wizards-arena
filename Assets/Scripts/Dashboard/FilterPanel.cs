@@ -5,16 +5,16 @@ using UnityEngine;
 public class FilterPanel : MonoBehaviour
 {
 
-    [SerializeField] FilterButton[] buttons = new FilterButton[5];
-    [SerializeField] string filter;
+    [SerializeField] FilterButton[] _buttons = new FilterButton[5];
+    [SerializeField] string _filter;
 
     void Start(){
-        FilterClicked(filter);
+        FilterClicked(_filter);
     }
 
     public void FilterClicked(string filter){
-        for (int i = 0; i < buttons.Length; i++) {
-            buttons[i].SetFilter(filter);
+        for (int i = 0; i < _buttons.Length; i++) {
+            _buttons[i].SetFilter(filter);
         }
     }
 }
