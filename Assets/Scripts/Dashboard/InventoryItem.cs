@@ -20,5 +20,6 @@ public class InventoryItem : MonoBehaviour
     }
     public void ItemClicked(){
         _itemPanel.OpenPanel(_icon, _name, _requiredLevel, _attributes, _description, _type);
+        RectTransform itemRect = this.GetComponent<RectTransform>();
     }
 }
