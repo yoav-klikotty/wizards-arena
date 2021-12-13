@@ -12,12 +12,19 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] TMP_Text _itemType;
     [SerializeField] TMP_Text _itemDescription;
     [SerializeField] TMP_Text[] _attributesInputs = new TMP_Text[4];
-    public void OpenPanel(Sprite sprite, string name, int requiredLevel, string[] attributes, string description, string type) {
-        _itemIcon.sprite = sprite;
-        _nameInput.text = name;
-        _itemType.text = type;
-        _itemDescription.text = description;
-        _requiredLevelInput.text = "Level required: " + requiredLevel.ToString();
+    [SerializeField] GameObject _staffSlot;
+    [SerializeField] GameObject _capeSLot;
+    [SerializeField] GameObject _orbSlot;
+    private InventoryItem _itemSelected;
+
+    public void OpenPanel(InventoryItem itemSelected) {
+        _itemSelected = itemSelected;
+        _itemIcon.sprite = itemSelected.GetIcon();
+        _nameInput.text = itemSelected.GetName();
+        _itemType.text = itemSelected.GetType();
+        _itemDescription.text = itemSelected.GetDescription();
+        _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
+        string[] attributes = itemSelected.GetAttributes();
         for(int i = 0; i < _attributesInputs.Length; i++) {
             _attributesInputs[i].text = attributes[i];
         }
@@ -25,6 +32,22 @@ public class ItemPanel : MonoBehaviour
     }
     
     public void ClosePanel() {
+        gameObject.SetActive(false);
+    }
+
+    public void EquipItem(){
+        switch(_itemSelected.GetType()) {
+            case "Staff":
+                _itemSelected.transform.SetParent(_staffSlot.transform, false);
+                break;
+            case "Orb":
+                _itemSelected.transform.SetParent(_orbSlot.transform, false);
+                break;
+            case "Cape":
+                _itemSelected.transform.SetParent(_capeSLot.transform, false);
+                break;
+            default: return;
+        }
         gameObject.SetActive(false);
     }
 }

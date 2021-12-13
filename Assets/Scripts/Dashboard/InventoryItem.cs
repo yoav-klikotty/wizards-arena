@@ -19,7 +19,25 @@ public class InventoryItem : MonoBehaviour
         _itemPanel = Resources.FindObjectsOfTypeAll<ItemPanel>()[0];
     }
     public void ItemClicked(){
-        _itemPanel.OpenPanel(_icon, _name, _requiredLevel, _attributes, _description, _type);
+        _itemPanel.OpenPanel(this);
         RectTransform itemRect = this.GetComponent<RectTransform>();
+    }
+    public string GetName() {
+        return _name;
+    }
+    public int GetRequiredLevel() {
+        return _requiredLevel;
+    }
+    public string GetDescription() {
+        return _description;
+    }
+    public string GetType() {
+        return _type;
+    }
+    public Sprite GetIcon() {
+        return _icon;
+    }
+    public string[] GetAttributes() {
+        return _attributes;
     }
 }

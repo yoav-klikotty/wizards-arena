@@ -728,7 +728,6 @@ MonoBehaviour:
   - Advanced_Staff
   - Orb
   - Cape
-  _panelFilter: {fileID: 883163653}
   _prefabs:
   - {fileID: 4601522714787735445, guid: 8da3ec4a15f50094cb1740c53cfdc778, type: 3}
   - {fileID: 3984235016252156139, guid: 2cdd9b8ad9d72714689a1caae9d0bc85, type: 3}
@@ -736,6 +735,7 @@ MonoBehaviour:
   - {fileID: 2230774391992843262, guid: be37ac430b3853c419b84808880fe165, type: 3}
   - {fileID: 3759392584487037110, guid: 00cb7b75f2e7bb9409c2001862014003, type: 3}
   - {fileID: 5173713873003232611, guid: 8a27b4681d7d55048ab78da9a48494b9, type: 3}
+  _unfilteredContaier: {fileID: 1499439548}
 --- !u!1 &317287563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1815,7 +1815,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: weapon
+      value: Staff
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -1935,7 +1935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: weapon
+      value: Staff
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3252,7 +3252,7 @@ MonoBehaviour:
   - {fileID: 164761385}
   - {fileID: 1409700218}
   _filter: all
-  _unfilteredContaier: {fileID: 1499439548}
+  _invetoryManeger: {fileID: 315807630}
 --- !u!114 &883163654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3967,6 +3967,9 @@ MonoBehaviour:
   - {fileID: 405015447}
   - {fileID: 1355096569}
   - {fileID: 41010567}
+  _staffSlot: {fileID: 606362775}
+  _capeSLot: {fileID: 1939653232}
+  _orbSlot: {fileID: 94599756}
 --- !u!114 &979172079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4124,7 +4127,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 979172078}
+    - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 979172078}
     - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
@@ -4132,15 +4143,31 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ClosePanel
+      value: EquipItem
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: EquipItem
       objectReference: {fileID: 0}
     - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: ItemPanel, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: ItemPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5028859192264527164, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5028859192264527166, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
@@ -4340,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: cape
+      value: Cape
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -4460,7 +4487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: cape
+      value: Cape
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5971,7 +5998,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: orb
+      value: Orb
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -6093,7 +6120,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: orb
+      value: Orb
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
