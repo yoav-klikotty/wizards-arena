@@ -30678,8 +30678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a27152de7d2c6b7468fb4e8c7831f9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Opponent: {fileID: 1134142574}
-  SessionManager: {fileID: 1744701560}
+  _opponent: {fileID: 1134142574}
+  _sessionManager: {fileID: 1744701560}
 --- !u!1001 &1136776331
 PrefabInstance:
   m_ObjectHideFlags: 0

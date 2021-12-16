@@ -4,16 +4,19 @@ using System.Collections;
 
 public class SessionManager : MonoBehaviour
 {
-    [SerializeField] GameObject DecisionManagerPrefab;
-    DecisionManager DecisionManager;
-    [SerializeField] GameObject resultResolverPrefab;
-    ResultResolver resultResolver;
-    bool isSessionLock = false;
-    public DecisionManager.Option opponentOption = DecisionManager.Option.None;
-    public DecisionManager.Option playerOption = DecisionManager.Option.None;
-    [SerializeField] bool isOnline;
-    [SerializeField] Player opponent;
-    [SerializeField] Player player;
+    [SerializeField] GameObject _decisionManagerPrefab;
+    DecisionManager _decisionManager;
+    [SerializeField] GameObject _resultResolverPrefab;
+    ResultResolver _resultResolver;
+    bool _isSessionLock = false;
+    bool _isSessionEndLock = false;
+    public DecisionManager.Option OpponentOption = DecisionManager.Option.None;
+    public WizardStatsData OpponentWizardStatsData;
+    public DecisionManager.Option PlayerOption = DecisionManager.Option.None;
+    public WizardStatsData PlayerWizardStatsData;
+    [SerializeField] bool _isOnline;
+    [SerializeField] Player _opponent;
+    [SerializeField] Player _player;
     public enum GameResult
     {
         Lose,
@@ -22,7 +25,7 @@ public class SessionManager : MonoBehaviour
 
     void Start()
     {
-        DecisionManager = Instantiate(DecisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
+        _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
     }
 
     void Update()
@@ -30,11 +33,12 @@ public class SessionManager : MonoBehaviour
 
         if (IsBothSidesTookDecision())
         {
-            isSessionLock = true;
+            _isSessionLock = true;
             RevealDecisions();
         }
-        if (SessionEnd())
+        if (SessionEnd() && !_isSessionEndLock)
         {
+            _isSessionLock = true;
             StartCoroutine("HandleSessionEndEvent");
         }
     }
@@ -42,11 +46,11 @@ public class SessionManager : MonoBehaviour
 
     bool IsBothSidesTookDecision()
     {
-        if (opponentOption != DecisionManager.Option.None
+        if (OpponentOption != DecisionManager.Option.None
             &&
-            playerOption != DecisionManager.Option.None
+            PlayerOption != DecisionManager.Option.None
             &&
-            !isSessionLock)
+            !_isSessionLock)
         {
             return true;
         }
@@ -55,39 +59,39 @@ public class SessionManager : MonoBehaviour
 
     void RevealDecisions()
     {
-        Destroy(DecisionManager.gameObject);
-        if (resultResolver == null)
+        Destroy(_decisionManager.gameObject);
+        if (_resultResolver == null)
         {
-            resultResolver = Instantiate(resultResolverPrefab, transform.root).GetComponent<ResultResolver>();
+            _resultResolver = Instantiate(_resultResolverPrefab, transform.root).GetComponent<ResultResolver>();
         }
         RenderDecisions();
     }
 
     void RenderDecisions()
     {
-        resultResolver.RenderDecisions(playerOption, opponentOption);
+        _resultResolver.RenderDecisions(PlayerOption, OpponentOption);
     }
 
     public void ResetSession()
     {
-        playerOption = DecisionManager.Option.None;
-        opponentOption = DecisionManager.Option.None;
-        Destroy(resultResolver.gameObject);
-        if (DecisionManager == null)
+        PlayerOption = DecisionManager.Option.None;
+        OpponentOption = DecisionManager.Option.None;
+        Destroy(_resultResolver.gameObject);
+        if (_decisionManager == null)
         {
-            DecisionManager = Instantiate(DecisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
+            _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
         }
-        isSessionLock = false;
+        _isSessionLock = false;
     }
 
     bool SessionEnd()
     {
-        if (player.GetHealthBar() == 0)
+        if (_player.GetHealthBar() == 0)
         {
             LocalStorage.SetLastSessionResult(GameResult.Lose);
             return true;
         }
-        else if (opponent.GetHealthBar() == 0)
+        else if (_opponent.GetHealthBar() == 0)
         {
             LocalStorage.SetLastSessionResult(GameResult.Win);
             return true;

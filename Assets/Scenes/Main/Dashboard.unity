@@ -6284,7 +6284,7 @@ MonoBehaviour:
   _wizard: {fileID: 1481404095}
   PercentThreshold: 0.5
   Easing: 0.5
-  TotalPages: 5
+  TotalPages: 3
 --- !u!224 &1702512467 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 352244706389985113, guid: f193875d568df4d4cb7913377d4a1823, type: 3}

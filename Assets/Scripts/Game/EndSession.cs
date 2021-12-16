@@ -20,7 +20,7 @@ public class EndSession : MonoBehaviour
         {
             Result.text = "You Win";
         }
-        InvokeRepeating("Disconnect", 2, 0);
+        InvokeRepeating("Disconnect", 1, 0);
     }
 
     public void StartNewGame()
@@ -32,8 +32,8 @@ public class EndSession : MonoBehaviour
         if (PhotonNetwork.IsConnected)
         {
             PhotonNetwork.Disconnect();
-            PlayAgainBtn.interactable = true;
         }
+        PlayAgainBtn.interactable = true;
     }
 
     

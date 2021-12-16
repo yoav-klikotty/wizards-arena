@@ -5,44 +5,50 @@ using Photon.Pun;
 
 public class Syncronizer : MonoBehaviour
 {
-    SessionManager sessionManager;
-    PhotonView photonView;
-    [SerializeField] Player opponent;
-    [SerializeField] Player player;
-    [SerializeField] BotPlayer botPlayer;
+    SessionManager _sessionManager;
+    PhotonView _photonView;
+    [SerializeField] BotPlayer _botPlayer;
 
     // Start is called before the first frame update
     void Start()
     {
-        sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
-        photonView = PhotonView.Get(this);
-        // photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, player);
+        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        _photonView = PhotonView.Get(this);
+        if (PhotonNetwork.IsConnected)
+        {
+            WizardStatsData wizardStatsData = new WizardStatsData();
+            wizardStatsData.WandPrefabName = "tttt";
+            _photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, JsonUtility.ToJson(wizardStatsData));
+        }
+        else
+        {
+        }
     }
 
     public void UpdatePlayersDecision(DecisionManager.Option option)
     {
-        Debug.Log("HandleUpdateForOnlineGame " + option);
-        sessionManager.playerOption = option;
+        _sessionManager.PlayerOption = option;
         if (PhotonNetwork.IsConnected)
         {
-            photonView.RPC("SyncOpponentDecision", RpcTarget.Others, option);
+            _photonView.RPC("SyncOpponentDecision", RpcTarget.Others, option);
         }
-        else 
+        else
         {
-            botPlayer.GetBotDecision();
+            _botPlayer.GetBotDecision();
         }
     }
 
     [PunRPC]
     void SyncOpponentDecision(DecisionManager.Option option)
     {
-        sessionManager.opponentOption = option;
+        _sessionManager.OpponentOption = option;
     }
 
     [PunRPC]
-    void SyncOpponentPlayer(Player player)
+    void SyncOpponentPlayer(string wizardStatsDataRaw)
     {
-
+        WizardStatsData wizardStatsData = JsonUtility.FromJson<WizardStatsData>(wizardStatsDataRaw);
+        _sessionManager.OpponentWizardStatsData = wizardStatsData;
     }
 
     //public override void OnDisconnected(DisconnectCause cause)

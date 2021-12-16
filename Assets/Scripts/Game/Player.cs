@@ -4,12 +4,12 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Slider HealthBar;
-    [SerializeField] Slider ManaBar;
+    [SerializeField] Slider _healthBar;
+    [SerializeField] Slider _manaBar;
 
-    [SerializeField] Item wand;
-    [SerializeField] Item cape;
-    [SerializeField] Item hat;
+    [SerializeField] Item _wand;
+    [SerializeField] Item _cape;
+    [SerializeField] Item _hat;
 
     public void ReduceHealthBar(float damage)
     {
@@ -19,12 +19,12 @@ public class Player : MonoBehaviour
 
     public void SetHealthBar(float health)
     {
-        HealthBar.value = health;
+        _healthBar.value = health;
     }
 
     public float GetHealthBar()
     {
-        return HealthBar.value;
+        return _healthBar.value;
     }
 
     public void ReduceManaBar(float mana)
@@ -41,31 +41,31 @@ public class Player : MonoBehaviour
 
     public void SetManaBar(float mana)
     {
-        ManaBar.value = mana;
+        _manaBar.value = mana;
     }
 
     public float GetManaBar()
     {
-        return ManaBar.value;
+        return _manaBar.value;
     }
 
     public void setWand(Item wand){
-        this.wand = wand;
+        this._wand = wand;
     }
     public Item getWand(){
-        return this.wand;
+        return this._wand;
     }
 
     public void setCape(Item cape){
-        this.cape = cape;
+        this._cape = cape;
     }
     public Item getCape(){
-        return this.cape;
+        return this._cape;
     }
     public void setHat(Item hat){
-        this.hat = hat;
+        this._hat = hat;
     }
     public Item getHat(){
-        return this.hat;
+        return this._hat;
     }
 }

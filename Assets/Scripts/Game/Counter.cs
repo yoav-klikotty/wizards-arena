@@ -2,23 +2,23 @@ using UnityEngine;
 using TMPro;
 public class Counter : MonoBehaviour
 {
-    [SerializeField] public int secondsLeft;
+    [SerializeField] public int SecondsLeft;
     [SerializeField] TMP_Text Seconds;
 
     void Start()
     {
-        Seconds.text = secondsLeft + "";
+        Seconds.text = SecondsLeft + "";
         InvokeRepeating("DecreaseSeconds", 1, 1);
     }
 
     void DecreaseSeconds(){
-        if (secondsLeft > 0){
-            secondsLeft--;
-            Seconds.text = secondsLeft + "";
+        if (SecondsLeft > 0){
+            SecondsLeft--;
+            Seconds.text = SecondsLeft + "";
         }
     }
 
     public bool IsCounterEnd(){
-        return secondsLeft == 0;
+        return SecondsLeft == 0;
     }
 }

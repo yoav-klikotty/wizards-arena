@@ -4,29 +4,24 @@ public class Skill : MonoBehaviour
 {
     public GameObject ToPoint;
     public GameObject FromPoint;
-    public new string name;
-    public Sprite sprite;
-    public int damagePoints;
-    public int defencePoints;
-    public int requiredMana;
-    ParticleSystem particalSystem;
-    public GameObject FirePrefab;
+    ParticleSystem _particalSystem;
+    [SerializeField] GameObject _firePrefab;
     void Start()
     {
-        particalSystem = GetComponent<ParticleSystem>();
+        _particalSystem = GetComponent<ParticleSystem>();
     }
     public void Activate()
     {
-        particalSystem.Play();
+        _particalSystem.Play();
         Invoke("Diactivate", 2);
     }
     public void ActivateFirePrefab()
     {
-        GameObject instanceBullet = Instantiate(FirePrefab, FromPoint.transform.position, Quaternion.identity);
+        GameObject instanceBullet = Instantiate(_firePrefab, FromPoint.transform.position, Quaternion.identity);
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint.transform.position - FromPoint.transform.position);
     }
     void Diactivate()
     {
-        particalSystem.Stop();
+        _particalSystem.Stop();
     }
 }
