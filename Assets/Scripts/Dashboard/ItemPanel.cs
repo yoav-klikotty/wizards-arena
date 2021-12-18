@@ -12,9 +12,6 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] TMP_Text _itemType;
     [SerializeField] TMP_Text _itemDescription;
     [SerializeField] TMP_Text[] _attributesInputs = new TMP_Text[4];
-    [SerializeField] GameObject _staffSlot;
-    [SerializeField] GameObject _capeSLot;
-    [SerializeField] GameObject _orbSlot;
     private InventoryItem _itemSelected;
 
     public void OpenPanel(InventoryItem itemSelected) {
@@ -36,18 +33,9 @@ public class ItemPanel : MonoBehaviour
     }
 
     public void EquipItem(){
-        switch(_itemSelected.GetType()) {
-            case "Staff":
-                _itemSelected.transform.SetParent(_staffSlot.transform, false);
-                break;
-            case "Orb":
-                _itemSelected.transform.SetParent(_orbSlot.transform, false);
-                break;
-            case "Cape":
-                _itemSelected.transform.SetParent(_capeSLot.transform, false);
-                break;
-            default: return;
-        }
+        var inverntorydata = new InventoryDataController().GetInventoryData();
+        inverntorydata.EquipedItems.Add(inverntorydata.Items[0]);
+        new InventoryDataController().SaveInventoryData(inverntorydata);
         gameObject.SetActive(false);
     }
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3759392584487037104
+--- !u!1 &2230774391992843256
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3759392584487037111}
-  - component: {fileID: 3759392584487037113}
-  - component: {fileID: 3759392584487037114}
-  - component: {fileID: 3759392584487037115}
-  - component: {fileID: 3759392584487037108}
-  - component: {fileID: 3759392584487037109}
-  - component: {fileID: 3759392584487037110}
-  - component: {fileID: 3759392584487037112}
+  - component: {fileID: 2230774391992843263}
+  - component: {fileID: 2230774391992843249}
+  - component: {fileID: 2230774391992843250}
+  - component: {fileID: 2230774391992843251}
+  - component: {fileID: 2230774391992843260}
+  - component: {fileID: 2230774391992843261}
+  - component: {fileID: 2230774391992843262}
+  - component: {fileID: 2230774391992843248}
   m_Layer: 5
-  m_Name: Orb_Inventory
+  m_Name: Cape_Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3759392584487037111
+--- !u!224 &2230774391992843263
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -42,13 +42,13 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &3759392584487037113
+--- !u!223 &2230774391992843249
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
@@ -63,13 +63,13 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &3759392584487037114
+--- !u!114 &2230774391992843250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
@@ -86,13 +86,13 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &3759392584487037115
+--- !u!114 &2230774391992843251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
@@ -103,21 +103,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!222 &3759392584487037108
+--- !u!222 &2230774391992843260
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_CullTransparentMesh: 1
---- !u!114 &3759392584487037109
+--- !u!114 &2230774391992843261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d988721a30268774798f5f920d1cb602, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e505fcc1cc72993478e44a322870a1be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -141,34 +141,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3759392584487037110
+--- !u!114 &2230774391992843262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Orb
+  _name: Cape
   _requiredLevel: 1
   _attributes:
-  - 'Max mana: +5'
+  - 'Max HP: +10'
   - 
   - 
   - 
-  _description: Simple orb
-  _type: Orb
---- !u!114 &3759392584487037112
+  _description: Simple cape
+  _type: Cape
+--- !u!114 &2230774391992843248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -202,11 +202,11 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3759392584487037109}
+  m_TargetGraphic: {fileID: 2230774391992843261}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3759392584487037110}
+      - m_Target: {fileID: 2230774391992843262}
         m_TargetAssemblyTypeName: InventoryItem, Assembly-CSharp
         m_MethodName: ItemClicked
         m_Mode: 1

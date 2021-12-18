@@ -5,7 +5,7 @@ using UnityEngine;
 public class FilterPanel : MonoBehaviour
 {
 
-    [SerializeField] FilterButton[] _buttons = new FilterButton[5];
+    [SerializeField] FilterButton[] _buttons = new FilterButton[4];
     [SerializeField] string _filter;
     [SerializeField] InvetoryManeger _invetoryManeger;
 

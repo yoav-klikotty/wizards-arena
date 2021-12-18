@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    
     [SerializeField] string _name;
     [SerializeField] int _requiredLevel;
     [SerializeField] string[] _attributes = new string[4];
     [SerializeField] string _description;
+    [SerializeField] int _numOfSockets;
+    [SerializeField] string _gems;
     [SerializeField] string _type;
-    private ItemPanel _itemPanel;
+    [SerializeField] bool _equiped;
     private Sprite _icon;
+    private ItemPanel _itemPanel;
     
     void Start(){
         _icon = GetComponent<Image>().sprite;
