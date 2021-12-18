@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public string type;
-    public Sprite sprite;
-    public Skill [] skills;
+    public string Type;
+    public Sprite Sprite;
+    public Skill [] Skills;
 }

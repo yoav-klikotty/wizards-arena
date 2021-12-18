@@ -5,8 +5,8 @@ using Random = System.Random;
 public class BotPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Player Opponent;
-    [SerializeField] SessionManager SessionManager;
+    [SerializeField] Player _opponent;
+    [SerializeField] SessionManager _sessionManager;
     public void GetBotDecision()
     {
         Random rnd = new Random();
@@ -19,13 +19,13 @@ public class BotPlayer : MonoBehaviour
             DecisionManager.Option.Protect, 
             DecisionManager.Option.Shoot 
         };
-        if (Opponent.GetManaBar() > 0)
+        if (_opponent.GetManaBar() > 0)
         {
-            SessionManager.opponentOption = decisionWithShoot[rnd.Next(0,3)];
+            _sessionManager.OpponentOption = decisionWithShoot[rnd.Next(0,3)];
         }
         else
         {
-            SessionManager.opponentOption = decisionWithoutShoot[rnd.Next(0,2)];
+            _sessionManager.OpponentOption = decisionWithoutShoot[rnd.Next(0,2)];
         }
     }
 

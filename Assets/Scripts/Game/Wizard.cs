@@ -11,13 +11,13 @@ public class Wizard : MonoBehaviour {
 	public const string DAMAGE	 = "Wizard_Damage";
 	public const string STUN	 = "Wizard_Stun";
 	public const string DEATH	 = "Wizard_Death";
-    public Player player;
-	Animation anim;
+    public Player Player;
+	Animation _anim;
 
     private bool _isDeadAnimationPlayed = false;
 
 	void Start () {
-		anim = GetComponent<Animation>();
+		_anim = GetComponent<Animation>();
 	}
 
     void Update()
@@ -26,43 +26,44 @@ public class Wizard : MonoBehaviour {
     }
 
 	public void IdleAni (){
-		anim.CrossFade (IDLE);
+		_anim.CrossFade (IDLE);
 	}
 
 	public void RunAni (){
-		anim.CrossFade (RUN);
+		_anim.CrossFade (RUN);
 	}
 
 	public void AttackAni (){
-		anim.CrossFade (ATTACK);
+		_anim.CrossFade (ATTACK);
 	}
 
 	public void SkillAni (){
-		anim.CrossFade (SKILL);
+		_anim.CrossFade (SKILL);
 	}
 
 	public void DamageAni (){
-		anim.CrossFade (DAMAGE);
+		_anim.CrossFade (DAMAGE);
 	}
 
 	public void StunAni (){
-		anim.CrossFade (STUN);
+		_anim.CrossFade (STUN);
 	}
 
 	public void DeathAni (){
-		anim.CrossFade (DEATH);
+		_anim.CrossFade (DEATH);
 	}
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("collision");
         DamageAni();    
-        if (player.GetHealthBar() == 0)
+        if (Player.GetHealthBar() == 0)
         {
             DeathAni();
         }
     }
 
 	public void StopAni (){
-		anim.Stop();
+		_anim.Stop();
 	}
 		
 }

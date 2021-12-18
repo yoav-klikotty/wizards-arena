@@ -3,12 +3,12 @@ using UnityEngine.UI;
 
 public class DecisionManager : MonoBehaviour
 {
-    [SerializeField] Counter counter;
-    [SerializeField] Option option;
-    Syncronizer syncronizer;
-    [SerializeField] Button shootBtn;
-    [SerializeField] Button ammoBtn;
-    [SerializeField] Button shieldBtn;
+    [SerializeField] Counter _counter;
+    [SerializeField] Option _option;
+    Syncronizer _syncronizer;
+    [SerializeField] Button _shootBtn;
+    [SerializeField] Button _ammoBtn;
+    [SerializeField] Button _shieldBtn;
     Player player;
     public enum Option
     {
@@ -20,20 +20,20 @@ public class DecisionManager : MonoBehaviour
 
     void Start()
     {
-        syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
+        _syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
         player = GameObject.Find("Player").GetComponent<Player>();
         if (player.GetManaBar() > 0)
         {
-            shootBtn.interactable = true;
+            _shootBtn.interactable = true;
         }
         else
         {
-            shootBtn.interactable = false;
+            _shootBtn.interactable = false;
         }
     }
     void Update()
     {
-        if (counter.IsCounterEnd() && option == Option.None)
+        if (_counter.IsCounterEnd() && _option == Option.None)
         {
             ChooseRandom();
         }
@@ -42,7 +42,7 @@ public class DecisionManager : MonoBehaviour
     public Option GetOption()
     {
 
-        return option;
+        return _option;
 
     }
 
@@ -51,10 +51,10 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            syncronizer.UpdatePlayersDecision(Option.Reload);
-            option = Option.Reload;
-            shootBtn.interactable = false;
-            shieldBtn.interactable = false;
+            _syncronizer.UpdatePlayersDecision(Option.Reload);
+            _option = Option.Reload;
+            _shootBtn.interactable = false;
+            _shieldBtn.interactable = false;
         }
 
     }
@@ -64,10 +64,10 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            syncronizer.UpdatePlayersDecision(Option.Protect);
-            option = Option.Protect;
-            ammoBtn.interactable = false;
-            shootBtn.interactable = false;
+            _syncronizer.UpdatePlayersDecision(Option.Protect);
+            _option = Option.Protect;
+            _ammoBtn.interactable = false;
+            _shootBtn.interactable = false;
         }
 
     }
@@ -77,25 +77,25 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            syncronizer.UpdatePlayersDecision(Option.Shoot);
-            option = Option.Shoot;
-            ammoBtn.interactable = false;
-            shieldBtn.interactable = false;
+            _syncronizer.UpdatePlayersDecision(Option.Shoot);
+            _option = Option.Shoot;
+            _ammoBtn.interactable = false;
+            _shieldBtn.interactable = false;
         }
     }
 
     public void ChooseRandom()
     {
 
-        syncronizer.UpdatePlayersDecision(Option.Reload);
-        option = Option.Reload;
+        _syncronizer.UpdatePlayersDecision(Option.Reload);
+        _option = Option.Reload;
 
     }
 
     public bool IsDecisionMakingOver()
     {
 
-        return option != Option.None;
+        return _option != Option.None;
 
     }
 

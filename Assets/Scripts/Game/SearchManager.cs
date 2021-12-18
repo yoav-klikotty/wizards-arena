@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class SearchManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] GameObject _botModeButton;
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -11,8 +13,13 @@ public class SearchManager : MonoBehaviourPunCallbacks
     // Multiplayer methods
     public override void OnConnectedToMaster()
     {
+        _botModeButton.SetActive(true);
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinRandomRoom();
+    }
+    public void StartBotGame()
+    {
+        PhotonNetwork.Disconnect();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -48,5 +55,10 @@ public class SearchManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.LoadLevel("Game");
         }
+    }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.Log(PhotonNetwork.IsConnected);
+        SceneManager.LoadScene("Game");
     }
 }
