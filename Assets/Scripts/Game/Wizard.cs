@@ -67,21 +67,3 @@ public class Wizard : MonoBehaviour {
 	}
 		
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
