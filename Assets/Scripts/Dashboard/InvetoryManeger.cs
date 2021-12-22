@@ -13,11 +13,21 @@ public class InvetoryManeger : MonoBehaviour
 
     void Start()
     {
-        var list = _inventoryDataController.GetInventoryData().Items;
-        _inventoryItems = new InventoryItem[list.Count];
+        // string[] list = new string[] {"Orb", "Staff", "Cape", "Advanced_Orb", "Advanced_Staff", "Advanced_Cape"};
+        // var a = _inventoryDataController.GetInventoryData();
+        // var b = new List<InventoryItemData>();
+        // for (int i = 0; i < list.Length; i++) {
+        //     var item = new InventoryItemData();
+        //     item.Name = list[i];
+        //     b.Add(item);
+        // }
+        // a.Items = b;
+        // _inventoryDataController.SaveInventoryData(a);
+        var itemsList = _inventoryDataController.GetInventoryData().Items;
+        _inventoryItems = new InventoryItem[itemsList.Count];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
-        for(int i = 0; i < list.Count; i++){
-            var prefab = Resources.Load("Items/" + list[i] + "/" + list[i] + "_Inventory");
+        for(int i = 0; i < itemsList.Count; i++){
+            var prefab = Resources.Load("Items/" + itemsList[i].Name + "/" + itemsList[i].Name + "_Inventory");
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
         }

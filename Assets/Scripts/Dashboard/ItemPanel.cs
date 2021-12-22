@@ -33,9 +33,24 @@ public class ItemPanel : MonoBehaviour
     }
 
     public void EquipItem(){
-        var inverntorydata = new InventoryDataController().GetInventoryData();
-        inverntorydata.EquipedItems.Add(inverntorydata.Items[0]);
-        new InventoryDataController().SaveInventoryData(inverntorydata);
-        gameObject.SetActive(false);
+    //     var inverntorydata = new InventoryDataController().GetInventoryData();
+    //     switch (_itemSelected.GetType()) {
+    //         case "Staff":
+    //             inverntorydata.Items.Add(inverntorydata.EquipedStaff);
+    //             inverntorydata.EquipedStaff = _itemSelected.GetName();
+    //             break;
+    //         case "Orb":
+    //             inverntorydata.Items.Add(inverntorydata.EquipedOrb);
+    //             inverntorydata.EquipedOrb = _itemSelected.GetName();
+    //             break;
+    //         case "Cape":
+    //             inverntorydata.Items.Add(inverntorydata.EquipedCape);
+    //             inverntorydata.EquipedCape = _itemSelected.GetName();
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //     new InventoryDataController().SaveInventoryData(inverntorydata);
+    //     gameObject.SetActive(false);
     }
 }
