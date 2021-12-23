@@ -34,7 +34,7 @@ public class Syncronizer : MonoBehaviour
         }
         else
         {
-            _botPlayer.GetBotDecision();
+            _sessionManager.OpponentOption = _botPlayer.GetBotDecision();
         }
     }
 

@@ -10,6 +10,14 @@ public class Player : MonoBehaviour
     [SerializeField] Item _wand;
     [SerializeField] Item _cape;
     [SerializeField] Item _hat;
+    void Start()
+    {
+        Material[] mts = {
+            Resources.Load<Material>("Materials/Fantasy_Wizard_Red"),
+        };
+        _wand.SetMaterials(mts);
+        _wand.SetSoftMagic("WaterShot");
+    }
 
     public void ReduceHealthBar(float damage)
     {

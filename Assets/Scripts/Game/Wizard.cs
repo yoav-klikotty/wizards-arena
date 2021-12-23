@@ -54,7 +54,6 @@ public class Wizard : MonoBehaviour {
 	}
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("collision");
         DamageAni();    
         if (Player.GetHealthBar() == 0)
         {
