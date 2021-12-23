@@ -5,8 +5,9 @@ using UnityEngine;
 public class FilterPanel : MonoBehaviour
 {
 
-    [SerializeField] FilterButton[] _buttons = new FilterButton[5];
+    [SerializeField] FilterButton[] _buttons = new FilterButton[4];
     [SerializeField] string _filter;
+    [SerializeField] InvetoryManeger _invetoryManeger;
 
     void Start(){
         FilterClicked(_filter);
@@ -16,5 +17,6 @@ public class FilterPanel : MonoBehaviour
         for (int i = 0; i < _buttons.Length; i++) {
             _buttons[i].SetFilter(filter);
         }
+        _invetoryManeger.FilterItems(filter);
     }
 }

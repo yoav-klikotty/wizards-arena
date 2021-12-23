@@ -12,12 +12,16 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] TMP_Text _itemType;
     [SerializeField] TMP_Text _itemDescription;
     [SerializeField] TMP_Text[] _attributesInputs = new TMP_Text[4];
-    public void OpenPanel(Sprite sprite, string name, int requiredLevel, string[] attributes, string description, string type) {
-        _itemIcon.sprite = sprite;
-        _nameInput.text = name;
-        _itemType.text = type;
-        _itemDescription.text = description;
-        _requiredLevelInput.text = "Level required: " + requiredLevel.ToString();
+    private InventoryItem _itemSelected;
+
+    public void OpenPanel(InventoryItem itemSelected) {
+        _itemSelected = itemSelected;
+        _itemIcon.sprite = itemSelected.GetIcon();
+        _nameInput.text = itemSelected.GetName();
+        _itemType.text = itemSelected.GetType();
+        _itemDescription.text = itemSelected.GetDescription();
+        _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
+        string[] attributes = itemSelected.GetAttributes();
         for(int i = 0; i < _attributesInputs.Length; i++) {
             _attributesInputs[i].text = attributes[i];
         }
@@ -26,5 +30,27 @@ public class ItemPanel : MonoBehaviour
     
     public void ClosePanel() {
         gameObject.SetActive(false);
+    }
+
+    public void EquipItem(){
+    //     var inverntorydata = new InventoryDataController().GetInventoryData();
+    //     switch (_itemSelected.GetType()) {
+    //         case "Staff":
+    //             inverntorydata.Items.Add(inverntorydata.EquipedStaff);
+    //             inverntorydata.EquipedStaff = _itemSelected.GetName();
+    //             break;
+    //         case "Orb":
+    //             inverntorydata.Items.Add(inverntorydata.EquipedOrb);
+    //             inverntorydata.EquipedOrb = _itemSelected.GetName();
+    //             break;
+    //         case "Cape":
+    //             inverntorydata.Items.Add(inverntorydata.EquipedCape);
+    //             inverntorydata.EquipedCape = _itemSelected.GetName();
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    //     new InventoryDataController().SaveInventoryData(inverntorydata);
+    //     gameObject.SetActive(false);
     }
 }

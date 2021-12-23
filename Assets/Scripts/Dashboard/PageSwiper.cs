@@ -10,7 +10,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     private Vector3 _panelLocation;
     public float PercentThreshold = 0.5f;
     public float Easing = 0.5f;
-    public int TotalPages = 5;
+    public int TotalPages = 3;
     private int CurrentPage = 2;
     Stopwatch stopwatch;
     void Start(){
