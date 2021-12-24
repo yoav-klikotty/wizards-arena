@@ -17,7 +17,6 @@ public class Syncronizer : MonoBehaviour
         if (PhotonNetwork.IsConnected)
         {
             WizardStatsData wizardStatsData = new WizardStatsData();
-            wizardStatsData.WandPrefabName = "tttt";
             _photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, JsonUtility.ToJson(wizardStatsData));
         }
         else
@@ -34,7 +33,7 @@ public class Syncronizer : MonoBehaviour
         }
         else
         {
-            _botPlayer.GetBotDecision();
+            _sessionManager.OpponentOption = _botPlayer.GetBotDecision();
         }
     }
 

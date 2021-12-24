@@ -6,26 +6,25 @@ public class BotPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] Player _opponent;
-    [SerializeField] SessionManager _sessionManager;
-    public void GetBotDecision()
+    public DecisionManager.Option GetBotDecision()
     {
         Random rnd = new Random();
-        DecisionManager.Option[] decisionWithoutShoot = { 
-            DecisionManager.Option.Protect, 
-            DecisionManager.Option.Reload, 
+        DecisionManager.Option[] decisionWithoutShoot = {
+            DecisionManager.Option.Protect,
+            DecisionManager.Option.Reload,
         };
-         DecisionManager.Option[] decisionWithShoot = { 
-            DecisionManager.Option.Reload, 
-            DecisionManager.Option.Protect, 
-            DecisionManager.Option.Shoot 
+        DecisionManager.Option[] decisionWithShoot = {
+            DecisionManager.Option.Reload,
+            DecisionManager.Option.Protect,
+            DecisionManager.Option.Shoot
         };
         if (_opponent.GetManaBar() > 0)
         {
-            _sessionManager.OpponentOption = decisionWithShoot[rnd.Next(0,3)];
+            return decisionWithShoot[rnd.Next(0, 3)];
         }
         else
         {
-            _sessionManager.OpponentOption = decisionWithoutShoot[rnd.Next(0,2)];
+            return decisionWithoutShoot[rnd.Next(0, 2)];
         }
     }
 
