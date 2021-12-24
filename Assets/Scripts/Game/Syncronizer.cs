@@ -17,7 +17,6 @@ public class Syncronizer : MonoBehaviour
         if (PhotonNetwork.IsConnected)
         {
             WizardStatsData wizardStatsData = new WizardStatsData();
-            wizardStatsData.WandPrefabName = "tttt";
             _photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, JsonUtility.ToJson(wizardStatsData));
         }
         else
