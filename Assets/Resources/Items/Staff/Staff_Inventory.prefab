@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5173713873003232608}
   - component: {fileID: 5173713873003232611}
   - component: {fileID: 5173713873003232621}
+  - component: {fileID: 7098109295513117611}
   m_Layer: 5
   m_Name: Staff_Inventory
   m_TagString: Untagged
@@ -153,18 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Staff
-  _requiredLevel: 1
-  _attributes:
-  - 'Base Damage: 5-10'
-  - 
-  - 
-  - 
-  _description: Simple Staff
-  _numOfSockets: 0
+  _itemData: {fileID: 7098109295513117611}
   _gems: 
-  _type: Staff
-  _equiped: 0
 --- !u!114 &5173713873003232621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,3 +212,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7098109295513117611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5173713873003232613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 922820103001d794aae0ff03712b2ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Staff
+  RequiredLevel: 5
+  Description: 
+  Type: Staff
+  NumOfSockets: 0
+  inventoryItem: {fileID: 0}

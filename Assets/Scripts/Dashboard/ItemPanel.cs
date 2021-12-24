@@ -21,8 +21,8 @@ public class ItemPanel : MonoBehaviour
         _itemType.text = itemSelected.GetType();
         _itemDescription.text = itemSelected.GetDescription();
         _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
-        string[] attributes = itemSelected.GetAttributes();
-        for(int i = 0; i < _attributesInputs.Length; i++) {
+        List<string> attributes = itemSelected.GetAttributes();
+        for(int i = 0; i < attributes.Count; i++) {
             _attributesInputs[i].text = attributes[i];
         }
         gameObject.SetActive(true);

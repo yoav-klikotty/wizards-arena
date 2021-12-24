@@ -5,20 +5,33 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] string _name;
-    [SerializeField] int _requiredLevel;
-    [SerializeField] string[] _attributes = new string[4];
-    [SerializeField] string _description;
-    [SerializeField] int _numOfSockets;
-    [SerializeField] string _gems;
-    [SerializeField] string _type;
-    [SerializeField] bool _equiped;
+    public ItemData _itemData;
+    private string _name;
+    private int _requiredLevel;
+    private List<string> _attributes = new List<string>();
+    private string _description;
+    private int _numOfSockets;
+    private string _type;
+    private bool _equiped;
     private Sprite _icon;
     private ItemPanel _itemPanel;
+    [SerializeField] string _gems;
+
+    void Awake() {
+        _type = "Cape";
+    }
     
     void Start(){
         _icon = GetComponent<Image>().sprite;
         _itemPanel = Resources.FindObjectsOfTypeAll<ItemPanel>()[0];
+    }
+    public void SetData() {
+        _name = _itemData.Name;
+        _requiredLevel = _itemData.RequiredLevel;
+        _numOfSockets = _itemData.NumOfSockets;
+        _type = _itemData.Type;
+        _description = _itemData.Description;
+        _attributes = _itemData.GetAttributes();
     }
     public void ItemClicked(){
         _itemPanel.OpenPanel(this);
@@ -39,7 +52,7 @@ public class InventoryItem : MonoBehaviour
     public Sprite GetIcon() {
         return _icon;
     }
-    public string[] GetAttributes() {
+    public List<string> GetAttributes() {
         return _attributes;
     }
 }

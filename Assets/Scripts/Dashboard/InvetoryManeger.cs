@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InvetoryManeger : MonoBehaviour
 {
-    [SerializeField] InventoryItem[] _prefabs;
     [SerializeField] GameObject _unfilteredContaier;
     private GameObject[] _slots;
     private InventoryItem[] _inventoryItems;
@@ -13,8 +12,9 @@ public class InvetoryManeger : MonoBehaviour
 
     void Start()
     {
-        // string[] list = new string[] {"Orb", "Staff", "Cape", "Advanced_Orb", "Advanced_Staff", "Advanced_Cape"};
-        // var a = _inventoryDataController.GetInventoryData();
+        // // chunk to write items to local storage
+        // string[] list = new string[] {"Advanced_Cape", "Orb", "Staff", "Cape", "Advanced_Orb", "Advanced_Staff"};
+        // var a = new InventoryData();
         // var b = new List<InventoryItemData>();
         // for (int i = 0; i < list.Length; i++) {
         //     var item = new InventoryItemData();
@@ -23,6 +23,8 @@ public class InvetoryManeger : MonoBehaviour
         // }
         // a.Items = b;
         // _inventoryDataController.SaveInventoryData(a);
+        // // end chunk
+
         var itemsList = _inventoryDataController.GetInventoryData().Items;
         _inventoryItems = new InventoryItem[itemsList.Count];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
@@ -30,6 +32,7 @@ public class InvetoryManeger : MonoBehaviour
             var prefab = Resources.Load("Items/" + itemsList[i].Name + "/" + itemsList[i].Name + "_Inventory");
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
+            _inventoryItems[i].SetData();
         }
     }
 
