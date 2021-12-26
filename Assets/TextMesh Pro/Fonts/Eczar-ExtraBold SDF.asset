@@ -273,11 +273,11 @@ MonoBehaviour:
     m_AtlasIndex: 0
   - m_Index: 44
     m_Metrics:
-      m_Width: 54
-      m_Height: 59.9375
-      m_HorizontalBearingX: 1.984375
-      m_HorizontalBearingY: 59.9375
-      m_HorizontalAdvance: 60.296875
+      m_Width: 48.25
+      m_Height: 62.09375
+      m_HorizontalBearingX: 3.234375
+      m_HorizontalBearingY: 60.296875
+      m_HorizontalAdvance: 54.984375
     m_GlyphRect:
       m_X: 10
       m_Y: 114

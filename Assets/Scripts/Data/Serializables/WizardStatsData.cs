@@ -1,15 +1,13 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class WizardStatsData
 {
-    public AttackStatsData AttackStatsData;
-    public DefenceStatsData DefenceStatsData;
-    public ManaStatsData ManaStatsData;
-    public string WizardPrefabName = "";
-    public string CapePrefabName = "";
-    public string WandPrefabName = "";
-    public string OrbPrefabName = "";
+    public StaffStatsData StaffStatsData;
+    public CapeStatsData CapeStatsData;
+    public OrbStatsData OrbStatsData;
 
 }
 
@@ -38,4 +36,71 @@ public class ManaStatsData
     public float StartMana = 0;
     public int ManaRegeneration = 0;
     public int PassiveManaRegeneration = 0;
+}
+
+[Serializable]
+public class AttackMagicStatsData
+{
+    public string name;
+    public AttackStatsData AttackStatsData;
+}
+
+[Serializable]
+public class StaffStatsData
+{
+    public List<string> materials;
+    public AttackMagicStatsData SoftMagicStats;
+    public AttackMagicStatsData ModerateMagicStats;
+    public AttackMagicStatsData HardMagicStats;
+    public Material[] GetMaterials()
+    {
+        return new Material[] {
+            Resources.Load<Material>("Materials/" + materials[0]),
+        };
+    }
+
+}
+
+[Serializable]
+public class DefenceMagicStatsData
+{
+    public string name;
+    public DefenceStatsData DefenceStatsData;
+}
+
+[Serializable]
+public class CapeStatsData
+{
+    public List<string> materials;
+    public DefenceMagicStatsData SoftMagicStats;
+    public DefenceMagicStatsData ModerateMagicStats;
+    public DefenceMagicStatsData HardMagicStats;
+    public Material[] GetMaterials()
+    {
+        return new Material[] {
+            Resources.Load<Material>("Materials/" + materials[0]),
+        };
+    }
+}
+
+[Serializable]
+public class ManaMagicStatsData
+{
+    public string name;
+    public ManaStatsData ManaStatsData;
+}
+
+[Serializable]
+public class OrbStatsData
+{
+    public List<string> materials;
+    public ManaMagicStatsData SoftMagicStats;
+    public ManaMagicStatsData ModerateMagicStats;
+    public ManaMagicStatsData HardMagicStats;
+    public Material[] GetMaterials()
+    {
+        return new Material[] {
+            Resources.Load<Material>("Materials/" + materials[0]),
+        };
+    }
 }
