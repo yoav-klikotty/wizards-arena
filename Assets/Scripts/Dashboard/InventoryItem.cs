@@ -15,6 +15,7 @@ public class InventoryItem : MonoBehaviour
     private bool _equiped;
     private Sprite _icon;
     private ItemPanel _itemPanel;
+    private InventoryItemData _inventoryItemData;
     [SerializeField] string _gems;
 
     void Awake() {
@@ -25,13 +26,14 @@ public class InventoryItem : MonoBehaviour
         _icon = GetComponent<Image>().sprite;
         _itemPanel = Resources.FindObjectsOfTypeAll<ItemPanel>()[0];
     }
-    public void SetData() {
+    public void SetData(InventoryItemData itemDataPointer) {
         _name = _itemData.Name;
         _requiredLevel = _itemData.RequiredLevel;
         _numOfSockets = _itemData.NumOfSockets;
         _type = _itemData.Type;
         _description = _itemData.Description;
         _attributes = _itemData.GetAttributes();
+        _inventoryItemData = itemDataPointer;
     }
     public void ItemClicked(){
         _itemPanel.OpenPanel(this);
@@ -54,5 +56,9 @@ public class InventoryItem : MonoBehaviour
     }
     public List<string> GetAttributes() {
         return _attributes;
+    }
+
+    public InventoryItemData GetInventoryItemData() {
+        return _inventoryItemData;
     }
 }

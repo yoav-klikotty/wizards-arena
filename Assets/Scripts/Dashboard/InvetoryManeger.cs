@@ -25,14 +25,18 @@ public class InvetoryManeger : MonoBehaviour
         // _inventoryDataController.SaveInventoryData(a);
         // // end chunk
 
-        var itemsList = _inventoryDataController.GetInventoryData().Items;
-        _inventoryItems = new InventoryItem[itemsList.Count];
+        var itemsData = _inventoryDataController.GetInventoryData();
+        var itemsList = itemsData.Items;
+        _inventoryItems = new InventoryItem[itemsList.Count+3];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
+        InstantiateSinglePrefab(itemsData.EquipedCape, 0);
+        InstantiateSinglePrefab(itemsData.EquipedStaff, 1);
+        InstantiateSinglePrefab(itemsData.EquipedOrb, 2);
         for(int i = 0; i < itemsList.Count; i++){
-            var prefab = Resources.Load("Items/" + itemsList[i].Name + "/" + itemsList[i].Name + "_Inventory");
-            var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
-            _inventoryItems[i] = item.GetComponent<InventoryItem>();
-            _inventoryItems[i].SetData();
+            var prefab = Resources.Load("Prefabs/Items/" + itemsList[i].Name + "/" + itemsList[i].Name + "_Inventory");
+            var item = Instantiate(prefab, _slots[i+3].transform.position, _slots[i+3].transform.rotation, _slots[i+3].transform) as GameObject;
+            _inventoryItems[i+3] = item.GetComponent<InventoryItem>();
+            _inventoryItems[i+3].SetData(itemsList[i]);
         }
     }
 
@@ -50,5 +54,12 @@ public class InvetoryManeger : MonoBehaviour
         for(int i = 0; i < filteredItems.Count; i++) {
             filteredItems[i].transform.SetParent(_slots[i].transform, false);
         }
+    }
+
+    private void InstantiateSinglePrefab(InventoryItemData itemData, int position) {
+        var prefab = Resources.Load("Prefabs/Items/" + itemData.Name + "/" + itemData.Name + "_Inventory");
+        var item = Instantiate(prefab, _slots[position].transform.position, _slots[position].transform.rotation, _slots[position].transform) as GameObject;
+        _inventoryItems[position] = item.GetComponent<InventoryItem>();
+        _inventoryItems[position].SetData(itemData);
     }
 }

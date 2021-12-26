@@ -33,24 +33,34 @@ public class ItemPanel : MonoBehaviour
     }
 
     public void EquipItem(){
-    //     var inverntorydata = new InventoryDataController().GetInventoryData();
-    //     switch (_itemSelected.GetType()) {
-    //         case "Staff":
-    //             inverntorydata.Items.Add(inverntorydata.EquipedStaff);
-    //             inverntorydata.EquipedStaff = _itemSelected.GetName();
-    //             break;
-    //         case "Orb":
-    //             inverntorydata.Items.Add(inverntorydata.EquipedOrb);
-    //             inverntorydata.EquipedOrb = _itemSelected.GetName();
-    //             break;
-    //         case "Cape":
-    //             inverntorydata.Items.Add(inverntorydata.EquipedCape);
-    //             inverntorydata.EquipedCape = _itemSelected.GetName();
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    //     new InventoryDataController().SaveInventoryData(inverntorydata);
-    //     gameObject.SetActive(false);
+        var inverntorydata = new InventoryDataController().GetInventoryData();
+        InventoryItemData itemDataPointer = _itemSelected.GetInventoryItemData();
+        switch (_itemSelected.GetType()) {
+            case "Staff":
+                inverntorydata.Items.Add(inverntorydata.EquipedStaff);
+                inverntorydata.EquipedStaff = itemDataPointer;
+                break;
+            case "Orb":
+                inverntorydata.Items.Add(inverntorydata.EquipedOrb);
+                inverntorydata.EquipedOrb = itemDataPointer;
+                break;
+            case "Cape":
+                inverntorydata.Items.Add(inverntorydata.EquipedCape);
+                inverntorydata.EquipedCape = itemDataPointer;
+                break;
+            default:
+                break;
+        }
+        RemoveItemFromList(itemDataPointer, inverntorydata.Items);
+        new InventoryDataController().SaveInventoryData(inverntorydata);
+        gameObject.SetActive(false);
+    }
+
+    private void RemoveItemFromList(InventoryItemData itemEquiped, List<InventoryItemData> unequipedItems) {
+        for(int i = 0; i < unequipedItems.Count; i++) {
+            if(itemEquiped == unequipedItems[i]) {
+                unequipedItems.RemoveAt(i);
+            }
+        }
     }
 }
