@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 4601522714787735451}
   m_Layer: 5
   m_Name: Advanced_Cape_Inventory
+  m_Layer: 5
+  m_Name: Advanced_Cape_Invetory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
