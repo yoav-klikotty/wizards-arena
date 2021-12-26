@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2230774391992843261}
   - component: {fileID: 2230774391992843262}
   - component: {fileID: 2230774391992843248}
-  - component: {fileID: -3227245421818214199}
   m_Layer: 5
   m_Name: Cape_Inventory
   m_TagString: Untagged
@@ -154,8 +153,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemData: {fileID: -3227245421818214199}
-  _gems: 
+  _type: Cape
+  _name: Cape
+  _requiredLevel: 1
+  _attributes:
+  - 'Max HP: 10'
+  _description: Cape
+  _icon: {fileID: 0}
+  _itemPanel: {fileID: 0}
+  _defenceStatsData:
+    MaxHP: 10
+    Recovery: 0
+    Avoidability: 0
+    Mirroring: 0
+  _attackStatsData:
+    MinBaseDamage: 0
+    MaxBaseDamage: 0
+    CriticalRate: 0
+    ArmorPenetration: 0
+  _manaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
 --- !u!114 &2230774391992843248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,21 +232,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &-3227245421818214199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2230774391992843256}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 151c118046abed94f91d605dc6f1eccd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Cape
-  RequiredLevel: 1
-  Description: 
-  Type: Cape
-  NumOfSockets: 0
-  inventoryItem: {fileID: 0}

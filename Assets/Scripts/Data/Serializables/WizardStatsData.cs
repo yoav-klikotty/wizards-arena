@@ -6,9 +6,11 @@ using UnityEngine;
 public class WizardStatsData
 {
     public StaffStatsData StaffStatsData;
+    public AttackStatsData AttackStatsData;
     public CapeStatsData CapeStatsData;
+    public DefenceStatsData DefenceStatsData;
     public OrbStatsData OrbStatsData;
-
+    public ManaStatsData ManaStatsData;
 }
 
 [Serializable]
@@ -42,7 +44,7 @@ public class ManaStatsData
 public class AttackMagicStatsData
 {
     public string name;
-    public AttackStatsData AttackStatsData;
+    public int multiple;
 }
 
 [Serializable]
@@ -65,7 +67,6 @@ public class StaffStatsData
 public class DefenceMagicStatsData
 {
     public string name;
-    public DefenceStatsData DefenceStatsData;
 }
 
 [Serializable]
@@ -87,7 +88,6 @@ public class CapeStatsData
 public class ManaMagicStatsData
 {
     public string name;
-    public ManaStatsData ManaStatsData;
 }
 
 [Serializable]

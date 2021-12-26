@@ -7,12 +7,15 @@ using UnityEngine.UI;
 public class ItemPanel : MonoBehaviour
 {
     [SerializeField] Image _itemIcon;
+    [SerializeField] Button _equipButton;
     [SerializeField] TMP_Text _nameInput;
     [SerializeField] TMP_Text _requiredLevelInput;
     [SerializeField] TMP_Text _itemType;
     [SerializeField] TMP_Text _itemDescription;
     [SerializeField] TMP_Text[] _attributesInputs = new TMP_Text[4];
+    [SerializeField] InvetoryManeger _inventoryManager;
     private InventoryItem _itemSelected;
+    
 
     public void OpenPanel(InventoryItem itemSelected) {
         _itemSelected = itemSelected;
@@ -22,6 +25,7 @@ public class ItemPanel : MonoBehaviour
         _itemDescription.text = itemSelected.GetDescription();
         _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
         List<string> attributes = itemSelected.GetAttributes();
+        _equipButton.interactable = !itemSelected.GetEquipedStatus();
         for(int i = 0; i < attributes.Count; i++) {
             _attributesInputs[i].text = attributes[i];
         }
@@ -33,26 +37,7 @@ public class ItemPanel : MonoBehaviour
     }
 
     public void EquipItem(){
-        var inverntorydata = new InventoryDataController().GetInventoryData();
-        InventoryItemData itemDataPointer = _itemSelected.GetInventoryItemData();
-        switch (_itemSelected.GetType()) {
-            case "Staff":
-                inverntorydata.Items.Add(inverntorydata.EquipedStaff);
-                inverntorydata.EquipedStaff = itemDataPointer;
-                break;
-            case "Orb":
-                inverntorydata.Items.Add(inverntorydata.EquipedOrb);
-                inverntorydata.EquipedOrb = itemDataPointer;
-                break;
-            case "Cape":
-                inverntorydata.Items.Add(inverntorydata.EquipedCape);
-                inverntorydata.EquipedCape = itemDataPointer;
-                break;
-            default:
-                break;
-        }
-        RemoveItemFromList(itemDataPointer, inverntorydata.Items);
-        new InventoryDataController().SaveInventoryData(inverntorydata);
+        _inventoryManager.EquipItem(_itemSelected);
         gameObject.SetActive(false);
     }
 

@@ -5,35 +5,27 @@ using UnityEngine.UI;
 
 public class InventoryItem : MonoBehaviour
 {
-    public ItemData _itemData;
-    private string _name;
-    private int _requiredLevel;
-    private List<string> _attributes = new List<string>();
-    private string _description;
-    private int _numOfSockets;
-    private string _type;
     private bool _equiped;
-    private Sprite _icon;
-    private ItemPanel _itemPanel;
-    private InventoryItemData _inventoryItemData;
-    [SerializeField] string _gems;
+    [SerializeField] string _type;
+    [SerializeField] string _name;
+    [SerializeField] int _requiredLevel;
+    [SerializeField] List<string> _attributes = new List<string>();
+    [SerializeField] string _description;
+    [SerializeField] Sprite _icon;
+    [SerializeField] ItemPanel _itemPanel;
+    [SerializeField] DefenceStatsData _defenceStatsData;
+    [SerializeField] AttackStatsData _attackStatsData;
+    [SerializeField] ManaStatsData _manaStatsData;
 
-    void Awake() {
-        _type = "Cape";
-    }
-    
     void Start(){
         _icon = GetComponent<Image>().sprite;
         _itemPanel = Resources.FindObjectsOfTypeAll<ItemPanel>()[0];
     }
-    public void SetData(InventoryItemData itemDataPointer) {
-        _name = _itemData.Name;
-        _requiredLevel = _itemData.RequiredLevel;
-        _numOfSockets = _itemData.NumOfSockets;
-        _type = _itemData.Type;
-        _description = _itemData.Description;
-        _attributes = _itemData.GetAttributes();
-        _inventoryItemData = itemDataPointer;
+    public void SetEquipedStatus(bool equiped) {
+        _equiped = equiped;
+    }
+    public bool GetEquipedStatus() {
+        return _equiped;
     }
     public void ItemClicked(){
         _itemPanel.OpenPanel(this);
@@ -56,9 +48,5 @@ public class InventoryItem : MonoBehaviour
     }
     public List<string> GetAttributes() {
         return _attributes;
-    }
-
-    public InventoryItemData GetInventoryItemData() {
-        return _inventoryItemData;
     }
 }

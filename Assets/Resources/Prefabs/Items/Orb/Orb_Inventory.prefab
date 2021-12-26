@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3759392584487037109}
   - component: {fileID: 3759392584487037110}
   - component: {fileID: 3759392584487037112}
-  - component: {fileID: 6671106502839606948}
   m_Layer: 5
   m_Name: Orb_Inventory
   m_TagString: Untagged
@@ -154,8 +153,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemData: {fileID: 6671106502839606948}
-  _gems: 
+  _type: Orb
+  _name: Orb
+  _requiredLevel: 1
+  _attributes:
+  - 'Max Mana: 5'
+  _description: Orb
+  _icon: {fileID: 0}
+  _itemPanel: {fileID: 0}
+  _defenceStatsData:
+    MaxHP: 0
+    Recovery: 0
+    Avoidability: 0
+    Mirroring: 0
+  _attackStatsData:
+    MinBaseDamage: 0
+    MaxBaseDamage: 0
+    CriticalRate: 0
+    ArmorPenetration: 0
+  _manaStatsData:
+    MaxMana: 5
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
 --- !u!114 &3759392584487037112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,21 +232,3 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &6671106502839606948
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3759392584487037104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9285fbb4ced95504084f2f89144cbc97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Orb
-  RequiredLevel: 5
-  Description: 
-  Type: Orb
-  NumOfSockets: 0
-  inventoryItem: {fileID: 0}
