@@ -28669,7 +28669,7 @@ MonoBehaviour:
           Mirroring: 0
     OrbStatsData:
       materials:
-      - lava
+      - red
       SoftMagicStats:
         name: Magic aura
         ManaStatsData:

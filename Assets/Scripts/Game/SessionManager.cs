@@ -101,7 +101,7 @@ public class SessionManager : MonoBehaviour
     IEnumerator HandleSessionEndEvent()
     {
 		yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("EndGame");
+        SceneManager.LoadScene("Score");
 		
     }
 
