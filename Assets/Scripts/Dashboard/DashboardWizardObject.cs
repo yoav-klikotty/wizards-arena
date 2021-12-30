@@ -34,7 +34,7 @@ public class DashboardWizardObject : MonoBehaviour
         gameObject.SetActive(true);
         Vector3 newLocation = new Vector3(-0.05f, 0.7f, 0);
         StartCoroutine(SmoothMove(newLocation));
-        _wizard.transform.localRotation = Quaternion.Euler(20,140,-10);
+        _wizard.transform.localRotation = Quaternion.Euler(20, 150, -10);
         _wizard.IdleAni();
     }
     private void StorePage() {

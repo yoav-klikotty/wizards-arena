@@ -23,4 +23,17 @@ public class Item : MonoBehaviour
         softMagic.transform.parent = gameObject.transform;
         SoftMagic = softMagic.GetComponent<Magic>();
     }
+    public void SetModerateMagic(string moderateMagicPrefName)
+    {
+        var moderateMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + moderateMagicPrefName),transform.position, Quaternion.identity);
+        moderateMagic.transform.parent = gameObject.transform;
+        ModerateMagic = moderateMagic.GetComponent<Magic>();
+    }
+
+    public void SetHardMagic(string hardMagicPrefName)
+    {
+        var hardMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + hardMagicPrefName),transform.position, Quaternion.identity);
+        hardMagic.transform.parent = gameObject.transform;
+        HardMagic = hardMagic.GetComponent<Magic>();
+    }
 }

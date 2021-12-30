@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 4601522714787735445}
   - component: {fileID: 4601522714787735451}
   m_Layer: 5
+  m_Name: Advanced_Cape_Inventory
+  m_Layer: 5
   m_Name: Advanced_Cape_Invetory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,15 +155,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: Cape
   _name: Advanced Cape
   _requiredLevel: 5
   _attributes:
-  - 'Max HP: +15'
-  - 
-  - 
-  - 
-  _description: Weak cap
-  _type: Cape
+  - 'Max HP: +20'
+  _description: WeakCape
+  _icon: {fileID: 0}
+  _itemPanel: {fileID: 0}
+  _defenceStatsData:
+    MaxHP: 20
+    Recovery: 0
+    Avoidability: 0
+    Mirroring: 0
+  _attackStatsData:
+    MinBaseDamage: 0
+    MaxBaseDamage: 0
+    CriticalRate: 0
+    ArmorPenetration: 0
+  _manaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
 --- !u!114 &4601522714787735451
 MonoBehaviour:
   m_ObjectHideFlags: 0

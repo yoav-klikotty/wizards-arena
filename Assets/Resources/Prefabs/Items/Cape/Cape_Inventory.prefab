@@ -153,18 +153,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _type: Cape
   _name: Cape
   _requiredLevel: 1
   _attributes:
-  - 'Max HP: +10'
-  - 
-  - 
-  - 
-  _description: Simple cape
-  _numOfSockets: 0
-  _gems: 
-  _type: Cape
-  _equiped: 0
+  - 'Max HP: 10'
+  _description: Cape
+  _icon: {fileID: 0}
+  _itemPanel: {fileID: 0}
+  _defenceStatsData:
+    MaxHP: 10
+    Recovery: 0
+    Avoidability: 0
+    Mirroring: 0
+  _attackStatsData:
+    MinBaseDamage: 0
+    MaxBaseDamage: 0
+    CriticalRate: 0
+    ArmorPenetration: 0
+  _manaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
 --- !u!114 &2230774391992843248
 MonoBehaviour:
   m_ObjectHideFlags: 0

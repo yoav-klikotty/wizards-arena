@@ -483,7 +483,7 @@ MonoBehaviour:
   _victoryMaterial: {fileID: 2100000, guid: f6f38c634af627c40b62e053b1c4414c, type: 2}
   _defeatMaterial: {fileID: 2100000, guid: d81b2a9386cc2224cade1d8f74c923cd, type: 2}
   _starsAnim: {fileID: 1188328479}
-  _debug: 0
+  _debug: 1
   _isWon: 1
 --- !u!114 &513347329 stripped
 MonoBehaviour:

@@ -4,78 +4,102 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] Slider _healthBar;
-    [SerializeField] Slider _manaBar;
+    [SerializeField] int currentHealth;
+    [SerializeField] int currentMana;
 
     [SerializeField] Item _wand;
     [SerializeField] Item _cape;
     [SerializeField] Item _hat;
-    [SerializeField] WizardStatsData WizardStatsData;
+    public WizardStatsData WizardStatsData;
+    private WizardStatsController _wizardStatsController;
+    public PlayerHUD PlayerHUD;
+
     void Start()
     {
         _wand.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
         _wand.SetSoftMagic(WizardStatsData.StaffStatsData.SoftMagicStats.name);
+        _wand.SetModerateMagic(WizardStatsData.StaffStatsData.ModerateMagicStats.name);
+        _wand.SetHardMagic(WizardStatsData.StaffStatsData.HardMagicStats.name);
         _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
         _cape.SetSoftMagic(WizardStatsData.CapeStatsData.SoftMagicStats.name);
         _hat.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
         _hat.SetSoftMagic(WizardStatsData.OrbStatsData.SoftMagicStats.name);
+        PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
+        PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
+        PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
     }
 
-    public void ReduceHealthBar(float damage)
+    public float GetHealth()
     {
-        float healthBar = GetHealthBar();
-        SetHealthBar(healthBar - damage);
+        return currentHealth;
     }
-
-    public void SetHealthBar(float health)
+    public void ReduceHealth(int health)
     {
-        _healthBar.value = health;
+        currentHealth = (currentHealth - health);
+        PlayerHUD.SetHealthBar(currentHealth);
+
     }
 
-    public float GetHealthBar()
+    public void IncreaseHealth(int health)
     {
-        return _healthBar.value;
+        currentHealth = (currentHealth + health);
+        PlayerHUD.SetHealthBar(currentHealth);
     }
-
-    public void ReduceManaBar(float mana)
+    public int GetMana()
     {
-        float manaBar = GetManaBar();
-        SetManaBar(manaBar - mana);
+        return currentMana;
     }
-
-    public void IncreaseManaBar(float mana)
+    public void ReduceMana(int mana)
     {
-        float manaBar = GetManaBar();
-        SetManaBar(manaBar + mana);
+        int newVal = currentMana - mana;
+        if (newVal < 0)
+        {
+            currentMana = 0;
+        }
+        else
+        {
+            currentMana = newVal;
+        }
+        PlayerHUD.RenderAvailableAttacks(currentMana);
     }
 
-    public void SetManaBar(float mana)
+    public void IncreaseMana(int mana)
     {
-        _manaBar.value = mana;
+        int newVal = currentMana + mana;
+        if (newVal > WizardStatsData.ManaStatsData.MaxMana)
+        {
+            currentMana = WizardStatsData.ManaStatsData.MaxMana;
+        }
+        else
+        {
+            currentMana = newVal;
+        }
+        PlayerHUD.RenderAvailableAttacks(currentMana);
     }
 
-    public float GetManaBar()
+    public void setWand(Item wand)
     {
-        return _manaBar.value;
-    }
-
-    public void setWand(Item wand){
         this._wand = wand;
     }
-    public Item getWand(){
+    public Item getWand()
+    {
         return this._wand;
     }
 
-    public void setCape(Item cape){
+    public void setCape(Item cape)
+    {
         this._cape = cape;
     }
-    public Item getCape(){
+    public Item getCape()
+    {
         return this._cape;
     }
-    public void setHat(Item hat){
+    public void setHat(Item hat)
+    {
         this._hat = hat;
     }
-    public Item getHat(){
+    public Item getHat()
+    {
         return this._hat;
     }
 }

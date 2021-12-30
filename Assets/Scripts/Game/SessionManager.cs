@@ -86,12 +86,12 @@ public class SessionManager : MonoBehaviour
 
     bool SessionEnd()
     {
-        if (_player.GetHealthBar() == 0)
+        if (_player.GetHealth() <= 0)
         {
             LocalStorage.SetLastSessionResult(GameResult.Lose);
             return true;
         }
-        else if (_opponent.GetHealthBar() == 0)
+        else if (_opponent.GetHealth() <= 0)
         {
             LocalStorage.SetLastSessionResult(GameResult.Win);
             return true;

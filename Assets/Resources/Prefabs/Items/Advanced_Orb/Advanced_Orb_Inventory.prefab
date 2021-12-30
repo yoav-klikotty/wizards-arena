@@ -153,18 +153,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Orb
+  _type: Orb
+  _name: Advanced Orb
   _requiredLevel: 5
   _attributes:
-  - 'Max Mana: +10'
-  - 
-  - 
-  - 
-  _description: Weak orb
-  _numOfSockets: 0
-  _gems: 
-  _type: Orb
-  _equiped: 0
+  - 'Maxa Mana: +10'
+  _description: A weak orb
+  _icon: {fileID: 0}
+  _itemPanel: {fileID: 0}
+  _defenceStatsData:
+    MaxHP: 0
+    Recovery: 0
+    Avoidability: 0
+    Mirroring: 0
+  _attackStatsData:
+    MinBaseDamage: 0
+    MaxBaseDamage: 0
+    CriticalRate: 0
+    ArmorPenetration: 0
+  _manaStatsData:
+    MaxMana: 10
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
 --- !u!114 &3984235016252156133
 MonoBehaviour:
   m_ObjectHideFlags: 0

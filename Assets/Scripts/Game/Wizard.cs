@@ -55,7 +55,7 @@ public class Wizard : MonoBehaviour {
     void OnCollisionEnter(Collision collision)
     {
         DamageAni();    
-        if (Player.GetHealthBar() == 0)
+        if (Player.GetHealth() <= 0)
         {
             DeathAni();
         }
