@@ -49,4 +49,13 @@ public class InventoryItem : MonoBehaviour
     public List<string> GetAttributes() {
         return _attributes;
     }
+    public AttackStatsData GetAttackStatsData() {
+        return _attackStatsData;
+    }
+    public DefenceStatsData GetDefenceStatsData() {
+        return _defenceStatsData;
+    }
+    public ManaStatsData GetManaStatsData() {
+        return _manaStatsData;
+    }
 }

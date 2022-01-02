@@ -13,7 +13,7 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] TMP_Text _itemType;
     [SerializeField] TMP_Text _itemDescription;
     [SerializeField] TMP_Text[] _attributesInputs = new TMP_Text[4];
-    [SerializeField] InvetoryManeger _inventoryManager;
+    [SerializeField] InventoryManeger _inventoryManager;
     private InventoryItem _itemSelected;
     
 
