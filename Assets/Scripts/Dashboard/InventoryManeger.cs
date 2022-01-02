@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InvetoryManeger : MonoBehaviour
+public class InventoryManeger : MonoBehaviour
 {
     [SerializeField] GameObject _unfilteredContaier;
     private GameObject[] _slots;
     private InventoryItem[] _inventoryItems;
     private InventoryDataController _inventoryDataController = new InventoryDataController();
+    private WizardStatsController _wizardStatsController = new WizardStatsController();
     private List<InventoryItemData> _inventoryDataList;
 
     void Start()
     {
         // // chunk to write items to local storage
         // string[] list = new string[] {"Advanced_Cape", "Orb", "Staff", "Cape", "Advanced_Orb", "Advanced_Staff"};
-        // bool[] equiped = new bool[] {true, true, true, false, false, false};
+        // bool[] equiped = new bool[] {false, false, false, false, false, false};
         // var a = new InventoryData();
         // var b = new List<InventoryItemData>();
         // for (int i = 0; i < list.Length; i++) {
@@ -25,6 +26,11 @@ public class InvetoryManeger : MonoBehaviour
         // }
         // a.Items = b;
         // _inventoryDataController.SaveInventoryData(a);
+        // WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        // wizardStatsData.ManaStatsData = new ManaStatsData();
+        // wizardStatsData.AttackStatsData = new AttackStatsData();
+        // wizardStatsData.DefenceStatsData = new DefenceStatsData();
+        // _wizardStatsController.SaveWizardStatsData(wizardStatsData);
         // // end chunk
 
         _inventoryDataList = _inventoryDataController.GetInventoryData().Items;
@@ -36,6 +42,7 @@ public class InvetoryManeger : MonoBehaviour
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
             _inventoryItems[i].SetEquipedStatus(_inventoryDataList[i].Equiped);
         }
+        _wizardStatsController.GetWizardStatsData().WriteWizardStats();
     }
 
     public void FilterItems(string type) {
@@ -55,19 +62,22 @@ public class InvetoryManeger : MonoBehaviour
     }
 
     public void EquipItem(InventoryItem itemSelected) {
+        WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        wizardStatsData.EquipItem(itemSelected);
         string type = itemSelected.GetType();
         string itemSelectedName = itemSelected.GetName();
         string itemRemovedName = "";
         for(int i = 0; i < _inventoryItems.Length; i++){
             if(_inventoryItems[i].GetType() == type && _inventoryItems[i].GetEquipedStatus() == true){
                 _inventoryItems[i].SetEquipedStatus(false);
+                wizardStatsData.RemoveItem(_inventoryItems[i]);
                 itemRemovedName = _inventoryItems[i].GetName();
                 break;
             }
         }
         itemSelected.SetEquipedStatus(true);
         for (int i = 0; i < _inventoryDataList.Count; i++) {
-            if (itemSelectedName == _inventoryDataList[i].Name) {
+            if (itemSelectedName == _inventoryDataList[i].Name.Replace('_', ' ')) {
                 _inventoryDataList[i].Equiped = true;
             }
             if (_inventoryDataList[i].Name == itemRemovedName) {
@@ -77,5 +87,7 @@ public class InvetoryManeger : MonoBehaviour
         InventoryData inventoryData = new InventoryData();
         inventoryData.Items = _inventoryDataList;
         _inventoryDataController.SaveInventoryData(inventoryData);
+        _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+        wizardStatsData.WriteWizardStats();
     }
 }
