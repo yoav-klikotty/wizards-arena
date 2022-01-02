@@ -40873,19 +40873,19 @@ MonoBehaviour:
       - green
       SoftMagicStats:
         name: GreenPoison
-        multiple: 0
+        multiple: 1
         requiredMana: 5
       ModerateMagicStats:
         name: PoisonShot
-        multiple: 0
+        multiple: 2
         requiredMana: 20
       HardMagicStats:
         name: BlueArrow
-        multiple: 0
+        multiple: 3
         requiredMana: 80
     AttackStatsData:
-      MinBaseDamage: 0
-      MaxBaseDamage: 0
+      MinBaseDamage: 10
+      MaxBaseDamage: 20
       CriticalRate: 0
       ArmorPenetration: 0
     CapeStatsData:
