@@ -1,0 +1,206 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1471791374990531019
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1005679706102658836}
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ItemClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: InventoryItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1210065561578509825, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _name
+      value: Lava Staff
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _type
+      value: Staff
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _requiredLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attributes.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _manaStatsData.MaxMana
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _defenceStatsData.MaxHP
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attributes.Array.data[0]
+      value: 'Base Damage: 13-14'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attributes.Array.data[1]
+      value: 'Crit Rate: +5%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attributes.Array.data[2]
+      value: 'Crit Damage: +50%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attributes.Array.data[3]
+      value: 'Armor Penetration: +5%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attackStatsData.CriticalDmg
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attackStatsData.CriticalRate
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attackStatsData.MaxBaseDamage
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attackStatsData.MinBaseDamage
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _manaStatsData.ManaRegeneration
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: _attackStatsData.ArmorPenetration
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4048649111384829400, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 12f51f4414e141f4abbd9b9d25c73619, type: 3}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5199898015532816119, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8592210444265684387, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+      propertyPath: m_Name
+      value: lava_staff_inventory
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+--- !u!114 &1005679706102658836 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1844292390569520863, guid: ddbf0a2d1285eb240906a3fe09df915d, type: 3}
+  m_PrefabInstance: {fileID: 1471791374990531019}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

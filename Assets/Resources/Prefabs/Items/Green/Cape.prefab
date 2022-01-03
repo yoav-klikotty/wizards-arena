@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6024662579884165384
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 496604504351428630, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_Name
+      value: Cape
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4174939640160402242, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5329537509890818157, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 76a3ba0e38f74ad40860a13c5c612926, type: 3}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _name
+      value: Green Cape
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _type
+      value: Cape
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _description
+      value: Green Cape
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _defenceStatsData.MaxHP
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _manaStatsData.StartMana
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _attributes.Array.data[0]
+      value: 'Max HP: +30'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _attributes.Array.data[1]
+      value: 'Recovery: +10'
+      objectReference: {fileID: 0}
+    - target: {fileID: 7512528517317821290, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}
+      propertyPath: _defenceStatsData.Recovery
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 974fa0abc157c804ba20512a1f70d981, type: 3}

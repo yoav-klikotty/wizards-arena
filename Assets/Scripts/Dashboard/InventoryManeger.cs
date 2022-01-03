@@ -14,8 +14,8 @@ public class InventoryManeger : MonoBehaviour
     void Start()
     {
         // // chunk to write items to local storage
-        // string[] list = new string[] {"Advanced_Cape", "Orb", "Staff", "Cape", "Advanced_Orb", "Advanced_Staff"};
-        // bool[] equiped = new bool[] {false, false, false, false, false, false};
+        // string[] list = new string[] {"Blue_Cape", "Blue_Orb", "Blue_Staff", "DarkBlue_Cape", "DarkBlue_Orb", "DarkBlue_Staff", "Green_Cape", "Green_Orb", "Green_Staff", "Red_Cape", "Red_Orb", "Red_Staff", "Lava_Cape", "Lava_Orb", "Lava_Staff"};
+        // bool[] equiped = new bool[] {false, false, false, false, false, false, false, false, false, false, false, false, false, false, false};
         // var a = new InventoryData();
         // var b = new List<InventoryItemData>();
         // for (int i = 0; i < list.Length; i++) {
@@ -31,13 +31,14 @@ public class InventoryManeger : MonoBehaviour
         // wizardStatsData.AttackStatsData = new AttackStatsData();
         // wizardStatsData.DefenceStatsData = new DefenceStatsData();
         // _wizardStatsController.SaveWizardStatsData(wizardStatsData);
-        // // end chunk
+        // end chunk
 
         _inventoryDataList = _inventoryDataController.GetInventoryData().Items;
         _inventoryItems = new InventoryItem[_inventoryDataList.Count];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
         for(int i = 0; i < _inventoryDataList.Count; i++){
-            var prefab = Resources.Load("Prefabs/Items/" + _inventoryDataList[i].Name + "/" + _inventoryDataList[i].Name + "_Inventory");
+            string[] prefabPath = _inventoryDataList[i].Name.Split('_');
+            var prefab = Resources.Load("Prefabs/Items/" + prefabPath[0] + "/" + prefabPath[1]);
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
             _inventoryItems[i].SetEquipedStatus(_inventoryDataList[i].Equiped);

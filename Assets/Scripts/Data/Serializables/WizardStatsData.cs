@@ -67,8 +67,8 @@ public class AttackStatsData
 { 
     public int MinBaseDamage = 1;
     public int MaxBaseDamage = 3;
-    public float CriticalRate = 0;
-    public float CriticalDmg = 0;
+    public float CriticalRate = 0.1f;
+    public float CriticalDmg = 1.5f;
     public float ArmorPenetration = 0;
 }
 
