@@ -11,11 +11,21 @@ public class Player : MonoBehaviour
     [SerializeField] Item _cape;
     [SerializeField] Item _hat;
     public WizardStatsData WizardStatsData;
-    private WizardStatsController _wizardStatsController;
+    private WizardStatsController _wizardStatsController = new WizardStatsController();
     public PlayerHUD PlayerHUD;
 
     void Start()
     {
+        // PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
+        // PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
+        // PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
+        UpdateWizard();
+    }
+
+    public void UpdateWizard()
+    {
+        WizardStatsData = _wizardStatsController.GetWizardStatsData();
+        Debug.Log(WizardStatsData.StaffStatsData.GetMaterials()[0]);
         _wand.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
         _wand.SetSoftMagic(WizardStatsData.StaffStatsData.SoftMagicStats.name);
         _wand.SetModerateMagic(WizardStatsData.StaffStatsData.ModerateMagicStats.name);
@@ -24,9 +34,7 @@ public class Player : MonoBehaviour
         _cape.SetSoftMagic(WizardStatsData.CapeStatsData.SoftMagicStats.name);
         _hat.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
         _hat.SetSoftMagic(WizardStatsData.OrbStatsData.SoftMagicStats.name);
-        PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
-        PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
-        PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
+
     }
 
     public float GetHealth()

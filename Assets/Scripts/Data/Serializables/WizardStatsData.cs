@@ -29,7 +29,26 @@ public class WizardStatsData
     }
 
     public void EquipItem(InventoryItem equipedItem) {
-
+        Debug.Log("EquipItem wizard stats");
+        Debug.Log(equipedItem.GetName());
+        if (equipedItem.GetItemType() == "Cape")
+        {
+            CapeStatsData.materials = new List<string> {
+                equipedItem.GetMaterialName(),
+            };
+        }
+        if (equipedItem.GetItemType() == "Staff")
+        {
+            StaffStatsData.materials = new List<string> {
+                equipedItem.GetMaterialName(),
+            };
+        }
+        if (equipedItem.GetItemType() == "Orb")
+        {
+            OrbStatsData.materials = new List<string> {
+                equipedItem.GetMaterialName(),
+            };
+        }
         UpdateAttackStatsData(equipedItem.GetAttackStatsData(), 1);
         UpdateDefenceStatsData(equipedItem.GetDefenceStatsData(), 1);
         UpdateManaStatsData(equipedItem.GetManaStatsData(), 1);
@@ -112,6 +131,15 @@ public class StaffStatsData
         };
     }
 
+    public bool IsContainInventoryItem(InventoryItem inventoryItem)
+    {
+        if (materials.Contains(inventoryItem.GetMaterialName()))
+        {
+            return true;
+        }
+        return false;
+    }
+
 }
 
 [Serializable]
@@ -133,6 +161,14 @@ public class CapeStatsData
             Resources.Load<Material>("Materials/" + materials[0]),
         };
     }
+    public bool IsContainInventoryItem(InventoryItem inventoryItem)
+    {
+        if (materials.Contains(inventoryItem.GetMaterialName()))
+        {
+            return true;
+        }
+        return false;
+    }
 }
 
 [Serializable]
@@ -153,5 +189,13 @@ public class OrbStatsData
         return new Material[] {
             Resources.Load<Material>("Materials/" + materials[0]),
         };
+    }
+    public bool IsContainInventoryItem(InventoryItem inventoryItem)
+    {
+        if (materials.Contains(inventoryItem.GetMaterialName()))
+        {
+            return true;
+        }
+        return false;
     }
 }

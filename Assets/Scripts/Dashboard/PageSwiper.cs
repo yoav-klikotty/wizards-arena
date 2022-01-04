@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     [SerializeField] NavigationPanel _navigationPanel;
-    [SerializeField] DashboardWizardObject _wizard;
+    [SerializeField] DashboardWizard _wizard;
     private Vector3 _panelLocation;
     public float PercentThreshold = 0.5f;
     public float Easing = 0.5f;

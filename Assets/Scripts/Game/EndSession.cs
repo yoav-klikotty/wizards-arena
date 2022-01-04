@@ -7,6 +7,7 @@ public class EndSession : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] TMP_Text Result;
+    [SerializeField] TMP_Text ClaimButtonText;
     [SerializeField] Button PlayAgainBtn;
     SessionManager.GameResult result;
     [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
@@ -16,6 +17,9 @@ public class EndSession : MonoBehaviour
     [SerializeField] Animation _starsAnim;
     [SerializeField] bool _debug;
     [SerializeField] bool _isWon;
+    [SerializeField] GameObject PrizeContainer;
+
+    private PlayerStatsController _playerStatsController = new PlayerStatsController();
 
     void Start()
     {
@@ -28,9 +32,16 @@ public class EndSession : MonoBehaviour
         InvokeRepeating("Disconnect", 1, 0);
     }
 
-    public void StartNewGame()
+    public void Collect()
     {
-        SceneManager.LoadScene("Search");
+        if (_isWon)
+        {
+            PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+            playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
+            playerStatsData.AddLevelPoints(50);
+            _playerStatsController.SavePlayerStatsData(playerStatsData, false);
+        }
+        SceneManager.LoadScene("Dashboard");
     }
 
     void Disconnect(){
@@ -46,6 +57,20 @@ public class EndSession : MonoBehaviour
         RenderTextScore();
         RenderWizardScore();
         StartStarsAnim();
+        RenderPrizes();
+
+    }
+
+    void RenderPrizes()
+    {
+        if (!_isWon)
+        {
+            PrizeContainer.SetActive(false);
+        }
+        else
+        {
+            PrizeContainer.SetActive(true);
+        }
     }
 
     void RenderTextScore()
@@ -53,10 +78,12 @@ public class EndSession : MonoBehaviour
         if (!_isWon)
         {
             Result.text = "Defeat";
+            ClaimButtonText.text = "Retry";
         }
         else
         {
             Result.text = "Victory";
+            ClaimButtonText.text = "Claim";
         }
     }
     void RenderWizardScore()

@@ -7,7 +7,7 @@ public class FilterPanel : MonoBehaviour
 
     [SerializeField] FilterButton[] _buttons = new FilterButton[4];
     [SerializeField] string _filter;
-    [SerializeField] InventoryManeger _invetoryManeger;
+    [SerializeField] InventoryManager _invetoryManeger;
 
     void Start(){
         FilterClicked(_filter);

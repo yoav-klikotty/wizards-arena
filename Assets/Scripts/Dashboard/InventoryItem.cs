@@ -8,6 +8,7 @@ public class InventoryItem : MonoBehaviour
     private bool _equiped;
     [SerializeField] string _type;
     [SerializeField] string _name;
+    [SerializeField] string _materialName;
     [SerializeField] int _requiredLevel;
     [SerializeField] List<string> _attributes = new List<string>();
     [SerializeField] string _description;
@@ -40,7 +41,7 @@ public class InventoryItem : MonoBehaviour
     public string GetDescription() {
         return _description;
     }
-    public string GetType() {
+    public string GetItemType() {
         return _type;
     }
     public Sprite GetIcon() {
@@ -57,5 +58,8 @@ public class InventoryItem : MonoBehaviour
     }
     public ManaStatsData GetManaStatsData() {
         return _manaStatsData;
+    }
+    public string GetMaterialName() {
+        return _materialName;
     }
 }

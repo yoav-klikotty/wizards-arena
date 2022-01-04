@@ -21,14 +21,14 @@ public class LocalStorage : MonoBehaviour
         string WizardStatsDataRaw = PlayerPrefs.GetString("WizardStatsData");
         return JsonUtility.FromJson<WizardStatsData>(WizardStatsDataRaw);
     }
-    public static InventoryData LoadInventoryData()
-    {
-        string InventoryDataRaw = PlayerPrefs.GetString("InventoryData");
-        return JsonUtility.FromJson<InventoryData>(InventoryDataRaw);
-    }
-    public static void SaveInventoryData(InventoryData InventoryData)
-    {
-        PlayerPrefs.SetString("InventoryData", JsonUtility.ToJson(InventoryData));
-    }
 
+    public static void SavePlayerStatsData(PlayerStatsData playerStatsData)
+    {
+        PlayerPrefs.SetString("PlayerStatsData", JsonUtility.ToJson(playerStatsData));
+    }
+    public static PlayerStatsData LoadPlayerStatsData()
+    {
+        string PlayerStatsDataRaw = PlayerPrefs.GetString("PlayerStatsData");
+        return JsonUtility.FromJson<PlayerStatsData>(PlayerStatsDataRaw);
+    }
 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3984235016252156141
+--- !u!1 &2230774391992843256
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3984235016252156138}
-  - component: {fileID: 3984235016252156132}
-  - component: {fileID: 3984235016252156135}
-  - component: {fileID: 3984235016252156134}
-  - component: {fileID: 3984235016252156137}
-  - component: {fileID: 3984235016252156136}
-  - component: {fileID: 3984235016252156139}
-  - component: {fileID: 3984235016252156133}
+  - component: {fileID: 2230774391992843263}
+  - component: {fileID: 2230774391992843249}
+  - component: {fileID: 2230774391992843250}
+  - component: {fileID: 2230774391992843251}
+  - component: {fileID: 2230774391992843260}
+  - component: {fileID: 2230774391992843261}
+  - component: {fileID: 2230774391992843262}
+  - component: {fileID: 2230774391992843248}
   m_Layer: 5
-  m_Name: Advanced_Orb_Inventory
+  m_Name: Blue_Cape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &3984235016252156138
+--- !u!224 &2230774391992843263
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -42,13 +42,13 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 90, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &3984235016252156132
+--- !u!223 &2230774391992843249
 Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
@@ -63,13 +63,13 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &3984235016252156135
+--- !u!114 &2230774391992843250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
@@ -86,13 +86,13 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
---- !u!114 &3984235016252156134
+--- !u!114 &2230774391992843251
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
@@ -103,21 +103,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!222 &3984235016252156137
+--- !u!222 &2230774391992843260
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_CullTransparentMesh: 1
---- !u!114 &3984235016252156136
+--- !u!114 &2230774391992843261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -131,7 +131,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c60ad8d6b6fdcf4f85729c4e1999e41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e505fcc1cc72993478e44a322870a1be, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -141,28 +141,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &3984235016252156139
+--- !u!114 &2230774391992843262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: Orb
-  _name: Advanced Orb
-  _requiredLevel: 5
+  _type: Cape
+  _name: Blue_Cape
+  _materialName: blue
+  _requiredLevel: 1
   _attributes:
-  - 'Maxa Mana: +10'
-  _description: A weak orb
+  - 'Max HP: 10'
+  _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
-    MaxHP: 0
+    MaxHP: 10
     Recovery: 0
     Avoidability: 0
     Mirroring: 0
@@ -170,19 +171,20 @@ MonoBehaviour:
     MinBaseDamage: 0
     MaxBaseDamage: 0
     CriticalRate: 0
+    CriticalDmg: 0
     ArmorPenetration: 0
   _manaStatsData:
-    MaxMana: 10
+    MaxMana: 0
     StartMana: 0
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
---- !u!114 &3984235016252156133
+--- !u!114 &2230774391992843248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3984235016252156141}
+  m_GameObject: {fileID: 2230774391992843256}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -216,11 +218,11 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 3984235016252156136}
+  m_TargetGraphic: {fileID: 2230774391992843261}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3984235016252156139}
+      - m_Target: {fileID: 2230774391992843262}
         m_TargetAssemblyTypeName: InventoryItem, Assembly-CSharp
         m_MethodName: ItemClicked
         m_Mode: 1
