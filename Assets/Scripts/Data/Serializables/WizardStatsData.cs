@@ -5,11 +5,11 @@ using UnityEngine;
 [Serializable]
 public class WizardStatsData
 {
-    public StaffStatsData StaffStatsData;
+    public ItemStatsData StaffStatsData;
+    public ItemStatsData CapeStatsData;
+    public ItemStatsData OrbStatsData;
     public AttackStatsData AttackStatsData;
-    public CapeStatsData CapeStatsData;
     public DefenceStatsData DefenceStatsData;
-    public OrbStatsData OrbStatsData;
     public ManaStatsData ManaStatsData;
 
     public void WriteWizardStats(){
@@ -29,25 +29,17 @@ public class WizardStatsData
     }
 
     public void EquipItem(InventoryItem equipedItem) {
-        Debug.Log("EquipItem wizard stats");
-        Debug.Log(equipedItem.GetName());
-        if (equipedItem.GetItemType() == "Cape")
+        if (equipedItem.GetItemType() == ItemType.Cape)
         {
-            CapeStatsData.materials = new List<string> {
-                equipedItem.GetMaterialName(),
-            };
+            this.CapeStatsData = equipedItem.GetItemStatsData();
         }
-        if (equipedItem.GetItemType() == "Staff")
+        if (equipedItem.GetItemType() == ItemType.Staff)
         {
-            StaffStatsData.materials = new List<string> {
-                equipedItem.GetMaterialName(),
-            };
+            this.StaffStatsData = equipedItem.GetItemStatsData();
         }
-        if (equipedItem.GetItemType() == "Orb")
+        if (equipedItem.GetItemType() == ItemType.Orb)
         {
-            OrbStatsData.materials = new List<string> {
-                equipedItem.GetMaterialName(),
-            };
+            this.OrbStatsData = equipedItem.GetItemStatsData();
         }
         UpdateAttackStatsData(equipedItem.GetAttackStatsData(), 1);
         UpdateDefenceStatsData(equipedItem.GetDefenceStatsData(), 1);
@@ -67,17 +59,26 @@ public class WizardStatsData
         AttackStatsData.MaxBaseDamage += (equipedItem.MaxBaseDamage*factor);
         AttackStatsData.ArmorPenetration += (equipedItem.ArmorPenetration*factor);
     }
+    private void UpdateStaffStatsData(ItemStatsData staffStaffData){
+        this.StaffStatsData = staffStaffData;
+    }
     private void UpdateDefenceStatsData(DefenceStatsData equipedItem, int factor){
         DefenceStatsData.MaxHP += (equipedItem.MaxHP*factor);
         DefenceStatsData.Recovery += (equipedItem.Recovery*factor);
         DefenceStatsData.Mirroring += (equipedItem.Mirroring*factor);
         DefenceStatsData.Avoidability += (equipedItem.Avoidability*factor);
     }
+    private void UpdateCapeStatsData(ItemStatsData capeStatsData){
+        this.CapeStatsData = capeStatsData;
+    }
     private void UpdateManaStatsData(ManaStatsData equipedItem, int factor){
         ManaStatsData.MaxMana += (equipedItem.MaxMana*factor);
         ManaStatsData.StartMana += (equipedItem.StartMana*factor);
         ManaStatsData.ManaRegeneration += (equipedItem.ManaRegeneration*factor);
         ManaStatsData.PassiveManaRegeneration += (equipedItem.PassiveManaRegeneration*factor);
+    }
+    private void UpdateOrbStatsData(ItemStatsData orbStatsData){
+        this.OrbStatsData = orbStatsData;
     }
 }
 
@@ -110,7 +111,7 @@ public class ManaStatsData
 }
 
 [Serializable]
-public class AttackMagicStatsData
+public class MagicStatsData
 {
     public string name;
     public int multiple;
@@ -118,12 +119,12 @@ public class AttackMagicStatsData
 }
 
 [Serializable]
-public class StaffStatsData
+public class ItemStatsData
 {
     public List<string> materials;
-    public AttackMagicStatsData SoftMagicStats;
-    public AttackMagicStatsData ModerateMagicStats;
-    public AttackMagicStatsData HardMagicStats;
+    public MagicStatsData SoftMagicStats;
+    public MagicStatsData ModerateMagicStats;
+    public MagicStatsData HardMagicStats;
     public Material[] GetMaterials()
     {
         return new Material[] {
@@ -133,69 +134,11 @@ public class StaffStatsData
 
     public bool IsContainInventoryItem(InventoryItem inventoryItem)
     {
-        if (materials.Contains(inventoryItem.GetMaterialName()))
+        if (materials.Contains(inventoryItem.GetItemStatsData().materials[0]))
         {
             return true;
         }
         return false;
     }
 
-}
-
-[Serializable]
-public class DefenceMagicStatsData
-{
-    public string name;
-}
-
-[Serializable]
-public class CapeStatsData
-{
-    public List<string> materials;
-    public DefenceMagicStatsData SoftMagicStats;
-    public DefenceMagicStatsData ModerateMagicStats;
-    public DefenceMagicStatsData HardMagicStats;
-    public Material[] GetMaterials()
-    {
-        return new Material[] {
-            Resources.Load<Material>("Materials/" + materials[0]),
-        };
-    }
-    public bool IsContainInventoryItem(InventoryItem inventoryItem)
-    {
-        if (materials.Contains(inventoryItem.GetMaterialName()))
-        {
-            return true;
-        }
-        return false;
-    }
-}
-
-[Serializable]
-public class ManaMagicStatsData
-{
-    public string name;
-}
-
-[Serializable]
-public class OrbStatsData
-{
-    public List<string> materials;
-    public ManaMagicStatsData SoftMagicStats;
-    public ManaMagicStatsData ModerateMagicStats;
-    public ManaMagicStatsData HardMagicStats;
-    public Material[] GetMaterials()
-    {
-        return new Material[] {
-            Resources.Load<Material>("Materials/" + materials[0]),
-        };
-    }
-    public bool IsContainInventoryItem(InventoryItem inventoryItem)
-    {
-        if (materials.Contains(inventoryItem.GetMaterialName()))
-        {
-            return true;
-        }
-        return false;
-    }
 }

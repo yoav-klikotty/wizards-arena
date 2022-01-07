@@ -6,17 +6,17 @@ public class FilterPanel : MonoBehaviour
 {
 
     [SerializeField] FilterButton[] _buttons = new FilterButton[4];
-    [SerializeField] string _filter;
+    [SerializeField] ItemType _filter;
     [SerializeField] InventoryManager _invetoryManeger;
 
     void Start(){
-        FilterClicked(_filter);
+        FilterClicked((int)_filter);
     }
 
-    public void FilterClicked(string filter){
+    public void FilterClicked(int filter){
         for (int i = 0; i < _buttons.Length; i++) {
-            _buttons[i].SetFilter(filter);
+            _buttons[i].SetFilter((ItemType)filter);
         }
-        _invetoryManeger.FilterItems(filter);
+        _invetoryManeger.FilterItems((ItemType)filter);
     }
 }

@@ -21363,7 +21363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134174232608780, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.646
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4134174232608780, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21371,7 +21371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4134174232608780, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.863
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4200625431291372, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
       propertyPath: m_RootOrder
@@ -21487,6 +21487,39 @@ PrefabInstance:
       objectReference: {fileID: 1598615464}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+--- !u!114 &818537418 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7454844745425378795, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+  m_PrefabInstance: {fileID: 818537417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &818537419 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1802602586487134098, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+  m_PrefabInstance: {fileID: 818537417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &818537420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5254709882000859822, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+  m_PrefabInstance: {fileID: 818537417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &818537421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4200625431291372, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
@@ -22704,32 +22737,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8737478065945947291, guid: a06237ea3dd12bc46a46cc2f7236e9b2, type: 3}
   m_PrefabInstance: {fileID: 869706445}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &872296709 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1083203802269158, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 818537417}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &872296711 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137306672281821108, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 818537417}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &872296712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872296709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoftMagic: {fileID: 0}
-  ModerateMagic: {fileID: 0}
-  HardMagic: {fileID: 0}
-  itemMeshRenderer: {fileID: 872296711}
 --- !u!1001 &872330966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24292,32 +24299,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8105249761388792780, guid: f28a33e8e11922e499430c69747d2280, type: 3}
   m_PrefabInstance: {fileID: 930797545}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &939115653 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1687488468178632, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 818537417}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &939115655 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137474894624504034, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 818537417}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &939115656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939115653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoftMagic: {fileID: 0}
-  ModerateMagic: {fileID: 0}
-  HardMagic: {fileID: 0}
-  itemMeshRenderer: {fileID: 939115655}
 --- !u!1001 &945212971
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27377,32 +27358,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6017370685907375645, guid: 6858ba880559a8f40a68a3da40427438, type: 3}
   m_PrefabInstance: {fileID: 1073903108}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1084855755 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1651503733893728, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 818537417}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1084855756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1084855755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoftMagic: {fileID: 0}
-  ModerateMagic: {fileID: 0}
-  HardMagic: {fileID: 0}
-  itemMeshRenderer: {fileID: 1084855757}
---- !u!137 &1084855757 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137011097167178510, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 818537417}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1087933143
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28621,6 +28576,39 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1287758029709606, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
   m_PrefabInstance: {fileID: 1134142568}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1134142570 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7454844745425378795, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+  m_PrefabInstance: {fileID: 1134142568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1134142571 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1802602586487134098, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+  m_PrefabInstance: {fileID: 1134142568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1134142572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5254709882000859822, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
+  m_PrefabInstance: {fileID: 1134142568}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1134142574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28635,9 +28623,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   currentMana: 0
-  _wand: {fileID: 1493526255}
-  _cape: {fileID: 1448598599}
-  _hat: {fileID: 2125030189}
+  _wand: {fileID: 1134142572}
+  _cape: {fileID: 1134142571}
+  _hat: {fileID: 1134142570}
   WizardStatsData:
     StaffStatsData:
       materials:
@@ -28654,34 +28642,47 @@ MonoBehaviour:
         name: RotatingStar
         multiple: 0
         requiredMana: 100
-    AttackStatsData:
-      MinBaseDamage: 0
-      MaxBaseDamage: 0
-      CriticalRate: 0
-      ArmorPenetration: 0
     CapeStatsData:
       materials:
       - lava
       SoftMagicStats:
         name: Healing
+        multiple: 0
+        requiredMana: 0
       ModerateMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       HardMagicStats:
         name: 
-    DefenceStatsData:
-      MaxHP: 0
-      Recovery: 0
-      Avoidability: 0
-      Mirroring: 0
+        multiple: 0
+        requiredMana: 0
     OrbStatsData:
       materials:
       - red
       SoftMagicStats:
         name: Magic aura
+        multiple: 0
+        requiredMana: 0
       ModerateMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       HardMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
+    AttackStatsData:
+      MinBaseDamage: 0
+      MaxBaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    DefenceStatsData:
+      MaxHP: 0
+      Recovery: 0
+      Avoidability: 0
+      Mirroring: 0
     ManaStatsData:
       MaxMana: 100
       StartMana: 0
@@ -37887,32 +37888,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1419228336958037047, guid: 91923d59cb5fae54b9842d1a699648a4, type: 3}
   m_PrefabInstance: {fileID: 1448073119}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1448598597 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1083203802269158, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 1134142568}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1448598599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1448598597}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoftMagic: {fileID: 0}
-  ModerateMagic: {fileID: 0}
-  HardMagic: {fileID: 0}
-  itemMeshRenderer: {fileID: 1448598600}
---- !u!137 &1448598600 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137306672281821108, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 1134142568}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1452116274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38902,32 +38877,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 495259229835682767, guid: 9119102f8ea2b2243911909a16be4b9b, type: 3}
   m_PrefabInstance: {fileID: 1489565123}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1493526254 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1651503733893728, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 1134142568}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1493526255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1493526254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoftMagic: {fileID: 0}
-  ModerateMagic: {fileID: 0}
-  HardMagic: {fileID: 0}
-  itemMeshRenderer: {fileID: 1493526256}
---- !u!137 &1493526256 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137011097167178510, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 1134142568}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1499862834
 PrefabInstance:
@@ -40864,9 +40813,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   currentMana: 0
-  _wand: {fileID: 1084855756}
-  _cape: {fileID: 872296712}
-  _hat: {fileID: 939115656}
+  _wand: {fileID: 818537420}
+  _cape: {fileID: 818537419}
+  _hat: {fileID: 818537418}
   WizardStatsData:
     StaffStatsData:
       materials:
@@ -40883,34 +40832,47 @@ MonoBehaviour:
         name: BlueArrow
         multiple: 3
         requiredMana: 80
-    AttackStatsData:
-      MinBaseDamage: 10
-      MaxBaseDamage: 20
-      CriticalRate: 0
-      ArmorPenetration: 0
     CapeStatsData:
       materials:
       - green
       SoftMagicStats:
         name: Healing
+        multiple: 0
+        requiredMana: 0
       ModerateMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       HardMagicStats:
         name: 
-    DefenceStatsData:
-      MaxHP: 0
-      Recovery: 0
-      Avoidability: 0
-      Mirroring: 0
+        multiple: 0
+        requiredMana: 0
     OrbStatsData:
       materials:
       - green
       SoftMagicStats:
         name: Magic aura
+        multiple: 0
+        requiredMana: 0
       ModerateMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       HardMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
+    AttackStatsData:
+      MinBaseDamage: 10
+      MaxBaseDamage: 20
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    DefenceStatsData:
+      MaxHP: 0
+      Recovery: 0
+      Avoidability: 0
+      Mirroring: 0
     ManaStatsData:
       MaxMana: 50
       StartMana: 0
@@ -44571,32 +44533,45 @@ MonoBehaviour:
         name: 
         multiple: 0
         requiredMana: 0
-    AttackStatsData:
-      MinBaseDamage: 0
-      MaxBaseDamage: 0
-      CriticalRate: 0
-      ArmorPenetration: 0
     CapeStatsData:
       materials: []
       SoftMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       ModerateMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       HardMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
+    OrbStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+    AttackStatsData:
+      MinBaseDamage: 0
+      MaxBaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
     DefenceStatsData:
       MaxHP: 0
       Recovery: 0
       Avoidability: 0
       Mirroring: 0
-    OrbStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-      ModerateMagicStats:
-        name: 
-      HardMagicStats:
-        name: 
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
@@ -44618,32 +44593,45 @@ MonoBehaviour:
         name: 
         multiple: 0
         requiredMana: 0
-    AttackStatsData:
-      MinBaseDamage: 0
-      MaxBaseDamage: 0
-      CriticalRate: 0
-      ArmorPenetration: 0
     CapeStatsData:
       materials: []
       SoftMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       ModerateMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
       HardMagicStats:
         name: 
+        multiple: 0
+        requiredMana: 0
+    OrbStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+    AttackStatsData:
+      MinBaseDamage: 0
+      MaxBaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
     DefenceStatsData:
       MaxHP: 0
       Recovery: 0
       Avoidability: 0
       Mirroring: 0
-    OrbStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-      ModerateMagicStats:
-        name: 
-      HardMagicStats:
-        name: 
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
@@ -53771,32 +53759,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6017370685907375645, guid: 6858ba880559a8f40a68a3da40427438, type: 3}
   m_PrefabInstance: {fileID: 2116972356}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2125030186 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1687488468178632, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 1134142568}
-  m_PrefabAsset: {fileID: 0}
---- !u!137 &2125030188 stripped
-SkinnedMeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 137474894624504034, guid: 2bc1b50a21e3c5742aecf583c8382cb2, type: 3}
-  m_PrefabInstance: {fileID: 1134142568}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2125030189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2125030186}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fb841f32a649b24ab8ab172bd5f74fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SoftMagic: {fileID: 0}
-  ModerateMagic: {fileID: 0}
-  HardMagic: {fileID: 0}
-  itemMeshRenderer: {fileID: 2125030188}
 --- !u!1001 &2130594000
 PrefabInstance:
   m_ObjectHideFlags: 0

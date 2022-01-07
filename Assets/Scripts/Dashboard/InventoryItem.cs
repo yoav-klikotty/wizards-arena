@@ -3,12 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum ItemType
+{
+    Cape,
+    Staff,
+    Orb,
+    Other,
+}
+
+
+public class InventoryPrefabs
+{
+    public string Name;
+    public ItemType Type;
+
+    public InventoryPrefabs(string name, ItemType type)
+    {
+        this.Name = name;
+        this.Type = type;
+    }
+}
+
 public class InventoryItem : MonoBehaviour
 {
     private bool _equiped;
-    [SerializeField] string _type;
+    [SerializeField] ItemType _type;
     [SerializeField] string _name;
-    [SerializeField] string _materialName;
+    [SerializeField] string _displayName;
+
     [SerializeField] int _requiredLevel;
     [SerializeField] List<string> _attributes = new List<string>();
     [SerializeField] string _description;
@@ -17,49 +39,68 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] DefenceStatsData _defenceStatsData;
     [SerializeField] AttackStatsData _attackStatsData;
     [SerializeField] ManaStatsData _manaStatsData;
+    [SerializeField] ItemStatsData _itemStatsData;
 
-    void Start(){
+    void Start()
+    {
         _icon = GetComponent<Image>().sprite;
         _itemPanel = Resources.FindObjectsOfTypeAll<ItemPanel>()[0];
     }
-    public void SetEquipedStatus(bool equiped) {
+    public void SetEquipedStatus(bool equiped)
+    {
         _equiped = equiped;
     }
-    public bool GetEquipedStatus() {
+    public bool GetEquipedStatus()
+    {
         return _equiped;
     }
-    public void ItemClicked(){
+    public void ItemClicked()
+    {
         _itemPanel.OpenPanel(this);
         RectTransform itemRect = this.GetComponent<RectTransform>();
     }
-    public string GetName() {
+    public string GetName()
+    {
         return _name;
     }
-    public int GetRequiredLevel() {
+    public string GetDisplayName()
+    {
+        return _displayName;
+    }
+    public int GetRequiredLevel()
+    {
         return _requiredLevel;
     }
-    public string GetDescription() {
+    public string GetDescription()
+    {
         return _description;
     }
-    public string GetItemType() {
+    public ItemType GetItemType()
+    {
         return _type;
     }
-    public Sprite GetIcon() {
+    public Sprite GetIcon()
+    {
         return _icon;
     }
-    public List<string> GetAttributes() {
+    public List<string> GetAttributes()
+    {
         return _attributes;
     }
-    public AttackStatsData GetAttackStatsData() {
+    public AttackStatsData GetAttackStatsData()
+    {
         return _attackStatsData;
     }
-    public DefenceStatsData GetDefenceStatsData() {
+    public DefenceStatsData GetDefenceStatsData()
+    {
         return _defenceStatsData;
     }
-    public ManaStatsData GetManaStatsData() {
+    public ManaStatsData GetManaStatsData()
+    {
         return _manaStatsData;
     }
-    public string GetMaterialName() {
-        return _materialName;
+    public ItemStatsData GetItemStatsData()
+    {
+        return _itemStatsData;
     }
 }

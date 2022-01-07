@@ -8,7 +8,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     [SerializeField] NavigationPanel _navigationPanel;
     [SerializeField] DashboardWizard _wizard;
     private Vector3 _panelLocation;
-    public float PercentThreshold = 0.5f;
+    [SerializeField] float PercentThreshold;
     public float Easing = 0.5f;
     public int TotalPages = 3;
     private int CurrentPage = 2;
@@ -58,11 +58,12 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         }
     }
 
-    public void setPage(int page) {
+    public void SetPage(int page) {
         int delta = page - CurrentPage;
         CurrentPage = page;
-        Vector3 newLocation = transform.position;
+        Vector3 newLocation = _panelLocation;
         newLocation += new Vector3((-1*delta*Screen.width), 0, 0);
+        _panelLocation = newLocation;
         StartCoroutine(SmoothMove(transform.position, newLocation, Easing, true));
         _wizard.ChangePage(page);
     }

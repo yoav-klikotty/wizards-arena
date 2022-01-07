@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FilterButton : MonoBehaviour
 {
-    [SerializeField] string _filterValue;
+    [SerializeField] ItemType _filterValue;
     [SerializeField] GameObject _activeFiller;
 
-    public void SetFilter(string filter){
-        if(filter == _filterValue || filter == "all") {
+    public void SetFilter(ItemType filter){
+        if(filter == _filterValue) {
             _activeFiller.SetActive(true);
         }
         else {

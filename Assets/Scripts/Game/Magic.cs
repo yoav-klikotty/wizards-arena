@@ -7,6 +7,8 @@ public class Magic : MonoBehaviour
     [SerializeField] GameObject _firePrefab;
     ParticleSystem _particalSystem;
     [SerializeField] Image _skillThumbnail;
+    [SerializeField] BoxCollider _boxCollider;
+
     void Start()
     {
         if(transform.parent.gameObject.transform.parent.gameObject.name == "Opponent")
@@ -30,18 +32,26 @@ public class Magic : MonoBehaviour
         else
         {
             _particalSystem.Play();
-            Invoke("Diactivate", 2);
         }
+        if (_boxCollider != null)
+        {
+            EnableBoxCollider();
+        }
+    }
 
+    private void EnableBoxCollider()
+    {
+        _boxCollider.enabled = true;
+        Invoke("DisableBoxCollider", 1);
+    }
+    private void DisableBoxCollider()
+    {
+        _boxCollider.enabled = false;
     }
     void ActivateFirePrefab()
     {
         GameObject instanceBullet = Instantiate(_firePrefab, FromPoint.transform.position, Quaternion.identity);
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint.transform.position - FromPoint.transform.position);
-    }
-    void Diactivate()
-    {
-        _particalSystem.Stop();
     }
     public Image GetThumbnail()
     {

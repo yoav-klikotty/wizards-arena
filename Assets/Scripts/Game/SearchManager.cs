@@ -58,7 +58,6 @@ public class SearchManager : MonoBehaviourPunCallbacks
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log(PhotonNetwork.IsConnected);
         SceneManager.LoadScene("Game");
     }
 }

@@ -20,8 +20,8 @@ public class ItemPanel : MonoBehaviour
     public void OpenPanel(InventoryItem itemSelected) {
         _itemSelected = itemSelected;
         _itemIcon.sprite = itemSelected.GetIcon();
-        _nameInput.text = itemSelected.GetName();
-        _itemType.text = itemSelected.GetItemType();
+        _nameInput.text = itemSelected.GetDisplayName();
+        _itemType.text = itemSelected.GetItemType().ToString();
         _itemDescription.text = itemSelected.GetDescription();
         _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
         List<string> attributes = itemSelected.GetAttributes();

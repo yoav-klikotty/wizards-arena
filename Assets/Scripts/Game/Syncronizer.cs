@@ -34,7 +34,6 @@ public class Syncronizer : MonoBehaviour
         else
         {
             _sessionManager.OpponentOption = _botPlayer.GetBotDecision();
-            Debug.Log(_sessionManager.OpponentOption);
         }
     }
 

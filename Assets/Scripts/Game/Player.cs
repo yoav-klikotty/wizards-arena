@@ -25,15 +25,24 @@ public class Player : MonoBehaviour
     public void UpdateWizard()
     {
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
-        Debug.Log(WizardStatsData.StaffStatsData.GetMaterials()[0]);
         _wand.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
-        _wand.SetSoftMagic(WizardStatsData.StaffStatsData.SoftMagicStats.name);
-        _wand.SetModerateMagic(WizardStatsData.StaffStatsData.ModerateMagicStats.name);
-        _wand.SetHardMagic(WizardStatsData.StaffStatsData.HardMagicStats.name);
+        _wand.SetMagics(
+            WizardStatsData.StaffStatsData.SoftMagicStats.name,
+            WizardStatsData.StaffStatsData.ModerateMagicStats.name,
+            WizardStatsData.StaffStatsData.HardMagicStats.name
+        );
         _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
-        _cape.SetSoftMagic(WizardStatsData.CapeStatsData.SoftMagicStats.name);
+        _cape.SetMagics(
+            WizardStatsData.CapeStatsData.SoftMagicStats.name,
+            WizardStatsData.CapeStatsData.ModerateMagicStats.name,
+            WizardStatsData.CapeStatsData.HardMagicStats.name
+        );
         _hat.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
-        _hat.SetSoftMagic(WizardStatsData.OrbStatsData.SoftMagicStats.name);
+        _hat.SetMagics(
+            WizardStatsData.OrbStatsData.SoftMagicStats.name,
+            WizardStatsData.OrbStatsData.ModerateMagicStats.name,
+            WizardStatsData.OrbStatsData.HardMagicStats.name
+        );
 
     }
 

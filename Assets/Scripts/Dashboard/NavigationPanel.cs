@@ -8,7 +8,7 @@ public class NavigationPanel : MonoBehaviour
 
     public void PageChange(int page) {
         for (int i = 0; i < _buttons.Length; i++) {
-            _buttons[i].setPage(page);
+            _buttons[i].SetPage(page);
         }
     }
 

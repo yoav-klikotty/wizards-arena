@@ -511,7 +511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: etc
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -613,7 +613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -630,6 +630,10 @@ PrefabInstance:
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FilterPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -663,81 +667,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5028859192264527167, guid: 7f0db7109dd53c549a90ec34b9062b37, type: 3}
   m_PrefabInstance: {fileID: 1052769753}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &297424872
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 297424873}
-  - component: {fileID: 297424875}
-  - component: {fileID: 297424874}
-  m_Layer: 5
-  m_Name: BackgroundImage
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &297424873
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297424872}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1513409449}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &297424874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297424872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 0
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8cb99118b9cb4c499518038cc64542e, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 2
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &297424875
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297424872}
-  m_CullTransparentMesh: 1
 --- !u!1001 &300841063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2186,7 +2115,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: Staff
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -2286,7 +2215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2303,6 +2232,10 @@ PrefabInstance:
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FilterPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -3854,7 +3787,7 @@ MonoBehaviour:
   - {fileID: 585562746}
   - {fileID: 164761385}
   - {fileID: 1409700218}
-  _filter: Staff
+  _filter: 1
   _invetoryManeger: {fileID: 315807630}
 --- !u!114 &883163654
 MonoBehaviour:
@@ -4626,33 +4559,45 @@ MonoBehaviour:
         name: 
         multiple: 0
         requiredMana: 0
+    CapeStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+    OrbStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
     AttackStatsData:
       MinBaseDamage: 1
       MaxBaseDamage: 3
       CriticalRate: 0
       CriticalDmg: 0
       ArmorPenetration: 0
-    CapeStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-      ModerateMagicStats:
-        name: 
-      HardMagicStats:
-        name: 
     DefenceStatsData:
       MaxHP: 50
       Recovery: 0
       Avoidability: 0
       Mirroring: 0
-    OrbStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-      ModerateMagicStats:
-        name: 
-      HardMagicStats:
-        name: 
     ManaStatsData:
       MaxMana: 30
       StartMana: 0
@@ -5150,7 +5095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: Cape
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -5250,7 +5195,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -5267,6 +5212,10 @@ PrefabInstance:
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FilterPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -6172,7 +6121,6 @@ RectTransform:
   - {fileID: 1694572822}
   - {fileID: 1529191560}
   - {fileID: 328965454}
-  - {fileID: 297424873}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6239,9 +6187,6 @@ MonoBehaviour:
   _coinsInput: {fileID: 1842200294}
   _energyInput: {fileID: 619934390}
   _levelBar: {fileID: 542151275}
-  Level: 5
-  Energy: 12
-  Coins: 574
 --- !u!1 &1549070413
 GameObject:
   m_ObjectHideFlags: 0
@@ -6786,7 +6731,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _filterValue
-      value: Orb
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 636235117546676516, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: _activeFiller
@@ -6888,7 +6833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -6905,6 +6850,10 @@ PrefabInstance:
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: FilterPanel, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8672270492656465998, guid: 3f20898332c2cea43899991859b923c2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
@@ -7079,10 +7028,10 @@ RectTransform:
   m_Father: {fileID: 1513409449}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 720, y: 1480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1694572823
 MonoBehaviour:
@@ -7098,7 +7047,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navigationPanel: {fileID: 328965458}
   _wizard: {fileID: 971112531}
-  PercentThreshold: 0.5
+  PercentThreshold: 0.3
   Easing: 0.5
   TotalPages: 3
 --- !u!114 &1701889631 stripped
@@ -8813,6 +8762,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 328965458}
+    - target: {fileID: 352244706389985119, guid: f193875d568df4d4cb7913377d4a1823, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PageChange
+      objectReference: {fileID: 0}
     - target: {fileID: 4051752736954936136, guid: f193875d568df4d4cb7913377d4a1823, type: 3}
       propertyPath: m_Sprite
       value: 

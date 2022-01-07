@@ -12,22 +12,38 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-        string[] list = new string[] {"Blue_Cape", "Blue_Orb", "Blue_Staff", "Dark_Blue_Cape", "Dark_Blue_Orb", "Dark_Blue_Staff"};
-        _inventoryItems = new InventoryItem[list.Length];
+        InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
+            new InventoryPrefabs("Blue_Cape", ItemType.Cape),
+            new InventoryPrefabs("Blue_Orb", ItemType.Orb),
+            new InventoryPrefabs("Blue_Staff", ItemType.Staff),
+            new InventoryPrefabs("Dark_Blue_Cape", ItemType.Cape),
+            new InventoryPrefabs("Dark_Blue_Orb", ItemType.Orb),
+            new InventoryPrefabs("Dark_Blue_Staff", ItemType.Staff),
+            new InventoryPrefabs("Green_Cape", ItemType.Cape),
+            new InventoryPrefabs("Green_Orb", ItemType.Orb),
+            new InventoryPrefabs("Green_Staff", ItemType.Staff),
+            new InventoryPrefabs("Lava_Cape", ItemType.Cape),
+            new InventoryPrefabs("Lava_Orb", ItemType.Orb),
+            new InventoryPrefabs("Lava_Staff", ItemType.Staff),
+            new InventoryPrefabs("Red_Cape", ItemType.Cape),
+            new InventoryPrefabs("Red_Orb", ItemType.Orb),
+            new InventoryPrefabs("Red_Staff", ItemType.Staff),
+        };
+        _inventoryItems = new InventoryItem[totalItems.Length];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
-        for(int i = 0; i < list.Length; i++){
-            var prefab = Resources.Load("Prefabs/Items/" + list[i]);
+        for(int i = 0; i < totalItems.Length; i++){
+            var prefab = Resources.Load("Prefabs/Items/" + totalItems[i].Type.ToString() + "/" + totalItems[i].Name);
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
-            if (_inventoryItems[i].GetItemType() == "Cape")
+            if (_inventoryItems[i].GetItemType() == ItemType.Cape)
             {
                 _inventoryItems[i].SetEquipedStatus(wizardStatsData.CapeStatsData.IsContainInventoryItem(_inventoryItems[i]));
             }
-            if (_inventoryItems[i].GetItemType() == "Staff")
+            if (_inventoryItems[i].GetItemType() == ItemType.Staff)
             {
                 _inventoryItems[i].SetEquipedStatus(wizardStatsData.StaffStatsData.IsContainInventoryItem(_inventoryItems[i]));
             }
-            if (_inventoryItems[i].GetItemType() == "Orb")
+            if (_inventoryItems[i].GetItemType() == ItemType.Orb)
             {
                 _inventoryItems[i].SetEquipedStatus(wizardStatsData.OrbStatsData.IsContainInventoryItem(_inventoryItems[i]));
             }
@@ -35,9 +51,8 @@ public class InventoryManager : MonoBehaviour
         wizardStatsData.WriteWizardStats();
     }
 
-    public void FilterItems(string type) {
+    public void FilterItems(ItemType type) {
         for(int i = 0; i < _inventoryItems.Length; i++) {
-            // do not include equiped items
             _inventoryItems[i].transform.SetParent(_unfilteredContaier.transform, false);
         }
         List<InventoryItem> filteredItems = new List<InventoryItem>();
@@ -54,14 +69,11 @@ public class InventoryManager : MonoBehaviour
     public void EquipItem(InventoryItem itemSelected) {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
         wizardStatsData.EquipItem(itemSelected);
-        string type = itemSelected.GetItemType();
-        string itemSelectedName = itemSelected.GetName();
-        string itemRemovedName = "";
+        ItemType type = itemSelected.GetItemType();
         for(int i = 0; i < _inventoryItems.Length; i++){
             if(_inventoryItems[i].GetItemType() == type && _inventoryItems[i].GetEquipedStatus() == true){
                 _inventoryItems[i].SetEquipedStatus(false);
                 wizardStatsData.RemoveItem(_inventoryItems[i]);
-                itemRemovedName = _inventoryItems[i].GetName();
                 break;
             }
         }

@@ -8,31 +8,30 @@ public class Item : MonoBehaviour
     public Magic ModerateMagic;
     public Magic HardMagic;
     [SerializeField] SkinnedMeshRenderer itemMeshRenderer;
+    [SerializeField] ItemType _itemType;
 
     void Start()
     {
     }
 
-    public void SetMaterials(Material [] mts)
+    public void SetMaterials(Material[] mts)
     {
         itemMeshRenderer.materials = mts;
     }
-    public void SetSoftMagic(string softMagicPrefName)
+    public void SetMagics(string softMagicPrefName, string moderateMagicPrefName, string hardMagicPrefName)
     {
-        var softMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + softMagicPrefName),transform.position, Quaternion.identity);
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        var softMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + _itemType.ToString() + "/" + softMagicPrefName), transform.position, Quaternion.identity);
         softMagic.transform.parent = gameObject.transform;
         SoftMagic = softMagic.GetComponent<Magic>();
-    }
-    public void SetModerateMagic(string moderateMagicPrefName)
-    {
-        var moderateMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + moderateMagicPrefName),transform.position, Quaternion.identity);
+        var moderateMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + _itemType.ToString() + "/" + moderateMagicPrefName), transform.position, Quaternion.identity);
         moderateMagic.transform.parent = gameObject.transform;
         ModerateMagic = moderateMagic.GetComponent<Magic>();
-    }
-
-    public void SetHardMagic(string hardMagicPrefName)
-    {
-        var hardMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + hardMagicPrefName),transform.position, Quaternion.identity);
+        var hardMagic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + _itemType.ToString() + "/" + hardMagicPrefName), transform.position, Quaternion.identity);
         hardMagic.transform.parent = gameObject.transform;
         HardMagic = hardMagic.GetComponent<Magic>();
     }

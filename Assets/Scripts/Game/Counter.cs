@@ -1,24 +1,15 @@
 using UnityEngine;
-using TMPro;
+using Lovatto.Countdown;
+
 public class Counter : MonoBehaviour
 {
-    [SerializeField] public int SecondsLeft;
-    [SerializeField] TMP_Text Seconds;
-
+    public bl_Countdown countdownRoot;
     void Start()
     {
-        Seconds.text = SecondsLeft + "";
-        InvokeRepeating("DecreaseSeconds", 1, 1);
-    }
-
-    void DecreaseSeconds(){
-        if (SecondsLeft > 0){
-            SecondsLeft--;
-            Seconds.text = SecondsLeft + "";
-        }
+        countdownRoot.StartCountdown();
     }
 
     public bool IsCounterEnd(){
-        return SecondsLeft == 0;
+        return countdownRoot.CurrentCountValue == 0;
     }
 }

@@ -274,6 +274,7 @@ MonoBehaviour:
   ModerateMagic: {fileID: 0}
   HardMagic: {fileID: 0}
   itemMeshRenderer: {fileID: 137306672281821108}
+  _itemType: 0
 --- !u!1 &1125309617228390
 GameObject:
   m_ObjectHideFlags: 0
@@ -984,6 +985,7 @@ MonoBehaviour:
   ModerateMagic: {fileID: 0}
   HardMagic: {fileID: 0}
   itemMeshRenderer: {fileID: 137011097167178510}
+  _itemType: 1
 --- !u!1 &1651792338588208
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,6 +1152,7 @@ MonoBehaviour:
   ModerateMagic: {fileID: 0}
   HardMagic: {fileID: 0}
   itemMeshRenderer: {fileID: 137474894624504034}
+  _itemType: 2
 --- !u!1 &1691907547281726
 GameObject:
   m_ObjectHideFlags: 0
