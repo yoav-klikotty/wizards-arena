@@ -156,7 +156,8 @@ MonoBehaviour:
   _type: 0
   _name: Red_Cape
   _displayName: 
-  _requiredLevel: 1
+  _price: 10000
+  _requiredLevel: 20
   _attributes:
   - 'Max HP: +100'
   - 'Recovery: +30'

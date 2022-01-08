@@ -155,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   _name: Dark_Blue_Staff
+  _displayName: 
+  _price: 100
   _requiredLevel: 5
   _attributes:
   - 'Damage: 7-15'

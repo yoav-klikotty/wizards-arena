@@ -11,7 +11,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TMP_Text _energyInput;
     [SerializeField] Slider _levelBar;
 
-    private PlayerStatsController _playerStatsController;
+    private PlayerStatsController _playerStatsController = new PlayerStatsController();
 
     void OnEnable()
     {
@@ -27,7 +27,6 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {   
-        _playerStatsController = new PlayerStatsController();
         UpdatePlayerStats();
     }
 

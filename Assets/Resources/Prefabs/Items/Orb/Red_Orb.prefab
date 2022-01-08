@@ -156,7 +156,8 @@ MonoBehaviour:
   _type: 2
   _name: Red_Orb
   _displayName: 
-  _requiredLevel: 1
+  _price: 10000
+  _requiredLevel: 20
   _attributes:
   - 'Max Mana: +80'
   - 'Max Regeneration: +15'

@@ -156,6 +156,7 @@ MonoBehaviour:
   _type: 0
   _name: Dark_Blue_Cape
   _displayName: 
+  _price: 100
   _requiredLevel: 5
   _attributes:
   - 'Max HP: +60'

@@ -155,7 +155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   _name: Red_Staff
-  _requiredLevel: 1
+  _displayName: 
+  _price: 10000
+  _requiredLevel: 20
   _attributes:
   - 'Damage: 5-10'
   _description: Staff
@@ -181,15 +183,15 @@ MonoBehaviour:
     materials:
     - red
     SoftMagicStats:
-      name: BlueArrow
+      name: Fireball
       multiple: 1
       requiredMana: 10
     ModerateMagicStats:
-      name: PurpleLightning
+      name: Fireball
       multiple: 2
       requiredMana: 20
     HardMagicStats:
-      name: BlueMissile
+      name: FireMissile
       multiple: 3
       requiredMana: 30
 --- !u!114 &1825784076430162269

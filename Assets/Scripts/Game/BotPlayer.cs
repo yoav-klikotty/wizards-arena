@@ -15,13 +15,13 @@ public class BotPlayer : MonoBehaviour
         };
         DecisionManager.Option[] decisionWithShoot = {
             DecisionManager.Option.Reload,
-            DecisionManager.Option.Protect,
+            DecisionManager.Option.Reload,
             DecisionManager.Option.SoftAttack,
             DecisionManager.Option.ModerateAttack,
             DecisionManager.Option.HardAttack,
         };
         int currentMana = _opponent.GetMana();
-        if (currentMana == 0)
+        if (currentMana < _opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana)
         {
             return decisionWithoutShoot[rnd.Next(0, 2)];
         }

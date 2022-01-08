@@ -9,9 +9,12 @@ public class InventoryManager : MonoBehaviour
     private GameObject[] _slots;
     private InventoryItem[] _inventoryItems;
     private WizardStatsController _wizardStatsController = new WizardStatsController();
+    private PlayerStatsController _playerStatsController = new PlayerStatsController();
+
     void Start()
     {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
             new InventoryPrefabs("Blue_Cape", ItemType.Cape),
             new InventoryPrefabs("Blue_Orb", ItemType.Orb),
@@ -31,7 +34,8 @@ public class InventoryManager : MonoBehaviour
         };
         _inventoryItems = new InventoryItem[totalItems.Length];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
-        for(int i = 0; i < totalItems.Length; i++){
+        for (int i = 0; i < totalItems.Length; i++)
+        {
             var prefab = Resources.Load("Prefabs/Items/" + totalItems[i].Type.ToString() + "/" + totalItems[i].Name);
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
@@ -47,31 +51,40 @@ public class InventoryManager : MonoBehaviour
             {
                 _inventoryItems[i].SetEquipedStatus(wizardStatsData.OrbStatsData.IsContainInventoryItem(_inventoryItems[i]));
             }
+            _inventoryItems[i].SetPurchasedStatus(playerStatsData.IsPurchasedItem(_inventoryItems[i].GetName()));
         }
         wizardStatsData.WriteWizardStats();
     }
 
-    public void FilterItems(ItemType type) {
-        for(int i = 0; i < _inventoryItems.Length; i++) {
+    public void FilterItems(ItemType type)
+    {
+        for (int i = 0; i < _inventoryItems.Length; i++)
+        {
             _inventoryItems[i].transform.SetParent(_unfilteredContaier.transform, false);
         }
         List<InventoryItem> filteredItems = new List<InventoryItem>();
-        for(int i = 0; i < _inventoryItems.Length; i++) {
-            if(_inventoryItems[i].GetItemType() == type) {
+        for (int i = 0; i < _inventoryItems.Length; i++)
+        {
+            if (_inventoryItems[i].GetItemType() == type)
+            {
                 filteredItems.Add(_inventoryItems[i]);
             }
         }
-        for(int i = 0; i < filteredItems.Count; i++) {
+        for (int i = 0; i < filteredItems.Count; i++)
+        {
             filteredItems[i].transform.SetParent(_slots[i].transform, false);
         }
     }
 
-    public void EquipItem(InventoryItem itemSelected) {
+    public void EquipItem(InventoryItem itemSelected)
+    {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
         wizardStatsData.EquipItem(itemSelected);
         ItemType type = itemSelected.GetItemType();
-        for(int i = 0; i < _inventoryItems.Length; i++){
-            if(_inventoryItems[i].GetItemType() == type && _inventoryItems[i].GetEquipedStatus() == true){
+        for (int i = 0; i < _inventoryItems.Length; i++)
+        {
+            if (_inventoryItems[i].GetItemType() == type && _inventoryItems[i].GetEquipedStatus() == true)
+            {
                 _inventoryItems[i].SetEquipedStatus(false);
                 wizardStatsData.RemoveItem(_inventoryItems[i]);
                 break;
@@ -81,5 +94,12 @@ public class InventoryManager : MonoBehaviour
         _wizardStatsController.SaveWizardStatsData(wizardStatsData);
         wizardStatsData.WriteWizardStats();
         Player.UpdateWizard();
+    }
+
+    public void PurchaseItem(InventoryItem itemSelected)
+    {
+        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+        playerStatsData.AddItem(itemSelected);
+        _playerStatsController.SavePlayerStatsData(playerStatsData, true);
     }
 }

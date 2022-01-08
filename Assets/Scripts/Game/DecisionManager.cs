@@ -38,6 +38,7 @@ public class DecisionManager : MonoBehaviour
     {
         if (_counter.IsCounterEnd() && _option == Option.None)
         {
+            Debug.Log("choose random");
             ChooseRandom();
         }
     }
@@ -73,7 +74,7 @@ public class DecisionManager : MonoBehaviour
     {
         _manaBar.maxValue = player.WizardStatsData.ManaStatsData.MaxMana;
         _manaBar.value = player.GetMana();
-        _manaText.text = _manaBar.value + "/" +  _manaBar.maxValue;
+        _manaText.text = _manaBar.value + "/" + _manaBar.maxValue;
     }
 
     public Option GetOption()

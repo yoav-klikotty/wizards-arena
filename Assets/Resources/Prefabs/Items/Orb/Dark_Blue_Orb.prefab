@@ -156,6 +156,7 @@ MonoBehaviour:
   _type: 2
   _name: Dark_Blue_Orb
   _displayName: 
+  _price: 100
   _requiredLevel: 5
   _attributes:
   - 'Max Mana: +40'

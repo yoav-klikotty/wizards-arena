@@ -27,10 +27,11 @@ public class InventoryPrefabs
 public class InventoryItem : MonoBehaviour
 {
     private bool _equiped;
+    private bool _purchased;
     [SerializeField] ItemType _type;
     [SerializeField] string _name;
     [SerializeField] string _displayName;
-
+    [SerializeField] int _price;
     [SerializeField] int _requiredLevel;
     [SerializeField] List<string> _attributes = new List<string>();
     [SerializeField] string _description;
@@ -54,6 +55,14 @@ public class InventoryItem : MonoBehaviour
     {
         return _equiped;
     }
+     public void SetPurchasedStatus(bool purchased)
+    {
+        this._purchased = purchased;
+    }
+    public bool GetPurchasedStatus()
+    {
+        return _purchased;
+    }
     public void ItemClicked()
     {
         _itemPanel.OpenPanel(this);
@@ -66,6 +75,10 @@ public class InventoryItem : MonoBehaviour
     public string GetDisplayName()
     {
         return _displayName;
+    }
+    public int GetPrice()
+    {
+        return _price;
     }
     public int GetRequiredLevel()
     {

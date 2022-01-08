@@ -156,7 +156,8 @@ MonoBehaviour:
   _type: 2
   _name: Green_Orb
   _displayName: 
-  _requiredLevel: 1
+  _price: 1000
+  _requiredLevel: 7
   _attributes:
   - 'Max Mana: +50'
   - 'Max Regeneration: +10'

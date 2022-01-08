@@ -16,9 +16,16 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        // PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
-        // PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
-        // PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
+        WizardStatsData = _wizardStatsController.GetWizardStatsData();
+        currentHealth = WizardStatsData.DefenceStatsData.MaxHP;
+
+        if (PlayerHUD != null)
+        {
+            PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
+            PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
+            PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
+            PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
+        }
         UpdateWizard();
     }
 
@@ -53,15 +60,21 @@ public class Player : MonoBehaviour
     public void ReduceHealth(int health)
     {
         currentHealth = (currentHealth - health);
-        PlayerHUD.SetHealthBar(currentHealth);
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
+        PlayerHUD.ActivateIndication("- " + health + " HP");
 
     }
 
     public void IncreaseHealth(int health)
     {
         currentHealth = (currentHealth + health);
-        PlayerHUD.SetHealthBar(currentHealth);
+        PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
     }
+
     public int GetMana()
     {
         return currentMana;

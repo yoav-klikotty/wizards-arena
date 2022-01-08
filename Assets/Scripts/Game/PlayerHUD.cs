@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] Slider _healthBar;
+    [SerializeField] TMP_Text _healthLabel;
     [SerializeField] Transform _camera;
     public float requiredManaForSoftAttack;
     [SerializeField] GameObject _softAttackMagic;
@@ -13,10 +15,14 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] GameObject _moderateAttackMagic;
     public float requiredManaForHardAttack;
     [SerializeField] GameObject _hardAttackMagic;
+    [SerializeField] Animation _animation;
+    [SerializeField] TMP_Text _indicationText;
 
-    public void SetHealthBar(float health)
+    public void SetHealthBar(float health, float maxHP)
     {
+        _healthBar.maxValue = maxHP;
         _healthBar.value = health;
+        _healthLabel.text = health + "/" + maxHP;
     }
     // Update is called once per frame
     void LateUpdate()
@@ -51,5 +57,11 @@ public class PlayerHUD : MonoBehaviour
             _hardAttackMagic.SetActive(false);
         }
 
+    }
+
+    public void ActivateIndication(string indicationText)
+    {
+        _indicationText.text = indicationText;
+        _animation.Play();
     }
 }

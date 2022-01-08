@@ -156,7 +156,8 @@ MonoBehaviour:
   _type: 0
   _name: Lava_Cape
   _displayName: 
-  _requiredLevel: 1
+  _price: 5000
+  _requiredLevel: 10
   _attributes:
   - 'Max HP: +80'
   - 'Recovery: +20'

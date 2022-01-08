@@ -155,7 +155,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _type: 1
   _name: Green_Staff
-  _requiredLevel: 1
+  _displayName: 
+  _price: 1000
+  _requiredLevel: 7
   _attributes:
   - 'Damage: 5-10'
   _description: Staff
@@ -181,15 +183,15 @@ MonoBehaviour:
     materials:
     - green
     SoftMagicStats:
-      name: BlueArrow
+      name: PoisonShot
       multiple: 1
       requiredMana: 10
     ModerateMagicStats:
-      name: PurpleLightning
+      name: GreenPoison
       multiple: 2
       requiredMana: 20
     HardMagicStats:
-      name: BlueMissile
+      name: WaterShot
       multiple: 3
       requiredMana: 30
 --- !u!114 &4481199207560785988

@@ -6,10 +6,11 @@ using UnityEngine;
 public class PlayerStatsData
 {
     public string _name = "";
-    public int _level = 1;
+    public int _level = 30;
     public int _levelPoints = 0;
-    public int _coins = 0;
+    public int _coins = 100000;
     public int _crystals = 5;
+    public List<string> _items = new List<string>();
 
     public string GetName()
     {
@@ -71,4 +72,19 @@ public class PlayerStatsData
     {
         this._crystals = _crystals;
     }
+    public void AddItem(InventoryItem inventoryItem)
+    {
+        if (!IsPurchasedItem(inventoryItem.GetName()) && inventoryItem.GetPrice() <= this._coins)
+        {
+            this.SetCoins(GetCoins() - inventoryItem.GetPrice());
+            Debug.Log(this.GetCoins());
+            this._items.Add(inventoryItem.GetName());
+        }
+    }
+
+    public bool IsPurchasedItem(string itemName)
+    {
+        return this._items.Contains(itemName);
+    }
+
 }
