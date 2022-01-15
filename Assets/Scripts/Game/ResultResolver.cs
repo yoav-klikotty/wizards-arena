@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
+
 
 public class ResultResolver : MonoBehaviour
 {
@@ -27,16 +29,21 @@ public class ResultResolver : MonoBehaviour
         {
             _opponent.Player.getCape().SoftMagic.Activate();
             _player.Player.getCape().SoftMagic.Activate();
+            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+
         }
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.Protect)
         {
             _player.Player.getHat().SoftMagic.Activate();
             _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.Player.getCape().SoftMagic.Activate();
+            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.Reload)
         {
             _player.Player.getCape().SoftMagic.Activate();
+             _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
             _opponent.Player.getHat().SoftMagic.Activate();
             _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
         }
@@ -47,7 +54,7 @@ public class ResultResolver : MonoBehaviour
             _opponent.Player.getWand().SoftMagic.Activate();
             _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.AttackAni();
-            _player.Player.ReduceHealth(10);
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0, false));
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.ModerateAttack)
@@ -56,7 +63,7 @@ public class ResultResolver : MonoBehaviour
             _opponent.Player.getWand().ModerateMagic.Activate();
             _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.AttackAni();
-            _player.Player.ReduceHealth(20);
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.2f, false));
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.HardAttack)
@@ -65,7 +72,7 @@ public class ResultResolver : MonoBehaviour
             _opponent.Player.getWand().HardMagic.Activate();
             _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.AttackAni();
-            _player.Player.ReduceHealth(30);
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.5f, false));
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
         
@@ -74,6 +81,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.Player.getWand().SoftMagic.Activate();
             _opponent.AttackAni();
             _player.Player.getCape().SoftMagic.Activate();
+            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0, true));
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.ModerateAttack)
@@ -82,6 +91,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getCape().SoftMagic.Activate();
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.2f, true));
+            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.HardAttack)
         {
@@ -89,6 +100,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getCape().SoftMagic.Activate();
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.5f, true));
+            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.Protect)
         {
@@ -96,13 +109,15 @@ public class ResultResolver : MonoBehaviour
             _player.Player.getWand().SoftMagic.Activate();
             _opponent.Player.getCape().SoftMagic.Activate();
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0f, true));
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.Reload)
         {
             _player.Player.getWand().SoftMagic.Activate();
             _player.AttackAni();
             _opponent.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.ReduceHealth(10);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0, false));
             _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
@@ -112,8 +127,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().SoftMagic.Activate();
             _opponent.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.ReduceHealth(10);
-            _player.Player.ReduceHealth(10);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
@@ -123,8 +138,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().SoftMagic.Activate();
             _opponent.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.ReduceHealth(20);
-            _player.Player.ReduceHealth(10);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _player.Player.WizardStatsData, 0, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.2f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
@@ -134,8 +149,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().SoftMagic.Activate();
             _opponent.Player.getWand().HardMagic.Activate();
-            _opponent.Player.ReduceHealth(30);
-            _player.Player.ReduceHealth(10);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.5f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
@@ -146,13 +161,15 @@ public class ResultResolver : MonoBehaviour
             _player.Player.getWand().ModerateMagic.Activate();
             _opponent.Player.getCape().SoftMagic.Activate();
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.2f, true));
         }
         else if (playerDecision == DecisionManager.Option.ModerateAttack && opponentDecision == DecisionManager.Option.Reload)
         {
             _player.Player.getWand().ModerateMagic.Activate();
             _player.AttackAni();
             _opponent.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.ReduceHealth(20);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.2f, false));
             _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
@@ -162,8 +179,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().ModerateMagic.Activate();
             _opponent.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.ReduceHealth(20);
-            _player.Player.ReduceHealth(10);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.2f, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
@@ -173,8 +190,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().ModerateMagic.Activate();
             _opponent.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.ReduceHealth(20);
-            _player.Player.ReduceHealth(20);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.2f, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.2f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
@@ -184,8 +201,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().ModerateMagic.Activate();
             _opponent.Player.getWand().HardMagic.Activate();
-            _opponent.Player.ReduceHealth(20);
-            _player.Player.ReduceHealth(30);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.2f, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.5f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
@@ -195,13 +212,15 @@ public class ResultResolver : MonoBehaviour
             _player.Player.getWand().HardMagic.Activate();
             _opponent.Player.getCape().SoftMagic.Activate();
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.5f, true));
         }
         else if (playerDecision == DecisionManager.Option.HardAttack && opponentDecision == DecisionManager.Option.Reload)
         {
             _player.Player.getWand().HardMagic.Activate();
             _player.AttackAni();
             _opponent.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.ReduceHealth(30);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.5f, false));
             _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
@@ -211,8 +230,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().HardMagic.Activate();
             _opponent.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.ReduceHealth(10);
-            _player.Player.ReduceHealth(30);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.5f, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
@@ -222,8 +241,8 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().HardMagic.Activate();
             _opponent.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.ReduceHealth(30);
-            _player.Player.ReduceHealth(20);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.5f, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.2f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
@@ -233,13 +252,42 @@ public class ResultResolver : MonoBehaviour
             _opponent.AttackAni();
             _player.Player.getWand().HardMagic.Activate();
             _opponent.Player.getWand().HardMagic.Activate();
-            _opponent.Player.ReduceHealth(30);
-            _player.Player.ReduceHealth(30);
+            _opponent.Player.ReduceHealth(CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, 0.5f, false));
+            _player.Player.ReduceHealth(CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, 0.5f, false));
             _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
             _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
         
         InvokeRepeating("FinishResolving", 1.4f, 0);
+    }
+
+    int CalculateDamage(WizardStatsData attacker, WizardStatsData defender, float attackerMagicMultiplier, bool isDefenderDefends)
+    {
+        Random rnd = new Random();
+        if (!isDefenderDefends)
+        {
+            if (rnd.NextDouble() <= defender.DefenceStatsData.Avoidability)
+            {
+                return 0;
+            }
+        }
+        int damagePoints = 0;
+        int baseDamage = rnd.Next(attacker.AttackStatsData.MinBaseDamage, attacker.AttackStatsData.MaxBaseDamage);
+        damagePoints += baseDamage;
+        bool isCriticalHit = rnd.NextDouble() <= attacker.AttackStatsData.CriticalRate;
+        if (isCriticalHit)
+        {
+            damagePoints += (int)((attacker.AttackStatsData.CriticalDmg + attackerMagicMultiplier)*baseDamage);
+        }
+        else
+        {
+            damagePoints += (int)((attackerMagicMultiplier)*baseDamage);
+        }
+        if (isDefenderDefends)
+        {
+            damagePoints = (int)(attackerMagicMultiplier*damagePoints);
+        }
+        return damagePoints;
     }
     void FinishResolving()
     {

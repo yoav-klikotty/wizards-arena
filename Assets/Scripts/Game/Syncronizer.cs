@@ -8,6 +8,9 @@ public class Syncronizer : MonoBehaviour
     SessionManager _sessionManager;
     PhotonView _photonView;
     [SerializeField] BotPlayer _botPlayer;
+    [SerializeField] Player _opponent;
+    WizardStatsController _wizardStatsController = new WizardStatsController();
+
 
     // Start is called before the first frame update
     void Start()
@@ -16,11 +19,13 @@ public class Syncronizer : MonoBehaviour
         _photonView = PhotonView.Get(this);
         if (PhotonNetwork.IsConnected)
         {
-            WizardStatsData wizardStatsData = new WizardStatsData();
+            WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
             _photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, JsonUtility.ToJson(wizardStatsData));
         }
         else
         {
+            WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+            _opponent.UpdateWizard(wizardStatsData);
         }
     }
 
@@ -47,7 +52,7 @@ public class Syncronizer : MonoBehaviour
     void SyncOpponentPlayer(string wizardStatsDataRaw)
     {
         WizardStatsData wizardStatsData = JsonUtility.FromJson<WizardStatsData>(wizardStatsDataRaw);
-        _sessionManager.OpponentWizardStatsData = wizardStatsData;
+        _opponent.UpdateWizard(wizardStatsData);
     }
 
     //public override void OnDisconnected(DisconnectCause cause)

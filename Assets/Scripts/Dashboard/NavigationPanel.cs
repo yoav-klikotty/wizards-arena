@@ -11,10 +11,4 @@ public class NavigationPanel : MonoBehaviour
             _buttons[i].SetPage(page);
         }
     }
-
-    public void FinishedPageChange() {
-        for (int i = 0; i < _buttons.Length; i++) {
-            _buttons[i].EnableButtons();
-        }
-    }
 }

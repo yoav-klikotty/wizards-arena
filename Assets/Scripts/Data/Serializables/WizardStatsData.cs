@@ -85,11 +85,11 @@ public class WizardStatsData
 [Serializable]
 public class AttackStatsData
 { 
-    public int MinBaseDamage = 1;
-    public int MaxBaseDamage = 3;
-    public float CriticalRate = 0;
-    public float CriticalDmg = 0;
-    public float ArmorPenetration = 0;
+    public int MinBaseDamage = 5;
+    public int MaxBaseDamage = 10;
+    public float CriticalRate = 0.2f;
+    public float CriticalDmg = 0.5f;
+    public float ArmorPenetration = 0.1f;
 }
 
 [Serializable]
@@ -97,7 +97,7 @@ public class DefenceStatsData
 { 
     public int MaxHP = 50;
     public int Recovery = 0;
-    public float Avoidability = 0;
+    public float Avoidability = 0.1f;
     public float Mirroring = 0;
 }
 

@@ -13,9 +13,6 @@ public class Wizard : MonoBehaviour {
 	public const string DEATH	 = "Wizard_Death";
     public Player Player;
 	Animation _anim;
-
-    private bool _isDeadAnimationPlayed = false;
-
 	void Start () {
 		_anim = GetComponent<Animation>();
 	}

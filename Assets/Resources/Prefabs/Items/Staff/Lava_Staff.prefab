@@ -169,11 +169,11 @@ MonoBehaviour:
     Avoidability: 0
     Mirroring: 0
   _attackStatsData:
-    MinBaseDamage: 5
-    MaxBaseDamage: 10
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
+    MinBaseDamage: 15
+    MaxBaseDamage: 25
+    CriticalRate: 0.5
+    CriticalDmg: 1
+    ArmorPenetration: 0.4
   _manaStatsData:
     MaxMana: 0
     StartMana: 0

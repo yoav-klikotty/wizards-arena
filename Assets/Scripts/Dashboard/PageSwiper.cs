@@ -40,21 +40,18 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
                 newLocation += new Vector3(Screen.width, 0, 0);
                 _navigationPanel.PageChange(CurrentPage);
             }
-            StartCoroutine(SmoothMove(transform.position, newLocation, Easing, false));
+            StartCoroutine(SmoothMove(transform.position, newLocation, Easing));
             _panelLocation = newLocation;
         }else{
-            StartCoroutine(SmoothMove(transform.position, _panelLocation, Easing, false));
+            StartCoroutine(SmoothMove(transform.position, _panelLocation, Easing));
         }
     }
-    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds, bool buttonsNav){
+    IEnumerator SmoothMove(Vector3 startpos, Vector3 endpos, float seconds){
         float t = 0f;
         while(t <= 1.0){
             t += Time.deltaTime / seconds;
             transform.position = Vector3.Lerp(startpos, endpos, Mathf.SmoothStep(0f, 1f, t));
             yield return null;
-        }
-        if(buttonsNav) {
-            _navigationPanel.FinishedPageChange();
         }
     }
 
@@ -64,7 +61,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         Vector3 newLocation = _panelLocation;
         newLocation += new Vector3((-1*delta*Screen.width), 0, 0);
         _panelLocation = newLocation;
-        StartCoroutine(SmoothMove(transform.position, newLocation, Easing, true));
+        StartCoroutine(SmoothMove(transform.position, newLocation, Easing));
         _wizard.ChangePage(page);
     }
 

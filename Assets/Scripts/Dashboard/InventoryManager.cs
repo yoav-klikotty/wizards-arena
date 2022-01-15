@@ -8,11 +8,12 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Player Player;
     private GameObject[] _slots;
     private InventoryItem[] _inventoryItems;
-    private WizardStatsController _wizardStatsController = new WizardStatsController();
+    WizardStatsController _wizardStatsController = new WizardStatsController();
     private PlayerStatsController _playerStatsController = new PlayerStatsController();
 
     void Start()
     {
+        PlayerPrefs.DeleteAll();
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
@@ -93,7 +94,7 @@ public class InventoryManager : MonoBehaviour
         itemSelected.SetEquipedStatus(true);
         _wizardStatsController.SaveWizardStatsData(wizardStatsData);
         wizardStatsData.WriteWizardStats();
-        Player.UpdateWizard();
+        Player.UpdateWizard(null);
     }
 
     public void PurchaseItem(InventoryItem itemSelected)

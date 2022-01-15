@@ -167,7 +167,7 @@ MonoBehaviour:
   _defenceStatsData:
     MaxHP: 70
     Recovery: 10
-    Avoidability: 0
+    Avoidability: 0.3
     Mirroring: 0
   _attackStatsData:
     MinBaseDamage: 0
@@ -186,15 +186,15 @@ MonoBehaviour:
     SoftMagicStats:
       name: MagicShieldGreen
       multiple: 0
-      requiredMana: 0
+      requiredMana: 3
     ModerateMagicStats:
       name: MagicShieldGreen
       multiple: 0
-      requiredMana: 0
+      requiredMana: 3
     HardMagicStats:
       name: MagicShieldGreen
       multiple: 0
-      requiredMana: 0
+      requiredMana: 3
 --- !u!114 &942723345973312055
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class DecisionManager : MonoBehaviour
         _syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
         player = GameObject.Find("Player").GetComponent<Player>();
         SetManaBar();
-        CalculateValidAttacks();
+        UpdateValidMagicsByMana();
     }
     void Update()
     {
@@ -43,7 +43,7 @@ public class DecisionManager : MonoBehaviour
         }
     }
 
-    void CalculateValidAttacks()
+    void UpdateValidMagicsByMana()
     {
         if (player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana <= player.GetMana())
         {
@@ -68,6 +68,14 @@ public class DecisionManager : MonoBehaviour
         else
         {
             _hardAttackMagic.interactable = false;
+        }
+        if (player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana <= player.GetMana())
+        {
+            _shieldBtn.interactable = true;
+        }
+        else
+        {
+            _shieldBtn.interactable = false;
         }
     }
     public void SetManaBar()

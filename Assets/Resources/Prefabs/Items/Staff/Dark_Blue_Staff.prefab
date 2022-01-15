@@ -171,9 +171,9 @@ MonoBehaviour:
   _attackStatsData:
     MinBaseDamage: 7
     MaxBaseDamage: 15
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
+    CriticalRate: 0.3
+    CriticalDmg: 0.6
+    ArmorPenetration: 0.2
   _manaStatsData:
     MaxMana: 0
     StartMana: 0

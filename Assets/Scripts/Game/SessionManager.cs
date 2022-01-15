@@ -11,9 +11,7 @@ public class SessionManager : MonoBehaviour
     bool _isSessionLock = false;
     bool _isSessionEndLock = false;
     public DecisionManager.Option OpponentOption = DecisionManager.Option.None;
-    public WizardStatsData OpponentWizardStatsData;
     public DecisionManager.Option PlayerOption = DecisionManager.Option.None;
-    public WizardStatsData PlayerWizardStatsData;
     [SerializeField] bool _isOnline;
     [SerializeField] Player _opponent;
     [SerializeField] Player _player;

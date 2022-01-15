@@ -156,6 +156,7 @@ MonoBehaviour:
   _type: 0
   _name: Blue_Cape
   _displayName: Cosmos Cape
+  _price: 0
   _requiredLevel: 1
   _attributes:
   - 'Max HP: +50'
@@ -165,7 +166,7 @@ MonoBehaviour:
   _defenceStatsData:
     MaxHP: 50
     Recovery: 0
-    Avoidability: 0
+    Avoidability: 0.1
     Mirroring: 0
   _attackStatsData:
     MinBaseDamage: 0
@@ -184,15 +185,15 @@ MonoBehaviour:
     SoftMagicStats:
       name: MagicShieldBlue
       multiple: 0
-      requiredMana: 0
+      requiredMana: 3
     ModerateMagicStats:
       name: MagicShieldBlue
       multiple: 0
-      requiredMana: 0
+      requiredMana: 3
     HardMagicStats:
       name: MagicShieldBlue
       multiple: 0
-      requiredMana: 0
+      requiredMana: 3
 --- !u!114 &2230774391992843248
 MonoBehaviour:
   m_ObjectHideFlags: 0

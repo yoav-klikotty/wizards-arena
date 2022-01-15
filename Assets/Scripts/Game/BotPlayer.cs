@@ -8,37 +8,27 @@ public class BotPlayer : MonoBehaviour
     [SerializeField] Player _opponent;
     public DecisionManager.Option GetBotDecision()
     {
+        List <DecisionManager.Option> decitions = new List<DecisionManager.Option>();
         Random rnd = new Random();
-        DecisionManager.Option[] decisionWithoutShoot = {
-            DecisionManager.Option.Protect,
-            DecisionManager.Option.Reload,
-        };
-        DecisionManager.Option[] decisionWithShoot = {
-            DecisionManager.Option.Reload,
-            DecisionManager.Option.Reload,
-            DecisionManager.Option.SoftAttack,
-            DecisionManager.Option.ModerateAttack,
-            DecisionManager.Option.HardAttack,
-        };
         int currentMana = _opponent.GetMana();
-        if (currentMana < _opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana)
-        {
-            return decisionWithoutShoot[rnd.Next(0, 2)];
-        }
-        else if (currentMana >= _opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana &&
-                 currentMana < _opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana)
-        {
-            return decisionWithShoot[rnd.Next(0, 3)];
-        }
-        else if (currentMana >= _opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana &&
-                currentMana < _opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana)
-        {
-            return decisionWithShoot[rnd.Next(0, 4)];
-        }
-        else
-        {
-            return decisionWithShoot[rnd.Next(0, 5)];
-        }
+        decitions.Add(DecisionManager.Option.Protect);
+        // if (currentMana >= _opponent.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana)
+        // {
+        //     decitions.Add(DecisionManager.Option.Protect);
+        // }
+        // if (currentMana >= _opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana)
+        // {
+        //     decitions.Add(DecisionManager.Option.SoftAttack);
+        // }
+        // if (currentMana >= _opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana)
+        // {
+        //     decitions.Add(DecisionManager.Option.ModerateAttack);
+        // }
+        // if (currentMana >= _opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana)
+        // {
+        //     decitions.Add(DecisionManager.Option.HardAttack);
+        // }
+        return decitions[rnd.Next(0, decitions.Count - 1)];
     }
 
 }

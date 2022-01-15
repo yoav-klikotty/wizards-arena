@@ -10,7 +10,6 @@ public class ArenaManager : MonoBehaviour
     [SerializeField] NavigationPanel _navigationPanel;
     public void StartGame()
     {
-        // PlayerPrefs.DeleteAll();
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         if (playerStatsData.GetCrystals() > 0)
         {

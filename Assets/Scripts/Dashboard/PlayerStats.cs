@@ -35,7 +35,7 @@ public class PlayerStats : MonoBehaviour
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         _nameInput.text = playerStatsData.GetName();
         _coinsInput.text = playerStatsData.GetCoins() + "";
-        _energyInput.text = playerStatsData.GetCrystals() + "";
+        _energyInput.text = playerStatsData.GetCrystals() + "/" + playerStatsData.GetMaxCrystals();
         _levelInput.text = "level: " + playerStatsData.GetLevel();
         _levelBar.value = playerStatsData.GetLevelPoints();
     }

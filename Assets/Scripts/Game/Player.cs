@@ -11,14 +11,26 @@ public class Player : MonoBehaviour
     [SerializeField] Item _cape;
     [SerializeField] Item _hat;
     public WizardStatsData WizardStatsData;
-    private WizardStatsController _wizardStatsController = new WizardStatsController();
+    WizardStatsController _wizardStatsController = new WizardStatsController();
     public PlayerHUD PlayerHUD;
 
     void Start()
     {
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
-        currentHealth = WizardStatsData.DefenceStatsData.MaxHP;
+        UpdateWizard(null);
+    }
 
+    public void UpdateWizard(WizardStatsData wizardStatsData)
+    {
+        if (wizardStatsData == null)
+        {
+            WizardStatsData = _wizardStatsController.GetWizardStatsData();
+        }
+        else 
+        {
+            WizardStatsData = wizardStatsData;
+        }
+        currentHealth = WizardStatsData.DefenceStatsData.MaxHP;
         if (PlayerHUD != null)
         {
             PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
@@ -26,12 +38,6 @@ public class Player : MonoBehaviour
             PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
             PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
         }
-        UpdateWizard();
-    }
-
-    public void UpdateWizard()
-    {
-        WizardStatsData = _wizardStatsController.GetWizardStatsData();
         _wand.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
         _wand.SetMagics(
             WizardStatsData.StaffStatsData.SoftMagicStats.name,
@@ -65,7 +71,15 @@ public class Player : MonoBehaviour
             currentHealth = 0;
         }
         PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
-        PlayerHUD.ActivateIndication("- " + health + " HP");
+        if (health == 0)
+        {
+            PlayerHUD.ActivateIndication("Strike Avoid!");
+
+        }
+        else 
+        {
+            PlayerHUD.ActivateIndication("- " + health + " HP");
+        }
 
     }
 

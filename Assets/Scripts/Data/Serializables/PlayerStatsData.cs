@@ -10,6 +10,7 @@ public class PlayerStatsData
     public int _levelPoints = 0;
     public int _coins = 100000;
     public int _crystals = 5;
+    public int _maxCrystals = 20;
     public List<string> _items = new List<string>();
 
     public string GetName()
@@ -70,14 +71,20 @@ public class PlayerStatsData
 
     public void SetCrystals(int _crystals)
     {
-        this._crystals = _crystals;
+        if (_crystals > this._maxCrystals)
+        {
+            this._crystals = this._maxCrystals;
+        }
+        else 
+        {
+            this._crystals = _crystals;
+        }
     }
     public void AddItem(InventoryItem inventoryItem)
     {
         if (!IsPurchasedItem(inventoryItem.GetName()) && inventoryItem.GetPrice() <= this._coins)
         {
             this.SetCoins(GetCoins() - inventoryItem.GetPrice());
-            Debug.Log(this.GetCoins());
             this._items.Add(inventoryItem.GetName());
         }
     }
@@ -85,6 +92,10 @@ public class PlayerStatsData
     public bool IsPurchasedItem(string itemName)
     {
         return this._items.Contains(itemName);
+    }
+    public int GetMaxCrystals()
+    {
+        return this._maxCrystals;
     }
 
 }

@@ -9,7 +9,6 @@ public class PanelButton : MonoBehaviour
     [SerializeField] int _panelNum;
     [SerializeField] GameObject _activeFiller;
     private bool _isActive;
-    private bool _disabled = false;
 
     void Start()
     {
@@ -48,10 +47,5 @@ public class PanelButton : MonoBehaviour
         {
             gameObject.transform.localScale = new Vector3(1f, 1f, 0);
         }
-    }
-
-    public void EnableButtons()
-    {
-        _disabled = false;
     }
 }
