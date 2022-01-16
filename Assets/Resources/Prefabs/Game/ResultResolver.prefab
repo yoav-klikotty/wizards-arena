@@ -48,7 +48,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ac3ba64d099a4449bc752f6b9636ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OpponentChoice: {fileID: 0}
-  PlayerChoice: {fileID: 0}
-  Shield: {fileID: 21300000, guid: 3bf7a03f2851efb4caf088bfa380a234, type: 3}
-  Ammo: {fileID: 21300000, guid: 7e2f2e2c8bc45be4aa7a3b668007de72, type: 3}

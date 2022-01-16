@@ -24844,6 +24844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _botPlayer: {fileID: 1134142582}
   _opponent: {fileID: 1134142574}
+  _player: {fileID: 1598615464}
 --- !u!114 &976916506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44519,65 +44520,6 @@ MonoBehaviour:
   _decisionManagerPrefab: {fileID: 5906512550948728991, guid: 90287057ce88843fcaf7bf58ffcbebbe, type: 3}
   _resultResolverPrefab: {fileID: 2049985769470908931, guid: 89d0aadf2407fa049b74925cce2fc7db, type: 3}
   OpponentOption: 5
-  OpponentWizardStatsData:
-    StaffStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-      ModerateMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-      HardMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-    CapeStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-      ModerateMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-      HardMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-    OrbStatsData:
-      materials: []
-      SoftMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-      ModerateMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-      HardMagicStats:
-        name: 
-        multiple: 0
-        requiredMana: 0
-    AttackStatsData:
-      MinBaseDamage: 0
-      MaxBaseDamage: 0
-      CriticalRate: 0
-      CriticalDmg: 0
-      ArmorPenetration: 0
-    DefenceStatsData:
-      MaxHP: 0
-      Recovery: 0
-      Avoidability: 0
-      Mirroring: 0
-    ManaStatsData:
-      MaxMana: 0
-      StartMana: 0
-      ManaRegeneration: 0
-      PassiveManaRegeneration: 0
   PlayerOption: 5
   _isOnline: 0
   _opponent: {fileID: 1134142574}

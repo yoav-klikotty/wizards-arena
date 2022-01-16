@@ -22,6 +22,7 @@ public class StoreItem : MonoBehaviour
 
     public void OnPurchase()
     {
+        SoundManager.Instance.PlayButtonSound();
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         playerStatsData.SetCrystals(playerStatsData.GetCrystals() + _amount);
         _playerStatsController.SavePlayerStatsData(playerStatsData, true);

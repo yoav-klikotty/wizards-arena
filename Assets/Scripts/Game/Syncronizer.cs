@@ -9,8 +9,8 @@ public class Syncronizer : MonoBehaviour
     PhotonView _photonView;
     [SerializeField] BotPlayer _botPlayer;
     [SerializeField] Player _opponent;
+    [SerializeField] Player _player;
     WizardStatsController _wizardStatsController = new WizardStatsController();
-
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +53,20 @@ public class Syncronizer : MonoBehaviour
     {
         WizardStatsData wizardStatsData = JsonUtility.FromJson<WizardStatsData>(wizardStatsDataRaw);
         _opponent.UpdateWizard(wizardStatsData);
+    }
+
+    [PunRPC]
+    void ReduceHealthMulti(int damagePoint, bool isOpponent)
+    {
+        if (isOpponent)
+        {
+            _player.ReduceHealth(damagePoint);
+        }
+        else
+        {
+            _opponent.ReduceHealth(damagePoint);
+        }
+
     }
 
     //public override void OnDisconnected(DisconnectCause cause)

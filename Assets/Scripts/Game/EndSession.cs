@@ -55,6 +55,7 @@ public class EndSession : MonoBehaviour
     void RenderScore()
     {
         RenderTextScore();
+        RenderSoundScore();
         RenderWizardScore();
         StartStarsAnim();
         RenderPrizes();
@@ -84,6 +85,17 @@ public class EndSession : MonoBehaviour
         {
             Result.text = "Victory";
             ClaimButtonText.text = "Claim";
+        }
+    }
+    void RenderSoundScore()
+    {
+        if (!_isWon)
+        {
+            SoundManager.Instance.PlayYouLoseSound();
+        }
+        else
+        {
+            SoundManager.Instance.PlayYouWinSound();
         }
     }
     void RenderWizardScore()
