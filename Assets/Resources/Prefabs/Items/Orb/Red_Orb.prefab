@@ -159,8 +159,9 @@ MonoBehaviour:
   _price: 10000
   _requiredLevel: 20
   _attributes:
-  - 'Max Mana: +80'
-  - 'Max Regeneration: +15'
+  - 'Mana Regeneration: +15'
+  - 'Shield Penetration: +15%'
+  - 'Mirroring: +15%'
   _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
@@ -168,15 +169,15 @@ MonoBehaviour:
     MaxHP: 0
     Recovery: 0
     Avoidability: 0
-    Mirroring: 0
+    Mirroring: 0.15
   _attackStatsData:
     MinBaseDamage: 0
     MaxBaseDamage: 0
     CriticalRate: 0
     CriticalDmg: 0
-    ArmorPenetration: 0
+    ArmorPenetration: 0.15
   _manaStatsData:
-    MaxMana: 80
+    MaxMana: 0
     StartMana: 0
     ManaRegeneration: 15
     PassiveManaRegeneration: 0

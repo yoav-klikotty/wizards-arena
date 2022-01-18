@@ -159,15 +159,16 @@ MonoBehaviour:
   _price: 100
   _requiredLevel: 5
   _attributes:
-  - 'Max HP: +60'
-  - 'Recovery: +5'
+  - 'Max HP: +15'
+  - 'Mana Regeneration: +10'
+  - 'Passive Mana Regeneration: +3'
   _description: WeakCape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
-    MaxHP: 60
-    Recovery: 5
-    Avoidability: 0.2
+    MaxHP: 15
+    Recovery: 0
+    Avoidability: 0
     Mirroring: 0
   _attackStatsData:
     MinBaseDamage: 0
@@ -178,8 +179,8 @@ MonoBehaviour:
   _manaStatsData:
     MaxMana: 0
     StartMana: 0
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
+    ManaRegeneration: 10
+    PassiveManaRegeneration: 3
   _itemStatsData:
     materials:
     - dark-blue

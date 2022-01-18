@@ -159,21 +159,23 @@ MonoBehaviour:
   _price: 1000
   _requiredLevel: 7
   _attributes:
-  - 'Damage: 5-10'
+  - 'Damage: 1-22'
+  - 'Recovery: +5'
+  - 'Shield Penetration: +10%'
   _description: Staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
     MaxHP: 0
-    Recovery: 0
+    Recovery: 5
     Avoidability: 0
     Mirroring: 0
   _attackStatsData:
-    MinBaseDamage: 10
-    MaxBaseDamage: 20
-    CriticalRate: 0.4
-    CriticalDmg: 0.8
-    ArmorPenetration: 0.3
+    MinBaseDamage: 1
+    MaxBaseDamage: 22
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0.1
   _manaStatsData:
     MaxMana: 0
     StartMana: 0
