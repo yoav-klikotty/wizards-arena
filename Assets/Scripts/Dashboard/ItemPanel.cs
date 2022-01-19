@@ -38,6 +38,10 @@ public class ItemPanel : MonoBehaviour
         _isPlayerPurchasedItem = playerStatsData.IsPurchasedItem(itemSelected.GetName());
         _isPlayerEquipedItem = itemSelected.GetEquipedStatus();
         List<string> attributes = itemSelected.GetAttributes();
+        for (int i = 0; i < _attributesInputs.Length; i++)
+        {
+            _attributesInputs[i].text = "";
+        }
         for (int i = 0; i < attributes.Count; i++)
         {
             _attributesInputs[i].text = attributes[i];

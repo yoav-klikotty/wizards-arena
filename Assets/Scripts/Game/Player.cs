@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
             PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
             PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
             PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
+            currentMana = WizardStatsData.ManaStatsData.StartMana;
+            PlayerHUD.RenderAvailableAttacks(currentMana);
         }
         _wand.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
         _wand.SetMagics(
@@ -85,7 +87,15 @@ public class Player : MonoBehaviour
 
     public void IncreaseHealth(int health)
     {
-        currentHealth = (currentHealth + health);
+        int newVal = (currentHealth + health);
+        if (newVal > WizardStatsData.DefenceStatsData.MaxHP)
+        {
+            currentHealth = WizardStatsData.DefenceStatsData.MaxHP;
+        }
+        else
+        {
+            currentHealth = newVal;
+        }
         PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
     }
 

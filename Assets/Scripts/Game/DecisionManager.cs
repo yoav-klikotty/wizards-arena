@@ -31,6 +31,7 @@ public class DecisionManager : MonoBehaviour
     {
         _syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
         player = GameObject.Find("Player").GetComponent<Player>();
+        player.IncreaseMana(player.WizardStatsData.ManaStatsData.PassiveManaRegeneration);
         SetManaBar();
         UpdateValidMagicsByMana();
     }
@@ -38,7 +39,6 @@ public class DecisionManager : MonoBehaviour
     {
         if (_counter.IsCounterEnd() && _option == Option.None)
         {
-            Debug.Log("choose random");
             ChooseRandom();
         }
     }

@@ -159,7 +159,10 @@ MonoBehaviour:
   _price: 5000
   _requiredLevel: 10
   _attributes:
-  - 'Damage: 5-10'
+  - 'Damage: 13-14'
+  - 'Crit Rate: +5%'
+  - 'Crit Damage: +50%'
+  - 'Shield Penetration: +5%'
   _description: Staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
@@ -169,11 +172,11 @@ MonoBehaviour:
     Avoidability: 0
     Mirroring: 0
   _attackStatsData:
-    MinBaseDamage: 15
-    MaxBaseDamage: 25
-    CriticalRate: 0.5
-    CriticalDmg: 1
-    ArmorPenetration: 0.4
+    MinBaseDamage: 13
+    MaxBaseDamage: 14
+    CriticalRate: 0.05
+    CriticalDmg: 0.5
+    ArmorPenetration: 0.05
   _manaStatsData:
     MaxMana: 0
     StartMana: 0

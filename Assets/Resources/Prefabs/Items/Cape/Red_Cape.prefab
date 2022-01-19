@@ -159,15 +159,15 @@ MonoBehaviour:
   _price: 10000
   _requiredLevel: 20
   _attributes:
-  - 'Max HP: +100'
-  - 'Recovery: +30'
+  - 'Max HP: +25'
+  - 'Avoidability: +15%'
   _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
-    MaxHP: 100
-    Recovery: 30
-    Avoidability: 0.5
+    MaxHP: 25
+    Recovery: 0
+    Avoidability: 0.15
     Mirroring: 0
   _attackStatsData:
     MinBaseDamage: 0

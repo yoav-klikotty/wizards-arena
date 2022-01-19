@@ -159,8 +159,10 @@ MonoBehaviour:
   _price: 5000
   _requiredLevel: 10
   _attributes:
-  - 'Max Mana: +60'
-  - 'Max Regeneration: +10'
+  - 'Mana Regeneration: 10'
+  - 'Passive: 10'
+  - 'Crit Rate: +5%'
+  - 'Crit Damage: +30%'
   _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
@@ -172,11 +174,11 @@ MonoBehaviour:
   _attackStatsData:
     MinBaseDamage: 0
     MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
+    CriticalRate: 0.05
+    CriticalDmg: 0.3
     ArmorPenetration: 0
   _manaStatsData:
-    MaxMana: 60
+    MaxMana: 50
     StartMana: 0
     ManaRegeneration: 10
     PassiveManaRegeneration: 0

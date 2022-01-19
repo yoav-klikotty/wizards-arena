@@ -159,14 +159,15 @@ MonoBehaviour:
   _price: 0
   _requiredLevel: 1
   _attributes:
-  - 'Max HP: +50'
+  - 'Max HP: +20'
+  - 'Starting Mana: +20'
   _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
-    MaxHP: 50
+    MaxHP: 20
     Recovery: 0
-    Avoidability: 0.1
+    Avoidability: 0
     Mirroring: 0
   _attackStatsData:
     MinBaseDamage: 0
@@ -176,7 +177,7 @@ MonoBehaviour:
     ArmorPenetration: 0
   _manaStatsData:
     MaxMana: 0
-    StartMana: 0
+    StartMana: 20
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
   _itemStatsData:

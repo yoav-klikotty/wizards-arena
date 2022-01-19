@@ -156,10 +156,11 @@ MonoBehaviour:
   _type: 2
   _name: Blue_Orb
   _displayName: 
+  _price: 0
   _requiredLevel: 1
   _attributes:
-  - 'Max Mana: +30'
-  - 'Max Regeneration: +5'
+  - 'Starting Mana: +15'
+  - 'Mana Regeneration: +7'
   _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
@@ -175,9 +176,9 @@ MonoBehaviour:
     CriticalDmg: 0
     ArmorPenetration: 0
   _manaStatsData:
-    MaxMana: 30
-    StartMana: 0
-    ManaRegeneration: 5
+    MaxMana: 50
+    StartMana: 15
+    ManaRegeneration: 7
     PassiveManaRegeneration: 0
   _itemStatsData:
     materials:

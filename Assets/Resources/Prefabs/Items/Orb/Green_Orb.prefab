@@ -159,14 +159,16 @@ MonoBehaviour:
   _price: 1000
   _requiredLevel: 7
   _attributes:
-  - 'Max Mana: +50'
   - 'Max Regeneration: +10'
+  - 'Passive Mana Regeneration: +5'
+  - 'Max HP: +10'
+  - 'Recovery: +5'
   _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
+    MaxHP: 10
+    Recovery: 5
     Avoidability: 0
     Mirroring: 0
   _attackStatsData:
@@ -179,7 +181,7 @@ MonoBehaviour:
     MaxMana: 50
     StartMana: 0
     ManaRegeneration: 10
-    PassiveManaRegeneration: 0
+    PassiveManaRegeneration: 5
   _itemStatsData:
     materials:
     - green

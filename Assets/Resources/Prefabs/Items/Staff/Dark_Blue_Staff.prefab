@@ -159,7 +159,8 @@ MonoBehaviour:
   _price: 100
   _requiredLevel: 5
   _attributes:
-  - 'Damage: 7-15'
+  - 'Damage: 8-10'
+  - 'Passive Mana Regeneration: 5'
   _description: A weak staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
@@ -169,15 +170,15 @@ MonoBehaviour:
     Avoidability: 0
     Mirroring: 0
   _attackStatsData:
-    MinBaseDamage: 7
-    MaxBaseDamage: 15
-    CriticalRate: 0.3
-    CriticalDmg: 0.6
-    ArmorPenetration: 0.2
+    MinBaseDamage: 8
+    MaxBaseDamage: 10
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0
   _manaStatsData:
     MaxMana: 0
     StartMana: 0
-    ManaRegeneration: 0
+    ManaRegeneration: 5
     PassiveManaRegeneration: 0
   _itemStatsData:
     materials:

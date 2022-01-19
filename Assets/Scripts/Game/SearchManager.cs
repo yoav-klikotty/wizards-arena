@@ -2,10 +2,12 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SearchManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] GameObject _botModeButton;
+    [SerializeField] Slider _progressBar;
+
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -13,13 +15,18 @@ public class SearchManager : MonoBehaviourPunCallbacks
     // Multiplayer methods
     public override void OnConnectedToMaster()
     {
-        _botModeButton.SetActive(true);
+        IncreaseProgressBar(3);
+        Invoke("StartBotGame", 10);
         PhotonNetwork.AutomaticallySyncScene = true;
         PhotonNetwork.JoinRandomRoom();
     }
-    public void StartBotGame()
+    void StartBotGame()
     {
         PhotonNetwork.Disconnect();
+    }
+    void IncreaseProgressBar(int value)
+    {
+        _progressBar.value = value;
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
@@ -29,6 +36,7 @@ public class SearchManager : MonoBehaviourPunCallbacks
 
     void CreateRoom()
     {
+        IncreaseProgressBar(6);
         int randomRoomNumber = Random.Range(0, 10000);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
         PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOps);
@@ -53,11 +61,13 @@ public class SearchManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
         {
+            IncreaseProgressBar(9);
             PhotonNetwork.LoadLevel("Game");
         }
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
+        IncreaseProgressBar(9);
         SceneManager.LoadScene("Game");
     }
 }

@@ -159,15 +159,16 @@ MonoBehaviour:
   _price: 100
   _requiredLevel: 5
   _attributes:
-  - 'Max Mana: +40'
-  - 'Max Regeneration: +5'
+  - 'Mana Regeneration: +10'
+  - 'Passive Mana Regeneration: +5'
+  - 'Avoidability: +5%'
   _description: A weak orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _defenceStatsData:
     MaxHP: 0
     Recovery: 0
-    Avoidability: 0
+    Avoidability: 0.05
     Mirroring: 0
   _attackStatsData:
     MinBaseDamage: 0
@@ -176,10 +177,10 @@ MonoBehaviour:
     CriticalDmg: 0
     ArmorPenetration: 0
   _manaStatsData:
-    MaxMana: 40
+    MaxMana: 50
     StartMana: 0
-    ManaRegeneration: 5
-    PassiveManaRegeneration: 0
+    ManaRegeneration: 10
+    PassiveManaRegeneration: 5
   _itemStatsData:
     materials:
     - dark-blue

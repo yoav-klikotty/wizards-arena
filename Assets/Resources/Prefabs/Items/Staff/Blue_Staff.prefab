@@ -159,7 +159,9 @@ MonoBehaviour:
   _price: 0
   _requiredLevel: 1
   _attributes:
-  - 'Damage: 5-10'
+  - 'Damage: 7-15'
+  - 'Crit Rate: +10%'
+  - 'Starting Mana: +10'
   _description: Staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
@@ -169,14 +171,14 @@ MonoBehaviour:
     Avoidability: 0
     Mirroring: 0
   _attackStatsData:
-    MinBaseDamage: 5
-    MaxBaseDamage: 10
-    CriticalRate: 0.2
-    CriticalDmg: 0.5
-    ArmorPenetration: 0.1
+    MinBaseDamage: 7
+    MaxBaseDamage: 15
+    CriticalRate: 0.1
+    CriticalDmg: 0
+    ArmorPenetration: 0
   _manaStatsData:
     MaxMana: 0
-    StartMana: 0
+    StartMana: 5
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
   _itemStatsData:

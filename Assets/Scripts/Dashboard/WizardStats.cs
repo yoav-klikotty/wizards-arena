@@ -46,7 +46,7 @@ public class WizardStats : MonoBehaviour
         _maxMana.text = "Max mana: " + num;
     }
     public void SetStartMana(float num) {
-        _startMana.text = "Starting mana: " + num*100 + "%";
+        _startMana.text = "Starting mana: " + num;
     }
     public void SetManaRegeneration(int num) {
         _manaRegenration.text = "Mana regeneration: " + num;
