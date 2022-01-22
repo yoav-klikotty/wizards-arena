@@ -473,7 +473,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f340b180943584ea50b69c56919523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
+  currentHealth: 0
+  currentMana: 0
+  _staff: {fileID: 5254709882000859822}
+  _cape: {fileID: 1802602586487134098}
+  _orb: {fileID: 7454844745425378795}
+  WizardStatsData:
+    StaffStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+    CapeStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+    OrbStatsData:
+      materials: []
+      SoftMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      ModerateMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+      HardMagicStats:
+        name: 
+        multiple: 0
+        requiredMana: 0
+    AttackStatsData:
+      MinBaseDamage: 7
+      MaxBaseDamage: 15
+      CriticalRate: 0.1
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    DefenceStatsData:
+      MaxHP: 20
+      Recovery: 0
+      Avoidability: 0
+      Mirroring: 0
+    ManaStatsData:
+      MaxMana: 50
+      StartMana: 40
+      ManaRegeneration: 7
+      PassiveManaRegeneration: 0
+  PlayerHUD: {fileID: 0}
 --- !u!1 &1290692263351666
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +956,7 @@ GameObject:
   - component: {fileID: 137011097167178510}
   - component: {fileID: 5254709882000859822}
   m_Layer: 0
-  m_Name: Fantasy_Wizard_WP
+  m_Name: Fantasy_Wizard_Staff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1059,7 +1123,7 @@ GameObject:
   - component: {fileID: 137474894624504034}
   - component: {fileID: 7454844745425378795}
   m_Layer: 0
-  m_Name: Fantasy_Wizard_Gem
+  m_Name: Fantasy_Wizard_Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

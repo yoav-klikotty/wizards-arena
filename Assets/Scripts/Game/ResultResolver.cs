@@ -22,252 +22,252 @@ public class ResultResolver : MonoBehaviour
         // easy cases
         if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.Reload)
         {
-            _player.Player.getHat().SoftMagic.Activate();
-            _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
-            _opponent.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.getOrb().SoftMagic.Activate();
+            _player.IncreaseMana(_player.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _opponent.getOrb().SoftMagic.Activate();
+            _opponent.IncreaseMana(_opponent.WizardStatsData.ManaStatsData.ManaRegeneration);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.Protect)
         {
-            _opponent.Player.getCape().SoftMagic.Activate();
-            _player.Player.getCape().SoftMagic.Activate();
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            _player.Player.IncreaseHealth(_player.Player.WizardStatsData.DefenceStatsData.Recovery);
-            _opponent.Player.IncreaseHealth(_opponent.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _opponent.getCape().SoftMagic.Activate();
+            _player.getCape().SoftMagic.Activate();
+            _opponent.ReduceMana(_opponent.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.IncreaseHealth(_player.WizardStatsData.DefenceStatsData.Recovery);
+            _opponent.IncreaseHealth(_opponent.WizardStatsData.DefenceStatsData.Recovery);
 
         }
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.Protect)
         {
-            _player.Player.getHat().SoftMagic.Activate();
-            _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
-            _opponent.Player.getCape().SoftMagic.Activate();
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            _opponent.Player.IncreaseHealth(_opponent.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _player.getOrb().SoftMagic.Activate();
+            _player.IncreaseMana(_player.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _opponent.getCape().SoftMagic.Activate();
+            _opponent.ReduceMana(_opponent.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _opponent.IncreaseHealth(_opponent.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.Reload)
         {
-            _player.Player.getCape().SoftMagic.Activate();
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            _opponent.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
-            _player.Player.IncreaseHealth(_player.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _player.getCape().SoftMagic.Activate();
+            _player.ReduceMana(_player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _opponent.getOrb().SoftMagic.Activate();
+            _opponent.IncreaseMana(_opponent.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.IncreaseHealth(_player.WizardStatsData.DefenceStatsData.Recovery);
         }
         // complex cases
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.SoftAttack)
         {
-            _player.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.getWand().SoftMagic.Activate();
-            _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.getOrb().SoftMagic.Activate();
+            _opponent.getStaff().SoftMagic.Activate();
+            _player.IncreaseMana(_player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.AttackAni();
             ReduceHealth(true, false, 0);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.ModerateAttack)
         {
-            _player.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.getWand().ModerateMagic.Activate();
-            _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.getOrb().SoftMagic.Activate();
+            _opponent.getStaff().ModerateMagic.Activate();
+            _player.IncreaseMana(_player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.AttackAni();
             ReduceHealth(true, false, 0.2f);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.Reload && opponentDecision == DecisionManager.Option.HardAttack)
         {
-            _player.Player.getHat().SoftMagic.Activate();
-            _opponent.Player.getWand().HardMagic.Activate();
-            _player.Player.IncreaseMana(_player.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.getOrb().SoftMagic.Activate();
+            _opponent.getStaff().HardMagic.Activate();
+            _player.IncreaseMana(_player.WizardStatsData.ManaStatsData.ManaRegeneration);
             _opponent.AttackAni();
             ReduceHealth(true, false, 0.5f);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
 
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.SoftAttack)
         {
-            _opponent.Player.getWand().SoftMagic.Activate();
+            _opponent.getStaff().SoftMagic.Activate();
             _opponent.AttackAni();
-            _player.Player.getCape().SoftMagic.Activate();
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.getCape().SoftMagic.Activate();
+            _player.ReduceMana(_player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
             ReduceHealth(true, true, 0);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
-            _player.Player.IncreaseHealth(_player.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _player.IncreaseHealth(_player.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.ModerateAttack)
         {
-            _opponent.Player.getWand().ModerateMagic.Activate();
+            _opponent.getStaff().ModerateMagic.Activate();
             _opponent.AttackAni();
-            _player.Player.getCape().SoftMagic.Activate();
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _player.getCape().SoftMagic.Activate();
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
             ReduceHealth(true, true, 0.2f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            _player.Player.IncreaseHealth(_player.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _player.ReduceMana(_player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.IncreaseHealth(_player.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.Protect && opponentDecision == DecisionManager.Option.HardAttack)
         {
-            _opponent.Player.getWand().HardMagic.Activate();
+            _opponent.getStaff().HardMagic.Activate();
             _opponent.AttackAni();
-            _player.Player.getCape().SoftMagic.Activate();
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _player.getCape().SoftMagic.Activate();
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
             ReduceHealth(true, true, 0.5f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            _player.Player.IncreaseHealth(_player.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _player.ReduceMana(_player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.IncreaseHealth(_player.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.Protect)
         {
             _player.AttackAni();
-            _player.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.getCape().SoftMagic.Activate();
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.getStaff().SoftMagic.Activate();
+            _opponent.getCape().SoftMagic.Activate();
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
             ReduceHealth(false, true, 0);
-            _opponent.Player.IncreaseHealth(_opponent.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _opponent.IncreaseHealth(_opponent.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.Reload)
         {
-            _player.Player.getWand().SoftMagic.Activate();
+            _player.getStaff().SoftMagic.Activate();
             _player.AttackAni();
-            _opponent.Player.getHat().SoftMagic.Activate();
+            _opponent.getOrb().SoftMagic.Activate();
             ReduceHealth(false, false, 0);
-            _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.IncreaseMana(_opponent.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.SoftAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.getWand().SoftMagic.Activate();
+            _player.getStaff().SoftMagic.Activate();
+            _opponent.getStaff().SoftMagic.Activate();
             ReduceHealth(true, false, 0);
             ReduceHealth(false, false, 0);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.ModerateAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.getWand().ModerateMagic.Activate();
+            _player.getStaff().SoftMagic.Activate();
+            _opponent.getStaff().ModerateMagic.Activate();
             ReduceHealth(true, false, 0.2f);
             ReduceHealth(false, false, 0);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.SoftAttack && opponentDecision == DecisionManager.Option.HardAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().SoftMagic.Activate();
-            _opponent.Player.getWand().HardMagic.Activate();
+            _player.getStaff().SoftMagic.Activate();
+            _opponent.getStaff().HardMagic.Activate();
             ReduceHealth(true, false, 0.5f);
             ReduceHealth(false, false, 0);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
 
         else if (playerDecision == DecisionManager.Option.ModerateAttack && opponentDecision == DecisionManager.Option.Protect)
         {
             _player.AttackAni();
-            _player.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.getCape().SoftMagic.Activate();
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.getStaff().ModerateMagic.Activate();
+            _opponent.getCape().SoftMagic.Activate();
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
             ReduceHealth(false, true, 0.2f);
-            _opponent.Player.IncreaseHealth(_opponent.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _opponent.IncreaseHealth(_opponent.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.ModerateAttack && opponentDecision == DecisionManager.Option.Reload)
         {
-            _player.Player.getWand().ModerateMagic.Activate();
+            _player.getStaff().ModerateMagic.Activate();
             _player.AttackAni();
-            _opponent.Player.getHat().SoftMagic.Activate();
+            _opponent.getOrb().SoftMagic.Activate();
             ReduceHealth(false, false, 0.2f);
-            _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.IncreaseMana(_opponent.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.ModerateAttack && opponentDecision == DecisionManager.Option.SoftAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.getWand().SoftMagic.Activate();
+            _player.getStaff().ModerateMagic.Activate();
+            _opponent.getStaff().SoftMagic.Activate();
             ReduceHealth(true, false, 0f);
             ReduceHealth(false, false, 0.2f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.ModerateAttack && opponentDecision == DecisionManager.Option.ModerateAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.getWand().ModerateMagic.Activate();
+            _player.getStaff().ModerateMagic.Activate();
+            _opponent.getStaff().ModerateMagic.Activate();
             ReduceHealth(true, false, 0.2f);
             ReduceHealth(false, false, 0.2f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.ModerateAttack && opponentDecision == DecisionManager.Option.HardAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().ModerateMagic.Activate();
-            _opponent.Player.getWand().HardMagic.Activate();
+            _player.getStaff().ModerateMagic.Activate();
+            _opponent.getStaff().HardMagic.Activate();
             ReduceHealth(true, false, 0.5f);
             ReduceHealth(false, false, 0.2f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.HardAttack && opponentDecision == DecisionManager.Option.Protect)
         {
             _player.AttackAni();
-            _player.Player.getWand().HardMagic.Activate();
-            _opponent.Player.getCape().SoftMagic.Activate();
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            _player.getStaff().HardMagic.Activate();
+            _opponent.getCape().SoftMagic.Activate();
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
             ReduceHealth(false, true, 0.5f);
-            _opponent.Player.IncreaseHealth(_opponent.Player.WizardStatsData.DefenceStatsData.Recovery);
+            _opponent.IncreaseHealth(_opponent.WizardStatsData.DefenceStatsData.Recovery);
         }
         else if (playerDecision == DecisionManager.Option.HardAttack && opponentDecision == DecisionManager.Option.Reload)
         {
-            _player.Player.getWand().HardMagic.Activate();
+            _player.getStaff().HardMagic.Activate();
             _player.AttackAni();
-            _opponent.Player.getHat().SoftMagic.Activate();
+            _opponent.getOrb().SoftMagic.Activate();
             ReduceHealth(false, false, 0.5f);
-            _opponent.Player.IncreaseMana(_opponent.Player.WizardStatsData.ManaStatsData.ManaRegeneration);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.IncreaseMana(_opponent.WizardStatsData.ManaStatsData.ManaRegeneration);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.HardAttack && opponentDecision == DecisionManager.Option.SoftAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().HardMagic.Activate();
-            _opponent.Player.getWand().SoftMagic.Activate();
+            _player.getStaff().HardMagic.Activate();
+            _opponent.getStaff().SoftMagic.Activate();
             ReduceHealth(true, false, 0f);
             ReduceHealth(false, false, 0.5f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.HardAttack && opponentDecision == DecisionManager.Option.ModerateAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().HardMagic.Activate();
-            _opponent.Player.getWand().ModerateMagic.Activate();
+            _player.getStaff().HardMagic.Activate();
+            _opponent.getStaff().ModerateMagic.Activate();
             ReduceHealth(true, false, 0.2f);
             ReduceHealth(false, false, 0.5f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
         }
         else if (playerDecision == DecisionManager.Option.HardAttack && opponentDecision == DecisionManager.Option.HardAttack)
         {
             _player.AttackAni();
             _opponent.AttackAni();
-            _player.Player.getWand().HardMagic.Activate();
-            _opponent.Player.getWand().HardMagic.Activate();
+            _player.getStaff().HardMagic.Activate();
+            _opponent.getStaff().HardMagic.Activate();
             ReduceHealth(true, false, 0.5f);
             ReduceHealth(false, false, 0.5f);
-            _player.Player.ReduceMana(_player.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
-            _opponent.Player.ReduceMana(_opponent.Player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _player.ReduceMana(_player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+            _opponent.ReduceMana(_opponent.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
         }
 
         InvokeRepeating("FinishResolving", 1.5f, 0);
@@ -282,19 +282,19 @@ public class ResultResolver : MonoBehaviour
                 int damagePoint = 0;
                 if (isOpponentAttacker)
                 {
-                    damagePoint = CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+                    damagePoint = CalculateDamage(_opponent.WizardStatsData, _player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
                 }
                 else
                 {
-                    damagePoint = CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+                    damagePoint = CalculateDamage(_player.WizardStatsData, _opponent.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
                 }
                 if (isOpponentAttacker)
                 {
-                    _player.Player.ReduceHealth(damagePoint);
+                    _player.ReduceHealth(damagePoint);
                 }
                 else
                 {
-                    _opponent.Player.ReduceHealth(damagePoint);
+                    _opponent.ReduceHealth(damagePoint);
                 }
 
                 _photonView.RPC("ReduceHealthMulti", RpcTarget.Others, damagePoint, !isOpponentAttacker);
@@ -306,19 +306,19 @@ public class ResultResolver : MonoBehaviour
             int damagePoint = 0;
             if (isOpponentAttacker)
             {
-                damagePoint = CalculateDamage(_opponent.Player.WizardStatsData, _player.Player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+                damagePoint = CalculateDamage(_opponent.WizardStatsData, _player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
             }
             else
             {
-                damagePoint = CalculateDamage(_player.Player.WizardStatsData, _opponent.Player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+                damagePoint = CalculateDamage(_player.WizardStatsData, _opponent.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
             }
             if (isOpponentAttacker)
             {
-                _player.Player.ReduceHealth(damagePoint);
+                _player.ReduceHealth(damagePoint);
             }
             else
             {
-                _opponent.Player.ReduceHealth(damagePoint);
+                _opponent.ReduceHealth(damagePoint);
             }
         }
     }

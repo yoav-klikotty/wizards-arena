@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] GameObject _unfilteredContaier;
-    [SerializeField] Player Player;
+    [SerializeField] Wizard _wizard;
     private GameObject[] _slots;
     private InventoryItem[] _inventoryItems;
     WizardStatsController _wizardStatsController = new WizardStatsController();
@@ -94,7 +94,7 @@ public class InventoryManager : MonoBehaviour
         itemSelected.SetEquipedStatus(true);
         _wizardStatsController.SaveWizardStatsData(wizardStatsData);
         wizardStatsData.WriteWizardStats();
-        Player.UpdateWizard(null);
+        _wizard.UpdateWizard(null);
     }
 
     public void PurchaseItem(InventoryItem itemSelected)

@@ -16,7 +16,7 @@ public class DecisionManager : MonoBehaviour
     [SerializeField] Slider _manaBar;
     [SerializeField] TMP_Text _manaText;
 
-    Player player;
+    Wizard player;
     public enum Option
     {
         Reload,
@@ -30,7 +30,7 @@ public class DecisionManager : MonoBehaviour
     void Start()
     {
         _syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
-        player = GameObject.Find("Player").GetComponent<Player>();
+        player = GameObject.Find("Player").GetComponent<Wizard>();
         player.IncreaseMana(player.WizardStatsData.ManaStatsData.PassiveManaRegeneration);
         SetManaBar();
         UpdateValidMagicsByMana();

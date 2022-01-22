@@ -8,13 +8,15 @@ public class Syncronizer : MonoBehaviour
     SessionManager _sessionManager;
     PhotonView _photonView;
     [SerializeField] BotPlayer _botPlayer;
-    [SerializeField] Player _opponent;
-    [SerializeField] Player _player;
+    Wizard _opponent;
+    Wizard _player;
     WizardStatsController _wizardStatsController = new WizardStatsController();
 
     // Start is called before the first frame update
     void Start()
     {
+        _opponent = GameObject.Find("Opponent").GetComponent<Wizard>();
+        _player = GameObject.Find("Player").GetComponent<Wizard>();
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         _photonView = PhotonView.Get(this);
         if (PhotonNetwork.IsConnected)

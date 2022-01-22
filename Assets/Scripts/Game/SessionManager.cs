@@ -13,8 +13,8 @@ public class SessionManager : MonoBehaviour
     public DecisionManager.Option OpponentOption = DecisionManager.Option.None;
     public DecisionManager.Option PlayerOption = DecisionManager.Option.None;
     [SerializeField] bool _isOnline;
-    [SerializeField] Player _opponent;
-    [SerializeField] Player _player;
+    Wizard _opponent;
+    Wizard _player;
     public enum GameResult
     {
         Lose,
@@ -23,6 +23,8 @@ public class SessionManager : MonoBehaviour
 
     void Start()
     {
+        _opponent = GameObject.Find("Opponent").GetComponent<Wizard>();
+        _player = GameObject.Find("Player").GetComponent<Wizard>();
         _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
     }
 

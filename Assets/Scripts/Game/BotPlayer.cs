@@ -5,9 +5,10 @@ using Random = System.Random;
 public class BotPlayer : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] Player _opponent;
+    Wizard _opponent;
     public DecisionManager.Option GetBotDecision()
     {
+        _opponent = GameObject.Find("Opponent").GetComponent<Wizard>();
         List <DecisionManager.Option> decitions = new List<DecisionManager.Option>();
         Random rnd = new Random();
         int currentMana = _opponent.GetMana();
