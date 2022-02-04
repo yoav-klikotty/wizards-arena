@@ -8,7 +8,7 @@ public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] Slider _healthBar;
     [SerializeField] TMP_Text _healthLabel;
-    [SerializeField] Transform _camera;
+    Transform _camera;
     public float requiredManaForSoftAttack;
     [SerializeField] GameObject _softAttackMagic;
     public float requiredManaForModerateAttack;
@@ -17,6 +17,13 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] GameObject _hardAttackMagic;
     [SerializeField] Animation _animation;
     [SerializeField] TMP_Text _indicationText;
+    [SerializeField] TMP_Text _wizardIndex;
+
+
+    void Start()
+    {
+        _camera = GameObject.Find("Camera").GetComponent<Transform>();
+    }
 
     public void SetHealthBar(float health, float maxHP)
     {
@@ -63,5 +70,9 @@ public class PlayerHUD : MonoBehaviour
     {
         _indicationText.text = indicationText;
         _animation.Play();
+    }
+    public void SetWizardIndex(int wizardIndex)
+    {
+        _wizardIndex.text = wizardIndex + "";
     }
 }

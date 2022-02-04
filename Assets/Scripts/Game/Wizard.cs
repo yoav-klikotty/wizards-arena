@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Photon.Pun;
 
 public class Wizard : MonoBehaviour
 {
 
+    PhotonView _photonView;
     public const string IDLE = "Wizard_Idle";
     public const string RUN = "Wizard_Run";
     public const string ATTACK = "Wizard_Attack";
@@ -18,14 +18,73 @@ public class Wizard : MonoBehaviour
     [SerializeField] Item _staff;
     [SerializeField] Item _cape;
     [SerializeField] Item _orb;
+    [SerializeField] bool _isDashboardWizard;
+    GameObject attackedWizard;
+    [SerializeField] GameObject _shootCenter;
     public WizardStatsData WizardStatsData;
     WizardStatsController _wizardStatsController = new WizardStatsController();
     public PlayerHUD PlayerHUD;
+    SessionManager _sessionManager;
+    public int wizardIndex;
+    public int wizardId;
+    Vector3 wizardLocation = new Vector3(59.5f, 4.4f, 2.1f);
+    void Awake()
+    {
+        wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
+        _photonView = PhotonView.Get(this);
+        if (!_isDashboardWizard && _photonView && _photonView.IsMine)
+        {
+            _photonView.RPC("UpdateId", RpcTarget.All, Random.Range(1, 1000));
+        }
+    }
+    [PunRPC]
+    public void UpdateId(int id)
+    {
+        wizardId = id;
+        PlayerHUD.SetWizardIndex(id);
+    }
     void Start()
     {
+        if (!_isDashboardWizard)
+        {
+            _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+            LocateWizard();
+            _sessionManager.RegisterWizard(this);
+            if (_photonView.IsMine)
+            {
+                _sessionManager.playerWizard = this;
+                this.gameObject.name = "Player";
+            }
+            else
+            {
+                this.gameObject.name = "Opponent";
+            }
+        }
         _anim = GetComponent<Animation>();
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
         UpdateWizard(null);
+    }
+
+    private void LocateWizard()
+    {
+        if (wizardIndex == 1)
+        {
+            transform.position = new Vector3(57, 5.5f, -2f);
+            wizardLocation = new Vector3(57, 5.5f, -2f);
+            transform.rotation = Quaternion.Euler(-3, 0, 0);
+        }
+        else if (wizardIndex == 2)
+        {
+            transform.position = new Vector3(59, 5.5f, 2.1f);
+            wizardLocation = new Vector3(59, 5.5f, 2.1f);
+            transform.rotation = Quaternion.Euler(-3, 230, 0);
+        }
+        else
+        {
+            transform.position = new Vector3(54.4f, 5.5f, 2);
+            wizardLocation = new Vector3(54.4f, 5.5f, 2);
+            transform.rotation = Quaternion.Euler(-3, -240, 0);
+        }
     }
     public void UpdateWizard(WizardStatsData wizardStatsData)
     {
@@ -65,6 +124,53 @@ public class Wizard : MonoBehaviour
             WizardStatsData.OrbStatsData.ModerateMagicStats.name,
             WizardStatsData.OrbStatsData.HardMagicStats.name
         );
+    }
+
+    public void RenderDecision(WizardMove move)
+    {
+        if (move.wizardOption == DecisionManager.Option.Reload)
+        {
+            getOrb().SoftMagic.Activate();
+            IncreaseMana(WizardStatsData.ManaStatsData.ManaRegeneration);
+        }
+        else if (move.wizardOption == DecisionManager.Option.Protect)
+        {
+            getCape().SoftMagic.Activate();
+            ReduceMana(WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
+            IncreaseHealth(WizardStatsData.DefenceStatsData.Recovery);
+        }
+        else if (move.wizardOption == DecisionManager.Option.SoftAttack)
+        {
+            getStaff().SoftMagic.ActivateFirePrefab(_shootCenter.transform.position, move.wizardOpponentPosition);
+            AttackAni();
+            ReduceMana(WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana);
+        }
+        else if (move.wizardOption == DecisionManager.Option.ModerateAttack)
+        {
+            getStaff().ModerateMagic.ActivateFirePrefab(_shootCenter.transform.position, move.wizardOpponentPosition);
+            AttackAni();
+            ReduceMana(WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana);
+        }
+        else if (move.wizardOption == DecisionManager.Option.HardAttack)
+        {
+            getStaff().HardMagic.ActivateFirePrefab(_shootCenter.transform.position, move.wizardOpponentPosition);
+            AttackAni();
+            ReduceMana(WizardStatsData.StaffStatsData.HardMagicStats.requiredMana);
+        }
+
+    }
+    public void ChooseMove(DecisionManager.Option option, int id)
+    {
+        if (_photonView.IsMine)
+        {
+            _photonView.RPC("ChooseMoveRPC", RpcTarget.All, option, id);
+        }
+    }
+    [PunRPC]
+    public void ChooseMoveRPC(DecisionManager.Option option, int id)
+    {
+        WizardMove move = new WizardMove(option, _sessionManager.GetWizardById(id).wizardLocation);
+        _sessionManager.RegisterWizardMove(wizardIndex - 1, move);
     }
     public float GetHealth()
     {
@@ -172,6 +278,7 @@ public class Wizard : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        ReduceHealth(1);
         DamageAni();
         if (GetHealth() <= 0)
         {
@@ -234,5 +341,124 @@ public class Wizard : MonoBehaviour
     {
         return this._orb;
     }
+
+    // void ReduceHealth(bool isOpponentAttacker, bool isDefenderDefends, float attackerMagicMultiplier)
+    // {
+    //     if (PhotonNetwork.IsConnected)
+    //     {
+    //         if (PhotonNetwork.IsMasterClient)
+    //         {
+    //             int damagePoint = 0;
+    //             if (isOpponentAttacker)
+    //             {
+    //                 damagePoint = CalculateDamage(_opponent.WizardStatsData, _player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+    //             }
+    //             else
+    //             {
+    //                 damagePoint = CalculateDamage(_player.WizardStatsData, _opponent.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+    //             }
+    //             if (isOpponentAttacker)
+    //             {
+    //                 _player.ReduceHealth(damagePoint);
+    //             }
+    //             else
+    //             {
+    //                 _opponent.ReduceHealth(damagePoint);
+    //             }
+
+    //             _photonView.RPC("ReduceHealthMulti", RpcTarget.Others, damagePoint, !isOpponentAttacker);
+    //         }
+
+    //     }
+    //     else
+    //     {
+    //         int damagePoint = 0;
+    //         if (isOpponentAttacker)
+    //         {
+    //             damagePoint = CalculateDamage(_opponent.WizardStatsData, _player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+    //         }
+    //         else
+    //         {
+    //             damagePoint = CalculateDamage(_player.WizardStatsData, _opponent.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
+    //         }
+    //         if (isOpponentAttacker)
+    //         {
+    //             _player.ReduceHealth(damagePoint);
+    //         }
+    //         else
+    //         {
+    //             _opponent.ReduceHealth(damagePoint);
+    //         }
+    //     }
+    // }
+
+    // int CalculateDamage(WizardStatsData attacker, WizardStatsData defender, float attackerMagicMultiplier, bool isDefenderDefends)
+    // {
+    //     Random rnd = new Random();
+    //     if (!isDefenderDefends)
+    //     {
+    //         if (rnd.NextDouble() <= defender.DefenceStatsData.Avoidability)
+    //         {
+    //             return 0;
+    //         }
+    //     }
+    //     int damagePoints = 0;
+    //     int baseDamage = rnd.Next(attacker.AttackStatsData.MinBaseDamage, attacker.AttackStatsData.MaxBaseDamage);
+    //     damagePoints += baseDamage;
+    //     bool isCriticalHit = rnd.NextDouble() <= attacker.AttackStatsData.CriticalRate;
+    //     if (isCriticalHit)
+    //     {
+    //         damagePoints += (int)((attacker.AttackStatsData.CriticalDmg + attackerMagicMultiplier) * baseDamage);
+    //     }
+    //     else
+    //     {
+    //         damagePoints += (int)((attackerMagicMultiplier) * baseDamage);
+    //     }
+    //     if (isDefenderDefends)
+    //     {
+    //         damagePoints = (int)(attackerMagicMultiplier * damagePoints);
+    //     }
+    //     return damagePoints;
+    // }
+    // [PunRPC]
+    // void SyncOpponentPlayer(string wizardStatsDataRaw)
+    // {
+    //     WizardStatsData wizardStatsData = JsonUtility.FromJson<WizardStatsData>(wizardStatsDataRaw);
+    //     _opponent.UpdateWizard(wizardStatsData);
+    // }
+
+    // [PunRPC]
+    // void ReduceHealthMulti(int damagePoint, bool isOpponent)
+    // {
+    //     if (isOpponent)
+    //     {
+    //         _player.ReduceHealth(damagePoint);
+    //     }
+    //     else
+    //     {
+    //         _opponent.ReduceHealth(damagePoint);
+    //     }
+
+    // }
+
+    //public override void OnDisconnected(DisconnectCause cause)
+    //{
+    //    Debug.LogError("disconnented");
+    //}
+    // _opponent = GameObject.Find("Opponent").GetComponent<Wizard>();
+    // _player = GameObject.Find("Player").GetComponent<Wizard>();
+    // _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+    // _photonView = PhotonView.Get(this);
+    // if (PhotonNetwork.IsConnected)
+    // {
+    //     WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+    //     _photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, JsonUtility.ToJson(wizardStatsData));
+    // }
+    // else
+    // {
+    //     WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+    //     _opponent.UpdateWizard(wizardStatsData);
+    // }
+
 
 }

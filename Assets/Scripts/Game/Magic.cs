@@ -11,28 +11,11 @@ public class Magic : MonoBehaviour
 
     void Start()
     {
-        if(transform.parent.gameObject.transform.parent.gameObject.name == "Opponent")
-        {
-            ToPoint = GameObject.Find("Player");
-            FromPoint = GameObject.Find("CenterShootOpponent");
-        }
-        else
-        {
-            ToPoint = GameObject.Find("Opponent");
-            FromPoint = GameObject.Find("CenterShootPlayer");
-        }
         _particalSystem = GetComponent<ParticleSystem>();
     }
     public void Activate()
     {
-        if (_firePrefab != null)
-        {
-            ActivateFirePrefab();
-        }
-        else
-        {
-            _particalSystem.Play();
-        }
+        _particalSystem.Play();
         if (_boxCollider != null)
         {
             EnableBoxCollider();
@@ -48,10 +31,10 @@ public class Magic : MonoBehaviour
     {
         _boxCollider.enabled = false;
     }
-    void ActivateFirePrefab()
+    public void ActivateFirePrefab(Vector3 FromPoint, Vector3 ToPoint)
     {
-        GameObject instanceBullet = Instantiate(_firePrefab, FromPoint.transform.position, Quaternion.identity);
-        instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint.transform.position - FromPoint.transform.position);
+        GameObject instanceBullet = Instantiate(_firePrefab, FromPoint, Quaternion.identity);
+        instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
     public Image GetThumbnail()
     {

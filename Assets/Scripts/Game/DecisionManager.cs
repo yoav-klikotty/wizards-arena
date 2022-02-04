@@ -6,7 +6,7 @@ public class DecisionManager : MonoBehaviour
 {
     [SerializeField] Counter _counter;
     [SerializeField] Option _option;
-    Syncronizer _syncronizer;
+    SessionManager _sessionManager;
     [SerializeField] Button _softAttackMagic;
     [SerializeField] Button _moderateAttackMagic;
     [SerializeField] Button _hardAttackMagic;
@@ -15,8 +15,8 @@ public class DecisionManager : MonoBehaviour
     [SerializeField] Button _shieldBtn;
     [SerializeField] Slider _manaBar;
     [SerializeField] TMP_Text _manaText;
-
     Wizard player;
+    int OpponentId;
     public enum Option
     {
         Reload,
@@ -29,11 +29,14 @@ public class DecisionManager : MonoBehaviour
 
     void Start()
     {
-        _syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
-        player = GameObject.Find("Player").GetComponent<Wizard>();
+        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        OpponentId = _sessionManager.GetRightOpponentId();
+        Debug.Log(OpponentId);
+        player = _sessionManager.playerWizard;
         player.IncreaseMana(player.WizardStatsData.ManaStatsData.PassiveManaRegeneration);
         SetManaBar();
         UpdateValidMagicsByMana();
+        SelectOpponent();
     }
     void Update()
     {
@@ -41,6 +44,11 @@ public class DecisionManager : MonoBehaviour
         {
             ChooseRandom();
         }
+    }
+
+    void SelectOpponent()
+    {
+
     }
 
     void UpdateValidMagicsByMana()
@@ -97,8 +105,8 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            _syncronizer.UpdatePlayersDecision(Option.Reload);
             _option = Option.Reload;
+            player.ChooseMove(_option, OpponentId);
             _softAttackMagic.interactable = false;
             _moderateAttackMagic.interactable = false;
             _hardAttackMagic.interactable = false;
@@ -112,8 +120,10 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            _syncronizer.UpdatePlayersDecision(Option.Protect);
+
             _option = Option.Protect;
+            player.ChooseMove(_option, OpponentId);
+
             _ammoBtn.interactable = false;
             _softAttackMagic.interactable = false;
             _moderateAttackMagic.interactable = false;
@@ -127,8 +137,9 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            _syncronizer.UpdatePlayersDecision(Option.SoftAttack);
             _option = Option.SoftAttack;
+            player.ChooseMove(_option, OpponentId);
+
             _ammoBtn.interactable = false;
             _shieldBtn.interactable = false;
             _moderateAttackMagic.interactable = false;
@@ -141,8 +152,8 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            _syncronizer.UpdatePlayersDecision(Option.ModerateAttack);
             _option = Option.ModerateAttack;
+            player.ChooseMove(_option, OpponentId);
             _ammoBtn.interactable = false;
             _shieldBtn.interactable = false;
             _softAttackMagic.interactable = false;
@@ -155,8 +166,8 @@ public class DecisionManager : MonoBehaviour
 
         if (!IsDecisionMakingOver())
         {
-            _syncronizer.UpdatePlayersDecision(Option.HardAttack);
             _option = Option.HardAttack;
+            player.ChooseMove(_option, OpponentId);
             _ammoBtn.interactable = false;
             _shieldBtn.interactable = false;
             _softAttackMagic.interactable = false;
@@ -166,9 +177,20 @@ public class DecisionManager : MonoBehaviour
 
     public void ChooseRandom()
     {
-
-        _syncronizer.UpdatePlayersDecision(Option.Reload);
         _option = Option.Reload;
+        player.ChooseMove(_option, OpponentId);
+    }
+
+    public void ChooseLeftPlayer()
+    {
+
+        OpponentId = _sessionManager.GetLeftOpponentId();
+
+    }
+
+    public void ChooseRightPlayer()
+    {
+        OpponentId = _sessionManager.GetRightOpponentId();
 
     }
 
