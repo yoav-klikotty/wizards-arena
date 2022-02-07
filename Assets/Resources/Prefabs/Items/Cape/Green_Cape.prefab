@@ -158,29 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 1000
   _requiredLevel: 7
-  _attributes:
-  - 'Max HP: +30'
-  - 'Recovery: +10'
-  _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 30
-    Recovery: 10
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 0
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - green
     SoftMagicStats:
@@ -195,6 +176,20 @@ MonoBehaviour:
       name: MagicShieldGreen
       multiple: 0
       requiredMana: 3
+    DefenceStatsData:
+      HP: 1
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 2
+      PassiveManaRegeneration: 0
 --- !u!114 &942723345973312055
 MonoBehaviour:
   m_ObjectHideFlags: 0

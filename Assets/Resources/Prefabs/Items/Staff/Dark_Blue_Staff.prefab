@@ -158,43 +158,38 @@ MonoBehaviour:
   _displayName: 
   _price: 100
   _requiredLevel: 5
-  _attributes:
-  - 'Damage: 8-10'
-  - 'Passive Mana Regeneration: 5'
-  _description: A weak staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 8
-    MaxBaseDamage: 10
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 0
-    ManaRegeneration: 5
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - dark-blue
     SoftMagicStats:
       name: ElectricSnake
       multiple: 1
-      requiredMana: 10
+      requiredMana: 3
     ModerateMagicStats:
       name: StarShot
       multiple: 2
-      requiredMana: 20
+      requiredMana: 5
     HardMagicStats:
       name: RotatingStar
       multiple: 3
-      requiredMana: 30
+      requiredMana: 8
+    DefenceStatsData:
+      HP: 1
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 2
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 1
+      PassiveManaRegeneration: 0
 --- !u!114 &2536942942785517476
 MonoBehaviour:
   m_ObjectHideFlags: 0

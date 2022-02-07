@@ -621,6 +621,7 @@ MonoBehaviour:
   _shootCenter: {fileID: 8212514550241884948}
   WizardStatsData:
     StaffStatsData:
+      Name: 
       materials: []
       SoftMagicStats:
         name: 
@@ -634,7 +635,22 @@ MonoBehaviour:
         name: 
         multiple: 0
         requiredMana: 0
+      DefenceStatsData:
+        HP: 25
+        Recovery: 0
+        Avoidability: 0
+      AttackStatsData:
+        BaseDamage: 3
+        CriticalRate: 0.1
+        CriticalDmg: 0.1
+        ArmorPenetration: 0
+      ManaStatsData:
+        MaxMana: 20
+        StartMana: 0
+        ManaRegeneration: 3
+        PassiveManaRegeneration: 0
     CapeStatsData:
+      Name: 
       materials: []
       SoftMagicStats:
         name: 
@@ -648,7 +664,22 @@ MonoBehaviour:
         name: 
         multiple: 0
         requiredMana: 0
+      DefenceStatsData:
+        HP: 25
+        Recovery: 0
+        Avoidability: 0
+      AttackStatsData:
+        BaseDamage: 3
+        CriticalRate: 0.1
+        CriticalDmg: 0.1
+        ArmorPenetration: 0
+      ManaStatsData:
+        MaxMana: 20
+        StartMana: 0
+        ManaRegeneration: 3
+        PassiveManaRegeneration: 0
     OrbStatsData:
+      Name: 
       materials: []
       SoftMagicStats:
         name: 
@@ -662,21 +693,33 @@ MonoBehaviour:
         name: 
         multiple: 0
         requiredMana: 0
-    AttackStatsData:
-      MinBaseDamage: 7
-      MaxBaseDamage: 15
+      DefenceStatsData:
+        HP: 25
+        Recovery: 0
+        Avoidability: 0
+      AttackStatsData:
+        BaseDamage: 3
+        CriticalRate: 0.1
+        CriticalDmg: 0.1
+        ArmorPenetration: 0
+      ManaStatsData:
+        MaxMana: 20
+        StartMana: 0
+        ManaRegeneration: 3
+        PassiveManaRegeneration: 0
+    BaseAttackStatsData:
+      BaseDamage: 3
       CriticalRate: 0.1
-      CriticalDmg: 0
+      CriticalDmg: 0.1
       ArmorPenetration: 0
-    DefenceStatsData:
-      MaxHP: 20
+    BaseDefenceStatsData:
+      HP: 25
       Recovery: 0
       Avoidability: 0
-      Mirroring: 0
-    ManaStatsData:
-      MaxMana: 50
-      StartMana: 40
-      ManaRegeneration: 7
+    BaseManaStatsData:
+      MaxMana: 20
+      StartMana: 0
+      ManaRegeneration: 3
       PassiveManaRegeneration: 0
   PlayerHUD: {fileID: 601630423890107937}
   wizardIndex: 0
@@ -693,7 +736,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.6, z: 0}
+  m_Center: {x: 0, y: 0.25, z: 0}
 --- !u!114 &967135415398285767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,15 +2290,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6427741221270938590, guid: 1960732ad0c7a4e4e84599c5031f423d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.01
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6427741221270938590, guid: 1960732ad0c7a4e4e84599c5031f423d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.01
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6427741221270938590, guid: 1960732ad0c7a4e4e84599c5031f423d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.01
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 6427741221270938590, guid: 1960732ad0c7a4e4e84599c5031f423d, type: 3}
       propertyPath: m_LocalPosition.x

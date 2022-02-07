@@ -9,6 +9,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TMP_Text _coinsInput;
     [SerializeField] TMP_Text _energyInput;
     [SerializeField] Slider _levelBar;
+    [SerializeField] GameObject _settings;
 
     private PlayerStatsController _playerStatsController = new PlayerStatsController();
 
@@ -37,5 +38,17 @@ public class PlayerStats : MonoBehaviour
         _energyInput.text = playerStatsData.GetCrystals() + "/" + playerStatsData.GetMaxCrystals();
         _levelInput.text = "level: " + playerStatsData.GetLevel();
         _levelBar.value = playerStatsData.GetLevelPoints();
+    }
+
+    public void ToggleSettings()
+    {
+        if (_settings.activeSelf)
+        {
+            _settings.SetActive(false);
+        }
+        else
+        {
+            _settings.SetActive(true);
+        }
     }
 }

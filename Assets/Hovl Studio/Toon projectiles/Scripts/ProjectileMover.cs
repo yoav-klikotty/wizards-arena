@@ -12,7 +12,7 @@ public class ProjectileMover : MonoBehaviour
     public GameObject flash;
     private Rigidbody rb;
     public GameObject[] Detached;
-
+    public WizardStatsData wizardStats;
     void Start()
     {
         rb = GetComponent<Rigidbody>();

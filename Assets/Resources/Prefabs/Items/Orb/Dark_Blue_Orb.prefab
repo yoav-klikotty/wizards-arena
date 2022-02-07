@@ -158,30 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 100
   _requiredLevel: 5
-  _attributes:
-  - 'Mana Regeneration: +10'
-  - 'Passive Mana Regeneration: +5'
-  - 'Avoidability: +5%'
-  _description: A weak orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
-    Avoidability: 0.05
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 50
-    StartMana: 0
-    ManaRegeneration: 10
-    PassiveManaRegeneration: 5
   _itemStatsData:
+    Name: 
     materials:
     - dark-blue
     SoftMagicStats:
@@ -196,6 +176,20 @@ MonoBehaviour:
       name: MagicChargeDarkBlue
       multiple: 0
       requiredMana: 0
+    DefenceStatsData:
+      HP: 2
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 2
+      PassiveManaRegeneration: 0
 --- !u!114 &3984235016252156133
 MonoBehaviour:
   m_ObjectHideFlags: 0

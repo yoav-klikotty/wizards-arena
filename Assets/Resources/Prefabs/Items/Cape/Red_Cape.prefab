@@ -158,29 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 10000
   _requiredLevel: 20
-  _attributes:
-  - 'Max HP: +25'
-  - 'Avoidability: +15%'
-  _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 25
-    Recovery: 0
-    Avoidability: 0.15
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 0
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - red
     SoftMagicStats:
@@ -195,6 +176,20 @@ MonoBehaviour:
       name: MagicShieldYellow
       multiple: 0
       requiredMana: 3
+    DefenceStatsData:
+      HP: 1
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 3
+      CriticalRate: 0.2
+      CriticalDmg: 0.2
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 0
+      PassiveManaRegeneration: 0
 --- !u!114 &4151859189108725862
 MonoBehaviour:
   m_ObjectHideFlags: 0

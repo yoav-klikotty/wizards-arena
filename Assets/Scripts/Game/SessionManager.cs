@@ -28,15 +28,11 @@ public class SessionManager : MonoBehaviour
     }
     private void CreatePlayer()
     {
-        Debug.Log("create player");
         PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
-        PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
-        PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
-
     }
     void Update()
     {
-        if (wizards.Count == 3 && !_isDecisionLock)
+        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
         {
             _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
             _isDecisionLock = true;

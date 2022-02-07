@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Photon.Pun;
+using Random = System.Random;
 
 public class Wizard : MonoBehaviour
 {
@@ -32,78 +33,83 @@ public class Wizard : MonoBehaviour
     {
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
         _photonView = PhotonView.Get(this);
-        if (!_isDashboardWizard && _photonView && _photonView.IsMine)
+        WizardStatsData = _wizardStatsController.GetWizardStatsData();
+        if (!_isDashboardWizard)
         {
-            _photonView.RPC("UpdateId", RpcTarget.All, Random.Range(1, 1000));
+            if (_photonView && _photonView.IsMine)
+            {
+                WizardStatsData = _wizardStatsController.GetWizardStatsData();
+                string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
+                _photonView.RPC("UpdateWizardStats", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, WizardStatsDataRaw);
+            }
         }
     }
     [PunRPC]
-    public void UpdateId(int id)
+    public void UpdateWizardStats(int id, string wizardStatsRaw)
     {
         wizardId = id;
+        UpdateWizard(JsonUtility.FromJson<WizardStatsData>(wizardStatsRaw));
         PlayerHUD.SetWizardIndex(id);
+        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        LocateWizard();
+        _sessionManager.RegisterWizard(this);
+        if (_photonView.IsMine)
+        {
+            _sessionManager.playerWizard = this;
+            this.gameObject.name = "Player";
+        }
+        else
+        {
+            this.gameObject.name = "Opponent";
+        }
     }
     void Start()
     {
-        if (!_isDashboardWizard)
+        if (_isDashboardWizard)
         {
-            _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
-            LocateWizard();
-            _sessionManager.RegisterWizard(this);
-            if (_photonView.IsMine)
-            {
-                _sessionManager.playerWizard = this;
-                this.gameObject.name = "Player";
-            }
-            else
-            {
-                this.gameObject.name = "Opponent";
-            }
+            UpdateWizard(_wizardStatsController.GetWizardStatsData());
         }
         _anim = GetComponent<Animation>();
-        WizardStatsData = _wizardStatsController.GetWizardStatsData();
-        UpdateWizard(null);
     }
 
     private void LocateWizard()
     {
         if (wizardIndex == 1)
         {
-            transform.position = new Vector3(57, 5.5f, -2f);
-            wizardLocation = new Vector3(57, 5.5f, -2f);
-            transform.rotation = Quaternion.Euler(-3, 0, 0);
+            transform.position = new Vector3(60, 5.5f, -5f);
+            wizardLocation = new Vector3(60, 5.5f, -5f);
+            transform.rotation = Quaternion.Euler(-3, -45, 0);
         }
         else if (wizardIndex == 2)
         {
-            transform.position = new Vector3(59, 5.5f, 2.1f);
-            wizardLocation = new Vector3(59, 5.5f, 2.1f);
-            transform.rotation = Quaternion.Euler(-3, 230, 0);
+            transform.position = new Vector3(54, 5.5f, 1f);
+            wizardLocation = new Vector3(54, 5.5f, 1f);
+            transform.rotation = Quaternion.Euler(-3, 120, 0);
+        }
+        else if (wizardIndex == 3)
+        {
+            transform.position = new Vector3(60f, 5.5f, 1);
+            wizardLocation = new Vector3(60f, 5.5f, 1);
+            transform.rotation = Quaternion.Euler(-3, -130, 0);
         }
         else
         {
-            transform.position = new Vector3(54.4f, 5.5f, 2);
-            wizardLocation = new Vector3(54.4f, 5.5f, 2);
-            transform.rotation = Quaternion.Euler(-3, -240, 0);
+            transform.position = new Vector3(54f, 5.5f, -5);
+            wizardLocation = new Vector3(54f, 5.5f, -5);
+            transform.rotation = Quaternion.Euler(-3, 60, 0);
         }
     }
     public void UpdateWizard(WizardStatsData wizardStatsData)
     {
-        if (wizardStatsData == null)
-        {
-            WizardStatsData = _wizardStatsController.GetWizardStatsData();
-        }
-        else
-        {
-            WizardStatsData = wizardStatsData;
-        }
-        currentHealth = WizardStatsData.DefenceStatsData.MaxHP;
+        WizardStatsData = wizardStatsData;
+        currentHealth = WizardStatsData.GetTotalHP();
         if (PlayerHUD != null)
         {
-            PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
+            PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.GetTotalHP());
             PlayerHUD.requiredManaForSoftAttack = WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana;
             PlayerHUD.requiredManaForModerateAttack = WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana;
             PlayerHUD.requiredManaForHardAttack = WizardStatsData.StaffStatsData.HardMagicStats.requiredMana;
-            currentMana = WizardStatsData.ManaStatsData.StartMana;
+            currentMana = WizardStatsData.GetTotalStartMana();
             PlayerHUD.RenderAvailableAttacks(currentMana);
         }
         _staff.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
@@ -131,13 +137,13 @@ public class Wizard : MonoBehaviour
         if (move.wizardOption == DecisionManager.Option.Reload)
         {
             getOrb().SoftMagic.Activate();
-            IncreaseMana(WizardStatsData.ManaStatsData.ManaRegeneration);
+            IncreaseMana(WizardStatsData.GetTotalManaRegeneration());
         }
         else if (move.wizardOption == DecisionManager.Option.Protect)
         {
             getCape().SoftMagic.Activate();
             ReduceMana(WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana);
-            IncreaseHealth(WizardStatsData.DefenceStatsData.Recovery);
+            IncreaseHealth(WizardStatsData.GetTotalRecovery());
         }
         else if (move.wizardOption == DecisionManager.Option.SoftAttack)
         {
@@ -176,6 +182,8 @@ public class Wizard : MonoBehaviour
     {
         return currentHealth;
     }
+
+    [PunRPC]
     public void ReduceHealth(int health)
     {
         currentHealth = (currentHealth - health);
@@ -183,7 +191,7 @@ public class Wizard : MonoBehaviour
         {
             currentHealth = 0;
         }
-        PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
+        PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.GetTotalHP());
         if (health == 0)
         {
             PlayerHUD.ActivateIndication("Strike Avoid!");
@@ -199,15 +207,15 @@ public class Wizard : MonoBehaviour
     public void IncreaseHealth(int health)
     {
         int newVal = (currentHealth + health);
-        if (newVal > WizardStatsData.DefenceStatsData.MaxHP)
+        if (newVal > WizardStatsData.GetTotalHP())
         {
-            currentHealth = WizardStatsData.DefenceStatsData.MaxHP;
+            currentHealth = WizardStatsData.GetTotalHP();
         }
         else
         {
             currentHealth = newVal;
         }
-        PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.DefenceStatsData.MaxHP);
+        PlayerHUD.SetHealthBar(currentHealth, WizardStatsData.GetTotalHP());
     }
 
     public int GetMana()
@@ -231,9 +239,9 @@ public class Wizard : MonoBehaviour
     public void IncreaseMana(int mana)
     {
         int newVal = currentMana + mana;
-        if (newVal > WizardStatsData.ManaStatsData.MaxMana)
+        if (newVal > WizardStatsData.GetTotalMaxMana())
         {
-            currentMana = WizardStatsData.ManaStatsData.MaxMana;
+            currentMana = WizardStatsData.GetTotalMaxMana();
         }
         else
         {
@@ -278,7 +286,12 @@ public class Wizard : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        ReduceHealth(1);
+        if (_photonView && _photonView.IsMine)
+        {
+            int damage = CalculateDamage(collision.gameObject.GetComponent<ProjectileMover>().wizardStats, WizardStatsData);
+            Debug.Log(collision.gameObject);
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage);
+        }
         DamageAni();
         if (GetHealth() <= 0)
         {
@@ -341,105 +354,19 @@ public class Wizard : MonoBehaviour
     {
         return this._orb;
     }
-
-    // void ReduceHealth(bool isOpponentAttacker, bool isDefenderDefends, float attackerMagicMultiplier)
-    // {
-    //     if (PhotonNetwork.IsConnected)
-    //     {
-    //         if (PhotonNetwork.IsMasterClient)
-    //         {
-    //             int damagePoint = 0;
-    //             if (isOpponentAttacker)
-    //             {
-    //                 damagePoint = CalculateDamage(_opponent.WizardStatsData, _player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
-    //             }
-    //             else
-    //             {
-    //                 damagePoint = CalculateDamage(_player.WizardStatsData, _opponent.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
-    //             }
-    //             if (isOpponentAttacker)
-    //             {
-    //                 _player.ReduceHealth(damagePoint);
-    //             }
-    //             else
-    //             {
-    //                 _opponent.ReduceHealth(damagePoint);
-    //             }
-
-    //             _photonView.RPC("ReduceHealthMulti", RpcTarget.Others, damagePoint, !isOpponentAttacker);
-    //         }
-
-    //     }
-    //     else
-    //     {
-    //         int damagePoint = 0;
-    //         if (isOpponentAttacker)
-    //         {
-    //             damagePoint = CalculateDamage(_opponent.WizardStatsData, _player.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
-    //         }
-    //         else
-    //         {
-    //             damagePoint = CalculateDamage(_player.WizardStatsData, _opponent.WizardStatsData, attackerMagicMultiplier, isDefenderDefends);
-    //         }
-    //         if (isOpponentAttacker)
-    //         {
-    //             _player.ReduceHealth(damagePoint);
-    //         }
-    //         else
-    //         {
-    //             _opponent.ReduceHealth(damagePoint);
-    //         }
-    //     }
-    // }
-
-    // int CalculateDamage(WizardStatsData attacker, WizardStatsData defender, float attackerMagicMultiplier, bool isDefenderDefends)
-    // {
-    //     Random rnd = new Random();
-    //     if (!isDefenderDefends)
-    //     {
-    //         if (rnd.NextDouble() <= defender.DefenceStatsData.Avoidability)
-    //         {
-    //             return 0;
-    //         }
-    //     }
-    //     int damagePoints = 0;
-    //     int baseDamage = rnd.Next(attacker.AttackStatsData.MinBaseDamage, attacker.AttackStatsData.MaxBaseDamage);
-    //     damagePoints += baseDamage;
-    //     bool isCriticalHit = rnd.NextDouble() <= attacker.AttackStatsData.CriticalRate;
-    //     if (isCriticalHit)
-    //     {
-    //         damagePoints += (int)((attacker.AttackStatsData.CriticalDmg + attackerMagicMultiplier) * baseDamage);
-    //     }
-    //     else
-    //     {
-    //         damagePoints += (int)((attackerMagicMultiplier) * baseDamage);
-    //     }
-    //     if (isDefenderDefends)
-    //     {
-    //         damagePoints = (int)(attackerMagicMultiplier * damagePoints);
-    //     }
-    //     return damagePoints;
-    // }
-    // [PunRPC]
-    // void SyncOpponentPlayer(string wizardStatsDataRaw)
-    // {
-    //     WizardStatsData wizardStatsData = JsonUtility.FromJson<WizardStatsData>(wizardStatsDataRaw);
-    //     _opponent.UpdateWizard(wizardStatsData);
-    // }
-
-    // [PunRPC]
-    // void ReduceHealthMulti(int damagePoint, bool isOpponent)
-    // {
-    //     if (isOpponent)
-    //     {
-    //         _player.ReduceHealth(damagePoint);
-    //     }
-    //     else
-    //     {
-    //         _opponent.ReduceHealth(damagePoint);
-    //     }
-
-    // }
+    int CalculateDamage(WizardStatsData attacker, WizardStatsData defender)
+    {
+        Random rnd = new Random();
+        int damagePoints = 0;
+        int baseDamage = rnd.Next(attacker.GetTotalBaseDamage(), attacker.GetTotalBaseDamage());
+        damagePoints += baseDamage;
+        bool isCriticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
+        if (isCriticalHit)
+        {
+            damagePoints += (int)((attacker.GetTotalCriticalDmg()) * baseDamage);
+        }
+        return damagePoints;
+    }
 
     //public override void OnDisconnected(DisconnectCause cause)
     //{

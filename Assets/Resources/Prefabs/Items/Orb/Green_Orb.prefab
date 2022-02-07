@@ -158,31 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 1000
   _requiredLevel: 7
-  _attributes:
-  - 'Max Regeneration: +10'
-  - 'Passive Mana Regeneration: +5'
-  - 'Max HP: +10'
-  - 'Recovery: +5'
-  _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 10
-    Recovery: 5
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 50
-    StartMana: 0
-    ManaRegeneration: 10
-    PassiveManaRegeneration: 5
   _itemStatsData:
+    Name: 
     materials:
     - green
     SoftMagicStats:
@@ -197,6 +176,20 @@ MonoBehaviour:
       name: MagicChargeGreen
       multiple: 0
       requiredMana: 0
+    DefenceStatsData:
+      HP: 1
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 3
+      PassiveManaRegeneration: 0
 --- !u!114 &4991157913658611564
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,27 +8,12 @@ public class WizardStatsData
     public ItemStatsData StaffStatsData;
     public ItemStatsData CapeStatsData;
     public ItemStatsData OrbStatsData;
-    public AttackStatsData AttackStatsData;
-    public DefenceStatsData DefenceStatsData;
-    public ManaStatsData ManaStatsData;
+    public AttackStatsData BaseAttackStatsData;
+    public DefenceStatsData BaseDefenceStatsData;
+    public ManaStatsData BaseManaStatsData;
 
-    public void WriteWizardStats(){
-        WizardStats wizardStatsObject = GameObject.Find("WizardStats").GetComponent<WizardStats>();
-        wizardStatsObject.SetDmg(AttackStatsData.MinBaseDamage, AttackStatsData.MaxBaseDamage);
-        wizardStatsObject.SetCritDmg(AttackStatsData.CriticalDmg);
-        wizardStatsObject.SetCritRate(AttackStatsData.CriticalRate);
-        wizardStatsObject.SetArmorPenetration(AttackStatsData.ArmorPenetration);
-        wizardStatsObject.SetMaxHP(DefenceStatsData.MaxHP);
-        wizardStatsObject.SetRecovery(DefenceStatsData.Recovery);
-        wizardStatsObject.SetMirroring(DefenceStatsData.Mirroring);
-        wizardStatsObject.SetAvoidability(DefenceStatsData.Avoidability);
-        wizardStatsObject.SetMaxMana(ManaStatsData.MaxMana);
-        wizardStatsObject.SetStartMana(ManaStatsData.StartMana);
-        wizardStatsObject.SetManaRegeneration(ManaStatsData.ManaRegeneration);
-        wizardStatsObject.SetPassiveManaRegeneration(ManaStatsData.PassiveManaRegeneration);
-    }
-
-    public void EquipItem(InventoryItem equipedItem) {
+    public void EquipItem(InventoryItem equipedItem)
+    {
         if (equipedItem.GetItemType() == ItemType.Cape)
         {
             this.CapeStatsData = equipedItem.GetItemStatsData();
@@ -41,72 +26,121 @@ public class WizardStatsData
         {
             this.OrbStatsData = equipedItem.GetItemStatsData();
         }
-        UpdateAttackStatsData(equipedItem.GetAttackStatsData(), 1);
-        UpdateDefenceStatsData(equipedItem.GetDefenceStatsData(), 1);
-        UpdateManaStatsData(equipedItem.GetManaStatsData(), 1);
+    }
+    public int GetTotalBaseDamage()
+    {
+        return (BaseAttackStatsData.BaseDamage +
+                CapeStatsData.AttackStatsData.BaseDamage +
+                OrbStatsData.AttackStatsData.BaseDamage +
+                StaffStatsData.AttackStatsData.BaseDamage
+                );
+    }
+    public float GetTotalCriticalDmg()
+    {
+        return (BaseAttackStatsData.CriticalDmg +
+                CapeStatsData.AttackStatsData.CriticalDmg +
+                OrbStatsData.AttackStatsData.CriticalDmg +
+                StaffStatsData.AttackStatsData.CriticalDmg
+                );
     }
 
-    public void RemoveItem(InventoryItem removedItem) {
-        UpdateAttackStatsData(removedItem.GetAttackStatsData(), -1);
-        UpdateDefenceStatsData(removedItem.GetDefenceStatsData(), -1);
-        UpdateManaStatsData(removedItem.GetManaStatsData(), -1);
+    public float GetTotalCriticalRate()
+    {
+        return (BaseAttackStatsData.CriticalRate +
+                CapeStatsData.AttackStatsData.CriticalRate +
+                OrbStatsData.AttackStatsData.CriticalRate +
+                StaffStatsData.AttackStatsData.CriticalRate
+                );
     }
-
-    private void UpdateAttackStatsData(AttackStatsData equipedItem, int factor){
-        AttackStatsData.CriticalDmg += (equipedItem.CriticalDmg*factor);
-        AttackStatsData.CriticalRate += (equipedItem.CriticalRate*factor);
-        AttackStatsData.MinBaseDamage += (equipedItem.MinBaseDamage*factor);
-        AttackStatsData.MaxBaseDamage += (equipedItem.MaxBaseDamage*factor);
-        AttackStatsData.ArmorPenetration += (equipedItem.ArmorPenetration*factor);
+    public float GetTotalArmorPenetration()
+    {
+        return (BaseAttackStatsData.ArmorPenetration +
+                CapeStatsData.AttackStatsData.ArmorPenetration +
+                OrbStatsData.AttackStatsData.ArmorPenetration +
+                StaffStatsData.AttackStatsData.ArmorPenetration
+                );
     }
-    private void UpdateStaffStatsData(ItemStatsData staffStaffData){
-        this.StaffStatsData = staffStaffData;
+    public int GetTotalHP()
+    {
+        return (BaseDefenceStatsData.HP +
+                CapeStatsData.DefenceStatsData.HP +
+                OrbStatsData.DefenceStatsData.HP +
+                StaffStatsData.DefenceStatsData.HP
+                );
     }
-    private void UpdateDefenceStatsData(DefenceStatsData equipedItem, int factor){
-        DefenceStatsData.MaxHP += (equipedItem.MaxHP*factor);
-        DefenceStatsData.Recovery += (equipedItem.Recovery*factor);
-        DefenceStatsData.Mirroring += (equipedItem.Mirroring*factor);
-        DefenceStatsData.Avoidability += (equipedItem.Avoidability*factor);
+    public int GetTotalRecovery()
+    {
+        return (BaseDefenceStatsData.Recovery +
+                CapeStatsData.DefenceStatsData.Recovery +
+                OrbStatsData.DefenceStatsData.Recovery +
+                StaffStatsData.DefenceStatsData.Recovery
+                );
     }
-    private void UpdateCapeStatsData(ItemStatsData capeStatsData){
-        this.CapeStatsData = capeStatsData;
+    public float GetTotalAvoidability()
+    {
+        return (BaseDefenceStatsData.Avoidability +
+                CapeStatsData.DefenceStatsData.Avoidability +
+                OrbStatsData.DefenceStatsData.Avoidability +
+                StaffStatsData.DefenceStatsData.Avoidability
+                );
     }
-    private void UpdateManaStatsData(ManaStatsData equipedItem, int factor){
-        ManaStatsData.MaxMana += (equipedItem.MaxMana*factor);
-        ManaStatsData.StartMana += (equipedItem.StartMana*factor);
-        ManaStatsData.ManaRegeneration += (equipedItem.ManaRegeneration*factor);
-        ManaStatsData.PassiveManaRegeneration += (equipedItem.PassiveManaRegeneration*factor);
+    public int GetTotalMaxMana()
+    {
+        return (BaseManaStatsData.MaxMana +
+                CapeStatsData.ManaStatsData.MaxMana +
+                OrbStatsData.ManaStatsData.MaxMana +
+                StaffStatsData.ManaStatsData.MaxMana
+                );
     }
-    private void UpdateOrbStatsData(ItemStatsData orbStatsData){
-        this.OrbStatsData = orbStatsData;
+    public int GetTotalManaRegeneration()
+    {
+        return (BaseManaStatsData.ManaRegeneration +
+                CapeStatsData.ManaStatsData.ManaRegeneration +
+                OrbStatsData.ManaStatsData.ManaRegeneration +
+                StaffStatsData.ManaStatsData.ManaRegeneration
+                );
+    }
+    public int GetTotalPassiveManaRegeneration()
+    {
+        return (BaseManaStatsData.PassiveManaRegeneration +
+                CapeStatsData.ManaStatsData.PassiveManaRegeneration +
+                OrbStatsData.ManaStatsData.PassiveManaRegeneration +
+                StaffStatsData.ManaStatsData.PassiveManaRegeneration
+                );
+    }
+    public int GetTotalStartMana()
+    {
+        return (BaseManaStatsData.StartMana +
+                CapeStatsData.ManaStatsData.StartMana +
+                OrbStatsData.ManaStatsData.StartMana +
+                StaffStatsData.ManaStatsData.StartMana
+                );
     }
 }
 
 [Serializable]
 public class AttackStatsData
-{ 
-    public int MinBaseDamage = 7;
-    public int MaxBaseDamage = 15;
+{
+    public int BaseDamage = 3;
     public float CriticalRate = 0.1f;
-    public float CriticalDmg = 0;
+    public float CriticalDmg = 0.1f;
     public float ArmorPenetration = 0;
 }
 
 [Serializable]
 public class DefenceStatsData
-{ 
-    public int MaxHP = 20;
+{
+    public int HP = 25;
     public int Recovery = 0;
     public float Avoidability = 0;
-    public float Mirroring = 0;
 }
 
 [Serializable]
 public class ManaStatsData
-{ 
-    public int MaxMana = 50;
-    public int StartMana = 40;
-    public int ManaRegeneration = 7;
+{
+    public int MaxMana = 20;
+    public int StartMana = 0;
+    public int ManaRegeneration = 3;
     public int PassiveManaRegeneration = 0;
 }
 
@@ -121,24 +155,22 @@ public class MagicStatsData
 [Serializable]
 public class ItemStatsData
 {
+    public string Name;
     public List<string> materials;
     public MagicStatsData SoftMagicStats;
     public MagicStatsData ModerateMagicStats;
     public MagicStatsData HardMagicStats;
+    public DefenceStatsData DefenceStatsData;
+    public AttackStatsData AttackStatsData;
+    public ManaStatsData ManaStatsData;
     public Material[] GetMaterials()
     {
         return new Material[] {
             Resources.Load<Material>("Materials/" + materials[0]),
         };
     }
-
     public bool IsContainInventoryItem(InventoryItem inventoryItem)
     {
-        if (materials.Contains(inventoryItem.GetItemStatsData().materials[0]))
-        {
-            return true;
-        }
-        return false;
+        return Name.Equals(inventoryItem.GetName());
     }
-
 }

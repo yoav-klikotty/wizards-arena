@@ -9,14 +9,9 @@ public class InventoryManager : MonoBehaviour
     private GameObject[] _slots;
     private InventoryItem[] _inventoryItems;
     WizardStatsController _wizardStatsController = new WizardStatsController();
+    [SerializeField] WizardStats _wizardStats;
     private PlayerStatsController _playerStatsController = new PlayerStatsController();
-
-    void Start()
-    {
-        PlayerPrefs.DeleteAll();
-        WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
-        InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
+    private InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
             new InventoryPrefabs("Blue_Cape", ItemType.Cape),
             new InventoryPrefabs("Blue_Orb", ItemType.Orb),
             new InventoryPrefabs("Blue_Staff", ItemType.Staff),
@@ -32,7 +27,12 @@ public class InventoryManager : MonoBehaviour
             new InventoryPrefabs("Red_Cape", ItemType.Cape),
             new InventoryPrefabs("Red_Orb", ItemType.Orb),
             new InventoryPrefabs("Red_Staff", ItemType.Staff),
-        };
+    };
+    void Start()
+    {
+        PlayerPrefs.DeleteAll();
+        WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         _inventoryItems = new InventoryItem[totalItems.Length];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
         for (int i = 0; i < totalItems.Length; i++)
@@ -40,21 +40,21 @@ public class InventoryManager : MonoBehaviour
             var prefab = Resources.Load("Prefabs/Items/" + totalItems[i].Type.ToString() + "/" + totalItems[i].Name);
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
-            if (_inventoryItems[i].GetItemType() == ItemType.Cape)
+            if (totalItems[i].Name == "Blue_Cape")
             {
-                _inventoryItems[i].SetEquipedStatus(wizardStatsData.CapeStatsData.IsContainInventoryItem(_inventoryItems[i]));
+                wizardStatsData.EquipItem(item.GetComponent<InventoryItem>());
             }
-            if (_inventoryItems[i].GetItemType() == ItemType.Staff)
+            if (totalItems[i].Name == "Blue_Orb")
             {
-                _inventoryItems[i].SetEquipedStatus(wizardStatsData.StaffStatsData.IsContainInventoryItem(_inventoryItems[i]));
+                wizardStatsData.EquipItem(item.GetComponent<InventoryItem>());
             }
-            if (_inventoryItems[i].GetItemType() == ItemType.Orb)
+            if (totalItems[i].Name == "Blue_Staff")
             {
-                _inventoryItems[i].SetEquipedStatus(wizardStatsData.OrbStatsData.IsContainInventoryItem(_inventoryItems[i]));
+                wizardStatsData.EquipItem(item.GetComponent<InventoryItem>());
             }
-            _inventoryItems[i].SetPurchasedStatus(playerStatsData.IsPurchasedItem(_inventoryItems[i].GetName()));
         }
-        wizardStatsData.WriteWizardStats();
+        _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+        _wizardStats.WriteWizardStats();
     }
 
     public void FilterItems(ItemType type)
@@ -81,26 +81,8 @@ public class InventoryManager : MonoBehaviour
     {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
         wizardStatsData.EquipItem(itemSelected);
-        ItemType type = itemSelected.GetItemType();
-        for (int i = 0; i < _inventoryItems.Length; i++)
-        {
-            if (_inventoryItems[i].GetItemType() == type && _inventoryItems[i].GetEquipedStatus() == true)
-            {
-                _inventoryItems[i].SetEquipedStatus(false);
-                wizardStatsData.RemoveItem(_inventoryItems[i]);
-                break;
-            }
-        }
-        itemSelected.SetEquipedStatus(true);
         _wizardStatsController.SaveWizardStatsData(wizardStatsData);
-        wizardStatsData.WriteWizardStats();
-        _wizard.UpdateWizard(null);
-    }
-
-    public void PurchaseItem(InventoryItem itemSelected)
-    {
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
-        playerStatsData.AddItem(itemSelected);
-        _playerStatsController.SavePlayerStatsData(playerStatsData, true);
+        _wizard.UpdateWizard(wizardStatsData);
+        _wizardStats.WriteWizardStats();
     }
 }

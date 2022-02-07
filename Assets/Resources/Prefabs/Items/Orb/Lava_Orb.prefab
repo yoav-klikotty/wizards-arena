@@ -158,31 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 5000
   _requiredLevel: 10
-  _attributes:
-  - 'Mana Regeneration: 10'
-  - 'Passive: 10'
-  - 'Crit Rate: +5%'
-  - 'Crit Damage: +30%'
-  _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0.05
-    CriticalDmg: 0.3
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 50
-    StartMana: 0
-    ManaRegeneration: 10
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - lava
     SoftMagicStats:
@@ -197,6 +176,20 @@ MonoBehaviour:
       name: MagicChargeYellow
       multiple: 0
       requiredMana: 0
+    DefenceStatsData:
+      HP: 0
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 2
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 2
+      PassiveManaRegeneration: 0
 --- !u!114 &5235462873260244836
 MonoBehaviour:
   m_ObjectHideFlags: 0

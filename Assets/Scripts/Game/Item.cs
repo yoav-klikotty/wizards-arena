@@ -9,11 +9,6 @@ public class Item : MonoBehaviour
     public Magic HardMagic;
     [SerializeField] SkinnedMeshRenderer itemMeshRenderer;
     [SerializeField] ItemType _itemType;
-
-    void Start()
-    {
-    }
-
     public void SetMaterials(Material[] mts)
     {
         itemMeshRenderer.materials = mts;

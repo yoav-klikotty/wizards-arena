@@ -33,9 +33,6 @@ public class PlayerStatsController
     private PlayerStatsData CreateNewPlayer()
     {
         _playerStatsData = new PlayerStatsData();
-        _playerStatsData._items.Add("Blue_Cape");
-        _playerStatsData._items.Add("Blue_Orb");
-        _playerStatsData._items.Add("Blue_Staff");
         SavePlayerStatsData(_playerStatsData, true);
         return _playerStatsData;
     }

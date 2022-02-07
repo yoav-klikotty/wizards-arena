@@ -158,44 +158,38 @@ MonoBehaviour:
   _displayName: 
   _price: 10000
   _requiredLevel: 20
-  _attributes:
-  - 'Damage: 10-12'
-  - 'Shield Penetration: +20%'
-  - 'Max HP: +10'
-  _description: Staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 10
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 10
-    MaxBaseDamage: 12
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0.2
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 0
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - red
     SoftMagicStats:
       name: Fireball
       multiple: 1
-      requiredMana: 10
+      requiredMana: 3
     ModerateMagicStats:
       name: Fireball
       multiple: 2
-      requiredMana: 20
+      requiredMana: 5
     HardMagicStats:
       name: FireMissile
       multiple: 3
-      requiredMana: 30
+      requiredMana: 8
+    DefenceStatsData:
+      HP: 0
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 5
+      CriticalRate: 0.1
+      CriticalDmg: 0.1
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 0
+      PassiveManaRegeneration: 0
 --- !u!114 &1825784076430162269
 MonoBehaviour:
   m_ObjectHideFlags: 0

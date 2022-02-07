@@ -158,29 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 10000
   _requiredLevel: 20
-  _attributes:
-  - 'Mana Regeneration: +15'
-  - 'Shield Penetration: +15%'
-  _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0.15
-  _manaStatsData:
-    MaxMana: 50
-    StartMana: 0
-    ManaRegeneration: 15
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - red
     SoftMagicStats:
@@ -195,6 +176,20 @@ MonoBehaviour:
       name: MagicChargeYellow
       multiple: 0
       requiredMana: 0
+    DefenceStatsData:
+      HP: 0
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 3
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 1
+      PassiveManaRegeneration: 0
 --- !u!114 &3582562531105170262
 MonoBehaviour:
   m_ObjectHideFlags: 0

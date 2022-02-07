@@ -158,29 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 0
   _requiredLevel: 1
-  _attributes:
-  - 'Starting Mana: +15'
-  - 'Mana Regeneration: +7'
-  _description: Orb
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 50
-    StartMana: 15
-    ManaRegeneration: 7
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - blue
     SoftMagicStats:
@@ -195,6 +176,20 @@ MonoBehaviour:
       name: MagicChargeBlue
       multiple: 0
       requiredMana: 0
+    DefenceStatsData:
+      HP: 3
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 1
+      PassiveManaRegeneration: 0
 --- !u!114 &3759392584487037112
 MonoBehaviour:
   m_ObjectHideFlags: 0

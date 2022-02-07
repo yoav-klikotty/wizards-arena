@@ -31,9 +31,8 @@ public class DecisionManager : MonoBehaviour
     {
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         OpponentId = _sessionManager.GetRightOpponentId();
-        Debug.Log(OpponentId);
         player = _sessionManager.playerWizard;
-        player.IncreaseMana(player.WizardStatsData.ManaStatsData.PassiveManaRegeneration);
+        player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
         SetManaBar();
         UpdateValidMagicsByMana();
         SelectOpponent();
@@ -88,7 +87,7 @@ public class DecisionManager : MonoBehaviour
     }
     public void SetManaBar()
     {
-        _manaBar.maxValue = player.WizardStatsData.ManaStatsData.MaxMana;
+        _manaBar.maxValue = player.WizardStatsData.GetTotalMaxMana();
         _manaBar.value = player.GetMana();
         _manaText.text = _manaBar.value + "/" + _manaBar.maxValue;
     }

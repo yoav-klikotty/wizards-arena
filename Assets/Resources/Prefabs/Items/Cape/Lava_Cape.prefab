@@ -158,28 +158,10 @@ MonoBehaviour:
   _displayName: 
   _price: 5000
   _requiredLevel: 10
-  _attributes:
-  - 'Max HP: +15'
-  _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 15
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 0
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - lava
     SoftMagicStats:
@@ -194,6 +176,20 @@ MonoBehaviour:
       name: MagicShieldYellow
       multiple: 0
       requiredMana: 3
+    DefenceStatsData:
+      HP: 2
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 1
+      CriticalRate: 0.1
+      CriticalDmg: 0.1
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 0
+      PassiveManaRegeneration: 0
 --- !u!114 &9033899762581397062
 MonoBehaviour:
   m_ObjectHideFlags: 0

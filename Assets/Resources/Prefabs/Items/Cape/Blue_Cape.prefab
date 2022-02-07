@@ -158,29 +158,10 @@ MonoBehaviour:
   _displayName: Cosmos Cape
   _price: 0
   _requiredLevel: 1
-  _attributes:
-  - 'Max HP: +20'
-  - 'Starting Mana: +20'
-  _description: Cape
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 20
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 0
-    MaxBaseDamage: 0
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 20
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - blue
     SoftMagicStats:
@@ -195,6 +176,20 @@ MonoBehaviour:
       name: MagicShieldBlue
       multiple: 0
       requiredMana: 3
+    DefenceStatsData:
+      HP: 5
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 0
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 0
+      PassiveManaRegeneration: 0
 --- !u!114 &2230774391992843248
 MonoBehaviour:
   m_ObjectHideFlags: 0

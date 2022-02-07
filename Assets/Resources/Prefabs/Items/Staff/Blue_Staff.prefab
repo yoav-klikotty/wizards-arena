@@ -158,44 +158,38 @@ MonoBehaviour:
   _displayName: 
   _price: 0
   _requiredLevel: 1
-  _attributes:
-  - 'Damage: 7-15'
-  - 'Crit Rate: +10%'
-  - 'Starting Mana: +10'
-  _description: Staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 0
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 7
-    MaxBaseDamage: 15
-    CriticalRate: 0.1
-    CriticalDmg: 0
-    ArmorPenetration: 0
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 5
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - blue
     SoftMagicStats:
       name: BlueArrow
       multiple: 1
-      requiredMana: 10
+      requiredMana: 3
     ModerateMagicStats:
       name: PurpleLightning
       multiple: 2
-      requiredMana: 20
+      requiredMana: 5
     HardMagicStats:
       name: BlueMissile
       multiple: 3
-      requiredMana: 30
+      requiredMana: 8
+    DefenceStatsData:
+      HP: 2
+      Recovery: 1
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 2
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 0
+      PassiveManaRegeneration: 0
 --- !u!114 &5173713873003232621
 MonoBehaviour:
   m_ObjectHideFlags: 0

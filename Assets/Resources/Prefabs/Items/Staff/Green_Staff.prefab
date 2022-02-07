@@ -158,44 +158,38 @@ MonoBehaviour:
   _displayName: 
   _price: 1000
   _requiredLevel: 7
-  _attributes:
-  - 'Damage: 1-22'
-  - 'Recovery: +5'
-  - 'Shield Penetration: +10%'
-  _description: Staff
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
-  _defenceStatsData:
-    MaxHP: 0
-    Recovery: 5
-    Avoidability: 0
-    Mirroring: 0
-  _attackStatsData:
-    MinBaseDamage: 1
-    MaxBaseDamage: 22
-    CriticalRate: 0
-    CriticalDmg: 0
-    ArmorPenetration: 0.1
-  _manaStatsData:
-    MaxMana: 0
-    StartMana: 0
-    ManaRegeneration: 0
-    PassiveManaRegeneration: 0
   _itemStatsData:
+    Name: 
     materials:
     - green
     SoftMagicStats:
       name: PoisonShot
       multiple: 1
-      requiredMana: 10
+      requiredMana: 3
     ModerateMagicStats:
       name: GreenPoison
       multiple: 2
-      requiredMana: 20
+      requiredMana: 5
     HardMagicStats:
       name: WaterShot
       multiple: 3
-      requiredMana: 30
+      requiredMana: 8
+    DefenceStatsData:
+      HP: 1
+      Recovery: 0
+      Avoidability: 0
+    AttackStatsData:
+      BaseDamage: 1
+      CriticalRate: 0
+      CriticalDmg: 0.1
+      ArmorPenetration: 0
+    ManaStatsData:
+      MaxMana: 0
+      StartMana: 0
+      ManaRegeneration: 2
+      PassiveManaRegeneration: 0
 --- !u!114 &4481199207560785988
 MonoBehaviour:
   m_ObjectHideFlags: 0

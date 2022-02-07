@@ -34,6 +34,7 @@ public class Magic : MonoBehaviour
     public void ActivateFirePrefab(Vector3 FromPoint, Vector3 ToPoint)
     {
         GameObject instanceBullet = Instantiate(_firePrefab, FromPoint, Quaternion.identity);
+        instanceBullet.GetComponent<ProjectileMover>().wizardStats = gameObject.GetComponentInParent<Wizard>().WizardStatsData;
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
     public Image GetThumbnail()
