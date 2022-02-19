@@ -6,27 +6,58 @@ using UnityEngine.SceneManagement;
 public class ArenaManager : MonoBehaviour
 {
     private PlayerStatsController _playerStatsController = new PlayerStatsController();
-
     [SerializeField] NavigationPanel _navigationPanel;
+    [SerializeField] GameObject GameModes;
+    PlayerStatsData playerStatsData;
+
 
     void Start()
     {
         SoundManager.Instance.PlayGameThemeSound();
+        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
     }
-    public void StartGame()
+
+    public void OpenGameModes()
     {
         SoundManager.Instance.PlayButtonSound();
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+        playerStatsData = _playerStatsController.GetPlayerStatsData();
         if (playerStatsData.GetCrystals() > 0)
         {
-            StartCoroutine(SoundManager.Instance.FadeOutGameThemeSong(1f));
-            playerStatsData.SetCrystals(playerStatsData.GetCrystals() - 1);
-            _playerStatsController.SavePlayerStatsData(playerStatsData, true);
-            SceneManager.LoadScene("Search");
+            GameModes.SetActive(true);
         }
-        else 
+        else
         {
             _navigationPanel.PageChange(3);
         }
     }
+    public void ExitGameModes()
+    {
+        SoundManager.Instance.PlayButtonSound();
+        GameModes.SetActive(false);
+    }
+    public void Start2V2Game()
+    {
+        SoundManager.Instance.PlayButtonSound();
+        StartDeathmatchGame(2);
+    }
+    public void Start3V3Game()
+    {
+        SoundManager.Instance.PlayButtonSound();
+        StartDeathmatchGame(3);
+    }
+    public void Start4V4Game()
+    {
+        SoundManager.Instance.PlayButtonSound();
+        StartDeathmatchGame(4);
+    }
+
+    public void StartDeathmatchGame(int numberOfPlayers)
+    {
+        GameManager.Instance.NumOfDeathmatchPlayers = numberOfPlayers;
+        StartCoroutine(SoundManager.Instance.FadeOutGameThemeSong(1f));
+        playerStatsData.SetCrystals(playerStatsData.GetCrystals() - 1);
+        _playerStatsController.SavePlayerStatsData(playerStatsData, true);
+        SceneManager.LoadScene("Search");
+    }
+
 }

@@ -156,7 +156,7 @@ MonoBehaviour:
   _type: 1
   _name: Green_Staff
   _displayName: 
-  _price: 1000
+  _price: 500
   _requiredLevel: 7
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}

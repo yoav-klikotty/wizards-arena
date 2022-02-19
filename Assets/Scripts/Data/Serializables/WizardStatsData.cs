@@ -11,7 +11,13 @@ public class WizardStatsData
     public AttackStatsData BaseAttackStatsData;
     public DefenceStatsData BaseDefenceStatsData;
     public ManaStatsData BaseManaStatsData;
-
+    public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
+        new MagicStatsData("MagicChargeBlue"),
+        new MagicStatsData("MagicShieldBlue"),
+        new MagicStatsData("BlueMissile"),
+        new MagicStatsData("ElectricShot"),
+        new MagicStatsData("PurpleLightning"),
+    };
     public void EquipItem(InventoryItem equipedItem)
     {
         if (equipedItem.GetItemType() == ItemType.Cape)
@@ -148,8 +154,11 @@ public class ManaStatsData
 public class MagicStatsData
 {
     public string name;
-    public int multiple;
-    public int requiredMana;
+
+    public MagicStatsData(string name)
+    {
+        this.name = name;
+    }
 }
 
 [Serializable]
@@ -157,9 +166,6 @@ public class ItemStatsData
 {
     public string Name;
     public List<string> materials;
-    public MagicStatsData SoftMagicStats;
-    public MagicStatsData ModerateMagicStats;
-    public MagicStatsData HardMagicStats;
     public DefenceStatsData DefenceStatsData;
     public AttackStatsData AttackStatsData;
     public ManaStatsData ManaStatsData;

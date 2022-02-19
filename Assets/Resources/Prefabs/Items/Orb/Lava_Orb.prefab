@@ -156,7 +156,7 @@ MonoBehaviour:
   _type: 2
   _name: Lava_Orb
   _displayName: 
-  _price: 5000
+  _price: 500
   _requiredLevel: 10
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}

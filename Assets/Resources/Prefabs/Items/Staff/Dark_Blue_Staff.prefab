@@ -156,7 +156,7 @@ MonoBehaviour:
   _type: 1
   _name: Dark_Blue_Staff
   _displayName: 
-  _price: 100
+  _price: 500
   _requiredLevel: 5
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}

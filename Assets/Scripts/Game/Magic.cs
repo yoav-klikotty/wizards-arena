@@ -6,9 +6,11 @@ public class Magic : MonoBehaviour
     GameObject FromPoint;
     [SerializeField] GameObject _firePrefab;
     ParticleSystem _particalSystem;
-    [SerializeField] Image _skillThumbnail;
+    [SerializeField] Sprite _skillThumbnail;
     [SerializeField] BoxCollider _boxCollider;
-
+    [SerializeField] int _requiredMana;
+    [SerializeField] MagicType _magicType;
+    public enum MagicType { Attack, Mana, Defence };
     void Start()
     {
         _particalSystem = GetComponent<ParticleSystem>();
@@ -20,6 +22,11 @@ public class Magic : MonoBehaviour
         {
             EnableBoxCollider();
         }
+    }
+
+    public int GetRequiredMana()
+    {
+        return _requiredMana;
     }
 
     private void EnableBoxCollider()
@@ -37,8 +44,12 @@ public class Magic : MonoBehaviour
         instanceBullet.GetComponent<ProjectileMover>().wizardStats = gameObject.GetComponentInParent<Wizard>().WizardStatsData;
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
-    public Image GetThumbnail()
+    public Sprite GetThumbnail()
     {
         return _skillThumbnail;
+    }
+    public MagicType GetMagicType()
+    {
+        return _magicType;
     }
 }

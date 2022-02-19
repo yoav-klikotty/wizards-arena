@@ -10,7 +10,6 @@ public class InventoryManager : MonoBehaviour
     private InventoryItem[] _inventoryItems;
     WizardStatsController _wizardStatsController = new WizardStatsController();
     [SerializeField] WizardStats _wizardStats;
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
     private InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
             new InventoryPrefabs("Blue_Cape", ItemType.Cape),
             new InventoryPrefabs("Blue_Orb", ItemType.Orb),
@@ -31,8 +30,33 @@ public class InventoryManager : MonoBehaviour
     void Start()
     {
         PlayerPrefs.DeleteAll();
+        InitializeInventory();
+        InitializeWizardSavedItems();
+    }
+
+    private void InitializeWizardSavedItems()
+    {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+        for (int i = 0; i < totalItems.Length; i++)
+        {
+            if (totalItems[i].Name == "Blue_Cape")
+            {
+                wizardStatsData.EquipItem(_inventoryItems[i]);
+            }
+            if (totalItems[i].Name == "Blue_Orb")
+            {
+                wizardStatsData.EquipItem(_inventoryItems[i]);
+            }
+            if (totalItems[i].Name == "Blue_Staff")
+            {
+                wizardStatsData.EquipItem(_inventoryItems[i]);
+            }
+        }
+        _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+        _wizardStats.WriteWizardStats();
+    }
+    private void InitializeInventory()
+    {
         _inventoryItems = new InventoryItem[totalItems.Length];
         _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
         for (int i = 0; i < totalItems.Length; i++)
@@ -40,32 +64,14 @@ public class InventoryManager : MonoBehaviour
             var prefab = Resources.Load("Prefabs/Items/" + totalItems[i].Type.ToString() + "/" + totalItems[i].Name);
             var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
-            if (totalItems[i].Name == "Blue_Cape")
-            {
-                wizardStatsData.EquipItem(item.GetComponent<InventoryItem>());
-            }
-            if (totalItems[i].Name == "Blue_Orb")
-            {
-                wizardStatsData.EquipItem(item.GetComponent<InventoryItem>());
-            }
-            if (totalItems[i].Name == "Blue_Staff")
-            {
-                wizardStatsData.EquipItem(item.GetComponent<InventoryItem>());
-            }
         }
-        _wizardStatsController.SaveWizardStatsData(wizardStatsData);
-        _wizardStats.WriteWizardStats();
     }
-
     public void FilterItems(ItemType type)
     {
-        for (int i = 0; i < _inventoryItems.Length; i++)
-        {
-            _inventoryItems[i].transform.SetParent(_unfilteredContaier.transform, false);
-        }
         List<InventoryItem> filteredItems = new List<InventoryItem>();
         for (int i = 0; i < _inventoryItems.Length; i++)
         {
+            _inventoryItems[i].transform.SetParent(_unfilteredContaier.transform, false);
             if (_inventoryItems[i].GetItemType() == type)
             {
                 filteredItems.Add(_inventoryItems[i]);

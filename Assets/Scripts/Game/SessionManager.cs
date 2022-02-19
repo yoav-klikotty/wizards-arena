@@ -42,7 +42,7 @@ public class SessionManager : MonoBehaviour
             _isSessionLock = true;
             RevealDecisions();
         }
-        if (SessionEnd() && !_isSessionEndLock)
+        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && IsSessionEnd() && !_isSessionEndLock)
         {
             _isSessionEndLock = true;
             StartCoroutine("HandleSessionEndEvent");
@@ -59,7 +59,7 @@ public class SessionManager : MonoBehaviour
         bool isContainNoneDecision = false;
         foreach (WizardMove wizardMove in moves)
         {
-            if (wizardMove.wizardOption == DecisionManager.Option.None)
+            if (wizardMove.wizardOption == null)
             {
                 isContainNoneDecision = true;
             }
@@ -75,7 +75,7 @@ public class SessionManager : MonoBehaviour
     public void RegisterWizard(Wizard wizard)
     {
         wizards.Add(wizard);
-        moves.Add(new WizardMove(DecisionManager.Option.None, Vector3.zero));
+        moves.Add(new WizardMove(null, Vector3.zero));
     }
 
     public void RegisterWizardMove(int wizardIndex, WizardMove move)
@@ -97,7 +97,7 @@ public class SessionManager : MonoBehaviour
         }
         for (int i = 0; i < moves.Count; i++)
         {
-            moves[i] = new WizardMove(DecisionManager.Option.None, Vector3.zero);
+            moves[i] = new WizardMove(null, Vector3.zero);
         }
         InvokeRepeating("FinishResolving", 1.5f, 0);
     }
@@ -115,24 +115,33 @@ public class SessionManager : MonoBehaviour
         _isSessionLock = false;
     }
 
-    bool SessionEnd()
+    bool IsSessionEnd()
     {
-        return false;
+        int numberOfAliveWizards = wizards.Count;
+        foreach(var wizard in wizards)
+        {
+            if (!wizard.IsWizardAlive())
+            {
+                numberOfAliveWizards -= 1;
+            }
+        }
+        if (numberOfAliveWizards < 2)
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     IEnumerator HandleSessionEndEvent()
     {
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Score");
-
     }
 
     public Wizard GetWizardById(int id)
     {
         return wizards.Find((wizard) => wizard.wizardId == id);
-    }
-    public int GetLeftOpponentId()
-    {
-        return wizards[2].wizardId;
     }
     public int GetRightOpponentId()
     {
@@ -142,10 +151,10 @@ public class SessionManager : MonoBehaviour
 
 public class WizardMove
 {
-    public DecisionManager.Option wizardOption;
+    public string wizardOption;
     public Vector3 wizardOpponentPosition;
 
-    public WizardMove(DecisionManager.Option wizardOption, Vector3 wizardOppoentPosition)
+    public WizardMove(string wizardOption, Vector3 wizardOppoentPosition)
     {
         this.wizardOption = wizardOption;
         this.wizardOpponentPosition = wizardOppoentPosition;

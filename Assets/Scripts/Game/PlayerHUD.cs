@@ -9,16 +9,9 @@ public class PlayerHUD : MonoBehaviour
     [SerializeField] Slider _healthBar;
     [SerializeField] TMP_Text _healthLabel;
     Transform _camera;
-    public float requiredManaForSoftAttack;
-    [SerializeField] GameObject _softAttackMagic;
-    public float requiredManaForModerateAttack;
-    [SerializeField] GameObject _moderateAttackMagic;
-    public float requiredManaForHardAttack;
-    [SerializeField] GameObject _hardAttackMagic;
     [SerializeField] Animation _animation;
     [SerializeField] TMP_Text _indicationText;
-    [SerializeField] TMP_Text _wizardIndex;
-
+    [SerializeField] TMP_Text _manaText;
 
     void Start()
     {
@@ -37,42 +30,14 @@ public class PlayerHUD : MonoBehaviour
         transform.LookAt(transform.position + _camera.forward);
     }
 
-    public void RenderAvailableAttacks(float mana)
+    public void UpdateMana(float mana)
     {
-        if (mana >= requiredManaForSoftAttack)
-        {
-            _softAttackMagic.SetActive(true);
-        }
-        else
-        {
-            _softAttackMagic.SetActive(false);
-        }
-        if (mana >= requiredManaForModerateAttack)
-        {
-            _moderateAttackMagic.SetActive(true);
-        }
-        else
-        {
-            _moderateAttackMagic.SetActive(false);
-        }
-        if (mana >= requiredManaForHardAttack)
-        {
-            _hardAttackMagic.SetActive(true);
-        }
-        else
-        {
-            _hardAttackMagic.SetActive(false);
-        }
-
+        _manaText.text = (int) mana + "";
     }
 
     public void ActivateIndication(string indicationText)
     {
         _indicationText.text = indicationText;
         _animation.Play();
-    }
-    public void SetWizardIndex(int wizardIndex)
-    {
-        _wizardIndex.text = wizardIndex + "";
     }
 }
