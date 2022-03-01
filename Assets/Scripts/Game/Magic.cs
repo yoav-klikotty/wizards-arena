@@ -52,4 +52,25 @@ public class Magic : MonoBehaviour
     {
         return _magicType;
     }
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if (_photonView && _photonView.IsMine)
+    //     {
+    //         Random rnd = new Random();
+    //         var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
+    //         int damage = CalculateBaseDamage(attacker);
+    //         bool isCriticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
+    //         if (isCriticalHit)
+    //         {
+    //             damage += CalculateCritDamage(damage, attacker);
+    //         }
+    //         _photonView.RPC("ReduceHealth", RpcTarget.All, damage, isCriticalHit);
+    //     }
+    //     DamageAni();
+    //     if (GetHealth() <= 0)
+    //     {
+    //         DeathTime = DateTime.Now;
+    //         DeathAni();
+    //     }
+    // }
 }

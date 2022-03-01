@@ -164,20 +164,8 @@ MonoBehaviour:
     Name: 
     materials:
     - dark-blue
-    SoftMagicStats:
-      name: MagicShieldPurple
-      multiple: 0
-      requiredMana: 3
-    ModerateMagicStats:
-      name: MagicShieldPurple
-      multiple: 0
-      requiredMana: 3
-    HardMagicStats:
-      name: MagicShieldPurple
-      multiple: 0
-      requiredMana: 3
     DefenceStatsData:
-      HP: 2
+      HP: 15
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
@@ -188,8 +176,8 @@ MonoBehaviour:
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 1
-      PassiveManaRegeneration: 0
+      ManaRegeneration: 5
+      PassiveManaRegeneration: 2
 --- !u!114 &4601522714787735451
 MonoBehaviour:
   m_ObjectHideFlags: 0

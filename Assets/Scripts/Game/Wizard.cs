@@ -118,15 +118,13 @@ public class Wizard : MonoBehaviour
         }
         if (PlayerHUD != null)
         {
-            PlayerHUD.SetHealthBar(_currentHealth, WizardStatsData.GetTotalHP());
+            PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
             _currentMana = WizardStatsData.GetTotalStartMana();
-            PlayerHUD.UpdateMana(_currentMana);
+            PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
         }
         _staff.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
         _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
         _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
-
-
     }
 
     public void RenderDecision(WizardMove move)
@@ -180,10 +178,10 @@ public class Wizard : MonoBehaviour
         {
             _currentHealth = 0;
         }
-        PlayerHUD.SetHealthBar(_currentHealth, WizardStatsData.GetTotalHP());
+        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
         if (health == 0)
         {
-            PlayerHUD.ActivateIndication("Strike Avoid!", "avoid");
+            PlayerHUD.ActivateIndication("Avoided!", "avoid");
         }
         else
         {
@@ -204,8 +202,8 @@ public class Wizard : MonoBehaviour
         {
             _currentHealth = newVal;
         }
-        PlayerHUD.SetHealthBar(_currentHealth, WizardStatsData.GetTotalHP());
-        PlayerHUD.ActivateIndication("" + health, "heal");
+        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+        if (health > 0) PlayerHUD.ActivateIndication("" + health, "heal");
     }
 
     public int GetMana()
@@ -223,7 +221,7 @@ public class Wizard : MonoBehaviour
         {
             _currentMana = newVal;
         }
-        PlayerHUD.UpdateMana(_currentMana);
+        PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
     }
 
     public void IncreaseMana(int mana)
@@ -237,8 +235,10 @@ public class Wizard : MonoBehaviour
         {
             _currentMana = newVal;
         }
-        PlayerHUD.UpdateMana(_currentMana);
-        PlayerHUD.ActivateIndication("" + mana, "mana");
+        if (mana > 0) {
+            PlayerHUD.ActivateIndication("" + mana, "mana");
+            PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
+        }
     }
 
     public void IdleAni()
@@ -281,11 +281,11 @@ public class Wizard : MonoBehaviour
         {
             Random rnd = new Random();
             var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
-            int damage = CalculateBaseDamage(attacker, WizardStatsData);
+            int damage = CalculateBaseDamage(attacker);
             bool isCriticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
             if (isCriticalHit)
             {
-                damage = CalculateCritDamage(damage, attacker);
+                damage += CalculateCritDamage(damage, attacker);
             }
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage, isCriticalHit);
         }
@@ -355,7 +355,7 @@ public class Wizard : MonoBehaviour
     {
         return this._orb;
     }
-    int CalculateBaseDamage(WizardStatsData attacker, WizardStatsData defender)
+    int CalculateBaseDamage(WizardStatsData attacker)
     {
         Random rnd = new Random();
         int damagePoints = 0;

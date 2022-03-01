@@ -164,22 +164,10 @@ MonoBehaviour:
     Name: 
     materials:
     - green
-    SoftMagicStats:
-      name: MagicChargeGreen
-      multiple: 0
-      requiredMana: 0
-    ModerateMagicStats:
-      name: MagicChargeGreen
-      multiple: 0
-      requiredMana: 0
-    HardMagicStats:
-      name: MagicChargeGreen
-      multiple: 0
-      requiredMana: 0
     DefenceStatsData:
-      HP: 1
-      Recovery: 0
-      Avoidability: 0
+      HP: 5
+      Recovery: 2
+      Avoidability: 2
     AttackStatsData:
       BaseDamage: 0
       CriticalRate: 0
@@ -187,7 +175,7 @@ MonoBehaviour:
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0
-      StartMana: 0
+      StartMana: 5
       ManaRegeneration: 3
       PassiveManaRegeneration: 0
 --- !u!114 &4991157913658611564

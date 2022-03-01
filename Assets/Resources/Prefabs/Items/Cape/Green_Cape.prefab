@@ -164,22 +164,10 @@ MonoBehaviour:
     Name: 
     materials:
     - green
-    SoftMagicStats:
-      name: MagicShieldGreen
-      multiple: 0
-      requiredMana: 3
-    ModerateMagicStats:
-      name: MagicShieldGreen
-      multiple: 0
-      requiredMana: 3
-    HardMagicStats:
-      name: MagicShieldGreen
-      multiple: 0
-      requiredMana: 3
     DefenceStatsData:
-      HP: 1
-      Recovery: 0
-      Avoidability: 0
+      HP: 20
+      Recovery: 5
+      Avoidability: 5
     AttackStatsData:
       BaseDamage: 0
       CriticalRate: 0
@@ -188,7 +176,7 @@ MonoBehaviour:
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 2
+      ManaRegeneration: 0
       PassiveManaRegeneration: 0
 --- !u!114 &942723345973312055
 MonoBehaviour:

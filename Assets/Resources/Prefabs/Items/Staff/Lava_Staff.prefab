@@ -164,32 +164,20 @@ MonoBehaviour:
     Name: 
     materials:
     - lava
-    SoftMagicStats:
-      name: Fireball
-      multiple: 1
-      requiredMana: 3
-    ModerateMagicStats:
-      name: Fireball
-      multiple: 2
-      requiredMana: 5
-    HardMagicStats:
-      name: FireMissile
-      multiple: 3
-      requiredMana: 8
     DefenceStatsData:
       HP: 0
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
-      BaseDamage: 3
-      CriticalRate: 0.1
+      BaseDamage: 8
+      CriticalRate: 0
       CriticalDmg: 0
-      ArmorPenetration: 0
+      ArmorPenetration: 0.3
     ManaStatsData:
       MaxMana: 0
-      StartMana: 1
+      StartMana: 0
       ManaRegeneration: 0
-      PassiveManaRegeneration: 1
+      PassiveManaRegeneration: 0
 --- !u!114 &5883058295443833014
 MonoBehaviour:
   m_ObjectHideFlags: 0

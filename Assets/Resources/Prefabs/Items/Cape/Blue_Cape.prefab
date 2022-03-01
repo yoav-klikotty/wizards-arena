@@ -164,20 +164,8 @@ MonoBehaviour:
     Name: Blue_Cape
     materials:
     - blue
-    SoftMagicStats:
-      name: MagicShieldBlue
-      multiple: 0
-      requiredMana: 3
-    ModerateMagicStats:
-      name: MagicShieldBlue
-      multiple: 0
-      requiredMana: 3
-    HardMagicStats:
-      name: MagicShieldBlue
-      multiple: 0
-      requiredMana: 3
     DefenceStatsData:
-      HP: 5
+      HP: 15
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
@@ -187,8 +175,8 @@ MonoBehaviour:
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0
-      StartMana: 0
-      ManaRegeneration: 0
+      StartMana: 5
+      ManaRegeneration: 5
       PassiveManaRegeneration: 0
 --- !u!114 &2230774391992843248
 MonoBehaviour:
