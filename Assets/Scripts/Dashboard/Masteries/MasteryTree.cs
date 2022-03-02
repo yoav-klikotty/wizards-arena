@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MasteryTreeManager : MonoBehaviour
+public class MasteryTree : MonoBehaviour
 {
     private PlayerStatsController _playerStatsController = new PlayerStatsController();
     PlayerStatsData playerStatsData;

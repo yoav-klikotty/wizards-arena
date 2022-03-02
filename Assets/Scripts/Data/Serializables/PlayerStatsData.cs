@@ -11,7 +11,7 @@ public class PlayerStatsData
     public int _coins = 100000;
     public int _crystals = 5;
     public int _maxCrystals = 20;
-    public int _xp = 10;
+    public int _xp = 30;
     public string GetName()
     {
         return _name;

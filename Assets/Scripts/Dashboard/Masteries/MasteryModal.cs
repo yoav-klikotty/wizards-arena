@@ -9,7 +9,7 @@ public class MasteryModal : MonoBehaviour
     [SerializeField] Image _icon;
     private InventoryMastery _inventoryMastery;
     private int _initialPoints;
-    [SerializeField] MasteryTreeManager _masteryTreeManager;
+    [SerializeField] MasteryTrees _masteryTrees;
     [SerializeField] TMP_Text _masteryAttributes;
     public void Instantiate(InventoryMastery inventoryMastery)
     {
@@ -32,7 +32,7 @@ public class MasteryModal : MonoBehaviour
     {
         if (_inventoryMastery.GetCurrentPoints() < _inventoryMastery.GetMaxPoints())
         {
-            _masteryTreeManager.UpdateSkill(_inventoryMastery);
+            _masteryTrees.GetCurrentTree().UpdateSkill(_inventoryMastery);
             gameObject.SetActive(false);
         }
     }
