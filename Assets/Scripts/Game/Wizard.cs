@@ -6,7 +6,6 @@ using System;
 
 public class Wizard : MonoBehaviour
 {
-
     PhotonView _photonView;
     public const string IDLE = "Wizard_Idle";
     public const string RUN = "Wizard_Run";
@@ -181,12 +180,12 @@ public class Wizard : MonoBehaviour
         PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
         if (health == 0)
         {
-            PlayerHUD.ActivateIndication("Avoided!", "avoid");
+            PlayerHUD.ActivateIndication("Avoided!", indicationEvents.avoid);
         }
         else
         {
-            string hit = isCrit ? "crit" : "hit";
-            PlayerHUD.ActivateIndication("" + health, hit);
+            indicationEvents eventType = isCrit ? indicationEvents.crit : indicationEvents.hit;
+            PlayerHUD.ActivateIndication("" + health, eventType);
         }
 
     }
@@ -203,7 +202,7 @@ public class Wizard : MonoBehaviour
             _currentHealth = newVal;
         }
         PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
-        if (health > 0) PlayerHUD.ActivateIndication("" + health, "heal");
+        if (health > 0) PlayerHUD.ActivateIndication("" + health, indicationEvents.heal);
     }
 
     public int GetMana()
@@ -236,7 +235,7 @@ public class Wizard : MonoBehaviour
             _currentMana = newVal;
         }
         if (mana > 0) {
-            PlayerHUD.ActivateIndication("" + mana, "mana");
+            PlayerHUD.ActivateIndication("" + mana, indicationEvents.mana);
             PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
         }
     }

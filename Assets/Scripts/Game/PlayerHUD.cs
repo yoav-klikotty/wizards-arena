@@ -56,7 +56,7 @@ public class PlayerHUD : MonoBehaviour
         StartCoroutine(AdjustBar(_manaBar, barFillAmountTarget));
     }
 
-    public void ActivateIndication(string indicationText, string indicationEvent)
+    public void ActivateIndication(string indicationText, indicationEvents indicationEvent)
     {
         GameObject indicationTextObj = Instantiate(_indicationText, transform.position, Quaternion.identity, gameObject.transform);
         indicationTextObj.GetComponent<TextIndication>().Activate(indicationText, indicationEvent);

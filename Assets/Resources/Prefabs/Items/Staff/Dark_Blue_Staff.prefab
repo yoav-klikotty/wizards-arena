@@ -165,7 +165,7 @@ MonoBehaviour:
     materials:
     - dark-blue
     DefenceStatsData:
-      HP: 1
+      HP: 0
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
@@ -177,7 +177,7 @@ MonoBehaviour:
       MaxMana: 10
       StartMana: 0
       ManaRegeneration: 3
-      PassiveManaRegeneration: 0
+      PassiveManaRegeneration: 2
 --- !u!114 &2536942942785517476
 MonoBehaviour:
   m_ObjectHideFlags: 0
