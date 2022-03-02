@@ -164,18 +164,6 @@ MonoBehaviour:
     Name: 
     materials:
     - red
-    SoftMagicStats:
-      name: MagicChargeYellow
-      multiple: 0
-      requiredMana: 0
-    ModerateMagicStats:
-      name: MagicChargeYellow
-      multiple: 0
-      requiredMana: 0
-    HardMagicStats:
-      name: MagicChargeYellow
-      multiple: 0
-      requiredMana: 0
     DefenceStatsData:
       HP: 0
       Recovery: 0
@@ -183,12 +171,12 @@ MonoBehaviour:
     AttackStatsData:
       BaseDamage: 3
       CriticalRate: 0
-      CriticalDmg: 0
+      CriticalDmg: 0.2
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 1
+      ManaRegeneration: 3
       PassiveManaRegeneration: 0
 --- !u!114 &3582562531105170262
 MonoBehaviour:

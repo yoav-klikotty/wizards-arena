@@ -164,20 +164,8 @@ MonoBehaviour:
     Name: 
     materials:
     - dark-blue
-    SoftMagicStats:
-      name: MagicChargeDarkBlue
-      multiple: 0
-      requiredMana: 0
-    ModerateMagicStats:
-      name: MagicChargeDarkBlue
-      multiple: 0
-      requiredMana: 0
-    HardMagicStats:
-      name: MagicChargeDarkBlue
-      multiple: 0
-      requiredMana: 0
     DefenceStatsData:
-      HP: 2
+      HP: 0
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
@@ -186,10 +174,10 @@ MonoBehaviour:
       CriticalDmg: 0
       ArmorPenetration: 0
     ManaStatsData:
-      MaxMana: 0
+      MaxMana: 5
       StartMana: 0
-      ManaRegeneration: 2
-      PassiveManaRegeneration: 0
+      ManaRegeneration: 5
+      PassiveManaRegeneration: 2
 --- !u!114 &3984235016252156133
 MonoBehaviour:
   m_ObjectHideFlags: 0

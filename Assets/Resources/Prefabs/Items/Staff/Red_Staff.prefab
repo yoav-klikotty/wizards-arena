@@ -164,26 +164,14 @@ MonoBehaviour:
     Name: 
     materials:
     - red
-    SoftMagicStats:
-      name: Fireball
-      multiple: 1
-      requiredMana: 3
-    ModerateMagicStats:
-      name: Fireball
-      multiple: 2
-      requiredMana: 5
-    HardMagicStats:
-      name: FireMissile
-      multiple: 3
-      requiredMana: 8
     DefenceStatsData:
       HP: 0
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
-      BaseDamage: 5
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
+      BaseDamage: 8
+      CriticalRate: 0.2
+      CriticalDmg: 0.2
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0

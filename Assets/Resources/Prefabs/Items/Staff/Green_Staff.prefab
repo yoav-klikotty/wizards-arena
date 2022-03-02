@@ -164,31 +164,19 @@ MonoBehaviour:
     Name: 
     materials:
     - green
-    SoftMagicStats:
-      name: PoisonShot
-      multiple: 1
-      requiredMana: 3
-    ModerateMagicStats:
-      name: GreenPoison
-      multiple: 2
-      requiredMana: 5
-    HardMagicStats:
-      name: WaterShot
-      multiple: 3
-      requiredMana: 8
     DefenceStatsData:
-      HP: 1
-      Recovery: 0
-      Avoidability: 0
+      HP: 5
+      Recovery: 2
+      Avoidability: 2
     AttackStatsData:
-      BaseDamage: 1
+      BaseDamage: 5
       CriticalRate: 0
-      CriticalDmg: 0.1
+      CriticalDmg: 0
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 2
+      ManaRegeneration: 0
       PassiveManaRegeneration: 0
 --- !u!114 &4481199207560785988
 MonoBehaviour:

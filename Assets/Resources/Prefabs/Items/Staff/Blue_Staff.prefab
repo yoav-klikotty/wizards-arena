@@ -164,31 +164,19 @@ MonoBehaviour:
     Name: Blue_Staff
     materials:
     - blue
-    SoftMagicStats:
-      name: BlueArrow
-      multiple: 1
-      requiredMana: 3
-    ModerateMagicStats:
-      name: PurpleLightning
-      multiple: 2
-      requiredMana: 5
-    HardMagicStats:
-      name: BlueMissile
-      multiple: 3
-      requiredMana: 8
     DefenceStatsData:
-      HP: 2
-      Recovery: 1
+      HP: 0
+      Recovery: 0
       Avoidability: 0
     AttackStatsData:
-      BaseDamage: 2
+      BaseDamage: 5
       CriticalRate: 0
       CriticalDmg: 0
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0
-      StartMana: 0
-      ManaRegeneration: 0
+      StartMana: 5
+      ManaRegeneration: 3
       PassiveManaRegeneration: 0
 --- !u!114 &5173713873003232621
 MonoBehaviour:
