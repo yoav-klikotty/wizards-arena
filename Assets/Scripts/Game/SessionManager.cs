@@ -28,7 +28,7 @@ public class SessionManager : MonoBehaviour
     }
     private void CreatePlayer()
     {
-        PhotonNetwork.Instantiate("Prefabs/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
+        PhotonNetwork.Instantiate("Prefabs/Wizard/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
     }
     void Update()
     {

@@ -18,6 +18,9 @@ public class WizardStatsData
         new MagicStatsData("ElectricShot"),
         new MagicStatsData("PurpleLightning"),
     };
+    public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
+    {
+    };
     public void EquipItem(InventoryItem equipedItem)
     {
         if (equipedItem.GetItemType() == ItemType.Cape)
@@ -33,37 +36,88 @@ public class WizardStatsData
             this.OrbStatsData = equipedItem.GetItemStatsData();
         }
     }
+
+    public void UpdateMasteryPoints(InventoryMastery inventoryMastery)
+    {
+        var mastery = FindMastery(inventoryMastery.GetID());
+        if (mastery == null && inventoryMastery.GetCurrentPoints() > 0)
+        {
+            mastery = new MasteryStatsData(inventoryMastery.GetID());
+            mastery.points = inventoryMastery.GetCurrentPoints();
+            mastery.maxPoints = inventoryMastery.GetMaxPoints();
+            mastery.AttackStatsData = inventoryMastery.AttackStatsData;
+            mastery.DefenceStatsData = inventoryMastery.DefenceStatsData;
+            mastery.ManaStatsData = inventoryMastery.ManaStatsData;
+            MasteriesStatsData.Add(mastery);
+        }
+        else if (inventoryMastery.GetCurrentPoints() > 0)
+        {
+            mastery.points = inventoryMastery.GetCurrentPoints();
+        }
+        else
+        {
+            MasteriesStatsData.RemoveAll(masteryToRemove => masteryToRemove.name == inventoryMastery.GetID());
+        }
+    }
+    public MasteryStatsData FindMastery(string name)
+    {
+        return MasteriesStatsData.Find(skill => skill.name.Equals(name));
+    }
     public int GetTotalBaseDamage()
     {
+        int skillsBaseDamage = 0;
+        foreach (var skillStatsData in MasteriesStatsData)
+        {
+            skillsBaseDamage += skillStatsData.points * skillStatsData.AttackStatsData.BaseDamage;
+        }
         return (BaseAttackStatsData.BaseDamage +
                 CapeStatsData.AttackStatsData.BaseDamage +
                 OrbStatsData.AttackStatsData.BaseDamage +
-                StaffStatsData.AttackStatsData.BaseDamage
+                StaffStatsData.AttackStatsData.BaseDamage +
+                skillsBaseDamage
                 );
     }
     public float GetTotalCriticalDmg()
     {
+        float skillsCritDamage = 0;
+        foreach (var skillStatsData in MasteriesStatsData)
+        {
+            skillsCritDamage += skillStatsData.points * skillStatsData.AttackStatsData.CriticalDmg;
+        }
         return (BaseAttackStatsData.CriticalDmg +
                 CapeStatsData.AttackStatsData.CriticalDmg +
                 OrbStatsData.AttackStatsData.CriticalDmg +
-                StaffStatsData.AttackStatsData.CriticalDmg
+                StaffStatsData.AttackStatsData.CriticalDmg +
+                skillsCritDamage
                 );
     }
 
     public float GetTotalCriticalRate()
     {
+        float skillsCritRate = 0;
+        foreach (var skillStatsData in MasteriesStatsData)
+        {
+            skillsCritRate += skillStatsData.points * skillStatsData.AttackStatsData.CriticalRate;
+        }
         return (BaseAttackStatsData.CriticalRate +
                 CapeStatsData.AttackStatsData.CriticalRate +
                 OrbStatsData.AttackStatsData.CriticalRate +
-                StaffStatsData.AttackStatsData.CriticalRate
+                StaffStatsData.AttackStatsData.CriticalRate + 
+                skillsCritRate
                 );
     }
     public float GetTotalArmorPenetration()
     {
+        float skillsArmorPenetration = 0;
+        foreach (var skillStatsData in MasteriesStatsData)
+        {
+            skillsArmorPenetration += skillStatsData.points * skillStatsData.AttackStatsData.ArmorPenetration;
+        }
         return (BaseAttackStatsData.ArmorPenetration +
                 CapeStatsData.AttackStatsData.ArmorPenetration +
                 OrbStatsData.AttackStatsData.ArmorPenetration +
-                StaffStatsData.AttackStatsData.ArmorPenetration
+                StaffStatsData.AttackStatsData.ArmorPenetration +
+                skillsArmorPenetration
                 );
     }
     public int GetTotalHP()
@@ -161,6 +215,20 @@ public class MagicStatsData
     }
 }
 
+[Serializable]
+public class MasteryStatsData
+{
+    public string name;
+    public int points;
+    public int maxPoints;
+    public DefenceStatsData DefenceStatsData;
+    public AttackStatsData AttackStatsData;
+    public ManaStatsData ManaStatsData;
+    public MasteryStatsData(string name)
+    {
+        this.name = name;
+    }
+}
 [Serializable]
 public class ItemStatsData
 {

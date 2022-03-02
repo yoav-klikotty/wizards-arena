@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main/Dashboard.unity
     guid: ada6a669326f4694ca36d181a52679a3
   - enabled: 1
+    path: Assets/Scenes/Main/Masteries.unity
+    guid: 8588c2b15a2d8e647ac569d9695c9ca1
+  - enabled: 1
     path: Assets/Scenes/Game/Search.unity
     guid: 4713898eb1a25e842b49b6a09b3722e0
   - enabled: 1

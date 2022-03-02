@@ -14,7 +14,6 @@ public class ArenaManager : MonoBehaviour
     void Start()
     {
         SoundManager.Instance.PlayGameThemeSound();
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
     }
 
     public void OpenGameModes()
@@ -58,6 +57,10 @@ public class ArenaManager : MonoBehaviour
         playerStatsData.SetCrystals(playerStatsData.GetCrystals() - 1);
         _playerStatsController.SavePlayerStatsData(playerStatsData, true);
         SceneManager.LoadScene("Search");
+    }
+    public void LoadMasteriesScene()
+    {
+        SceneManager.LoadScene("Masteries");
     }
 
 }

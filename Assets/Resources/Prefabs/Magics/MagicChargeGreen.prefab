@@ -4797,6 +4797,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firePrefab: {fileID: 0}
   _skillThumbnail: {fileID: 0}
+  _boxCollider: {fileID: 0}
+  _requiredMana: 0
+  _magicType: 1
 --- !u!1 &1804089102906412596
 GameObject:
   m_ObjectHideFlags: 0

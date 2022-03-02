@@ -29,7 +29,6 @@ public class InventoryManager : MonoBehaviour
     };
     void Start()
     {
-        PlayerPrefs.DeleteAll();
         InitializeInventory();
         InitializeWizardSavedItems();
     }

@@ -11,6 +11,7 @@ public class PlayerStatsData
     public int _coins = 100000;
     public int _crystals = 5;
     public int _maxCrystals = 20;
+    public int _xp = 10;
     public string GetName()
     {
         return _name;
@@ -81,6 +82,19 @@ public class PlayerStatsData
     public int GetMaxCrystals()
     {
         return this._maxCrystals;
+    }
+    public int GetXP()
+    {
+        return this._xp;
+    }
+    public void SetXP(int _xp)
+    {
+        this._xp = _xp;
+    }
+
+    public void AddXP(int xp)
+    {
+        this._xp += xp;
     }
 
 }

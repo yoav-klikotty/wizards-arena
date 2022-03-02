@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] TMP_Text _nameInput;
     [SerializeField] TMP_Text _levelInput;
     [SerializeField] TMP_Text _coinsInput;
     [SerializeField] TMP_Text _energyInput;
+    [SerializeField] TMP_Text _XPInput;
     [SerializeField] Slider _levelBar;
     [SerializeField] GameObject _settings;
 
@@ -33,8 +33,8 @@ public class PlayerStats : MonoBehaviour
     void UpdatePlayerStats()
     {
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
-        _nameInput.text = playerStatsData.GetName();
         _coinsInput.text = playerStatsData.GetCoins() + "";
+        _XPInput.text = playerStatsData.GetXP() + "";
         _energyInput.text = playerStatsData.GetCrystals() + "/" + playerStatsData.GetMaxCrystals();
         _levelInput.text = "level: " + playerStatsData.GetLevel();
         _levelBar.value = playerStatsData.GetLevelPoints();
