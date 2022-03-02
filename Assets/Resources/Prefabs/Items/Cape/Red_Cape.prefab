@@ -164,26 +164,14 @@ MonoBehaviour:
     Name: 
     materials:
     - red
-    SoftMagicStats:
-      name: MagicShieldYellow
-      multiple: 0
-      requiredMana: 3
-    ModerateMagicStats:
-      name: MagicShieldYellow
-      multiple: 0
-      requiredMana: 3
-    HardMagicStats:
-      name: MagicShieldYellow
-      multiple: 0
-      requiredMana: 3
     DefenceStatsData:
-      HP: 1
+      HP: 10
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
       BaseDamage: 3
-      CriticalRate: 0.2
-      CriticalDmg: 0.2
+      CriticalRate: 0.1
+      CriticalDmg: 0.1
       ArmorPenetration: 0
     ManaStatsData:
       MaxMana: 0

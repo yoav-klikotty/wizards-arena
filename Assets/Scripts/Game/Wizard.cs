@@ -6,7 +6,6 @@ using System;
 
 public class Wizard : MonoBehaviour
 {
-
     PhotonView _photonView;
     public const string IDLE = "Wizard_Idle";
     public const string RUN = "Wizard_Run";
@@ -118,15 +117,13 @@ public class Wizard : MonoBehaviour
         }
         if (PlayerHUD != null)
         {
-            PlayerHUD.SetHealthBar(_currentHealth, WizardStatsData.GetTotalHP());
+            PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
             _currentMana = WizardStatsData.GetTotalStartMana();
-            PlayerHUD.UpdateMana(_currentMana);
+            PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
         }
         _staff.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
         _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
         _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
-
-
     }
 
     public void RenderDecision(WizardMove move)
@@ -173,22 +170,22 @@ public class Wizard : MonoBehaviour
     }
 
     [PunRPC]
-    public void ReduceHealth(int health)
+    public void ReduceHealth(int health, bool isCrit)
     {
         _currentHealth = (_currentHealth - health);
         if (_currentHealth < 0)
         {
             _currentHealth = 0;
         }
-        PlayerHUD.SetHealthBar(_currentHealth, WizardStatsData.GetTotalHP());
+        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
         if (health == 0)
         {
-            PlayerHUD.ActivateIndication("Strike Avoid!");
-
+            PlayerHUD.ActivateIndication("Avoided!", indicationEvents.avoid);
         }
         else
         {
-            PlayerHUD.ActivateIndication("- " + health + " HP");
+            indicationEvents eventType = isCrit ? indicationEvents.crit : indicationEvents.hit;
+            PlayerHUD.ActivateIndication("" + health, eventType);
         }
 
     }
@@ -204,7 +201,8 @@ public class Wizard : MonoBehaviour
         {
             _currentHealth = newVal;
         }
-        PlayerHUD.SetHealthBar(_currentHealth, WizardStatsData.GetTotalHP());
+        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+        if (health > 0) PlayerHUD.ActivateIndication("" + health, indicationEvents.heal);
     }
 
     public int GetMana()
@@ -222,7 +220,7 @@ public class Wizard : MonoBehaviour
         {
             _currentMana = newVal;
         }
-        PlayerHUD.UpdateMana(_currentMana);
+        PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
     }
 
     public void IncreaseMana(int mana)
@@ -236,7 +234,10 @@ public class Wizard : MonoBehaviour
         {
             _currentMana = newVal;
         }
-        PlayerHUD.UpdateMana(_currentMana);
+        if (mana > 0) {
+            PlayerHUD.ActivateIndication("" + mana, indicationEvents.mana);
+            PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
+        }
     }
 
     public void IdleAni()
@@ -277,8 +278,15 @@ public class Wizard : MonoBehaviour
     {
         if (_photonView && _photonView.IsMine)
         {
-            int damage = CalculateDamage(collision.gameObject.GetComponent<ProjectileMover>().wizardStats, WizardStatsData);
-            _photonView.RPC("ReduceHealth", RpcTarget.All, damage);
+            Random rnd = new Random();
+            var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
+            int damage = CalculateBaseDamage(attacker);
+            bool isCriticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
+            if (isCriticalHit)
+            {
+                damage += CalculateCritDamage(damage, attacker);
+            }
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage, isCriticalHit);
         }
         DamageAni();
         if (GetHealth() <= 0)
@@ -346,18 +354,17 @@ public class Wizard : MonoBehaviour
     {
         return this._orb;
     }
-    int CalculateDamage(WizardStatsData attacker, WizardStatsData defender)
+    int CalculateBaseDamage(WizardStatsData attacker)
     {
         Random rnd = new Random();
         int damagePoints = 0;
         int baseDamage = rnd.Next(attacker.GetTotalBaseDamage(), attacker.GetTotalBaseDamage());
         damagePoints += baseDamage;
-        bool isCriticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
-        if (isCriticalHit)
-        {
-            damagePoints += (int)((attacker.GetTotalCriticalDmg()) * baseDamage);
-        }
         return damagePoints;
+    }
+    int CalculateCritDamage(int damage, WizardStatsData attacker)
+    {
+        return (int)((attacker.GetTotalCriticalDmg()) * damage);
     }
     public void IsWizardSelected(bool isOn)
     {

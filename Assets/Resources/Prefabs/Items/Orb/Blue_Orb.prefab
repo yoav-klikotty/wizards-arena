@@ -164,20 +164,8 @@ MonoBehaviour:
     Name: Blue_Orb
     materials:
     - blue
-    SoftMagicStats:
-      name: MagicChargeBlue
-      multiple: 0
-      requiredMana: 0
-    ModerateMagicStats:
-      name: MagicChargeBlue
-      multiple: 0
-      requiredMana: 0
-    HardMagicStats:
-      name: MagicChargeBlue
-      multiple: 0
-      requiredMana: 0
     DefenceStatsData:
-      HP: 3
+      HP: 0
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
@@ -186,9 +174,9 @@ MonoBehaviour:
       CriticalDmg: 0
       ArmorPenetration: 0
     ManaStatsData:
-      MaxMana: 0
-      StartMana: 0
-      ManaRegeneration: 1
+      MaxMana: 5
+      StartMana: 5
+      ManaRegeneration: 5
       PassiveManaRegeneration: 0
 --- !u!114 &3759392584487037112
 MonoBehaviour:

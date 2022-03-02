@@ -164,27 +164,15 @@ MonoBehaviour:
     Name: 
     materials:
     - lava
-    SoftMagicStats:
-      name: MagicShieldYellow
-      multiple: 0
-      requiredMana: 3
-    ModerateMagicStats:
-      name: MagicShieldYellow
-      multiple: 0
-      requiredMana: 3
-    HardMagicStats:
-      name: MagicShieldYellow
-      multiple: 0
-      requiredMana: 3
     DefenceStatsData:
-      HP: 2
+      HP: 10
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
-      BaseDamage: 1
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
-      ArmorPenetration: 0
+      BaseDamage: 5
+      CriticalRate: 0
+      CriticalDmg: 0
+      ArmorPenetration: 0.2
     ManaStatsData:
       MaxMana: 0
       StartMana: 0

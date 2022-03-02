@@ -164,32 +164,20 @@ MonoBehaviour:
     Name: 
     materials:
     - dark-blue
-    SoftMagicStats:
-      name: ElectricSnake
-      multiple: 1
-      requiredMana: 3
-    ModerateMagicStats:
-      name: StarShot
-      multiple: 2
-      requiredMana: 5
-    HardMagicStats:
-      name: RotatingStar
-      multiple: 3
-      requiredMana: 8
     DefenceStatsData:
-      HP: 1
+      HP: 0
       Recovery: 0
       Avoidability: 0
     AttackStatsData:
-      BaseDamage: 2
+      BaseDamage: 5
       CriticalRate: 0
       CriticalDmg: 0
       ArmorPenetration: 0
     ManaStatsData:
-      MaxMana: 0
+      MaxMana: 10
       StartMana: 0
-      ManaRegeneration: 1
-      PassiveManaRegeneration: 0
+      ManaRegeneration: 3
+      PassiveManaRegeneration: 2
 --- !u!114 &2536942942785517476
 MonoBehaviour:
   m_ObjectHideFlags: 0

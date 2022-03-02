@@ -6,38 +6,59 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] Slider _healthBar;
+    
+    [SerializeField] GameObject _indicationText;
+    [SerializeField] Image _healthBar;
     [SerializeField] TMP_Text _healthLabel;
     Transform _camera;
-    [SerializeField] Animation _animation;
-    [SerializeField] TMP_Text _indicationText;
+    [SerializeField] Image _manaBar;
     [SerializeField] TMP_Text _manaText;
+    private float _barSpeed = 0.05f;
 
     void Start()
     {
         _camera = GameObject.Find("Camera").GetComponent<Transform>();
     }
 
-    public void SetHealthBar(float health, float maxHP)
+    IEnumerator AdjustBar(Image bar, float targetValue)
     {
-        _healthBar.maxValue = maxHP;
-        _healthBar.value = health;
-        _healthLabel.text = health + "/" + maxHP;
+        yield return new WaitForSeconds(_barSpeed);
+        float direction = (targetValue - bar.fillAmount) > 0 ? 1 : -1;
+        float newFillAmount = bar.fillAmount + (_barSpeed*direction);
+        if (direction == 1 && newFillAmount > targetValue) {
+            bar.fillAmount = targetValue;
+        }
+        else if (direction == -1 && newFillAmount < targetValue) {
+            bar.fillAmount = targetValue;
+        }
+        else {
+            bar.fillAmount = newFillAmount;
+            StartCoroutine(AdjustBar(bar, targetValue));
+        }
     }
-    // Update is called once per frame
+
+    public void UpdateHealth(float health, float maxHP)
+    {
+        _healthLabel.text = (int) health + "/" + maxHP;
+        float barFillAmountTarget = health / maxHP;
+        StartCoroutine(AdjustBar(_healthBar, barFillAmountTarget));
+    }
+
     void LateUpdate()
     {
         transform.LookAt(transform.position + _camera.forward);
     }
 
-    public void UpdateMana(float mana)
+    public void UpdateMana(float mana, float maxMana)
     {
-        _manaText.text = (int) mana + "";
+        _manaText.text = (int) mana + " / " + maxMana;
+        float barFillAmountTarget = mana / maxMana;
+        StartCoroutine(AdjustBar(_manaBar, barFillAmountTarget));
     }
 
-    public void ActivateIndication(string indicationText)
+    public void ActivateIndication(string indicationText, indicationEvents indicationEvent)
     {
-        _indicationText.text = indicationText;
-        _animation.Play();
+        GameObject indicationTextObj = Instantiate(_indicationText, transform.position, Quaternion.identity, gameObject.transform);
+        indicationTextObj.GetComponent<TextIndication>().Activate(indicationText, indicationEvent);
     }
 }
