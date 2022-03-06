@@ -57,7 +57,6 @@ public class DecisionManager : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log(OpponentId);
                 if (hit.transform.gameObject.name == "Opponent" && !IsDecisionMakingOver())
                 {
                     OpponentId = hit.transform.gameObject.GetComponent<Wizard>().wizardId;
