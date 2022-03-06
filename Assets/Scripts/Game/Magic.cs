@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Magic : MonoBehaviour
 {
+    Wizard casterWizard;
     GameObject ToPoint;
     GameObject FromPoint;
     [SerializeField] GameObject _firePrefab;
@@ -14,6 +15,10 @@ public class Magic : MonoBehaviour
     void Start()
     {
         _particalSystem = GetComponent<ParticleSystem>();
+    }
+    public void SetCasterWizard(Wizard wizard)
+    {
+        casterWizard = wizard;
     }
     public void Activate()
     {
@@ -51,5 +56,10 @@ public class Magic : MonoBehaviour
     public MagicType GetMagicType()
     {
         return _magicType;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
+        casterWizard.OnShieldCollision(attacker);
     }
 }
