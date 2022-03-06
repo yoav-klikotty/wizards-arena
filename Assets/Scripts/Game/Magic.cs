@@ -52,4 +52,9 @@ public class Magic : MonoBehaviour
     {
         return _magicType;
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
+        gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker);
+    }
 }

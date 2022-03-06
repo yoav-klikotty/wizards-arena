@@ -108,8 +108,7 @@ public class Wizard : MonoBehaviour
         _currentHealth = WizardStatsData.GetTotalHP();
         foreach (MagicStatsData magicStats in wizardStatsData.MagicsStatsData)
         {
-            var magic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + magicStats.name), transform.position, Quaternion.identity);
-            magic.transform.parent = gameObject.transform;
+            var magic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + magicStats.name), transform.position, Quaternion.identity, gameObject.transform);
             if (!magics.ContainsKey(magicStats.name))
             {
                 magics.Add(magicStats.name, magic.GetComponent<Magic>());
@@ -278,15 +277,9 @@ public class Wizard : MonoBehaviour
     {
         if (_photonView && _photonView.IsMine)
         {
-            Random rnd = new Random();
             var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
-            int damage = CalculateBaseDamage(attacker);
-            bool isCriticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
-            if (isCriticalHit)
-            {
-                damage += CalculateCritDamage(damage, attacker);
-            }
-            _photonView.RPC("ReduceHealth", RpcTarget.All, damage, isCriticalHit);
+            Damage damage = CalculateDamage(attacker);
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
         }
         DamageAni();
         if (GetHealth() <= 0)
@@ -354,17 +347,17 @@ public class Wizard : MonoBehaviour
     {
         return this._orb;
     }
-    int CalculateBaseDamage(WizardStatsData attacker)
+    public Damage CalculateDamage(WizardStatsData attacker)
     {
         Random rnd = new Random();
-        int damagePoints = 0;
-        int baseDamage = rnd.Next(attacker.GetTotalBaseDamage(), attacker.GetTotalBaseDamage());
-        damagePoints += baseDamage;
-        return damagePoints;
-    }
-    int CalculateCritDamage(int damage, WizardStatsData attacker)
-    {
-        return (int)((attacker.GetTotalCriticalDmg()) * damage);
+        Damage damage = new Damage();
+
+        damage.damage = rnd.Next(attacker.GetTotalBaseDamage(), attacker.GetTotalBaseDamage());
+
+        damage.criticalHit = rnd.NextDouble() <= attacker.GetTotalCriticalRate();
+        if (damage.criticalHit) damage.damage += (int)((attacker.GetTotalCriticalDmg()) * damage.damage);
+
+        return damage;
     }
     public void IsWizardSelected(bool isOn)
     {
@@ -391,6 +384,32 @@ public class Wizard : MonoBehaviour
         }
     }
 
+    public class Damage
+    {
+        public Damage()
+        {
+            damage = 0;
+            criticalHit = false;
+        }
+        public int damage;
+        public bool criticalHit;
+    }
+
+    public void OnShieldCollision(WizardStatsData attacker)
+    {
+        if (_photonView && _photonView.IsMine)
+        {
+            Damage damage = CalculateDamage(attacker);
+            damage.damage = (int)(damage.damage * attacker.GetTotalArmorPenetration());
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
+        }
+        DamageAni();
+        if (GetHealth() <= 0)
+        {
+            DeathTime = DateTime.Now;
+            DeathAni();
+        }
+    }
 
     //public override void OnDisconnected(DisconnectCause cause)
     //{
