@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -61,6 +59,10 @@ public class ArenaManager : MonoBehaviour
     public void LoadMasteriesScene()
     {
         SceneManager.LoadScene("Masteries");
+    }
+    public void LoadMagicsScene()
+    {
+        SceneManager.LoadScene("Magics");
     }
 
 }

@@ -5,18 +5,35 @@ using UnityEngine;
 [Serializable]
 public class WizardStatsData
 {
-    public ItemStatsData StaffStatsData;
-    public ItemStatsData CapeStatsData;
-    public ItemStatsData OrbStatsData;
-    public AttackStatsData BaseAttackStatsData;
-    public DefenceStatsData BaseDefenceStatsData;
-    public ManaStatsData BaseManaStatsData;
+    public ItemStatsData StaffStatsData = new ItemStatsData(
+        "Blue_Staff",
+        new List<string> {"blue"},
+        new DefenceStatsData(0, 0, 0),
+        new AttackStatsData(5, 0, 0, 0),
+        new ManaStatsData(0, 5, 3, 0)
+    );
+    public ItemStatsData CapeStatsData = new ItemStatsData(
+        "Blue_Orb",
+        new List<string> {"blue"},
+        new DefenceStatsData(0, 0, 0),
+        new AttackStatsData(0, 0, 0, 0),
+        new ManaStatsData(5, 5, 5, 0)
+    );
+    public ItemStatsData OrbStatsData = new ItemStatsData(
+        "Blue_Cape",
+        new List<string> {"blue"},
+        new DefenceStatsData(15, 0, 0),
+        new AttackStatsData(0, 0, 0, 0),
+        new ManaStatsData(0, 5, 5, 0)
+    );
+    public AttackStatsData BaseAttackStatsData = new AttackStatsData(3, 0.1f, 0.1f, 0);
+    public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(25, 0, 0);
+    public ManaStatsData BaseManaStatsData = new ManaStatsData(20, 0, 3, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
+        new MagicStatsData("BlueMissile"),
         new MagicStatsData("MagicChargeBlue"),
         new MagicStatsData("MagicShieldBlue"),
-        new MagicStatsData("BlueMissile"),
-        new MagicStatsData("ElectricShot"),
-        new MagicStatsData("PurpleLightning"),
+
     };
     public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
     {
@@ -58,6 +75,17 @@ public class WizardStatsData
         {
             MasteriesStatsData.RemoveAll(masteryToRemove => masteryToRemove.name == inventoryMastery.GetID());
         }
+    }
+    public void LearnMagic(string magicName)
+    {
+        if (FindMagic(magicName) == null)
+        {
+            this.MagicsStatsData.Add(new MagicStatsData(magicName));
+        }
+    }
+    public MagicStatsData FindMagic(string name)
+    {
+        return MagicsStatsData.Find(magic => magic.name.Equals(name));
     }
     public MasteryStatsData FindMastery(string name)
     {
@@ -223,27 +251,47 @@ public class WizardStatsData
 [Serializable]
 public class AttackStatsData
 {
-    public int BaseDamage = 3;
-    public float CriticalRate = 0.1f;
-    public float CriticalDmg = 0.1f;
-    public float ArmorPenetration = 0;
+    public AttackStatsData(int baseDamage, float criticalRate, float criticalDamage, float armorPenetration)
+    {
+        this.BaseDamage = baseDamage;
+        this.CriticalDmg = criticalDamage;
+        this.CriticalRate = criticalRate;
+        this.ArmorPenetration = armorPenetration;
+    }
+    public int BaseDamage;
+    public float CriticalRate;
+    public float CriticalDmg;
+    public float ArmorPenetration;
 }
 
 [Serializable]
 public class DefenceStatsData
 {
-    public int HP = 25;
-    public int Recovery = 0;
-    public float Avoidability = 0;
+    public DefenceStatsData(int HP, int Recovery, float Avoidability)
+    {
+        this.HP = HP;
+        this.Recovery = Recovery;
+        this.Avoidability = Avoidability;
+    }
+    public int HP;
+    public int Recovery;
+    public float Avoidability;
 }
 
 [Serializable]
 public class ManaStatsData
 {
-    public int MaxMana = 20;
-    public int StartMana = 0;
-    public int ManaRegeneration = 3;
-    public int PassiveManaRegeneration = 0;
+    public ManaStatsData(int MaxMana, int StartMana, int ManaRegeneration, int PassiveManaRegeneration)
+    {
+        this.MaxMana = MaxMana;
+        this.StartMana = StartMana;
+        this.ManaRegeneration = ManaRegeneration;
+        this.PassiveManaRegeneration = PassiveManaRegeneration;
+    }
+    public int MaxMana;
+    public int StartMana;
+    public int ManaRegeneration;
+    public int PassiveManaRegeneration;
 }
 
 [Serializable]
@@ -274,6 +322,20 @@ public class MasteryStatsData
 [Serializable]
 public class ItemStatsData
 {
+    public ItemStatsData(
+        string name, 
+        List<string> materials, 
+        DefenceStatsData defenceStatsData, 
+        AttackStatsData attackStatsData, 
+        ManaStatsData manaStatsData
+    )
+    {
+        this.Name = name;
+        this.materials = materials;
+        this.DefenceStatsData = defenceStatsData;
+        this.AttackStatsData = attackStatsData;
+        this.ManaStatsData = manaStatsData;
+    }
     public string Name;
     public List<string> materials;
     public DefenceStatsData DefenceStatsData;

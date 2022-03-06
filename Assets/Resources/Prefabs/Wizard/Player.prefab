@@ -650,6 +650,7 @@ MonoBehaviour:
       ManaRegeneration: 3
       PassiveManaRegeneration: 0
     MagicsStatsData: []
+    MasteriesStatsData: []
   PlayerHUD: {fileID: 601630423890107937}
   wizardIndex: 0
   wizardId: 0
