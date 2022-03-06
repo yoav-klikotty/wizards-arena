@@ -130,7 +130,6 @@ public class Wizard : MonoBehaviour
         if (move.wizardOption != "game over")
         {
             Magic magic = magics[move.wizardOption];
-            magic.SetCasterWizard(this);
             if (magic.GetMagicType() == Magic.MagicType.Attack)
             {
                 magic.ActivateFirePrefab(_shootCenter.transform.position, move.wizardOpponentPosition);
