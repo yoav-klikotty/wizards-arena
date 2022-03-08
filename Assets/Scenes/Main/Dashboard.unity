@@ -3056,8 +3056,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
+  m_sharedMaterial: {fileID: 21239350798574270, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7070,6 +7070,14 @@ PrefabInstance:
       propertyPath: m_text
       value: Text
       objectReference: {fileID: 0}
+    - target: {fileID: 1144757354007811948, guid: 666afef7768cab040966fea79a3b2968, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
+    - target: {fileID: 1144757354007811948, guid: 666afef7768cab040966fea79a3b2968, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21239350798574270, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
     - target: {fileID: 3935426052350808564, guid: 666afef7768cab040966fea79a3b2968, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -7078,10 +7086,26 @@ PrefabInstance:
       propertyPath: m_text
       value: Text
       objectReference: {fileID: 0}
+    - target: {fileID: 5106274017119053748, guid: 666afef7768cab040966fea79a3b2968, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
+    - target: {fileID: 5106274017119053748, guid: 666afef7768cab040966fea79a3b2968, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21239350798574270, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
     - target: {fileID: 6793666208467140404, guid: 666afef7768cab040966fea79a3b2968, type: 3}
       propertyPath: m_text
       value: Text
       objectReference: {fileID: 0}
+    - target: {fileID: 6793666208467140404, guid: 666afef7768cab040966fea79a3b2968, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
+    - target: {fileID: 6793666208467140404, guid: 666afef7768cab040966fea79a3b2968, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 21239350798574270, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
     - target: {fileID: 7440484741415038332, guid: 666afef7768cab040966fea79a3b2968, type: 3}
       propertyPath: m_Sprite
       value: 
