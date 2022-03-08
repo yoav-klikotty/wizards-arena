@@ -13,7 +13,6 @@ public class EndSession : MonoBehaviour
     [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
     [SerializeField] Material _victoryMaterial;
     [SerializeField] Material _defeatMaterial;
-    
     [SerializeField] Animation _starsAnim;
     [SerializeField] bool _debug;
     [SerializeField] bool _isWon;

@@ -186,7 +186,19 @@ public class Wizard : MonoBehaviour
             indicationEvents eventType = isCrit ? indicationEvents.crit : indicationEvents.hit;
             PlayerHUD.ActivateIndication("" + health, eventType);
         }
-
+        if (GetHealth() <= 0)
+        {
+            Debug.Log("death");
+            DeathTime = DateTime.Now;
+            DeathAni();
+        }
+        else
+        {
+            if (health > 0)
+            {
+                DamageAni();
+            }
+        }
     }
 
     public void IncreaseHealth(int health)
@@ -280,12 +292,6 @@ public class Wizard : MonoBehaviour
             var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
             Damage damage = CalculateDamage(attacker);
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
-        }
-        DamageAni();
-        if (GetHealth() <= 0)
-        {
-            DeathTime = DateTime.Now;
-            DeathAni();
         }
     }
     public bool IsWizardAlive()
@@ -403,32 +409,5 @@ public class Wizard : MonoBehaviour
             damage.damage = (int)(damage.damage * attacker.GetTotalArmorPenetration());
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
         }
-        DamageAni();
-        if (GetHealth() <= 0)
-        {
-            DeathTime = DateTime.Now;
-            DeathAni();
-        }
     }
-
-    //public override void OnDisconnected(DisconnectCause cause)
-    //{
-    //    Debug.LogError("disconnented");
-    //}
-    // _opponent = GameObject.Find("Opponent").GetComponent<Wizard>();
-    // _player = GameObject.Find("Player").GetComponent<Wizard>();
-    // _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
-    // _photonView = PhotonView.Get(this);
-    // if (PhotonNetwork.IsConnected)
-    // {
-    //     WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-    //     _photonView.RPC("SyncOpponentPlayer", RpcTarget.Others, JsonUtility.ToJson(wizardStatsData));
-    // }
-    // else
-    // {
-    //     WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-    //     _opponent.UpdateWizard(wizardStatsData);
-    // }
-
-
 }
