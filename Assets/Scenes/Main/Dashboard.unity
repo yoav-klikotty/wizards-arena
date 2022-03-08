@@ -6451,10 +6451,22 @@ PrefabInstance:
     - target: {fileID: 5837341385837813404, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 307144950}
+      objectReference: {fileID: 307144951}
     - target: {fileID: 5837341385837813404, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837341385837813404, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadMagicsScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837341385837813404, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ArenaManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837341385837813404, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5837341385837813405, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
       propertyPath: m_Pivot.x
@@ -6541,8 +6553,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5837341387410266798, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
+      propertyPath: m_text
+      value: 'Magics
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837341387410266798, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
       propertyPath: m_textAlignment
       value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 5837341387410266798, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
+      propertyPath: m_TextStyleHashCode
+      value: -1183493901
       objectReference: {fileID: 0}
     - target: {fileID: 5837341387410266798, guid: 55c47449c37f06d46b1e6d6099e9b55a, type: 3}
       propertyPath: m_VerticalAlignment
