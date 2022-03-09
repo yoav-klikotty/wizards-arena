@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 6487631295868073904}
   - component: {fileID: 8212514550521930822}
   - component: {fileID: 967135415398285767}
+  - component: {fileID: 4335497084427300585}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -650,6 +651,7 @@ MonoBehaviour:
       ManaRegeneration: 3
       PassiveManaRegeneration: 0
     MagicsStatsData: []
+    MasteriesStatsData: []
   PlayerHUD: {fileID: 601630423890107937}
   wizardIndex: 0
   wizardId: 0
@@ -688,6 +690,25 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!95 &4335497084427300585
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8213480834015807744}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8213494148556398616
 GameObject:
   m_ObjectHideFlags: 0
