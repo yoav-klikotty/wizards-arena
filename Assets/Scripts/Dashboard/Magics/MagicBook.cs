@@ -41,7 +41,7 @@ public class MagicBook : MonoBehaviour
     {
         if (playerStatsData.GetCoins() > inventoryMagic.GetPrice())
         {
-            wizardStatsData.LearnMagic(inventoryMagic.GetID());
+            wizardStatsData.LearnMagic(inventoryMagic.GetID(), inventoryMagic.GetMagicType());
             _wizardStatsController.SaveWizardStatsData(wizardStatsData);
             playerStatsData.SetCoins(playerStatsData.GetCoins() - inventoryMagic.GetPrice());
             _playerStatsController.SavePlayerStatsData(playerStatsData, true);

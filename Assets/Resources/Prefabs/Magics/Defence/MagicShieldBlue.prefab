@@ -4826,6 +4826,20 @@ MonoBehaviour:
   _boxCollider: {fileID: -398682815597580505}
   _requiredMana: 2
   _magicType: 2
+  DefenceStatsData:
+    HP: 0
+    Recovery: 1
+    Avoidability: 0
+  AttackStatsData:
+    BaseDamage: 0
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0
+  ManaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
 --- !u!65 &-398682815597580505
 BoxCollider:
   m_ObjectHideFlags: 0

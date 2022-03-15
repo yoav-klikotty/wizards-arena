@@ -30,9 +30,9 @@ public class WizardStatsData
     public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(25, 0, 0);
     public ManaStatsData BaseManaStatsData = new ManaStatsData(20, 0, 3, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
-        new MagicStatsData("BlueMissile"),
-        new MagicStatsData("MagicChargeBlue"),
-        new MagicStatsData("MagicShieldBlue"),
+        new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
+        new MagicStatsData("MagicChargeBlue", Magic.MagicType.Mana),
+        new MagicStatsData("MagicShieldBlue", Magic.MagicType.Defence),
 
     };
     public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
@@ -76,11 +76,11 @@ public class WizardStatsData
             MasteriesStatsData.RemoveAll(masteryToRemove => masteryToRemove.name == inventoryMastery.GetID());
         }
     }
-    public void LearnMagic(string magicName)
+    public void LearnMagic(string magicName, Magic.MagicType type)
     {
         if (FindMagic(magicName) == null)
         {
-            this.MagicsStatsData.Add(new MagicStatsData(magicName));
+            this.MagicsStatsData.Add(new MagicStatsData(magicName, type));
         }
     }
     public MagicStatsData FindMagic(string name)
@@ -298,10 +298,12 @@ public class ManaStatsData
 public class MagicStatsData
 {
     public string name;
+    public Magic.MagicType type;
 
-    public MagicStatsData(string name)
+    public MagicStatsData(string name, Magic.MagicType type)
     {
         this.name = name;
+        this.type = type;
     }
 }
 

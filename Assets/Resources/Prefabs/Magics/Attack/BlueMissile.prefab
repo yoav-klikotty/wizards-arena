@@ -47,3 +47,18 @@ MonoBehaviour:
   _skillThumbnail: {fileID: 21300000, guid: 3ea1adbab68faf64cb308d3db1efade0, type: 3}
   _boxCollider: {fileID: 0}
   _requiredMana: 5
+  _magicType: 0
+  DefenceStatsData:
+    HP: 0
+    Recovery: 0
+    Avoidability: 0
+  AttackStatsData:
+    BaseDamage: 2
+    CriticalRate: 0.02
+    CriticalDmg: 0
+    ArmorPenetration: 0
+  ManaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0

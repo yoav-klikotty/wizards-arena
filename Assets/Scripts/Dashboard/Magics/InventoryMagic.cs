@@ -23,6 +23,11 @@ public class InventoryMagic : MonoBehaviour
         return _name;
     }
 
+    public Magic.MagicType GetMagicType()
+    {
+        return _magicType;
+    }
+
     public string GetDisplayName()
     {
         return _displayName;

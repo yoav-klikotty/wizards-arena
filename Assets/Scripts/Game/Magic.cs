@@ -10,6 +10,9 @@ public class Magic : MonoBehaviour
     [SerializeField] BoxCollider _boxCollider;
     [SerializeField] int _requiredMana;
     [SerializeField] MagicType _magicType;
+    public DefenceStatsData DefenceStatsData;
+    public AttackStatsData AttackStatsData;
+    public ManaStatsData ManaStatsData;
     public enum MagicType { Attack, Mana, Defence };
     void Start()
     {
@@ -42,6 +45,7 @@ public class Magic : MonoBehaviour
     {
         GameObject instanceBullet = Instantiate(_firePrefab, FromPoint, Quaternion.identity);
         instanceBullet.GetComponent<ProjectileMover>().wizardStats = gameObject.GetComponentInParent<Wizard>().WizardStatsData;
+        instanceBullet.GetComponent<ProjectileMover>().AttackStatsData = AttackStatsData;
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
     public Sprite GetThumbnail()
@@ -55,6 +59,7 @@ public class Magic : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
-        gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker);
+        var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().AttackStatsData;
+        gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker, attackerMagic);
     }
 }
