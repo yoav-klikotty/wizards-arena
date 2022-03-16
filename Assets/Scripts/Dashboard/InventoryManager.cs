@@ -36,21 +36,6 @@ public class InventoryManager : MonoBehaviour
     private void InitializeWizardSavedItems()
     {
         WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-        for (int i = 0; i < totalItems.Length; i++)
-        {
-            if (totalItems[i].Name == "Blue_Cape")
-            {
-                wizardStatsData.EquipItem(_inventoryItems[i]);
-            }
-            if (totalItems[i].Name == "Blue_Orb")
-            {
-                wizardStatsData.EquipItem(_inventoryItems[i]);
-            }
-            if (totalItems[i].Name == "Blue_Staff")
-            {
-                wizardStatsData.EquipItem(_inventoryItems[i]);
-            }
-        }
         _wizardStatsController.SaveWizardStatsData(wizardStatsData);
         _wizardStats.WriteWizardStats();
     }

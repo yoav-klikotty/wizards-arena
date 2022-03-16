@@ -11,7 +11,7 @@ public class WizardStatsController
             _wizardStatsData = LocalStorage.LoadWizardStatsData();
             if (_wizardStatsData == null)
             {
-                return createNewWizard();
+                return new WizardStatsData();
             }
         }
         return LocalStorage.LoadWizardStatsData();
@@ -20,14 +20,5 @@ public class WizardStatsController
     public void SaveWizardStatsData(WizardStatsData wizardStatsData)
     {
         LocalStorage.SaveWizardStatsData(wizardStatsData);
-    }
-
-    private WizardStatsData createNewWizard()
-    {
-        WizardStatsData newWizardStats = new WizardStatsData();
-        newWizardStats.BaseAttackStatsData = new AttackStatsData();
-        newWizardStats.BaseDefenceStatsData = new DefenceStatsData();
-        newWizardStats.BaseManaStatsData = new ManaStatsData();
-        return newWizardStats;
     }
 }

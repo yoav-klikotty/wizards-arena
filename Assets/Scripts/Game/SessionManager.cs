@@ -135,6 +135,15 @@ public class SessionManager : MonoBehaviour
     }
     IEnumerator HandleSessionEndEvent()
     {
+        var myWizard = wizards.Find(wiz => wiz.wizardId == playerWizard.wizardId);
+        if (myWizard.IsWizardAlive())
+        {
+            LocalStorage.SetLastSessionResult(GameResult.Win);
+        }
+        else 
+        {
+            LocalStorage.SetLastSessionResult(GameResult.Lose);
+        }
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Score");
     }
