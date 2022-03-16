@@ -7,7 +7,7 @@ public class DrawManager : MonoBehaviour
     private Camera _cam;
     [SerializeField] LinePrefab _linePrefab;
     private LinePrefab _currentLine;
-    public const float DOT_THRESHOLD_RADIUS = 0.1f;
+    public const float DOT_THRESHOLD_RADIUS = 0.3f;
     public const float MINIMAL_DOT_DISTANCE = 1f;
     private string[] _patterns = {"012", "042", "345"};
     void Start()

@@ -23,7 +23,7 @@ public class LinePrefab : MonoBehaviour
             }
             else {
                 _lineRenderer.positionCount++;
-                _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, _currentDotPosition);
+                _lineRenderer.SetPosition(_lineRenderer.positionCount - 2, _currentDotPosition);
             }
         }
         else 
@@ -40,15 +40,16 @@ public class LinePrefab : MonoBehaviour
             if(Vector2.Distance(lastPosition, pos) < DrawManager.MINIMAL_DOT_DISTANCE) return false;
             _passedMinimalDistance = true;
         }
-
-        for(int i = 0; i < _dots.Length; i++)
-        {
-            if(Vector2.Distance(_dots[i].transform.position, pos) < DrawManager.DOT_THRESHOLD_RADIUS)
+        else {
+            for(int i = 0; i < _dots.Length; i++)
             {
-                _currentDotPosition = _dots[i].transform.position;
-                _patternPhrase += i;
-                _passedMinimalDistance = false;
-                return true;
+                if(Vector2.Distance(_dots[i].transform.position, pos) < DrawManager.DOT_THRESHOLD_RADIUS)
+                {
+                    _currentDotPosition = _dots[i].transform.position;
+                    _patternPhrase += i;
+                    _passedMinimalDistance = false;
+                    return true;
+                }
             }
         }
         return false;
