@@ -28,15 +28,17 @@ public class DrawManager : MonoBehaviour
 
     private async void LineResolver()
     {
+        bool destroyed = false;
         var lr = _currentLine.GetComponent<LineRenderer>();
         lr.positionCount--;
         for(int i = 0; i < _patterns.Length; i++)
         {
             if(_patterns[i] == _currentLine.GetPatternPhrase())
             {
-                Debug.Log(i);
+                Destroy(_currentLine.gameObject, 2);
+                destroyed = true;
             }
         }
-        Destroy(_currentLine.gameObject, 2);
+        if(!destroyed) Destroy(_currentLine.gameObject);
     }
 }
