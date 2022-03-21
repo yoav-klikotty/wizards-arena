@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawManager : MonoBehaviour
+public class PatternKeyboard : MonoBehaviour
 {
     private Camera _cam;
-    [SerializeField] LinePrefab _linePrefab;
-    private LinePrefab _currentLine;
+    [SerializeField] Line _linePrefab;
+    private Line _currentLine;
     public const float DOT_THRESHOLD_RADIUS = 0.3f;
     public const float MINIMAL_DOT_DISTANCE = 1f;
     private string[] _patterns = {"012", "042", "345"};
@@ -26,7 +26,7 @@ public class DrawManager : MonoBehaviour
         if(Input.GetMouseButtonUp(0)) LineResolver();
     }
 
-    private async void LineResolver()
+    private void LineResolver()
     {
         bool destroyed = false;
         var lr = _currentLine.GetComponent<LineRenderer>();

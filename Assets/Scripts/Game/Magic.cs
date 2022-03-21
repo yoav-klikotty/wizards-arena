@@ -14,6 +14,7 @@ public class Magic : MonoBehaviour
     public AttackStatsData AttackStatsData;
     public ManaStatsData ManaStatsData;
     public enum MagicType { Attack, Mana, Defence };
+    [SerializeField] string _pattern;
     void Start()
     {
         _particalSystem = GetComponent<ParticleSystem>();
@@ -61,5 +62,9 @@ public class Magic : MonoBehaviour
         var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
         var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().AttackStatsData;
         gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker, attackerMagic);
+    }
+    public string GetPattern()
+    {
+        return _pattern;
     }
 }

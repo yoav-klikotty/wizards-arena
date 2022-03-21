@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinePrefab : MonoBehaviour
+public class Line : MonoBehaviour
 {
     [SerializeField] LineRenderer _lineRenderer;
     private GameObject[] _dots;
@@ -37,13 +37,14 @@ public class LinePrefab : MonoBehaviour
         if(!_passedMinimalDistance)
         {
             Vector2 lastPosition = _lineRenderer.GetPosition(_lineRenderer.positionCount - 2);
-            if(Vector2.Distance(lastPosition, pos) < DrawManager.MINIMAL_DOT_DISTANCE) return false;
+            if(Vector2.Distance(lastPosition, pos) < PatternKeyboard.MINIMAL_DOT_DISTANCE) return false;
             _passedMinimalDistance = true;
         }
         else {
             for(int i = 0; i < _dots.Length; i++)
             {
-                if(Vector2.Distance(_dots[i].transform.position, pos) < DrawManager.DOT_THRESHOLD_RADIUS)
+                Debug.Log(Vector2.Distance(_dots[i].transform.position, pos));
+                if(Vector2.Distance(_dots[i].transform.position, pos) < PatternKeyboard.DOT_THRESHOLD_RADIUS)
                 {
                     _currentDotPosition = _dots[i].transform.position;
                     _patternPhrase += i;

@@ -8,12 +8,6 @@ public class DecisionManager : MonoBehaviour
     [SerializeField] Counter _counter;
     string _option;
     SessionManager _sessionManager;
-    [SerializeField] Button _softAttackMagic;
-    [SerializeField] Button _moderateAttackMagic;
-    [SerializeField] Button _hardAttackMagic;
-
-    [SerializeField] Button _ammoBtn;
-    [SerializeField] Button _shieldBtn;
     [SerializeField] Slider _manaBar;
     [SerializeField] TMP_Text _manaText;
     [SerializeField] GameObject _magicOption;
