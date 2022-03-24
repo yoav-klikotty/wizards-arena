@@ -97,9 +97,9 @@ public class Wizard : MonoBehaviour
         }
         else
         {
-            transform.position = new Vector3(54f, 5.5f, -5);
-            wizardLocation = new Vector3(54f, 5.5f, -5);
-            transform.rotation = Quaternion.Euler(-3, 60, 0);
+            transform.position = new Vector3(56f, 5.5f, -5.5f);
+            wizardLocation = new Vector3(56f, 5.5f, -5.5f);
+            transform.rotation = Quaternion.Euler(-3, 50, 0);
         }
     }
     public void UpdateWizard(WizardStatsData wizardStatsData)
