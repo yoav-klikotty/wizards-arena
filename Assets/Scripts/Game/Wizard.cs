@@ -251,6 +251,12 @@ public class Wizard : MonoBehaviour
         }
     }
 
+    IEnumerator ResetAnim(float animationDuration)
+    {
+        yield return new WaitForSeconds(animationDuration);
+        IdleAni();
+    }
+
     public void IdleAni()
     {
         _anim.CrossFade(IDLE);
@@ -264,6 +270,7 @@ public class Wizard : MonoBehaviour
     public void AttackAni()
     {
         _anim.CrossFade(ATTACK);
+        StartCoroutine(ResetAnim(1f));
     }
 
     public void SkillAni()
@@ -274,6 +281,7 @@ public class Wizard : MonoBehaviour
     public void DamageAni()
     {
         _anim.CrossFade(DAMAGE);
+        StartCoroutine(ResetAnim(1f));
     }
 
     public void StunAni()
