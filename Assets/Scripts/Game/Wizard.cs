@@ -3,6 +3,7 @@ using Photon.Pun;
 using Random = System.Random;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 public class Wizard : MonoBehaviour
 {
