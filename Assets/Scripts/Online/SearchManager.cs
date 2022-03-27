@@ -12,18 +12,11 @@ public class SearchManager : MonoBehaviourPunCallbacks
     void Start()
     {
         UpdatePlayersCount();
+        GameManager.Instance.TimeToPlay = (int)PhotonNetwork.CurrentRoom.CustomProperties["s"];
         if (PhotonNetwork.IsMasterClient)
         {
             _roomCode.text = "Room code: " + PhotonNetwork.CurrentRoom.Name;
         }
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player player)

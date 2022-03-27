@@ -82,7 +82,7 @@ public class DecisionManager : MonoBehaviour
         {
             var magic = player.magics[key];
             var elem = Instantiate(_magicOption, Vector3.zero, Quaternion.identity);
-            elem.transform.SetParent(_btnContainer.transform);
+            elem.transform.SetParent(_btnContainer.transform, false);
             elem.GetComponent<Image>().sprite = magic.GetThumbnail();
             elem.GetComponent<Button>().onClick.AddListener(() => ChooseMagic(key));
             if (magic.GetRequiredMana() <= player.GetMana())

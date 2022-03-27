@@ -2,13 +2,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using UnityEngine.UI;
-public class EndSession : MonoBehaviour
+using Photon.Realtime;
+public class EndSession : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     [SerializeField] TMP_Text Result;
     [SerializeField] TMP_Text ClaimButtonText;
-    [SerializeField] Button PlayAgainBtn;
     SessionManager.GameResult result;
     [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
     [SerializeField] Material _victoryMaterial;
@@ -33,22 +32,7 @@ public class EndSession : MonoBehaviour
 
     public void Collect()
     {
-        if (_isWon)
-        {
-            PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
-            playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
-            playerStatsData.AddLevelPoints(50);
-            _playerStatsController.SavePlayerStatsData(playerStatsData, false);
-        }
-        SceneManager.LoadScene("Dashboard");
-    }
-
-    void Disconnect(){
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.Disconnect();
-        }
-        PlayAgainBtn.interactable = true;
+        PhotonNetwork.Disconnect();
     }
 
     void RenderScore()
@@ -122,6 +106,17 @@ public class EndSession : MonoBehaviour
         {
             _starsAnim.Play();
         }
+    }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        if (_isWon)
+        {
+            PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+            playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
+            playerStatsData.AddLevelPoints(50);
+            _playerStatsController.SavePlayerStatsData(playerStatsData, false);
+        }
+        SceneManager.LoadScene("Dashboard");
     }
 
     

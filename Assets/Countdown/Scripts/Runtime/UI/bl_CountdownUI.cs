@@ -33,7 +33,7 @@ namespace Lovatto.Countdown
         public override void OnStartCount(bl_Countdown countdown)
         {
             Countdown = countdown;
-            var text = GetCountText(countdown.startTime);
+            var text = GetCountText(countdown.GetStartTime());
             SetCountText(text);
             gameObject.SetActive(true);
             onCountStart?.Invoke();

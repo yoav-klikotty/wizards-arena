@@ -53,7 +53,7 @@ namespace Lovatto.Countdown
         {
             if (countdown != null)
             {
-                float progress = 1 - ((float)count / (float)countdown.startTime);
+                float progress = 1 - ((float)count / (float)countdown.GetStartTime());
                 if (count <= 0) progress = 1;
 
                 audioSource.pitch = countPitchEffector.Evaluate(progress);

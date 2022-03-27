@@ -11,6 +11,7 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
     [SerializeField] GameObject _roomItem;
     [SerializeField] GameObject _lobbyContainer;
     private Dictionary<string, RoomInfo> cachedRoomList = new Dictionary<string, RoomInfo>();
+    [SerializeField] ErrorMessage _errorMessage;
 
     void Start()
     {
@@ -45,8 +46,11 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
             var roomItemPref = Instantiate(_roomItem, Vector3.zero, Quaternion.identity);
             roomItemPref.transform.SetParent(_lobbyContainer.transform);
             var roomItem = roomItemPref.GetComponent<RoomItem>();
-            roomItem.UpdateRoomItem(info.Name, info.MaxPlayers);
-            roomItemPref.GetComponentInChildren<Button>().onClick.AddListener(() => PhotonNetwork.JoinRoom(info.Name));
+            roomItem.UpdateRoomItem(info.Name, info.MaxPlayers, (int)info.CustomProperties["s"]);
+            roomItemPref.GetComponentInChildren<Button>().onClick.AddListener(() => { 
+                _errorMessage.DeleteMessage();
+                PhotonNetwork.JoinRoom(info.Name);
+            });
         }
     }
     public override void OnJoinedRoom()
@@ -54,6 +58,10 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
         cachedRoomList.Clear();
         PhotonNetwork.AutomaticallySyncScene = true;
         SceneManager.LoadScene("OnlineSearch");
+    }
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        _errorMessage.SetMessage(message);
     }
 
     public override void OnJoinedLobby()
