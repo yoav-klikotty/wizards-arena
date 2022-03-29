@@ -443,7 +443,7 @@ public class Wizard : MonoBehaviour
                 damage.damage = (int)(damage.damage * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration));
             }
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided);
-            _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg, damage.criticalHit);
+            _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg);
         }
     }
 }
