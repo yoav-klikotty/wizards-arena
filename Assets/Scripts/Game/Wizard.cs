@@ -202,6 +202,12 @@ public class Wizard : MonoBehaviour
         }
     }
 
+        [PunRPC]
+    public void ReduceShield(int dmg, bool isCrit)
+    {
+        PlayerHUD.ActivateIndication("" + dmg, indicationEvents.shield);
+    }
+
     public void IncreaseHealth(int health)
     {
         int newVal = (_currentHealth + health);
@@ -411,13 +417,23 @@ public class Wizard : MonoBehaviour
         public bool criticalHit;
     }
 
-    public void OnShieldCollision(WizardStatsData attacker, AttackStatsData attackerMagic)
+    public void OnShieldCollision(WizardStatsData attacker, AttackStatsData attackerMagic, int shieldHP)
     {
         if (_photonView && _photonView.IsMine)
         {
             Damage damage = CalculateDamage(attacker, attackerMagic);
-            damage.damage = (int)(damage.damage * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration));
+            int shieldDmg = 0;
+            if(damage.damage > shieldHP)
+            {
+                damage.damage = (damage.damage - shieldHP) + ((int)(shieldHP * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration)));
+                shieldDmg = shieldHP;
+            }
+            else {
+                shieldDmg = damage.damage;
+                damage.damage = (int)(damage.damage * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration));
+            }
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
+            _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg, damage.criticalHit);
         }
     }
 }
