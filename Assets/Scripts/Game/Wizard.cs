@@ -170,41 +170,39 @@ public class Wizard : MonoBehaviour
     }
 
     [PunRPC]
-    public void ReduceHealth(int health, bool isCrit)
+    public void ReduceHealth(int health, bool isCrit, bool isAvoided)
     {
-        _currentHealth = (_currentHealth - health);
-        if (_currentHealth < 0)
-        {
-            _currentHealth = 0;
-        }
-        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
-        if (health == 0)
+        if (isAvoided)
         {
             PlayerHUD.ActivateIndication("Avoided!", indicationEvents.avoid);
         }
-        else
+        else if(health > 0)
         {
-            indicationEvents eventType = isCrit ? indicationEvents.crit : indicationEvents.hit;
-            PlayerHUD.ActivateIndication("" + health, eventType);
-        }
-        if (GetHealth() <= 0)
-        {
-            Debug.Log("death");
-            DeathTime = DateTime.Now;
-            DeathAni();
-        }
-        else
-        {
-            if (health > 0)
+            _currentHealth = (_currentHealth - health);
+            if (_currentHealth < 0)
             {
+                _currentHealth = 0;
+                Debug.Log("death");
+                DeathTime = DateTime.Now;
+                DeathAni();
+            }
+            else {
                 DamageAni();
             }
+            PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+            indicationEvents hitType = isCrit ? indicationEvents.crit : indicationEvents.hit;
+            PlayerHUD.ActivateIndication("" + health, hitType);
         }
     }
 
-        [PunRPC]
-    public void ReduceShield(int dmg, bool isCrit)
+    [PunRPC]
+    public void ReduceShield(int dmg)
     {
+        StartCoroutine(DelayIndicator(dmg, 1f));
+    }
+    IEnumerator DelayIndicator(int dmg, float animationDuration)
+    {
+        yield return new WaitForSeconds(animationDuration);
         PlayerHUD.ActivateIndication("" + dmg, indicationEvents.shield);
     }
 
@@ -252,7 +250,8 @@ public class Wizard : MonoBehaviour
         {
             _currentMana = newVal;
         }
-        if (mana > 0) {
+        if (mana > 0)
+        {
             PlayerHUD.ActivateIndication("" + mana, indicationEvents.mana);
             PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
         }
@@ -288,7 +287,7 @@ public class Wizard : MonoBehaviour
     public void DamageAni()
     {
         _anim.CrossFade(DAMAGE);
-        StartCoroutine(ResetAnim(1f));
+        StartCoroutine(ResetAnim(0.66f));
     }
 
     public void StunAni()
@@ -307,7 +306,7 @@ public class Wizard : MonoBehaviour
             var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
             var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().AttackStatsData;
             Damage damage = CalculateDamage(attacker, attackerMagic);
-            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided);
         }
     }
     public bool IsWizardAlive()
@@ -373,12 +372,20 @@ public class Wizard : MonoBehaviour
     {
         Random rnd = new Random();
         Damage damage = new Damage();
+        
+        double randomFactor = rnd.NextDouble();
+
+        if(randomFactor <= WizardStatsData.GetTotalAvoidability())
+        {
+            damage.avoided = true;
+        }
 
         damage.damage = attacker.GetTotalBaseDamage() + attackerMagic.BaseDamage;
-
-        damage.criticalHit = rnd.NextDouble() <= (attacker.GetTotalCriticalRate() + attackerMagic.CriticalRate);
-        if (damage.criticalHit) damage.damage += (int)((attacker.GetTotalCriticalDmg() + attackerMagic.CriticalDmg) * damage.damage);
-
+        if (randomFactor <= (attacker.GetTotalCriticalRate() + attackerMagic.CriticalRate))
+        {
+            damage.criticalHit = true;
+            damage.damage += (int)((attacker.GetTotalCriticalDmg() + attackerMagic.CriticalDmg) * damage.damage);
+        }
         return damage;
     }
     public void IsWizardSelected(bool isOn)
@@ -412,9 +419,11 @@ public class Wizard : MonoBehaviour
         {
             damage = 0;
             criticalHit = false;
+            avoided = false;
         }
         public int damage;
         public bool criticalHit;
+        public bool avoided;
     }
 
     public void OnShieldCollision(WizardStatsData attacker, AttackStatsData attackerMagic, int shieldHP)
@@ -423,16 +432,17 @@ public class Wizard : MonoBehaviour
         {
             Damage damage = CalculateDamage(attacker, attackerMagic);
             int shieldDmg = 0;
-            if(damage.damage > shieldHP)
+            if (damage.damage > shieldHP)
             {
                 damage.damage = (damage.damage - shieldHP) + ((int)(shieldHP * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration)));
                 shieldDmg = shieldHP;
             }
-            else {
+            else
+            {
                 shieldDmg = damage.damage;
                 damage.damage = (int)(damage.damage * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration));
             }
-            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit);
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided);
             _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg, damage.criticalHit);
         }
     }
