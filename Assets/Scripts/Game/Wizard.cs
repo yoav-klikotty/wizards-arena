@@ -255,7 +255,9 @@ public class Wizard : MonoBehaviour
     IEnumerator ResetAnim(float animationDuration)
     {
         yield return new WaitForSeconds(animationDuration);
-        IdleAni();
+        if (IsWizardAlive()){
+            IdleAni();
+        }
     }
 
     public void IdleAni()

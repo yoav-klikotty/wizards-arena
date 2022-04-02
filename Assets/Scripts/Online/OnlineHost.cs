@@ -16,6 +16,12 @@ public class OnlineHost : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text _secondsToPlay;
     [SerializeField] ErrorMessage _errorMessage;
 
+    void Start()
+    {
+        ChangeNumberOfPlayers(GameManager.Instance.NumOfDeathmatchPlayers);
+        ChangeTimeToPlay(GameManager.Instance.TimeToPlay);
+    }
+
     public void ChangeNumberOfPlayers(int players)
     {
         this.numOfPlayers = players;
