@@ -9,7 +9,8 @@ public enum indicationEvents
     crit,
     mana,
     heal,
-    avoid
+    avoid,
+    shield
 }
 public class TextIndication : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class TextIndication : MonoBehaviour
                 _indicationText.color = new Color(0, 0, 1f, 255);
                 break;
             case indicationEvents.avoid:
+                _indicationText.color = new Color(0.5f, 0.5f, 0.5f, 255);
+                break;
+            case indicationEvents.shield:
                 _indicationText.color = new Color(0.5f, 0.5f, 0.5f, 255);
                 break;
         }

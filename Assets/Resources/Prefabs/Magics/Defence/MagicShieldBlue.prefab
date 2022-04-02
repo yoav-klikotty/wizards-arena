@@ -4827,8 +4827,8 @@ MonoBehaviour:
   _requiredMana: 2
   _magicType: 2
   DefenceStatsData:
-    HP: 0
-    Recovery: 1
+    HP: 20
+    Recovery: 0
     Avoidability: 0
   AttackStatsData:
     BaseDamage: 0
@@ -4840,6 +4840,7 @@ MonoBehaviour:
     StartMana: 0
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
+  _pattern: 
 --- !u!65 &-398682815597580505
 BoxCollider:
   m_ObjectHideFlags: 0
