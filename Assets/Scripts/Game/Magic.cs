@@ -61,7 +61,7 @@ public class Magic : MonoBehaviour
     {
         var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
         var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().AttackStatsData;
-        gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker, attackerMagic);
+        gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker, attackerMagic, DefenceStatsData.HP);
     }
     public string GetPattern()
     {
