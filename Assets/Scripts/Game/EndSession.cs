@@ -24,7 +24,7 @@ public class EndSession : MonoBehaviourPunCallbacks
         result = LocalStorage.GetLastSessionResult();
         if (!_debug)
         {
-            _isWon = result == SessionManager.GameResult.Win;
+            _isWon = result == SessionManager.GameResult.First;
         }
         RenderScore();
         InvokeRepeating("Disconnect", 1, 0);
@@ -61,14 +61,13 @@ public class EndSession : MonoBehaviourPunCallbacks
     {
         if (!_isWon)
         {
-            Result.text = "Defeat";
             ClaimButtonText.text = "Retry";
         }
         else
         {
-            Result.text = "Victory";
             ClaimButtonText.text = "Claim";
         }
+        Result.text = result.ToString();
     }
     void RenderSoundScore()
     {

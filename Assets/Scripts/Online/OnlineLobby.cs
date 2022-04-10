@@ -46,7 +46,7 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
             var roomItemPref = Instantiate(_roomItem, Vector3.zero, Quaternion.identity);
             roomItemPref.transform.SetParent(_lobbyContainer.transform);
             var roomItem = roomItemPref.GetComponent<RoomItem>();
-            roomItem.UpdateRoomItem(info.Name, info.MaxPlayers, (int)info.CustomProperties["s"]);
+            roomItem.UpdateRoomItem(info.Name, info.MaxPlayers, (int)info.CustomProperties["s"], (int)info.CustomProperties["ec"]);
             roomItemPref.GetComponentInChildren<Button>().onClick.AddListener(() => { 
                 _errorMessage.DeleteMessage();
                 PhotonNetwork.JoinRoom(info.Name);

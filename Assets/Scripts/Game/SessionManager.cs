@@ -3,23 +3,23 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using System;
 
-public class SessionManager : MonoBehaviour
+public class SessionManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject _decisionManagerPrefab;
     DecisionManager _decisionManager;
-    [SerializeField] GameObject _resultResolverPrefab;
     bool _isSessionLock = false;
     bool _isSessionEndLock = false;
     bool _isDecisionLock = false;
-    public List<WizardMove> moves = new List<WizardMove>();
     public List<Wizard> wizards;
     public Wizard playerWizard;
-    [SerializeField] bool _isOnline;
     public enum GameResult
     {
-        Lose,
-        Win
+        First,
+        Second,
+        Third,
+        Forth,
     }
     void Start()
     {
@@ -52,14 +52,14 @@ public class SessionManager : MonoBehaviour
 
     bool IsSidesTookDecision()
     {
-        if (moves.Count == 0)
+        if (wizards.Count == 0)
         {
             return false;
         }
         bool isContainNoneDecision = false;
-        foreach (WizardMove wizardMove in moves)
+        foreach (Wizard wizard in wizards)
         {
-            if (wizardMove.wizardOption == null)
+            if (wizard.move.wizardOption == null)
             {
                 isContainNoneDecision = true;
             }
@@ -75,14 +75,7 @@ public class SessionManager : MonoBehaviour
     public void RegisterWizard(Wizard wizard)
     {
         wizards.Add(wizard);
-        moves.Add(new WizardMove(null, Vector3.zero));
     }
-
-    public void RegisterWizardMove(int wizardIndex, WizardMove move)
-    {
-        moves[wizardIndex] = move;
-    }
-
     void RevealDecisions()
     {
         Destroy(_decisionManager.gameObject);
@@ -91,13 +84,9 @@ public class SessionManager : MonoBehaviour
 
     void RenderDecisions()
     {
-        for (int i = 0; i < moves.Count; i++)
+        for (int i = 0; i < wizards.Count; i++)
         {
-            wizards[i].RenderDecision(moves[i]);
-        }
-        for (int i = 0; i < moves.Count; i++)
-        {
-            moves[i] = new WizardMove(null, Vector3.zero);
+            wizards[i].RenderDecision();
         }
         InvokeRepeating("FinishResolving", 1.5f, 0);
     }
@@ -108,7 +97,7 @@ public class SessionManager : MonoBehaviour
 
     public void ResetSession()
     {
-        if (_decisionManager == null)
+        if (_decisionManager == null && !IsSessionEnd())
         {
             _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
         }
@@ -135,26 +124,37 @@ public class SessionManager : MonoBehaviour
     }
     IEnumerator HandleSessionEndEvent()
     {
-        var myWizard = wizards.Find(wiz => wiz.wizardId == playerWizard.wizardId);
-        if (myWizard.IsWizardAlive())
-        {
-            LocalStorage.SetLastSessionResult(GameResult.Win);
-        }
-        else 
-        {
-            LocalStorage.SetLastSessionResult(GameResult.Lose);
-        }
+        wizards.ForEach(wizard => {
+            if (wizard.IsWizardAlive())
+            {
+                wizard.DeathTime = DateTime.Now;
+            }
+        });
+        wizards.Sort((wizard1, wizard2) => DateTime.Compare(wizard2.DeathTime, wizard1.DeathTime));
+        var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
+        LocalStorage.SetLastSessionResult((GameResult)myWizard);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Score");
     }
 
-    public Wizard GetWizardById(int id)
+    public Wizard GetWizardById(string id)
     {
         return wizards.Find((wizard) => wizard.wizardId == id);
     }
-    public int GetRightOpponentId()
+    public string GetRightOpponentId()
     {
         return wizards[1].wizardId;
+    }
+
+    public override void OnPlayerLeftRoom(Photon.Realtime.Player player)
+    {
+        var quittedPlayer = GetWizardById(player.UserId);
+        if (quittedPlayer.IsWizardAlive())
+        {
+            quittedPlayer.move = new WizardMove("game over", Vector3.forward);
+            quittedPlayer.DeathTime = DateTime.Now;
+        }
+
     }
 }
 

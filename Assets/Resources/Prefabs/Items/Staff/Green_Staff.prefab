@@ -167,7 +167,7 @@ MonoBehaviour:
     DefenceStatsData:
       HP: 5
       Recovery: 2
-      Avoidability: 2
+      Avoidability: 0.1
     AttackStatsData:
       BaseDamage: 5
       CriticalRate: 0

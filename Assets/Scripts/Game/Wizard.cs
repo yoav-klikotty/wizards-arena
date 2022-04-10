@@ -30,8 +30,9 @@ public class Wizard : MonoBehaviour
     public PlayerHUD PlayerHUD;
     SessionManager _sessionManager;
     public int wizardIndex;
-    public int wizardId;
+    public string wizardId;
     Vector3 wizardLocation = new Vector3(59.5f, 4.4f, 2.1f);
+    public WizardMove move = new WizardMove(null, Vector3.zero);
     public Dictionary<string, Magic> magics = new Dictionary<string, Magic>();
     void Awake()
     {
@@ -44,13 +45,13 @@ public class Wizard : MonoBehaviour
             {
                 WizardStatsData = _wizardStatsController.GetWizardStatsData();
                 string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
-                _photonView.RPC("UpdateWizardStats", RpcTarget.All, PhotonNetwork.LocalPlayer.ActorNumber, WizardStatsDataRaw);
+                _photonView.RPC("UpdateWizardStats", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
             }
         }
     }
 
     [PunRPC]
-    public void UpdateWizardStats(int id, string wizardStatsRaw)
+    public void UpdateWizardStats(string id, string wizardStatsRaw)
     {
         wizardId = id;
         UpdateWizard(JsonUtility.FromJson<WizardStatsData>(wizardStatsRaw));
@@ -126,7 +127,7 @@ public class Wizard : MonoBehaviour
         _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
     }
 
-    public void RenderDecision(WizardMove move)
+    public void RenderDecision()
     {
         if (move.wizardOption != "game over")
         {
@@ -148,10 +149,12 @@ public class Wizard : MonoBehaviour
                 ReduceMana(magic.GetRequiredMana());
                 IncreaseHealth(WizardStatsData.GetTotalRecovery() + magic.DefenceStatsData.Recovery);
             }
+            move = new WizardMove(null, Vector3.zero);
+            TurnWizardSelection(false);
         }
 
     }
-    public void ChooseMove(string option, int id)
+    public void ChooseMove(string option, string id)
     {
         if (_photonView.IsMine)
         {
@@ -159,10 +162,9 @@ public class Wizard : MonoBehaviour
         }
     }
     [PunRPC]
-    public void ChooseMoveRPC(string option, int id)
+    public void ChooseMoveRPC(string option, string id)
     {
-        WizardMove move = new WizardMove(option, _sessionManager.GetWizardById(id).wizardLocation);
-        _sessionManager.RegisterWizardMove(wizardIndex - 1, move);
+        move = new WizardMove(option, _sessionManager.GetWizardById(id).wizardLocation);
     }
     public float GetHealth()
     {
@@ -176,17 +178,17 @@ public class Wizard : MonoBehaviour
         {
             PlayerHUD.ActivateIndication("Avoided!", indicationEvents.avoid);
         }
-        else if(health > 0)
+        else if (health > 0)
         {
             _currentHealth = (_currentHealth - health);
             if (_currentHealth < 0)
             {
                 _currentHealth = 0;
-                Debug.Log("death");
                 DeathTime = DateTime.Now;
                 DeathAni();
             }
-            else {
+            else
+            {
                 DamageAni();
             }
             PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
@@ -260,7 +262,8 @@ public class Wizard : MonoBehaviour
     IEnumerator ResetAnim(float animationDuration)
     {
         yield return new WaitForSeconds(animationDuration);
-        if (IsWizardAlive()){
+        if (IsWizardAlive())
+        {
             IdleAni();
         }
     }
@@ -374,10 +377,10 @@ public class Wizard : MonoBehaviour
     {
         Random rnd = new Random();
         Damage damage = new Damage();
-        
+
         double randomFactor = rnd.NextDouble();
 
-        if(randomFactor <= WizardStatsData.GetTotalAvoidability())
+        if (randomFactor <= WizardStatsData.GetTotalAvoidability())
         {
             damage.avoided = true;
         }
@@ -405,14 +408,18 @@ public class Wizard : MonoBehaviour
 
     public void TurnWizardSelection(bool isOn)
     {
-        if (isOn)
+        if (IsWizardAlive())
         {
-            m_SpriteRenderer.gameObject.SetActive(true);
+            if (isOn)
+            {
+                m_SpriteRenderer.gameObject.SetActive(true);
+            }
+            else
+            {
+                m_SpriteRenderer.gameObject.SetActive(false);
+            }
         }
-        else
-        {
-            m_SpriteRenderer.gameObject.SetActive(false);
-        }
+
     }
 
     public class Damage

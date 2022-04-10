@@ -12,9 +12,10 @@ public class DecisionManager : MonoBehaviour
     [SerializeField] TMP_Text _manaText;
     [SerializeField] GameObject _magicOption;
     [SerializeField] GameObject _btnContainer;
-
     Wizard player;
-    int OpponentId;
+    string OpponentId;
+    bool isPlayerChoseAttack;
+    bool isDecisionOver;
 
     void Start()
     {
@@ -36,16 +37,15 @@ public class DecisionManager : MonoBehaviour
             player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
             SetManaBar();
             UpdateValidMagicsByMana();
-            SelectOpponent(OpponentId);
         }
     }
     void Update()
     {
-        if (_counter.IsCounterEnd() && _option == null)
+        if (_counter.IsCounterEnd() && !IsDecisionMakingOver())
         {
             ChooseRandom();
         }
-        if (Input.GetMouseButtonDown(0))
+        if (isPlayerChoseAttack && Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -55,13 +55,15 @@ public class DecisionManager : MonoBehaviour
                 {
                     OpponentId = hit.transform.gameObject.GetComponent<Wizard>().wizardId;
                     SelectOpponent(OpponentId);
+                    player.ChooseMove(_option, OpponentId);
+                    isDecisionOver = true;
                 }
             }
 
         }
     }
 
-    void SelectOpponent(int wizardId)
+    void SelectOpponent(string wizardId)
     {
         foreach (var wizard in _sessionManager.wizards)
         {
@@ -84,7 +86,7 @@ public class DecisionManager : MonoBehaviour
             var elem = Instantiate(_magicOption, Vector3.zero, Quaternion.identity);
             elem.transform.SetParent(_btnContainer.transform, false);
             elem.GetComponent<Image>().sprite = magic.GetThumbnail();
-            elem.GetComponent<Button>().onClick.AddListener(() => ChooseMagic(key));
+            elem.GetComponent<Button>().onClick.AddListener(() => ChooseMagic(key, magic.GetMagicType() == Magic.MagicType.Attack));
             if (magic.GetRequiredMana() <= player.GetMana())
             {
                 elem.GetComponent<Button>().interactable = true;
@@ -105,17 +107,25 @@ public class DecisionManager : MonoBehaviour
 
     }
 
-    public void ChooseMagic(string magicName)
+    public void ChooseMagic(string magicName, bool isAttackMagic)
     {
-
         if (!IsDecisionMakingOver())
         {
             _option = magicName;
-            player.ChooseMove(_option, OpponentId);
             foreach (Transform child in _btnContainer.transform)
             {
                 var btn = child.GetComponent<Button>();
                 btn.interactable = false;
+            }
+            if (!isAttackMagic)
+            {
+                player.ChooseMove(_option, OpponentId);
+                isDecisionOver = true;
+            }
+            else
+            {
+                isPlayerChoseAttack = true;
+                SelectOpponent(OpponentId);
             }
         }
 
@@ -123,15 +133,17 @@ public class DecisionManager : MonoBehaviour
 
     public void ChooseRandom()
     {
-        _option = "MagicChargeBlue";
+        if (_option == null)
+        {
+            _option = "MagicChargeBlue";
+        }
         player.ChooseMove(_option, OpponentId);
+        isDecisionOver = true;
     }
 
     public bool IsDecisionMakingOver()
     {
-
-        return _option != null;
-
+        return isDecisionOver;
     }
 
 }

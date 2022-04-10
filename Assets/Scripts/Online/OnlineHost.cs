@@ -10,8 +10,12 @@ public class OnlineHost : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     int numOfPlayers = 2;
     int secondsToPlay = 2;
-    bool isPublic = true;
-    [SerializeField] TMP_Text _mode;
+    bool isPublicMode = true;
+    bool isCompetitiveMode = true;
+    int energyCost = 1;
+    [SerializeField] TMP_Text _publicMode;
+    [SerializeField] TMP_Text _competitiveMode;
+    [SerializeField] TMP_Text _eneryCost;
     [SerializeField] TMP_Text _numOfPlayers;
     [SerializeField] TMP_Text _secondsToPlay;
     [SerializeField] ErrorMessage _errorMessage;
@@ -37,12 +41,17 @@ public class OnlineHost : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         _errorMessage.DeleteMessage();
-        System.Random random = new System.Random(); 
-        RoomOptions roomOps = new RoomOptions() { IsVisible = isPublic, IsOpen = true, MaxPlayers = (byte)numOfPlayers,
-         CustomRoomProperties =  new ExitGames.Client.Photon.Hashtable()  { { "s", GameManager.Instance.TimeToPlay } },
-         CustomRoomPropertiesForLobby = new string[1] { "s" }
+        System.Random random = new System.Random();
+        RoomOptions roomOps = new RoomOptions()
+        {
+            IsVisible = isPublicMode,
+            IsOpen = true,
+            MaxPlayers = (byte)numOfPlayers,
+            PublishUserId = true,
+            CustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { "s", GameManager.Instance.TimeToPlay }, { "ec", GameManager.Instance.EnergyCost } },
+            CustomRoomPropertiesForLobby = new string[2] { "s", "ec" }
         };
-        PhotonNetwork.CreateRoom(random.Next(10000,50000) + "", roomOps);
+        PhotonNetwork.CreateRoom(random.Next(10000, 50000) + "", roomOps);
     }
 
     public override void OnCreatedRoom()
@@ -57,9 +66,22 @@ public class OnlineHost : MonoBehaviourPunCallbacks
     {
         SceneManager.LoadScene("OnlineMenu");
     }
-    public void ChangeMode()
+    public void ChangePublicMode()
     {
-        isPublic = !isPublic;
-        _mode.text = isPublic ? "Public" : "Private";
+        isPublicMode = !isPublicMode;
+        _publicMode.text = isPublicMode ? "Public" : "Private";
+    }
+    public void ChangeCompetitiveMode()
+    {
+        isCompetitiveMode = !isCompetitiveMode;
+        if (isCompetitiveMode)
+        {
+            GameManager.Instance.EnergyCost = 1;
+        }
+        else {
+            GameManager.Instance.EnergyCost = 0;
+        }
+        _eneryCost.text = "X " + GameManager.Instance.EnergyCost;
+        _competitiveMode.text = isCompetitiveMode ? "Competitive" : "Friendly";
     }
 }

@@ -48,11 +48,9 @@ public class ProjectileMover : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         //Lock all axes movement and rotation
-        Debug.Log(collision.gameObject.GetComponent<Collider>());
         if(collision.gameObject.name.Contains("Projectile")){
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>(), true);
         };
-        Debug.Log(collision.gameObject.name);
         rb.constraints = RigidbodyConstraints.FreezeAll;
         speed = 0;
         ContactPoint contact = collision.contacts[0];

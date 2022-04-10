@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public bool IsSFXOn = true;
     public int NumOfDeathmatchPlayers = 2;
     public int TimeToPlay = 2;
-
+    public int EnergyCost = 1;
     public static GameManager Instance { get; private set; }
     private void Awake()
     {

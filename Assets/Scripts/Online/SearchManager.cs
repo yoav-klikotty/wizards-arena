@@ -13,6 +13,7 @@ public class SearchManager : MonoBehaviourPunCallbacks
     {
         UpdatePlayersCount();
         GameManager.Instance.TimeToPlay = (int)PhotonNetwork.CurrentRoom.CustomProperties["s"];
+        GameManager.Instance.NumOfDeathmatchPlayers = (int)PhotonNetwork.CurrentRoom.MaxPlayers;
         if (PhotonNetwork.IsMasterClient)
         {
             _roomCode.text = "Room code: " + PhotonNetwork.CurrentRoom.Name;
