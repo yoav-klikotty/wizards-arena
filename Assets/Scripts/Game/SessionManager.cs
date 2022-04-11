@@ -62,7 +62,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         }
         int avgOpponentsWizardsMmr = opponentsWizardsMmrSum / (wizards.Count-1);
         int myRankDiff = avgOpponentsWizardsMmr - playerWizard.WizardStatsData.RankStatsData.GetModeRank(wizards.Count);
-        int myBonus = myRankDiff / (_maxRankDiff / _maxRankPointBonus);
+        int myBonus = myRankDiff / (maxRankDiff / _maxRankPointBonus);
         switch(wizardPlace)
         {
             case 0:
