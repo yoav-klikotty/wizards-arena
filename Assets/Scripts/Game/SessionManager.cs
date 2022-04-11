@@ -14,6 +14,9 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool _isDecisionLock = false;
     public List<Wizard> wizards;
     public Wizard playerWizard;
+    public int maxRankDiff = 50;
+    private int _baseRankPointsChange = 10;
+    private int _maxRankPointBonus = 5;
     public enum GameResult
     {
         First,
@@ -49,6 +52,52 @@ public class SessionManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void UpdateMMR(int wizardPlace)
+    {
+        int opponentsWizardsMmrSum = 0;
+        for(int i = 0; i < wizards.Count; i++) {
+            if(wizards[i].wizardId != playerWizard.wizardId){
+                opponentsWizardsMmrSum += wizards[i].WizardStatsData.RankStatsData.GetModeRank(wizards.Count);
+            }
+        }
+        int avgOpponentsWizardsMmr = opponentsWizardsMmrSum / (wizards.Count-1);
+        int myRankDiff = avgOpponentsWizardsMmr - playerWizard.WizardStatsData.RankStatsData.GetModeRank(wizards.Count);
+        int myBonus = myRankDiff / (_maxRankDiff / _maxRankPointBonus);
+        switch(wizardPlace)
+        {
+            case 0:
+                Debug.Log("my delta: " + (_baseRankPointsChange + myBonus));
+                break;
+            case 1:
+                switch(wizards.Count)
+                {
+                    case 2:
+                        Debug.Log("my delta: " + ((_baseRankPointsChange + myBonus) * -1));
+                        break;
+                    case 3:
+                        Debug.Log(0);
+                        break;
+                    case 4:
+                        Debug.Log("my delta: " + ((_baseRankPointsChange + myBonus) / 2));
+                        break;
+                }
+                break;
+            case 2:
+                switch(wizards.Count)
+                {
+                    case 3:
+                        Debug.Log("my delta: " + ((_baseRankPointsChange + myBonus) * -1));
+                        break;
+                    case 4:
+                        Debug.Log("my delta: " + (((_baseRankPointsChange + myBonus) * -1) / 2));
+                        break;
+                }
+                break;
+            case 3:
+                Debug.Log("my delta: " + ((_baseRankPointsChange + myBonus) * -1));
+                break;                
+        }
+    }
 
     bool IsSidesTookDecision()
     {
@@ -133,6 +182,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         wizards.Sort((wizard1, wizard2) => DateTime.Compare(wizard2.DeathTime, wizard1.DeathTime));
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
         LocalStorage.SetLastSessionResult((GameResult)myWizard);
+        UpdateMMR(myWizard);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Score");
     }

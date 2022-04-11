@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class WizardStatsData
 {
+    public RankStatsData RankStatsData = new RankStatsData(1000, 1000, 1000);
     public ItemStatsData StaffStatsData = new ItemStatsData(
         "Blue_Staff",
         new List<string> {"blue"},
@@ -352,5 +353,36 @@ public class ItemStatsData
     public bool IsContainInventoryItem(InventoryItem inventoryItem)
     {
         return Name.Equals(inventoryItem.GetName());
+    }
+}
+[Serializable]
+public class RankStatsData
+{
+    public RankStatsData(int twoPlayers, int threePlayers, int fourPlayers)
+    {
+        this.twoPlayers = twoPlayers;
+        this.threePlayers = threePlayers;
+        this.fourPlayers = fourPlayers;
+    }
+    public int twoPlayers;
+    public int threePlayers;
+    public int fourPlayers;
+
+    public int GetModeRank(int numOfplayers){
+        switch(numOfplayers)
+        {
+            case 2:
+                return twoPlayers;
+                break;
+            case 3:
+                return threePlayers;
+                break;
+            case 4:
+                return fourPlayers;
+                break;
+            default:
+                return twoPlayers;
+                break;
+        }
     }
 }
