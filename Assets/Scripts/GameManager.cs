@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool IsSFXOn = true;
+    public int ActivePlayers = 0;
     public int NumOfDeathmatchPlayers = 2;
     public int TimeToPlay = 2;
     public int EnergyCost = 1;

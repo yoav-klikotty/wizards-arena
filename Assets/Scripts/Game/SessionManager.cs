@@ -10,6 +10,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject _decisionManagerPrefab;
     DecisionManager _decisionManager;
     bool _isSessionLock = false;
+    bool _isBotGenerateLock = false;
     bool _isSessionEndLock = false;
     bool _isDecisionLock = false;
     public List<Wizard> wizards;
@@ -32,10 +33,10 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     void Update()
     {
-        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
+        RenderDecisionManger();
+        if (Tweaks.BotModeActive)
         {
-            _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
-            _isDecisionLock = true;
+            CreateBots();
         }
         if (IsSidesTookDecision())
         {
@@ -46,6 +47,27 @@ public class SessionManager : MonoBehaviourPunCallbacks
         {
             _isSessionEndLock = true;
             StartCoroutine("HandleSessionEndEvent");
+        }
+    }
+
+    private void RenderDecisionManger()
+    {
+        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
+        {
+            _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
+            _isDecisionLock = true;
+        }
+    }
+
+    private void CreateBots()
+    {
+        if (wizards.Count == GameManager.Instance.ActivePlayers && PhotonNetwork.IsMasterClient && !_isBotGenerateLock)
+        {
+            _isBotGenerateLock = true;
+            for (int i = 0; i < GameManager.Instance.NumOfDeathmatchPlayers - GameManager.Instance.ActivePlayers; i++)
+            {
+                PhotonNetwork.Instantiate("Prefabs/Wizard/WizardBot", new Vector3(56, 4.7f, -3), Quaternion.identity);
+            }
         }
     }
 
@@ -107,7 +129,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool IsSessionEnd()
     {
         int numberOfAliveWizards = wizards.Count;
-        foreach(var wizard in wizards)
+        foreach (var wizard in wizards)
         {
             if (!wizard.IsWizardAlive())
             {
@@ -118,13 +140,15 @@ public class SessionManager : MonoBehaviourPunCallbacks
         {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
     IEnumerator HandleSessionEndEvent()
     {
-        wizards.ForEach(wizard => {
+        wizards.ForEach(wizard =>
+        {
             if (wizard.IsWizardAlive())
             {
                 wizard.DeathTime = DateTime.Now;

@@ -52,7 +52,6 @@ public class OnlineMenu : MonoBehaviourPunCallbacks
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log(cause);
         if (cause == DisconnectCause.DisconnectByClientLogic)
         {
             SceneManager.LoadScene("Dashboard");

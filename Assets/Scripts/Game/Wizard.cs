@@ -34,18 +34,23 @@ public class Wizard : MonoBehaviour
     Vector3 wizardLocation = new Vector3(59.5f, 4.4f, 2.1f);
     public WizardMove move = new WizardMove(null, Vector3.zero);
     public Dictionary<string, Magic> magics = new Dictionary<string, Magic>();
+    public bool isBot;
     void Awake()
     {
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
         _photonView = PhotonView.Get(this);
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
+        if (isBot)
+        {
+            move = new WizardMove("MagicChargeBlue", Vector3.zero);
+        }
         if (!_isDashboardWizard)
         {
             if (_photonView && _photonView.IsMine)
             {
                 WizardStatsData = _wizardStatsController.GetWizardStatsData();
                 string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
-                _photonView.RPC("UpdateWizardStats", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
+                _photonView.RPC("UpdateWizardStats", RpcTarget.All, isBot ? PhotonNetwork.LocalPlayer.UserId + wizardIndex : PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
             }
         }
     }
@@ -58,7 +63,7 @@ public class Wizard : MonoBehaviour
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         LocateWizard();
         _sessionManager.RegisterWizard(this);
-        if (_photonView.IsMine)
+        if (_photonView.IsMine && !isBot)
         {
             _sessionManager.playerWizard = this;
             this.gameObject.name = "Player";
@@ -149,7 +154,14 @@ public class Wizard : MonoBehaviour
                 ReduceMana(magic.GetRequiredMana());
                 IncreaseHealth(WizardStatsData.GetTotalRecovery() + magic.DefenceStatsData.Recovery);
             }
-            move = new WizardMove(null, Vector3.zero);
+            if (isBot)
+            {
+                move = new WizardMove("MagicChargeBlue", Vector3.zero);
+            }
+            else
+            {
+                move = new WizardMove(null, Vector3.zero);
+            }
             TurnWizardSelection(false);
         }
 
