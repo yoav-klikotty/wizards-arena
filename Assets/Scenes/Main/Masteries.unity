@@ -3231,6 +3231,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MasteryModal
       objectReference: {fileID: 0}
+    - target: {fileID: 5347883684541400993, guid: e7b73800b5963524884fe0c008c90590, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5347883684541400997, guid: e7b73800b5963524884fe0c008c90590, type: 3}
       propertyPath: _masteryTrees
       value: 
