@@ -31,4 +31,12 @@ public class LocalStorage : MonoBehaviour
         string PlayerStatsDataRaw = PlayerPrefs.GetString("PlayerStatsData");
         return JsonUtility.FromJson<PlayerStatsData>(PlayerStatsDataRaw);
     }
+    public static void SetDashboardPage(int page)
+    {
+        PlayerPrefs.SetInt("dashboardPage", page);
+    }
+    public static int GetDashboardPage()
+    {
+        return PlayerPrefs.GetInt("dashboardPage");
+    }
 }

@@ -17,7 +17,6 @@ public class InventoryMastery : MonoBehaviour
     [SerializeField] string _displayName;
     [SerializeField] List<string> _attributes;
     [SerializeField] int _maxPoints;
-    [SerializeField] TMP_Text _pointsText;
     private int _currentPoints;
     [SerializeField] int _requiredLevel;
     [SerializeField] Button _masteryBtn;
@@ -34,10 +33,6 @@ public class InventoryMastery : MonoBehaviour
     public void SetCurrentPoints(int currentPoints)
     {
         _currentPoints = currentPoints;
-        if (_pointsText)
-        {
-            _pointsText.text = currentPoints + "/" + _maxPoints;
-        }
     }
     public int GetRequiredLevel()
     {

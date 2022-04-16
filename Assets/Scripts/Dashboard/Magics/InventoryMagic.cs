@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryMagic : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class InventoryMagic : MonoBehaviour
     [SerializeField] MagicModal _magicModal;
     private bool _purchased;
     private bool _enable;
+    [SerializeField] TMP_Text _levelRequired;
 
     public string GetID()
     {
@@ -77,5 +79,12 @@ public class InventoryMagic : MonoBehaviour
     {
         this._enable = isEnable;
         GetComponent<Button>().interactable = isEnable;
+        if (!isEnable)
+        {
+            _levelRequired.text = "Level " + _requiredLevel;
+        }
+        else {
+             _levelRequired.text = "";
+        }
     }
 }
