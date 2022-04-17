@@ -22,7 +22,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         First,
         Second,
         Third,
-        Forth,
+        Fourth,
     }
     void Start()
     {
