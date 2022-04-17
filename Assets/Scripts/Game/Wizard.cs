@@ -455,4 +455,48 @@ public class Wizard : MonoBehaviour
             _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg);
         }
     }
+
+    public void updateWizardRank(int numOfplayers, GameResult myPlace, int rankDelta)
+    {
+        switch(myPlace)
+        {
+            case First:
+                WizardStatsData.RankStatsData.updateRank( numOfplayers, rankDelta );
+                Debug.Log("win game of 2");
+                break;
+            case Second:
+                switch(numOfplayers)
+                {
+                    case 2:
+                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta * -1 ) );
+                        Debug.Log("lose game of 2");
+                        break;
+                    case 3:
+                        Debug.Log("second place game of 3");
+                        break;
+                    case 4:
+                        Debug.Log("second place game of 4");
+                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta / 2 ) );
+                        break;
+                }
+                break;
+            case Third:
+                switch(numOfplayers)
+                {
+                    case 3:
+                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta * -1 ) );
+                        Debug.Log("lose game of 3");
+                        break;
+                    case 4:
+                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( ( rankDelta * -1 ) / 2) );
+                        Debug.Log("third place game of 4");
+                        break;
+                }
+                break;
+            case Fourth:
+                Debug.Log("lose game of 4");
+                WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta * -1 ) );
+                break;                
+        }
+    }
 }

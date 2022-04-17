@@ -360,29 +360,19 @@ public class RankStatsData
 {
     public RankStatsData(int twoPlayers, int threePlayers, int fourPlayers)
     {
-        this.twoPlayers = twoPlayers;
-        this.threePlayers = threePlayers;
-        this.fourPlayers = fourPlayers;
+        this.rankDic.Add(2, twoPlayers);
+        this.rankDic.Add(3, twoPlayers);
+        this.rankDic.Add(4, twoPlayers);
     }
-    public int twoPlayers;
-    public int threePlayers;
-    public int fourPlayers;
+
+    IDictionary<int, int> rankDic = new Dictionary<int, int>();
 
     public int GetModeRank(int numOfplayers){
-        switch(numOfplayers)
-        {
-            case 2:
-                return twoPlayers;
-                break;
-            case 3:
-                return threePlayers;
-                break;
-            case 4:
-                return fourPlayers;
-                break;
-            default:
-                return twoPlayers;
-                break;
-        }
+        return rankDic[numOfplayers];
+    }
+
+    public void updateRank(int numOfplayers, int rankDelta)
+    {
+        rankDic[numOfplayers] += rankDelta;
     }
 }
