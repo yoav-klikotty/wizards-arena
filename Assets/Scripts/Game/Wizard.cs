@@ -456,23 +456,23 @@ public class Wizard : MonoBehaviour
         }
     }
 
-    public void updateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
+    public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
     {
         switch(myPlace)
         {
             case SessionManager.GameResult.First:
-                WizardStatsData.RankStatsData.updateRank( numOfplayers, rankDelta );
+                WizardStatsData.RankStatsData.UpdateRank( numOfplayers, rankDelta );
                 break;
             case SessionManager.GameResult.Second:
                 switch(numOfplayers)
                 {
                     case 2:
-                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta * -1 ) );
+                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta * -1 ) );
                         break;
                     case 3:
                         break;
                     case 4:
-                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta / 2 ) );
+                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta / 2 ) );
                         break;
                 }
                 break;
@@ -480,15 +480,15 @@ public class Wizard : MonoBehaviour
                 switch(numOfplayers)
                 {
                     case 3:
-                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta * -1 ) );
+                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta * -1 ) );
                         break;
                     case 4:
-                        WizardStatsData.RankStatsData.updateRank( numOfplayers, ( ( rankDelta * -1 ) / 2) );
+                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( ( rankDelta * -1 ) / 2) );
                         break;
                 }
                 break;
             case SessionManager.GameResult.Fourth:
-                WizardStatsData.RankStatsData.updateRank( numOfplayers, ( rankDelta * -1 ) );
+                WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta * -1 ) );
                 break;                
         }
 

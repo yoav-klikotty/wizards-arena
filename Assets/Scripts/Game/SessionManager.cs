@@ -14,7 +14,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool _isDecisionLock = false;
     public List<Wizard> wizards;
     public Wizard playerWizard;
-    public int maxRankDiff = 50;
+    public int MaxRankDiff = 50;
     private int _baseRankPointsChange = 10;
     private int _maxRankPointBonus = 5;
     public enum GameResult
@@ -64,7 +64,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         int myRankDiff = avgOpponentsWizardsRank - playerWizard.WizardStatsData.RankStatsData.GetModeRank(wizards.Count);
         int myBonus = myRankDiff / (maxRankDiff / _maxRankPointBonus);
         int rankDelta = myBonus + _baseRankPointsChange;
-        playerWizard.updateWizardRank(wizards.Count, wizardPlace, rankDelta);
+        playerWizard.UpdateWizardRank(wizards.Count, wizardPlace, rankDelta);
     }
 
     bool IsSidesTookDecision()

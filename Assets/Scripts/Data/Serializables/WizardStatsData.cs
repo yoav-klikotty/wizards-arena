@@ -371,7 +371,7 @@ public class RankStatsData
         return rankDic[numOfplayers];
     }
 
-    public void updateRank(int numOfplayers, int rankDelta)
+    public void UpdateRank(int numOfplayers, int rankDelta)
     {
         rankDic[numOfplayers] += rankDelta;
     }
