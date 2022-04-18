@@ -1,4 +1,4 @@
 public class Tweaks
 {
-    public const bool BotModeActive = false;
+    public const bool BotModeActive = true;
 }

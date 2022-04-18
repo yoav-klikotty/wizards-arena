@@ -40,12 +40,9 @@ public class Wizard : MonoBehaviour
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
         _photonView = PhotonView.Get(this);
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
-        if (isBot)
-        {
-            move = new WizardMove("MagicChargeBlue", Vector3.zero);
-        }
         if (!_isDashboardWizard)
         {
+            _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
             if (_photonView && _photonView.IsMine)
             {
                 WizardStatsData = _wizardStatsController.GetWizardStatsData();
@@ -60,7 +57,6 @@ public class Wizard : MonoBehaviour
     {
         wizardId = id;
         UpdateWizard(JsonUtility.FromJson<WizardStatsData>(wizardStatsRaw));
-        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         LocateWizard();
         _sessionManager.RegisterWizard(this);
         if (_photonView.IsMine && !isBot)
@@ -71,6 +67,10 @@ public class Wizard : MonoBehaviour
         else
         {
             this.gameObject.name = "Opponent";
+        }
+        if (isBot)
+        {
+            CreateBotMove();
         }
     }
     void Start()
@@ -156,12 +156,9 @@ public class Wizard : MonoBehaviour
             }
             if (isBot)
             {
-                move = new WizardMove("MagicChargeBlue", Vector3.zero);
+                Invoke("CreateBotMove", 3);
             }
-            else
-            {
-                move = new WizardMove(null, Vector3.zero);
-            }
+            move = new WizardMove(null, Vector3.zero);
             TurnWizardSelection(false);
         }
 
@@ -466,5 +463,54 @@ public class Wizard : MonoBehaviour
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided);
             _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg);
         }
+    }
+
+    private void CreateBotMove()
+    {
+        var opponentId = _sessionManager.GetRandomOpponentId(wizardId).wizardId;
+        if (!IsWizardAlive())
+        {
+            ChooseMove("game over", opponentId);
+            return;
+        }
+        var attackMagic = "";
+        var manaMagic = "";
+        var defenceMagic = "";
+        foreach (MagicStatsData magicStats in WizardStatsData.MagicsStatsData)
+        {
+            Debug.Log(magicStats.name);
+            if (magicStats.type == Magic.MagicType.Mana)
+            {
+                manaMagic = magicStats.name;
+            }
+            else if(magicStats.type == Magic.MagicType.Defence)
+            {
+                if (magics[magicStats.name].GetRequiredMana() < _currentMana)
+                {
+                    defenceMagic = magicStats.name;
+                }
+            }
+            else {
+                if (magics[magicStats.name].GetRequiredMana() < _currentMana)
+                {
+                    attackMagic = magicStats.name;
+                }
+            }
+        }
+        var options = new List<string>();
+        if (!attackMagic.Equals(""))
+        {
+            options.Add(attackMagic);
+        }
+        if (!manaMagic.Equals(""))
+        {
+            options.Add(manaMagic);
+        }
+        if (!defenceMagic.Equals(""))
+        {
+            options.Add(defenceMagic);
+        }
+        Random rnd = new Random();
+        ChooseMove(options[rnd.Next(0, options.Count)], opponentId);
     }
 }

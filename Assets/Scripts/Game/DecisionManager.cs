@@ -20,8 +20,8 @@ public class DecisionManager : MonoBehaviour
     void Start()
     {
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
-        OpponentId = _sessionManager.GetRightOpponentId();
         player = _sessionManager.playerWizard;
+        OpponentId = _sessionManager.GetRandomOpponentId(player.wizardId).wizardId;
         if (!player.IsWizardAlive())
         {
             _option = "game over";

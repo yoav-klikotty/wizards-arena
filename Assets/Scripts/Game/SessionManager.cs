@@ -38,6 +38,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         {
             CreateBots();
         }
+
         if (IsSidesTookDecision())
         {
             _isSessionLock = true;
@@ -165,20 +166,38 @@ public class SessionManager : MonoBehaviourPunCallbacks
     {
         return wizards.Find((wizard) => wizard.wizardId == id);
     }
+    public List<Wizard> GetWizardsById(string id)
+    {
+        var wizardsToReturn = new List<Wizard>();
+        foreach (var wizard in wizards)
+        {
+            if (wizard.wizardId.Contains(id))
+            {
+                wizardsToReturn.Add(wizard);
+            }
+        }
+        return wizardsToReturn;
+    }
     public string GetRightOpponentId()
     {
         return wizards[1].wizardId;
     }
+    public Wizard GetRandomOpponentId(string id)
+    {
+        return wizards.Find((wizard) => wizard.wizardId != id && wizard.IsWizardAlive());;
+    }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player player)
     {
-        var quittedPlayer = GetWizardById(player.UserId);
-        if (quittedPlayer.IsWizardAlive())
+        var quittedPlayerWizards = GetWizardsById(player.UserId);
+        foreach (var wizard in quittedPlayerWizards)
         {
-            quittedPlayer.move = new WizardMove("game over", Vector3.forward);
-            quittedPlayer.DeathTime = DateTime.Now;
+            if (wizard.IsWizardAlive())
+            {
+                wizard.move = new WizardMove("game over", Vector3.forward);
+                wizard.DeathTime = DateTime.Now;
+            }
         }
-
     }
 }
 
