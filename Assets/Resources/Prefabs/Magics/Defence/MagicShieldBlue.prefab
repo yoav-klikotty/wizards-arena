@@ -4822,7 +4822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePrefab: {fileID: 0}
-  _skillThumbnail: {fileID: 21300000, guid: 015879a2260cb7b4a9450922867f42e1, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: d871013cef9306c439381d60c0136814, type: 3}
   _boxCollider: {fileID: -398682815597580505}
   _requiredMana: 2
   _magicType: 2

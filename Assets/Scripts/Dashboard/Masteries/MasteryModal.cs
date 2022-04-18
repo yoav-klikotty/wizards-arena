@@ -9,14 +9,35 @@ public class MasteryModal : MonoBehaviour
     [SerializeField] Image _icon;
     private InventoryMastery _inventoryMastery;
     private int _initialPoints;
-    [SerializeField] MasteryTrees _masteryTrees;
     [SerializeField] TMP_Text _masteryAttributes;
+    [SerializeField] TMP_Text _title;
+    [SerializeField] MasteryTree masteryTree;
+    [SerializeField] List<Level> _levels;
+    [SerializeField] GameObject _message;
+    [SerializeField] Button _unlock;
+
     public void Instantiate(InventoryMastery inventoryMastery)
     {
         _inventoryMastery = inventoryMastery;
         _icon.sprite = _inventoryMastery.GetIcon();
         _initialPoints = _inventoryMastery.GetCurrentPoints();
+        _title.text = inventoryMastery.GetDisplayName();
+        CheckPlayerXP();
         RenderMasteriesAttr();
+        RenderLevels();
+    }
+    private void CheckPlayerXP()
+    {
+        if (masteryTree.playerStatsData.GetXP() == 0)
+        {
+            _message.SetActive(true);
+            _unlock.interactable = false;
+        }
+        else
+        {
+            _message.SetActive(false);
+            _unlock.interactable = true;
+        }
     }
 
     public void RenderMasteriesAttr()
@@ -28,11 +49,22 @@ public class MasteryModal : MonoBehaviour
         }
 
     }
+    public void RenderLevels()
+    {
+        for (var i = 0 ; i < _inventoryMastery.GetCurrentPoints(); i++)
+        {
+            _levels[i].Active(true);
+        }
+        for (var i = _inventoryMastery.GetCurrentPoints(); i < 5; i++)
+        {
+            _levels[i].Active(false);
+        }
+    }
     public void OnUpgrade()
     {
         if (_inventoryMastery.GetCurrentPoints() < _inventoryMastery.GetMaxPoints())
         {
-            _masteryTrees.GetCurrentTree().UpdateSkill(_inventoryMastery);
+            masteryTree.UpdateSkill(_inventoryMastery);
             gameObject.SetActive(false);
         }
     }

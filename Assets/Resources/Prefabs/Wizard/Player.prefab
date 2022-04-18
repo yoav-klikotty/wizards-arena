@@ -655,6 +655,7 @@ MonoBehaviour:
   PlayerHUD: {fileID: 601630423890107937}
   wizardIndex: 0
   wizardId: 0
+  isBot: 0
 --- !u!65 &8212514550521930822
 BoxCollider:
   m_ObjectHideFlags: 0

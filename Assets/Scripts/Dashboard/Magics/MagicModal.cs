@@ -9,6 +9,7 @@ public class MagicModal : MonoBehaviour
     private InventoryMagic _inventoryMagic;
     [SerializeField] MagicBook _magicBook;
     [SerializeField] TMP_Text _attributes;
+    [SerializeField] TMP_Text _title;
     [SerializeField] Button _learnBtn;
     [SerializeField] TMP_Text _price;
     public void Instantiate(InventoryMagic inventoryMagic)
@@ -16,6 +17,7 @@ public class MagicModal : MonoBehaviour
         _inventoryMagic = inventoryMagic;
         _icon.sprite = inventoryMagic.GetIcon();
         _price.text = inventoryMagic.GetPrice() + "";
+        _title.text = inventoryMagic.GetDisplayName();
         RenderAttr();
         if (_inventoryMagic.IsPurchased() || !_inventoryMagic.IsEnable())
         {

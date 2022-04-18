@@ -10,6 +10,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject _decisionManagerPrefab;
     DecisionManager _decisionManager;
     bool _isSessionLock = false;
+    bool _isBotGenerateLock = false;
     bool _isSessionEndLock = false;
     bool _isDecisionLock = false;
     public List<Wizard> wizards;
@@ -35,11 +36,12 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     void Update()
     {
-        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
+        RenderDecisionManger();
+        if (Tweaks.BotModeActive)
         {
-            _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
-            _isDecisionLock = true;
+            CreateBots();
         }
+
         if (IsSidesTookDecision())
         {
             _isSessionLock = true;
@@ -65,6 +67,27 @@ public class SessionManager : MonoBehaviourPunCallbacks
         int myBonus = myRankDiff / (maxRankDiff / _maxRankPointBonus);
         int rankDelta = myBonus + _baseRankPointsChange;
         playerWizard.UpdateWizardRank(wizards.Count, wizardPlace, rankDelta);
+    }
+
+    private void RenderDecisionManger()
+    {
+        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
+        {
+            _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
+            _isDecisionLock = true;
+        }
+    }
+
+    private void CreateBots()
+    {
+        if (wizards.Count == GameManager.Instance.ActivePlayers && PhotonNetwork.IsMasterClient && !_isBotGenerateLock)
+        {
+            _isBotGenerateLock = true;
+            for (int i = 0; i < GameManager.Instance.NumOfDeathmatchPlayers - GameManager.Instance.ActivePlayers; i++)
+            {
+                PhotonNetwork.Instantiate("Prefabs/Wizard/WizardBot", new Vector3(56, 4.7f, -3), Quaternion.identity);
+            }
+        }
     }
 
     bool IsSidesTookDecision()
@@ -124,7 +147,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool IsSessionEnd()
     {
         int numberOfAliveWizards = wizards.Count;
-        foreach(var wizard in wizards)
+        foreach (var wizard in wizards)
         {
             if (!wizard.IsWizardAlive())
             {
@@ -135,13 +158,15 @@ public class SessionManager : MonoBehaviourPunCallbacks
         {
             return true;
         }
-        else {
+        else
+        {
             return false;
         }
     }
     IEnumerator HandleSessionEndEvent()
     {
-        wizards.ForEach(wizard => {
+        wizards.ForEach(wizard =>
+        {
             if (wizard.IsWizardAlive())
             {
                 wizard.DeathTime = DateTime.Now;
@@ -159,20 +184,38 @@ public class SessionManager : MonoBehaviourPunCallbacks
     {
         return wizards.Find((wizard) => wizard.wizardId == id);
     }
+    public List<Wizard> GetWizardsById(string id)
+    {
+        var wizardsToReturn = new List<Wizard>();
+        foreach (var wizard in wizards)
+        {
+            if (wizard.wizardId.Contains(id))
+            {
+                wizardsToReturn.Add(wizard);
+            }
+        }
+        return wizardsToReturn;
+    }
     public string GetRightOpponentId()
     {
         return wizards[1].wizardId;
     }
+    public Wizard GetRandomOpponentId(string id)
+    {
+        return wizards.Find((wizard) => wizard.wizardId != id && wizard.IsWizardAlive());;
+    }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player player)
     {
-        var quittedPlayer = GetWizardById(player.UserId);
-        if (quittedPlayer.IsWizardAlive())
+        var quittedPlayerWizards = GetWizardsById(player.UserId);
+        foreach (var wizard in quittedPlayerWizards)
         {
-            quittedPlayer.move = new WizardMove("game over", Vector3.forward);
-            quittedPlayer.DeathTime = DateTime.Now;
+            if (wizard.IsWizardAlive())
+            {
+                wizard.move = new WizardMove("game over", Vector3.forward);
+                wizard.DeathTime = DateTime.Now;
+            }
         }
-
     }
 }
 

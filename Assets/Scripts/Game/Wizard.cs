@@ -34,6 +34,7 @@ public class Wizard : MonoBehaviour
     Vector3 wizardLocation = new Vector3(59.5f, 4.4f, 2.1f);
     public WizardMove move = new WizardMove(null, Vector3.zero);
     public Dictionary<string, Magic> magics = new Dictionary<string, Magic>();
+    public bool isBot;
     void Awake()
     {
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
@@ -41,11 +42,12 @@ public class Wizard : MonoBehaviour
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
         if (!_isDashboardWizard)
         {
+            _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
             if (_photonView && _photonView.IsMine)
             {
                 WizardStatsData = _wizardStatsController.GetWizardStatsData();
                 string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
-                _photonView.RPC("UpdateWizardStats", RpcTarget.All, PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
+                _photonView.RPC("UpdateWizardStats", RpcTarget.All, isBot ? PhotonNetwork.LocalPlayer.UserId + wizardIndex : PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
             }
         }
     }
@@ -55,10 +57,9 @@ public class Wizard : MonoBehaviour
     {
         wizardId = id;
         UpdateWizard(JsonUtility.FromJson<WizardStatsData>(wizardStatsRaw));
-        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         LocateWizard();
         _sessionManager.RegisterWizard(this);
-        if (_photonView.IsMine)
+        if (_photonView.IsMine && !isBot)
         {
             _sessionManager.playerWizard = this;
             this.gameObject.name = "Player";
@@ -66,6 +67,10 @@ public class Wizard : MonoBehaviour
         else
         {
             this.gameObject.name = "Opponent";
+        }
+        if (isBot)
+        {
+            CreateBotMove();
         }
     }
     void Start()
@@ -148,6 +153,10 @@ public class Wizard : MonoBehaviour
                 magic.Activate();
                 ReduceMana(magic.GetRequiredMana());
                 IncreaseHealth(WizardStatsData.GetTotalRecovery() + magic.DefenceStatsData.Recovery);
+            }
+            if (isBot)
+            {
+                Invoke("CreateBotMove", 3);
             }
             move = new WizardMove(null, Vector3.zero);
             TurnWizardSelection(false);
@@ -493,5 +502,53 @@ public class Wizard : MonoBehaviour
         }
 
         _wizardStatsController.SaveWizardStatsData(WizardStatsData);
+    }
+    private void CreateBotMove()
+    {
+        var opponentId = _sessionManager.GetRandomOpponentId(wizardId).wizardId;
+        if (!IsWizardAlive())
+        {
+            ChooseMove("game over", opponentId);
+            return;
+        }
+        var attackMagic = "";
+        var manaMagic = "";
+        var defenceMagic = "";
+        foreach (MagicStatsData magicStats in WizardStatsData.MagicsStatsData)
+        {
+            Debug.Log(magicStats.name);
+            if (magicStats.type == Magic.MagicType.Mana)
+            {
+                manaMagic = magicStats.name;
+            }
+            else if(magicStats.type == Magic.MagicType.Defence)
+            {
+                if (magics[magicStats.name].GetRequiredMana() < _currentMana)
+                {
+                    defenceMagic = magicStats.name;
+                }
+            }
+            else {
+                if (magics[magicStats.name].GetRequiredMana() < _currentMana)
+                {
+                    attackMagic = magicStats.name;
+                }
+            }
+        }
+        var options = new List<string>();
+        if (!attackMagic.Equals(""))
+        {
+            options.Add(attackMagic);
+        }
+        if (!manaMagic.Equals(""))
+        {
+            options.Add(manaMagic);
+        }
+        if (!defenceMagic.Equals(""))
+        {
+            options.Add(defenceMagic);
+        }
+        Random rnd = new Random();
+        ChooseMove(options[rnd.Next(0, options.Count)], opponentId);
     }
 }

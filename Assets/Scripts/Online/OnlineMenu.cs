@@ -34,7 +34,6 @@ public class OnlineMenu : MonoBehaviourPunCallbacks
     public void OpenOnlineHost()
     {
         SceneManager.LoadScene("OnlineHost");
-
     }
     public void OpenOnlinePrivate()
     {
@@ -52,7 +51,6 @@ public class OnlineMenu : MonoBehaviourPunCallbacks
     }
     public override void OnDisconnected(DisconnectCause cause)
     {
-        Debug.Log(cause);
         if (cause == DisconnectCause.DisconnectByClientLogic)
         {
             SceneManager.LoadScene("Dashboard");

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePrefab: {fileID: 1433909751113846, guid: f10d307d7517d034aa17196a92fa17eb, type: 3}
-  _skillThumbnail: {fileID: 21300000, guid: 3ea1adbab68faf64cb308d3db1efade0, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: c00c584e2e5dc0a4da5c17e67db6acd6, type: 3}
   _boxCollider: {fileID: 0}
   _requiredMana: 5
   _magicType: 0
@@ -62,3 +62,4 @@ MonoBehaviour:
     StartMana: 0
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
+  _pattern: 

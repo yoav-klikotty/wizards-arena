@@ -17,7 +17,6 @@ public class InventoryMastery : MonoBehaviour
     [SerializeField] string _displayName;
     [SerializeField] List<string> _attributes;
     [SerializeField] int _maxPoints;
-    [SerializeField] TMP_Text _pointsText;
     private int _currentPoints;
     [SerializeField] int _requiredLevel;
     [SerializeField] Button _masteryBtn;
@@ -26,6 +25,93 @@ public class InventoryMastery : MonoBehaviour
     public ManaStatsData ManaStatsData;
     [SerializeField] Sprite _icon;
     [SerializeField] MasteryModal _masteryModal;
+    [SerializeField] List<InventoryMastery> _dependenciesMasteries = new List<InventoryMastery>();
+    [SerializeField] List<InventoryMastery> _excludeMasteries = new List<InventoryMastery>();
+    [SerializeField] GameObject _plusIcon;
+    /**
+    States: 1. Not valid - since not in level or previous dependicies not opened.
+            2. Valid 
+            3. Full
+    **/
+    public void Validate(WizardStatsData wizardStatsData, PlayerStatsData playerStatsData)
+    {
+        if (!IsLevelSufficient(playerStatsData._level))
+        {
+            RenderLevelNotSufficient();
+        }
+        else if (!IsExcludedValid())
+        {
+            RenderLevelNotSufficient();
+        }
+        else if (!IsDependeciesValid())
+        {
+            RenderLevelNotSufficient();
+        }
+        else
+        {
+            EnableMastery();
+            var mastery = wizardStatsData.FindMastery(GetID());
+            if (mastery == null)
+            {
+                _plusIcon.SetActive(true);
+            }
+            else
+            {
+                if (mastery.points > 0)
+                {
+                    SetCurrentPoints(mastery.points);
+                }
+                if (_currentPoints == _maxPoints)
+                {
+                    _plusIcon.SetActive(false);
+                }
+                else
+                {
+                    _plusIcon.SetActive(true);
+                }
+            }
+        }
+    }
+
+    public bool IsLevelSufficient(int playerLevel)
+    {
+        return playerLevel >= GetRequiredLevel();
+    }
+    public bool IsDependeciesValid()
+    {
+        if (_dependenciesMasteries.Count == 0) return true;
+        foreach (var dependency in _dependenciesMasteries)
+        {
+            if (dependency._currentPoints > 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool IsExcludedValid()
+    {
+        if (_excludeMasteries.Count == 0) return true;
+        foreach (var excludedMastery in _excludeMasteries)
+        {
+            if (excludedMastery._currentPoints == 0)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void RenderLevelNotSufficient()
+    {
+        _plusIcon.SetActive(false);
+        DisableMastery();
+    }
+
+    public void RenderValidState()
+    {
+        DisableMastery();
+    }
 
     public string GetID()
     {
@@ -34,10 +120,6 @@ public class InventoryMastery : MonoBehaviour
     public void SetCurrentPoints(int currentPoints)
     {
         _currentPoints = currentPoints;
-        if (_pointsText)
-        {
-            _pointsText.text = currentPoints + "/" + _maxPoints;
-        }
     }
     public int GetRequiredLevel()
     {
@@ -75,6 +157,10 @@ public class InventoryMastery : MonoBehaviour
     public List<string> GetAttributes()
     {
         return _attributes;
+    }
+    public string GetDisplayName()
+    {
+        return _displayName;
     }
 
 }

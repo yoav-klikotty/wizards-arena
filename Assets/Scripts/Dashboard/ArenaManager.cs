@@ -29,10 +29,12 @@ public class ArenaManager : MonoBehaviour
     }
     public void LoadMasteriesScene()
     {
+        LocalStorage.SetDashboardPage(1);
         SceneManager.LoadScene("Masteries");
     }
     public void LoadMagicsScene()
     {
+        LocalStorage.SetDashboardPage(1);
         SceneManager.LoadScene("Magics");
     }
 

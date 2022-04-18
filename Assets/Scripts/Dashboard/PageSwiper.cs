@@ -15,6 +15,12 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     Stopwatch stopwatch;
     void Start(){
         _panelLocation = transform.position;
+        int initialPage = LocalStorage.GetDashboardPage();
+        if (initialPage > 0)
+        {
+            SetPage(initialPage);
+            LocalStorage.SetDashboardPage(0);
+        }
     }
     public void OnDrag(PointerEventData data){
         stopwatch = new Stopwatch();
