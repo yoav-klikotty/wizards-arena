@@ -34,7 +34,6 @@ public class OnlineMenu : MonoBehaviourPunCallbacks
     public void OpenOnlineHost()
     {
         SceneManager.LoadScene("OnlineHost");
-
     }
     public void OpenOnlinePrivate()
     {
