@@ -15,12 +15,15 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool _isDecisionLock = false;
     public List<Wizard> wizards;
     public Wizard playerWizard;
+    public int MaxRankDiff = 50;
+    private int _baseRankPointsChange = 10;
+    private int _maxRankPointBonus = 5;
     public enum GameResult
     {
         First,
         Second,
         Third,
-        Forth,
+        Fourth,
     }
     void Start()
     {
@@ -51,6 +54,21 @@ public class SessionManager : MonoBehaviourPunCallbacks
         }
     }
 
+    private void UpdateMMR(GameResult wizardPlace)
+    {
+        int opponentsWizardsRankSum = 0;
+        for(int i = 0; i < wizards.Count; i++) {
+            if(wizards[i].wizardId != playerWizard.wizardId){
+                opponentsWizardsRankSum += wizards[i].WizardStatsData.RankStatsData.rank;
+            }
+        }
+        int avgOpponentsWizardsRank = opponentsWizardsRankSum / (wizards.Count-1);
+        int myRankDiff = avgOpponentsWizardsRank - playerWizard.WizardStatsData.RankStatsData.rank;
+        int myBonus = myRankDiff / (maxRankDiff / _maxRankPointBonus);
+        int rankDelta = myBonus + _baseRankPointsChange;
+        playerWizard.UpdateWizardRank(wizards.Count, wizardPlace, rankDelta);
+    }
+
     private void RenderDecisionManger()
     {
         if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
@@ -71,7 +89,6 @@ public class SessionManager : MonoBehaviourPunCallbacks
             }
         }
     }
-
 
     bool IsSidesTookDecision()
     {
@@ -158,6 +175,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         wizards.Sort((wizard1, wizard2) => DateTime.Compare(wizard2.DeathTime, wizard1.DeathTime));
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
         LocalStorage.SetLastSessionResult((GameResult)myWizard);
+        UpdateMMR((GameResult)myWizard);
         yield return new WaitForSeconds(4);
         SceneManager.LoadScene("Score");
     }

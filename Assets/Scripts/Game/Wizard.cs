@@ -465,6 +465,44 @@ public class Wizard : MonoBehaviour
         }
     }
 
+    public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
+    {
+        switch(myPlace)
+        {
+            case SessionManager.GameResult.First:
+                WizardStatsData.RankStatsData.rank += rankDelta;
+                break;
+            case SessionManager.GameResult.Second:
+                switch(numOfplayers)
+                {
+                    case 2:
+                        WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        WizardStatsData.RankStatsData.rank += ( rankDelta / 2 );
+                        break;
+                }
+                break;
+            case SessionManager.GameResult.Third:
+                switch(numOfplayers)
+                {
+                    case 3:
+                        WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        break;
+                    case 4:
+                        WizardStatsData.RankStatsData.rank += ( ( rankDelta * -1 ) / 2);
+                        break;
+                }
+                break;
+            case SessionManager.GameResult.Fourth:
+                WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                break;                
+        }
+
+        _wizardStatsController.SaveWizardStatsData(WizardStatsData);
+    }
     private void CreateBotMove()
     {
         var opponentId = _sessionManager.GetRandomOpponentId(wizardId).wizardId;
