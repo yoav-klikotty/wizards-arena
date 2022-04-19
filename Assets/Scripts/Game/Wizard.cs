@@ -470,18 +470,18 @@ public class Wizard : MonoBehaviour
         switch(myPlace)
         {
             case SessionManager.GameResult.First:
-                WizardStatsData.RankStatsData.UpdateRank( numOfplayers, rankDelta );
+                WizardStatsData.RankStatsData.rank += rankDelta;
                 break;
             case SessionManager.GameResult.Second:
                 switch(numOfplayers)
                 {
                     case 2:
-                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta * -1 ) );
+                        WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
                         break;
                     case 3:
                         break;
                     case 4:
-                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta / 2 ) );
+                        WizardStatsData.RankStatsData.rank += ( rankDelta / 2 );
                         break;
                 }
                 break;
@@ -489,15 +489,15 @@ public class Wizard : MonoBehaviour
                 switch(numOfplayers)
                 {
                     case 3:
-                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta * -1 ) );
+                        WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
                         break;
                     case 4:
-                        WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( ( rankDelta * -1 ) / 2) );
+                        WizardStatsData.RankStatsData.rank += ( ( rankDelta * -1 ) / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Fourth:
-                WizardStatsData.RankStatsData.UpdateRank( numOfplayers, ( rankDelta * -1 ) );
+                WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
                 break;                
         }
 

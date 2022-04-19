@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class WizardStatsData
 {
-    public RankStatsData RankStatsData = new RankStatsData(1000, 1000, 1000);
+    public RankStatsData RankStatsData = new RankStatsData(1000);
     public ItemStatsData StaffStatsData = new ItemStatsData(
         "Blue_Staff",
         new List<string> {"blue"},
@@ -358,21 +358,10 @@ public class ItemStatsData
 [Serializable]
 public class RankStatsData
 {
-    public RankStatsData(int twoPlayers, int threePlayers, int fourPlayers)
+    public RankStatsData(int initialRank)
     {
-        this.rankDic.Add(2, twoPlayers);
-        this.rankDic.Add(3, twoPlayers);
-        this.rankDic.Add(4, twoPlayers);
+        this.rank = initialRank;
     }
 
-    IDictionary<int, int> rankDic = new Dictionary<int, int>();
-
-    public int GetModeRank(int numOfplayers){
-        return rankDic[numOfplayers];
-    }
-
-    public void UpdateRank(int numOfplayers, int rankDelta)
-    {
-        rankDic[numOfplayers] += rankDelta;
-    }
+    public int rank;
 }
