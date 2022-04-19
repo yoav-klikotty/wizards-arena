@@ -3,6 +3,14 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] AudioSource _buttonPressSound;
+    [SerializeField] AudioSource _negativeButtonPressSound;
+    [SerializeField] AudioSource _battleButtonPressSound;
+    [SerializeField] AudioSource _switchItemsTabSound;
+    [SerializeField] AudioSource _magicLearnedSound;
+    [SerializeField] AudioSource _masteryOpenedSound;
+    [SerializeField] AudioSource _battleBackgroundSound;
+    [SerializeField] AudioSource _equipItemSound;
+    [SerializeField] AudioSource _purchaseSound;
     [SerializeField] AudioSource _youWinSound;
     [SerializeField] AudioSource _youLoseSound;
     [SerializeField] AudioSource _timesUpSound;
