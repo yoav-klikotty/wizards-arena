@@ -55,6 +55,7 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
+        SoundManager.Instance.PlayBattleButtonSound();
         cachedRoomList.Clear();
         PhotonNetwork.AutomaticallySyncScene = true;
         SceneManager.LoadScene("OnlineSearch");
@@ -86,6 +87,7 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
 
     public void OnBack()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         SceneManager.LoadScene("OnlineMenu");
     }
 

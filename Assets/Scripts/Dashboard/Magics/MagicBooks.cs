@@ -43,6 +43,7 @@ public class MagicBooks : MonoBehaviour
     }
     public void GoToDashboard()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         SceneManager.LoadScene("Dashboard");
     }
 }

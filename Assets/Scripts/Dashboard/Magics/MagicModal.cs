@@ -40,11 +40,13 @@ public class MagicModal : MonoBehaviour
     }
     public void OnLearn()
     {
+        SoundManager.Instance.PlayMagicLearnedSound();
         _magicBook.LearnMagic(_inventoryMagic);
         gameObject.SetActive(false);
     }
     public void OnExit()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         gameObject.SetActive(false);
     }
 }

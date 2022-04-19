@@ -40,6 +40,7 @@ public class MasteryTree : MonoBehaviour
 
     public void GoToDashboard()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         SceneManager.LoadScene("Dashboard");
     }
 }

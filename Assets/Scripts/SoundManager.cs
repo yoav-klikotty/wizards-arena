@@ -34,6 +34,38 @@ public class SoundManager : MonoBehaviour
     {
         _buttonPressSound.Play();
     }
+    public void PlayNegativeButtonSound()
+    {
+        _negativeButtonPressSound.Play();
+    }
+    public void PlayBattleButtonSound()
+    {
+        _battleButtonPressSound.Play();
+    }
+    public void PlaySwitchTabSound()
+    {
+        _switchItemsTabSound.Play();
+    }
+    public void PlayMagicLearnedSound()
+    {
+        _magicLearnedSound.Play();
+    }
+    public void PlayMasteryUpgradeSound()
+    {
+        _masteryOpenedSound.Play();
+    }
+    public void PlayBattleBackgroundSound()
+    {
+        _battleBackgroundSound.Play();
+    }
+    public void PlayEquipItemSound()
+    {
+        _equipItemSound.Play();
+    }
+    public void PlayPurchaseSound()
+    {
+        _purchaseSound.Play();
+    }
     public void PlayYouWinSound()
     {
         _youWinSound.Play();
@@ -53,6 +85,10 @@ public class SoundManager : MonoBehaviour
     public void StopGameThemeSound()
     {
         _gameThemeSound.Stop();
+    }
+    public void StopBattleBackgroundSound()
+    {
+        _battleBackgroundSound.Stop();
     }
     public IEnumerator FadeOutGameThemeSong(float FadeTime)
     {
