@@ -341,7 +341,7 @@ Transform:
   m_LocalScale: {x: 54.127804, y: 54.127804, z: 54.127804}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &119975611
 PrefabInstance:
@@ -2392,7 +2392,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2474731003030833300, guid: 4c6300753bfb3b743a791c25f091a9c5, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2474731003030833300, guid: 4c6300753bfb3b743a791c25f091a9c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3750,10 +3750,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decisionManagerPrefab: {fileID: 5906512550948728991, guid: 90287057ce88843fcaf7bf58ffcbebbe, type: 3}
-  _resultResolverPrefab: {fileID: 2049985769470908931, guid: 89d0aadf2407fa049b74925cce2fc7db, type: 3}
   wizards: []
   playerWizard: {fileID: 0}
-  _isOnline: 0
+  MaxRankDiff: 50
 --- !u!114 &1744701561
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -334,17 +334,17 @@ public class Wizard : MonoBehaviour
 
     public void ResetLocation()
     {
-        EnableWizard();
-        Vector3 newLocation = new Vector3(-0.9f, -0.1f, 0);
-        transform.position = newLocation;
-        transform.localRotation = Quaternion.Euler(0, 180, 0);
+        // EnableWizard();
+        // Vector3 newLocation = new Vector3(-0.9f, -1.09f, 0);
+        // transform.position = newLocation;
+        // transform.localRotation = Quaternion.Euler(0, 180, 0);
     }
     public void TiltLocation()
     {
-        EnableWizard();
-        Vector3 newLocation = new Vector3(-0.9f, -0.1f, 0);
-        transform.position = newLocation;
-        transform.localRotation = Quaternion.Euler(20, 150, -10);
+        // EnableWizard();
+        // Vector3 newLocation = new Vector3(-0.9f, -1.09f, 0);
+        // transform.position = newLocation;
+        // transform.localRotation = Quaternion.Euler(20, 150, -10);
         IdleAni();
     }
     public void DisabledWizard()

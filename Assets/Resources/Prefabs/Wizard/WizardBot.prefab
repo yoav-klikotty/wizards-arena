@@ -1194,6 +1194,8 @@ MonoBehaviour:
   m_SpriteRenderer: {fileID: 4401109148450171993}
   _shootCenter: {fileID: 7821017024439942001}
   WizardStatsData:
+    RankStatsData:
+      rank: 1000
     StaffStatsData:
       Name: 
       materials: []
