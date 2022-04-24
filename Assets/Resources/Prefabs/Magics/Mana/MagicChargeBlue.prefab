@@ -9604,6 +9604,7 @@ MonoBehaviour:
     ManaRegeneration: 2
     PassiveManaRegeneration: 0
   _pattern: 
+  sound: {fileID: 8300000, guid: 88e05dce2d87f0749876af6edc4f8b2f, type: 3}
 --- !u!1 &4095957410145058905
 GameObject:
   m_ObjectHideFlags: 0

@@ -4841,6 +4841,7 @@ MonoBehaviour:
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
   _pattern: 
+  sound: {fileID: 8300000, guid: d0a96dd0b8bf88a4cadd728c0f0cd098, type: 3}
 --- !u!65 &-398682815597580505
 BoxCollider:
   m_ObjectHideFlags: 0

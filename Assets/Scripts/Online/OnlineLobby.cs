@@ -55,6 +55,7 @@ public class OnlineLobby : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
+        SoundManager.Instance.StopGameThemeSound();
         SoundManager.Instance.PlayBattleButtonSound();
         cachedRoomList.Clear();
         PhotonNetwork.AutomaticallySyncScene = true;

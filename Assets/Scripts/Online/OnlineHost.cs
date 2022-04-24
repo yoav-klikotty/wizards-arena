@@ -42,6 +42,7 @@ public class OnlineHost : MonoBehaviourPunCallbacks
     }
     public void CreateRoom()
     {
+        SoundManager.Instance.StopGameThemeSound();
         SoundManager.Instance.PlayBattleButtonSound();
         _errorMessage.DeleteMessage();
         System.Random random = new System.Random();

@@ -16,6 +16,7 @@ public class Wizard : MonoBehaviour
     public const string STUN = "Wizard_Stun";
     public const string DEATH = "Wizard_Death";
     Animation _anim;
+    [SerializeField] WizardSoundManager _wizardSoundManager;
     [SerializeField] int _currentHealth;
     [SerializeField] int _currentMana;
     public DateTime DeathTime;
@@ -158,6 +159,7 @@ public class Wizard : MonoBehaviour
             {
                 Invoke("CreateBotMove", 3);
             }
+            _wizardSoundManager.PlayActionsSound(magic.getSound());
             move = new WizardMove(null, Vector3.zero);
             TurnWizardSelection(false);
         }
@@ -315,6 +317,7 @@ public class Wizard : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        _wizardSoundManager.PlayWizardHitSound();
         if (_photonView && _photonView.IsMine)
         {
             var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
@@ -446,6 +449,7 @@ public class Wizard : MonoBehaviour
 
     public void OnShieldCollision(WizardStatsData attacker, AttackStatsData attackerMagic, int shieldHP)
     {
+        _wizardSoundManager.PlayShieldHitSound();
         if (_photonView && _photonView.IsMine)
         {
             Damage damage = CalculateDamage(attacker, attackerMagic);

@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
+    public bool isMusicOn = true;
+    public bool isSfxOn = true;
     [SerializeField] AudioSource _buttonPressSound;
     [SerializeField] AudioSource _negativeButtonPressSound;
     [SerializeField] AudioSource _battleButtonPressSound;
@@ -32,55 +34,61 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayButtonSound()
     {
-        _buttonPressSound.Play();
+        if(isSfxOn) _buttonPressSound.Play();
     }
     public void PlayNegativeButtonSound()
     {
-        _negativeButtonPressSound.Play();
+        if(isSfxOn) _negativeButtonPressSound.Play();
     }
     public void PlayBattleButtonSound()
     {
-        _battleButtonPressSound.Play();
+        if(isSfxOn) _battleButtonPressSound.Play();
     }
     public void PlaySwitchTabSound()
     {
-        _switchItemsTabSound.Play();
+        if(isSfxOn) _switchItemsTabSound.Play();
     }
     public void PlayMagicLearnedSound()
     {
-        _magicLearnedSound.Play();
+        if(isSfxOn) _magicLearnedSound.Play();
     }
     public void PlayMasteryUpgradeSound()
     {
-        _masteryOpenedSound.Play();
+        if(isSfxOn) _masteryOpenedSound.Play();
     }
     public void PlayBattleBackgroundSound()
     {
-        _battleBackgroundSound.Play();
+        if(isMusicOn)
+        {
+            _battleBackgroundSound.Play();
+        }
     }
     public void PlayEquipItemSound()
     {
-        _equipItemSound.Play();
+        if(isSfxOn) _equipItemSound.Play();
     }
     public void PlayPurchaseSound()
     {
-        _purchaseSound.Play();
+        if(isSfxOn) _purchaseSound.Play();
     }
     public void PlayYouWinSound()
     {
-        _youWinSound.Play();
+        if(isSfxOn) _youWinSound.Play();
     }
     public void PlayYouLoseSound()
     {
-        _youLoseSound.Play();
+        if(isSfxOn) _youLoseSound.Play();
     }
     public void PlayTimesUpSound()
     {
-        _timesUpSound.Play();
+        if(isSfxOn) _timesUpSound.Play();
     }
     public void PlayGameThemeSound()
     {
-        _gameThemeSound.Play();
+        if(isMusicOn)
+        {
+            _gameThemeSound.Play();
+        }
     }
     public void StopGameThemeSound()
     {
