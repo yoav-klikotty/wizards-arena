@@ -66,12 +66,14 @@ public class ItemPanel : MonoBehaviour
 
     public void ClosePanel()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         _wizardStats.RemoveAllDiff();
         gameObject.SetActive(false);
     }
 
     public void HandleActionButton()
     {
+        SoundManager.Instance.PlayEquipItemSound();
         _inventoryManager.EquipItem(_itemSelected);
         playerStatsData.SetCoins(playerStatsData.GetCoins() - _itemSelected.GetPrice());
         _playerStatsController.SavePlayerStatsData(playerStatsData, true);

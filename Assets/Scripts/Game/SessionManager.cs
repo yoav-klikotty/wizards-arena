@@ -27,8 +27,8 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     void Start()
     {
+        SoundManager.Instance.PlayBattleBackgroundSound();
         CreatePlayer();
-
     }
     private void CreatePlayer()
     {
@@ -165,6 +165,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     IEnumerator HandleSessionEndEvent()
     {
+        SoundManager.Instance.StopBattleBackgroundSound();
         wizards.ForEach(wizard =>
         {
             if (wizard.IsWizardAlive())

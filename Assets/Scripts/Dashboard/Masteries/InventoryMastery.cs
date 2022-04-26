@@ -147,6 +147,7 @@ public class InventoryMastery : MonoBehaviour
     }
     public void OnClick()
     {
+        SoundManager.Instance.PlayButtonSound();
         if (GetCurrentPoints() < GetMaxPoints())
         {
             _masteryModal.gameObject.SetActive(true);

@@ -26,6 +26,4 @@ public class GameManager : MonoBehaviour
     {
         this.IsSFXOn = !this.IsSFXOn;
     }
-    
-    
 }

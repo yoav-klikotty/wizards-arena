@@ -15,10 +15,13 @@ public class OnlinePrivate : MonoBehaviourPunCallbacks
     }
     public void OnCancel()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         SceneManager.LoadScene("OnlineMenu");
     }
     public override void OnJoinedRoom()
     {
+        SoundManager.Instance.StopGameThemeSound();
+        SoundManager.Instance.PlayBattleButtonSound();
         PhotonNetwork.AutomaticallySyncScene = true;
         SceneManager.LoadScene("OnlineSearch");
     }

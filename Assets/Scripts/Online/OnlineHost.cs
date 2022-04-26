@@ -28,18 +28,22 @@ public class OnlineHost : MonoBehaviourPunCallbacks
 
     public void ChangeNumberOfPlayers(int players)
     {
+        SoundManager.Instance.PlayButtonSound();
         this.numOfPlayers = players;
         _numOfPlayers.text = players + "";
         GameManager.Instance.NumOfDeathmatchPlayers = players;
     }
     public void ChangeTimeToPlay(int seconds)
     {
+        SoundManager.Instance.PlayButtonSound();
         this.secondsToPlay = seconds;
         _secondsToPlay.text = seconds + " sec";
         GameManager.Instance.TimeToPlay = seconds;
     }
     public void CreateRoom()
     {
+        SoundManager.Instance.StopGameThemeSound();
+        SoundManager.Instance.PlayBattleButtonSound();
         _errorMessage.DeleteMessage();
         System.Random random = new System.Random();
         RoomOptions roomOps = new RoomOptions()
@@ -64,15 +68,18 @@ public class OnlineHost : MonoBehaviourPunCallbacks
     }
     public void CancelRoomCreation()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         SceneManager.LoadScene("OnlineMenu");
     }
     public void ChangePublicMode()
     {
+        SoundManager.Instance.PlayButtonSound();
         isPublicMode = !isPublicMode;
         _publicMode.text = isPublicMode ? "Public" : "Private";
     }
     public void ChangeCompetitiveMode()
     {
+        SoundManager.Instance.PlayButtonSound();
         isCompetitiveMode = !isCompetitiveMode;
         if (isCompetitiveMode)
         {

@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f340b180943584ea50b69c56919523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _wizardSoundManager: {fileID: 0}
   _currentHealth: 0
   _currentMana: 0
   _staff: {fileID: 2622695081224751853}
