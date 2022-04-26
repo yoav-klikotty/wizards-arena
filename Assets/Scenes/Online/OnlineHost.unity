@@ -256,7 +256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693459317697643174, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2693459317697643174, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -272,7 +272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693459318278574285, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_text
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2693459318278574285, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_textAlignment
@@ -505,7 +505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693459317697643174, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
-      value: 60
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2693459317697643174, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -517,7 +517,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2693459318278574285, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_text
-      value: 60
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2693459318278574285, guid: c38bc33c19c0b384692bf0b77150dee0, type: 3}
       propertyPath: m_textAlignment
@@ -2158,7 +2158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2 sec
+  m_text: 3 sec
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}
   m_sharedMaterial: {fileID: 21239350798574270, guid: 5b0bbf0192b9788428af7b485b543c86, type: 2}

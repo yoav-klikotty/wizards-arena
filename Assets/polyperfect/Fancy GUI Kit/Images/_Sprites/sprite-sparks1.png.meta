@@ -74,6 +74,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -82,9 +84,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -105,9 +107,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
@@ -471,6 +476,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      sprite-sparks1_10: 21300020
+      sprite-sparks1_12: 21300024
+      sprite-sparks1_2: 21300004
+      sprite-sparks1_11: 21300022
+      sprite-sparks1_5: 21300010
+      sprite-sparks1_3: 21300006
+      sprite-sparks1_9: 21300018
+      sprite-sparks1_0: 21300000
+      sprite-sparks1_8: 21300016
+      sprite-sparks1_1: 21300002
+      sprite-sparks1_14: 21300028
+      sprite-sparks1_6: 21300012
+      sprite-sparks1_7: 21300014
+      sprite-sparks1_13: 21300026
+      sprite-sparks1_4: 21300008
+      sprite-sparks1_15: 21300030
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
