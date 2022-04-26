@@ -15,6 +15,7 @@ public class Magic : MonoBehaviour
     public ManaStatsData ManaStatsData;
     public enum MagicType { Attack, Mana, Defence };
     [SerializeField] string _pattern;
+    [SerializeField] AudioClip sound;
     void Start()
     {
         _particalSystem = GetComponent<ParticleSystem>();
@@ -66,5 +67,10 @@ public class Magic : MonoBehaviour
     public string GetPattern()
     {
         return _pattern;
+    }
+
+    public AudioClip getSound()
+    {
+        return sound;
     }
 }

@@ -63,3 +63,4 @@ MonoBehaviour:
     ManaRegeneration: 0
     PassiveManaRegeneration: 0
   _pattern: 
+  sound: {fileID: 8300000, guid: 229c368876aa69b4f8762e38c59d6cea, type: 3}

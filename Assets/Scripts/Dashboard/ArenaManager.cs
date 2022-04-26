@@ -29,11 +29,13 @@ public class ArenaManager : MonoBehaviour
     }
     public void LoadMasteriesScene()
     {
+        SoundManager.Instance.PlayButtonSound();
         LocalStorage.SetDashboardPage(1);
         SceneManager.LoadScene("Masteries");
     }
     public void LoadMagicsScene()
     {
+        SoundManager.Instance.PlayButtonSound();
         LocalStorage.SetDashboardPage(1);
         SceneManager.LoadScene("Magics");
     }

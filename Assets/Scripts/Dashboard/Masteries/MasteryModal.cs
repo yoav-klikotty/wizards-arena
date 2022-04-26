@@ -62,6 +62,7 @@ public class MasteryModal : MonoBehaviour
     }
     public void OnUpgrade()
     {
+        SoundManager.Instance.PlayMasteryUpgradeSound();
         if (_inventoryMastery.GetCurrentPoints() < _inventoryMastery.GetMaxPoints())
         {
             masteryTree.UpdateSkill(_inventoryMastery);
@@ -70,6 +71,7 @@ public class MasteryModal : MonoBehaviour
     }
     public void OnExit()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         gameObject.SetActive(false);
     }
 }

@@ -33,20 +33,22 @@ public class OnlineMenu : MonoBehaviourPunCallbacks
     }
     public void OpenOnlineHost()
     {
+        SoundManager.Instance.PlayButtonSound();
         SceneManager.LoadScene("OnlineHost");
     }
     public void OpenOnlinePrivate()
     {
+        SoundManager.Instance.PlayButtonSound();
         SceneManager.LoadScene("OnlinePrivate");
-
     }
     public void OpenOnlineLobby()
     {
+        SoundManager.Instance.PlayButtonSound();
         SceneManager.LoadScene("OnlineLobby");
-
     }
     public void ReturnToDashboard()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
         PhotonNetwork.Disconnect();
     }
     public override void OnDisconnected(DisconnectCause cause)

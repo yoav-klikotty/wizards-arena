@@ -41,6 +41,7 @@ public class InventoryItem : MonoBehaviour
     }
     public void ItemClicked()
     {
+        SoundManager.Instance.PlayButtonSound();
         _itemPanel.OpenPanel(this);
         RectTransform itemRect = this.GetComponent<RectTransform>();
     }
