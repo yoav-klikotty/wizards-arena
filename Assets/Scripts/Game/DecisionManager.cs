@@ -1,14 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System.Collections.Generic;
 
 public class DecisionManager : MonoBehaviour
 {
     [SerializeField] Counter _counter;
     string _option;
     SessionManager _sessionManager;
-    [SerializeField] Slider _manaBar;
     [SerializeField] TMP_Text _manaText;
     [SerializeField] GameObject _magicOption;
     [SerializeField] GameObject _btnContainer;
@@ -35,7 +33,6 @@ public class DecisionManager : MonoBehaviour
         else
         {
             player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
-            SetManaBar();
             UpdateValidMagicsByMana();
         }
     }
@@ -92,12 +89,6 @@ public class DecisionManager : MonoBehaviour
                 elem.GetComponent<Button>().interactable = true;
             }
         }
-    }
-    public void SetManaBar()
-    {
-        _manaBar.maxValue = player.WizardStatsData.GetTotalMaxMana();
-        _manaBar.value = player.GetMana();
-        _manaText.text = _manaBar.value + "/" + _manaBar.maxValue;
     }
 
     public string GetOption()

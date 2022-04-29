@@ -73,15 +73,15 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayYouWinSound()
     {
-        if(isSfxOn) _youWinSound.Play();
+        // if(isSfxOn) _youWinSound.Play();
     }
     public void PlayYouLoseSound()
     {
-        if(isSfxOn) _youLoseSound.Play();
+        // if(isSfxOn) _youLoseSound.Play();
     }
     public void PlayTimesUpSound()
     {
-        if(isSfxOn) _timesUpSound.Play();
+        // if(isSfxOn) _timesUpSound.Play();
     }
     public void PlayGameThemeSound()
     {
@@ -114,7 +114,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayClockTickingSound()
     {
-        _clockTickingSound.Play();
+        // _clockTickingSound.Play();
     }
     public void StopClockTickingSound()
     {
