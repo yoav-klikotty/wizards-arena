@@ -520,7 +520,6 @@ public class Wizard : MonoBehaviour
         var defenceMagic = "";
         foreach (MagicStatsData magicStats in WizardStatsData.MagicsStatsData)
         {
-            Debug.Log(magicStats.name);
             if (magicStats.type == Magic.MagicType.Mana)
             {
                 manaMagic = magicStats.name;

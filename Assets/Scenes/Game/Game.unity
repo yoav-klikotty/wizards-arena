@@ -291,6 +291,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -339,6 +340,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2.74, z: 0}
   m_LocalScale: {x: 54.127804, y: 54.127804, z: 54.127804}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -493,6 +495,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1318795201}
   - {fileID: 733098681}
@@ -964,6 +967,7 @@ Terrain:
   m_DrawHeightmap: 1
   m_DrawInstanced: 1
   m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
   m_ReflectionProbeUsage: 1
   m_MaterialTemplate: {fileID: 2100000, guid: 5986ac7a7b7de354182f210b765dadab, type: 2}
   m_BakeLightProbesForTrees: 1
@@ -984,6 +988,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -100, y: 0, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -2095,6 +2100,7 @@ Transform:
   m_LocalRotation: {x: -0.5961632, y: 0.40329856, z: -0.5070158, w: -0.47420958}
   m_LocalPosition: {x: 112.1, y: 357.8, z: 133.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -3728,6 +3734,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.624, y: 2.624, z: 2.624}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1281984002}
   m_RootOrder: 0
@@ -3750,6 +3757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _decisionManagerPrefab: {fileID: 5906512550948728991, guid: 90287057ce88843fcaf7bf58ffcbebbe, type: 3}
+  _gameOverManagerPrefab: {fileID: 8369566910880320130, guid: d3e7731306277ad4fb00b5cbea49e028, type: 3}
   wizards: []
   playerWizard: {fileID: 0}
   MaxRankDiff: 50
@@ -3877,6 +3885,7 @@ Transform:
   m_LocalRotation: {x: 0.31722912, y: -0.02068749, z: 0.0069219368, w: 0.94809794}
   m_LocalPosition: {x: 58, y: 15, z: -15}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -4550,6 +4559,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1

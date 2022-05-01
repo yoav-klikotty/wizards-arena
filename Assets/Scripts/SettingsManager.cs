@@ -15,4 +15,9 @@ public class SettingsManager : MonoBehaviour
     {
         _languages.SetActive(false);
     }
+
+    public void CloseSettings()
+    {
+        gameObject.SetActive(false);
+    }
 }

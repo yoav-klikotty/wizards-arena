@@ -23,11 +23,7 @@ public class DecisionManager : MonoBehaviour
         if (!player.IsWizardAlive())
         {
             _option = "game over";
-             foreach (Transform child in _btnContainer.transform)
-            {
-                var btn = child.GetComponent<Button>();
-                btn.interactable = false;
-            }
+            _btnContainer.SetActive(false);
             player.ChooseMove(_option, OpponentId);
         }
         else

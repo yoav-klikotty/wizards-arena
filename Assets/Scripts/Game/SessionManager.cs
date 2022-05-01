@@ -8,6 +8,7 @@ using System;
 public class SessionManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject _decisionManagerPrefab;
+    [SerializeField] GameObject _gameOverManagerPrefab;
     DecisionManager _decisionManager;
     bool _isSessionLock = false;
     bool _isBotGenerateLock = false;
@@ -141,6 +142,10 @@ public class SessionManager : MonoBehaviourPunCallbacks
         {
             _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
         }
+        if (!playerWizard.IsWizardAlive())
+        {
+            Instantiate(_gameOverManagerPrefab, transform.root);
+        }
         _isSessionLock = false;
     }
 
@@ -163,7 +168,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
             return false;
         }
     }
-    IEnumerator HandleSessionEndEvent()
+    public IEnumerator HandleSessionEndEvent()
     {
         SoundManager.Instance.StopBattleBackgroundSound();
         wizards.ForEach(wizard =>
