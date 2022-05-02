@@ -47,7 +47,6 @@ public class SettingsManager : MonoBehaviour
 
     public void ToggleMusic()
     {
-        Debug.Log("toggle music");
         SoundManager.Instance.isMusicOn = !SoundManager.Instance.isMusicOn;
         if(SoundManager.Instance.isMusicOn)
         {
@@ -60,7 +59,6 @@ public class SettingsManager : MonoBehaviour
 
     public void ToggleSfx()
     {
-        Debug.Log("toggle sfx");
         SoundManager.Instance.isSfxOn = !SoundManager.Instance.isSfxOn;
     }
 }
