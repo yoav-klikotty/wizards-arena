@@ -1454,6 +1454,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1707858524}
     m_Modifications:
+    - target: {fileID: 175199673140043739, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 175199673140043739, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 168052420}
+    - target: {fileID: 175199673140043739, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 175199673140043739, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 5376496207925373337, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1550,10 +1566,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7502538558164994196, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7502538558164994196, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 168052420}
+    - target: {fileID: 7502538558164994196, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleSfx
+      objectReference: {fileID: 0}
+    - target: {fileID: 7502538558164994196, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SettingsManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 8788818420881100171, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
       propertyPath: _languages
       value: 
       objectReference: {fileID: 500807902}
+    - target: {fileID: 8788818420881100171, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: _sfxCheckmark
+      value: 
+      objectReference: {fileID: 1699517750}
+    - target: {fileID: 8788818420881100171, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+      propertyPath: _musicCheckmark
+      value: 
+      objectReference: {fileID: 329448508}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
 --- !u!224 &168052418 stripped
@@ -1566,6 +1606,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7502538558087610646, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
   m_PrefabInstance: {fileID: 168052417}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &168052420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8788818420881100171, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+  m_PrefabInstance: {fileID: 168052417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168052419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d4f1e0b1fb2b343ba6eedacdb2a15b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &188549766
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,6 +3067,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navigationPanel: {fileID: 328965458}
   _settings: {fileID: 168052419}
+  _mmr: {fileID: 0}
 --- !u!224 &308415290 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1123881562996841594, guid: 666afef7768cab040966fea79a3b2968, type: 3}
@@ -3265,6 +3317,17 @@ MonoBehaviour:
   m_ChildScaleWidth: 1
   m_ChildScaleHeight: 1
   m_ReverseArrangement: 0
+--- !u!114 &329448508 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 175199673140043739, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+  m_PrefabInstance: {fileID: 168052417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &339376048
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3444,7 +3507,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -242.71002}
+  m_AnchoredPosition: {x: 0, y: -242.70996}
   m_SizeDelta: {x: 0, y: 175.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &377995955 stripped
@@ -9036,6 +9099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navigationPanel: {fileID: 328965458}
   _settings: {fileID: 168052419}
+  _mmr: {fileID: 0}
 --- !u!1 &1144934267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7666192954182319517, guid: f193875d568df4d4cb7913377d4a1823, type: 3}
@@ -12478,6 +12542,17 @@ MonoBehaviour:
   PercentThreshold: 0.3
   Easing: 0.5
   TotalPages: 5
+--- !u!114 &1699517750 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7502538558164994196, guid: 348f62e52c10abf48a128f9794605f5b, type: 3}
+  m_PrefabInstance: {fileID: 168052417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1701889631 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1123881564160837403, guid: 666afef7768cab040966fea79a3b2968, type: 3}
@@ -15814,6 +15889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _navigationPanel: {fileID: 328965458}
   _settings: {fileID: 168052419}
+  _mmr: {fileID: 0}
 --- !u!1001 &18524229654848931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16926,11 +17002,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5246030803509764818, guid: cf861ffbbe062364ab86a593d5509feb, type: 3}
       propertyPath: isSfxOn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5246030803509764818, guid: cf861ffbbe062364ab86a593d5509feb, type: 3}
       propertyPath: isMusicOn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf861ffbbe062364ab86a593d5509feb, type: 3}

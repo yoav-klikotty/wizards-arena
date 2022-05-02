@@ -73,11 +73,11 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayYouWinSound()
     {
-        // if(isSfxOn) _youWinSound.Play();
+        if(isSfxOn) _youWinSound.Play();
     }
     public void PlayYouLoseSound()
     {
-        // if(isSfxOn) _youLoseSound.Play();
+        if(isSfxOn) _youLoseSound.Play();
     }
     public void PlayTimesUpSound()
     {
