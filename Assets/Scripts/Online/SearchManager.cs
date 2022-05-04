@@ -16,7 +16,7 @@ public class SearchManager : MonoBehaviourPunCallbacks
     {
         UpdatePlayersCount();
         GameManager.Instance.TimeToPlay = (int)PhotonNetwork.CurrentRoom.CustomProperties["s"];
-        GameManager.Instance.NumOfDeathmatchPlayers = (int)PhotonNetwork.CurrentRoom.MaxPlayers;
+        GameManager.Instance.NumOfPlayers = (int)PhotonNetwork.CurrentRoom.MaxPlayers;
         if (PhotonNetwork.IsMasterClient)
         {
             start = DateTime.Now;
@@ -28,7 +28,7 @@ public class SearchManager : MonoBehaviourPunCallbacks
     {
         if (Tweaks.BotModeActive)
         {
-            if (PhotonNetwork.IsMasterClient && ((DateTime.Now - start).TotalSeconds > timeLimit) && !flag)
+            if (PhotonNetwork.IsMasterClient && !GameManager.Instance.IsPrivateGame && ((DateTime.Now - start).TotalSeconds > timeLimit) && !flag)
             {
                 flag = true;
                 StartCoroutine(StartGame());
@@ -39,7 +39,7 @@ public class SearchManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player player)
     {
         UpdatePlayersCount();
-        if (PhotonNetwork.CurrentRoom.PlayerCount == GameManager.Instance.NumOfDeathmatchPlayers && PhotonNetwork.IsMasterClient && !flag)
+        if (PhotonNetwork.CurrentRoom.PlayerCount == GameManager.Instance.NumOfPlayers && PhotonNetwork.IsMasterClient && !flag)
         {
             flag = true;
             StartCoroutine(StartGame());

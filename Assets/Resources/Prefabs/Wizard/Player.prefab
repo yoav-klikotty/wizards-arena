@@ -601,8 +601,6 @@ MonoBehaviour:
   m_SpriteRenderer: {fileID: 2333571046302198844}
   _shootCenter: {fileID: 8212514550241884948}
   WizardStatsData:
-    RankStatsData:
-      rank: 1000
     StaffStatsData:
       Name: 
       materials: []
@@ -670,6 +668,16 @@ MonoBehaviour:
       PassiveManaRegeneration: 0
     MagicsStatsData: []
     MasteriesStatsData: []
+  PlayerStatsData:
+    RankStatsData:
+      rank: 1000
+    _name: 
+    _level: 30
+    _levelPoints: 0
+    _coins: 100000
+    _crystals: 5
+    _maxCrystals: 20
+    _xp: 30
   PlayerHUD: {fileID: 601630423890107937}
   wizardIndex: 0
   wizardId: 0

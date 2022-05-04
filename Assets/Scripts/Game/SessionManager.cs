@@ -48,7 +48,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
             _isSessionLock = true;
             RevealDecisions();
         }
-        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && IsSessionEnd() && !_isSessionEndLock)
+        if (wizards.Count == GameManager.Instance.NumOfPlayers && IsSessionEnd() && !_isSessionEndLock)
         {
             _isSessionEndLock = true;
             StartCoroutine("HandleSessionEndEvent");
@@ -72,7 +72,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
 
     private void RenderDecisionManger()
     {
-        if (wizards.Count == GameManager.Instance.NumOfDeathmatchPlayers && !_isDecisionLock)
+        if (wizards.Count == GameManager.Instance.NumOfPlayers && !_isDecisionLock)
         {
             _decisionManager = Instantiate(_decisionManagerPrefab, transform.root).GetComponent<DecisionManager>();
             _isDecisionLock = true;
@@ -84,7 +84,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         if (wizards.Count == GameManager.Instance.ActivePlayers && PhotonNetwork.IsMasterClient && !_isBotGenerateLock)
         {
             _isBotGenerateLock = true;
-            for (int i = 0; i < GameManager.Instance.NumOfDeathmatchPlayers - GameManager.Instance.ActivePlayers; i++)
+            for (int i = 0; i < GameManager.Instance.NumOfPlayers - GameManager.Instance.ActivePlayers; i++)
             {
                 PhotonNetwork.Instantiate("Prefabs/Wizard/WizardBot", new Vector3(56, 4.7f, -3), Quaternion.identity);
             }
