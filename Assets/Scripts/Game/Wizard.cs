@@ -28,6 +28,8 @@ public class Wizard : MonoBehaviour
     [SerializeField] GameObject _shootCenter;
     public WizardStatsData WizardStatsData;
     WizardStatsController _wizardStatsController = new WizardStatsController();
+    public PlayerStatsData PlayerStatsData;
+    private PlayerStatsController _playerStatsController = new PlayerStatsController();
     public PlayerHUD PlayerHUD;
     SessionManager _sessionManager;
     public int wizardIndex;
@@ -38,6 +40,7 @@ public class Wizard : MonoBehaviour
     public bool isBot;
     void Awake()
     {
+        PlayerStatsData = _playerStatsController.GetPlayerStatsData();
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
         _photonView = PhotonView.Get(this);
         WizardStatsData = _wizardStatsController.GetWizardStatsData();
@@ -474,18 +477,18 @@ public class Wizard : MonoBehaviour
         switch(myPlace)
         {
             case SessionManager.GameResult.First:
-                WizardStatsData.RankStatsData.rank += rankDelta;
+                PlayerStatsData.RankStatsData.rank += rankDelta;
                 break;
             case SessionManager.GameResult.Second:
                 switch(numOfplayers)
                 {
                     case 2:
-                        WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
                         break;
                     case 3:
                         break;
                     case 4:
-                        WizardStatsData.RankStatsData.rank += ( rankDelta / 2 );
+                        PlayerStatsData.RankStatsData.rank += ( rankDelta / 2 );
                         break;
                 }
                 break;
@@ -493,15 +496,15 @@ public class Wizard : MonoBehaviour
                 switch(numOfplayers)
                 {
                     case 3:
-                        WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
                         break;
                     case 4:
-                        WizardStatsData.RankStatsData.rank += ( ( rankDelta * -1 ) / 2);
+                        PlayerStatsData.RankStatsData.rank += ( ( rankDelta * -1 ) / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Fourth:
-                WizardStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
                 break;                
         }
 

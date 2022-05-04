@@ -60,11 +60,11 @@ public class SessionManager : MonoBehaviourPunCallbacks
         int opponentsWizardsRankSum = 0;
         for(int i = 0; i < wizards.Count; i++) {
             if(wizards[i].wizardId != playerWizard.wizardId){
-                opponentsWizardsRankSum += wizards[i].WizardStatsData.RankStatsData.rank;
+                opponentsWizardsRankSum += wizards[i].PlayerStatsData.RankStatsData.rank;
             }
         }
         int avgOpponentsWizardsRank = opponentsWizardsRankSum / (wizards.Count-1);
-        int myRankDiff = avgOpponentsWizardsRank - playerWizard.WizardStatsData.RankStatsData.rank;
+        int myRankDiff = avgOpponentsWizardsRank - playerWizard.PlayerStatsData.RankStatsData.rank;
         int myBonus = myRankDiff / (MaxRankDiff / _maxRankPointBonus);
         int rankDelta = myBonus + _baseRankPointsChange;
         playerWizard.UpdateWizardRank(wizards.Count, wizardPlace, rankDelta);

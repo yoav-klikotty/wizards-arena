@@ -5,6 +5,7 @@ using UnityEngine;
 [Serializable]
 public class PlayerStatsData
 {
+    public RankStatsData RankStatsData = new RankStatsData(1000);
     public string _name = "";
     public int _level = 30;
     public int _levelPoints = 0;
@@ -97,4 +98,15 @@ public class PlayerStatsData
         this._xp += xp;
     }
 
+}
+
+[Serializable]
+public class RankStatsData
+{
+    public RankStatsData(int initialRank)
+    {
+        this.rank = initialRank;
+    }
+
+    public int rank;
 }

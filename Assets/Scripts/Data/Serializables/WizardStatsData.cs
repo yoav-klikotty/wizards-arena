@@ -5,7 +5,6 @@ using UnityEngine;
 [Serializable]
 public class WizardStatsData
 {
-    public RankStatsData RankStatsData = new RankStatsData(1000);
     public ItemStatsData StaffStatsData = new ItemStatsData(
         "Blue_Staff",
         new List<string> {"blue"},
@@ -354,14 +353,4 @@ public class ItemStatsData
     {
         return Name.Equals(inventoryItem.GetName());
     }
-}
-[Serializable]
-public class RankStatsData
-{
-    public RankStatsData(int initialRank)
-    {
-        this.rank = initialRank;
-    }
-
-    public int rank;
 }
