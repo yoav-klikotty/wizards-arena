@@ -190,6 +190,11 @@ public class SessionManager : MonoBehaviourPunCallbacks
     {
         return wizards.Find((wizard) => wizard.wizardId == id);
     }
+    public void UpdateWizardHits(string wizardId)
+    {
+        var wizard = GetWizardById(wizardId);
+        wizard.IncreaseHits();
+    }
     public List<Wizard> GetWizardsById(string id)
     {
         var wizardsToReturn = new List<Wizard>();
