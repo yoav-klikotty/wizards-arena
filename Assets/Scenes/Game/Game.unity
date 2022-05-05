@@ -3881,6 +3881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bbc548aa5455c647ab31dfea3a94747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _counter: {fileID: 1800444294}
   _decisionManagerPrefab: {fileID: 5906512550948728991, guid: 90287057ce88843fcaf7bf58ffcbebbe, type: 3}
   _gameOverManagerPrefab: {fileID: 8369566910880320130, guid: d3e7731306277ad4fb00b5cbea49e028, type: 3}
   wizards: []

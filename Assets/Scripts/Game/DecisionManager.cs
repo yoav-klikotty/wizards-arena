@@ -2,14 +2,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using System.Collections;
+
 public class DecisionManager : MonoBehaviour
 {
-    [SerializeField] Counter _counter;
     string _option;
     SessionManager _sessionManager;
     [SerializeField] TMP_Text _manaText;
     [SerializeField] GameObject _magicOption;
     [SerializeField] GameObject _btnContainer;
+    [SerializeField] GameObject _reviveButton;
     Wizard player;
     string OpponentId;
     bool isPlayerChoseAttack;
@@ -20,23 +22,18 @@ public class DecisionManager : MonoBehaviour
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         player = _sessionManager.playerWizard;
         OpponentId = _sessionManager.GetRandomOpponentId(player.wizardId).wizardId;
-        if (!player.IsWizardAlive())
-        {
-            _option = "game over";
-            _btnContainer.SetActive(false);
-            player.ChooseMove(_option, OpponentId);
-        }
-        else
-        {
-            player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
-            UpdateValidMagicsByMana();
-        }
+        player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
+        UpdateValidMagicsByMana();
     }
     void Update()
     {
-        if (_counter.IsCounterEnd() && !IsDecisionMakingOver())
+        if (player.IsWizardAlive())
         {
-            ChooseRandom();
+            _reviveButton.SetActive(false);
+        }
+        else 
+        {
+            _reviveButton.SetActive(true);
         }
         if (isPlayerChoseAttack && Input.GetMouseButtonDown(0))
         {
@@ -50,6 +47,9 @@ public class DecisionManager : MonoBehaviour
                     SelectOpponent(OpponentId);
                     player.ChooseMove(_option, OpponentId);
                     isDecisionOver = true;
+                    isPlayerChoseAttack = false;
+                    StartCoroutine(EnableDecision());
+
                 }
             }
 
@@ -108,6 +108,8 @@ public class DecisionManager : MonoBehaviour
             {
                 player.ChooseMove(_option, OpponentId);
                 isDecisionOver = true;
+                StartCoroutine(EnableDecision());
+
             }
             else
             {
@@ -117,6 +119,19 @@ public class DecisionManager : MonoBehaviour
         }
 
     }
+
+    IEnumerator EnableDecision()
+    {
+        yield return new WaitForSeconds(1);
+        isDecisionOver = false;
+        int childs = _btnContainer.transform.childCount;
+        for (int i = 0; i < childs; i++)
+        {
+            GameObject.Destroy(_btnContainer.transform.GetChild(i).gameObject);
+        }
+        UpdateValidMagicsByMana();
+    }
+
 
     public void ChooseRandom()
     {
@@ -131,6 +146,10 @@ public class DecisionManager : MonoBehaviour
     public bool IsDecisionMakingOver()
     {
         return isDecisionOver;
+    }
+    public void ReviveWizard()
+    {
+        this._sessionManager.ReviveWizard();
     }
 
 }

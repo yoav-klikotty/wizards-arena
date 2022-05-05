@@ -19,7 +19,7 @@ public class Wizard : MonoBehaviour
     [SerializeField] WizardSoundManager _wizardSoundManager;
     [SerializeField] int _currentHealth;
     [SerializeField] int _currentMana;
-    public DateTime DeathTime;
+    private bool _isWizardAlive = true;
     [SerializeField] Item _staff;
     [SerializeField] Item _cape;
     [SerializeField] Item _orb;
@@ -182,6 +182,7 @@ public class Wizard : MonoBehaviour
     public void ChooseMoveRPC(string option, string id)
     {
         move = new WizardMove(option, _sessionManager.GetWizardById(id).wizardLocation);
+        RenderDecision();
     }
     public float GetHealth()
     {
@@ -202,7 +203,7 @@ public class Wizard : MonoBehaviour
             {
                 _sessionManager.UpdateWizardHits(wizradId);
                 _currentHealth = 0;
-                DeathTime = DateTime.Now;
+                _isWizardAlive = false;
                 DeathAni();
             }
             else
@@ -244,7 +245,24 @@ public class Wizard : MonoBehaviour
         PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
         if (health > 0) PlayerHUD.ActivateIndication("" + health, indicationEvents.heal);
     }
+    public void ReviveWizard()
+    {
+        if (_photonView.IsMine)
+        {
+            _photonView.RPC("ReviveWizardRPC", RpcTarget.All);
+        }
 
+    }
+    [PunRPC]
+    public void ReviveWizardRPC()
+    {
+        _currentHealth = WizardStatsData.GetTotalHP();
+        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+        _currentMana = WizardStatsData.GetTotalStartMana();
+        PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
+        _isWizardAlive = true;
+        IdleAni();
+    }
     public int GetMana()
     {
         return _currentMana;
@@ -339,27 +357,11 @@ public class Wizard : MonoBehaviour
     }
     public bool IsWizardAlive()
     {
-        return DeathTime == DateTime.MinValue;
+        return _isWizardAlive;
     }
     public void StopAni()
     {
         _anim.Stop();
-    }
-
-    public void ResetLocation()
-    {
-        // EnableWizard();
-        // Vector3 newLocation = new Vector3(-0.9f, -1.09f, 0);
-        // transform.position = newLocation;
-        // transform.localRotation = Quaternion.Euler(0, 180, 0);
-    }
-    public void TiltLocation()
-    {
-        // EnableWizard();
-        // Vector3 newLocation = new Vector3(-0.9f, -1.09f, 0);
-        // transform.position = newLocation;
-        // transform.localRotation = Quaternion.Euler(20, 150, -10);
-        IdleAni();
     }
     public void DisabledWizard()
     {
@@ -482,38 +484,38 @@ public class Wizard : MonoBehaviour
 
     public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
     {
-        switch(myPlace)
+        switch (myPlace)
         {
             case SessionManager.GameResult.First:
                 PlayerStatsData.RankStatsData.rank += rankDelta;
                 break;
             case SessionManager.GameResult.Second:
-                switch(numOfplayers)
+                switch (numOfplayers)
                 {
                     case 2:
-                        PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
                         break;
                     case 3:
                         break;
                     case 4:
-                        PlayerStatsData.RankStatsData.rank += ( rankDelta / 2 );
+                        PlayerStatsData.RankStatsData.rank += (rankDelta / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Third:
-                switch(numOfplayers)
+                switch (numOfplayers)
                 {
                     case 3:
-                        PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
                         break;
                     case 4:
-                        PlayerStatsData.RankStatsData.rank += ( ( rankDelta * -1 ) / 2);
+                        PlayerStatsData.RankStatsData.rank += ((rankDelta * -1) / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Fourth:
-                PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
-                break;                
+                PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
+                break;
         }
 
         _wizardStatsController.SaveWizardStatsData(WizardStatsData);
@@ -535,14 +537,15 @@ public class Wizard : MonoBehaviour
             {
                 manaMagic = magicStats.name;
             }
-            else if(magicStats.type == Magic.MagicType.Defence)
+            else if (magicStats.type == Magic.MagicType.Defence)
             {
                 if (magics[magicStats.name].GetRequiredMana() < _currentMana)
                 {
                     defenceMagic = magicStats.name;
                 }
             }
-            else {
+            else
+            {
                 if (magics[magicStats.name].GetRequiredMana() < _currentMana)
                 {
                     attackMagic = magicStats.name;
