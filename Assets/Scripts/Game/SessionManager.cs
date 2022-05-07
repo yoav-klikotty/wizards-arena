@@ -7,13 +7,9 @@ using System;
 
 public class SessionManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Counter _counter;
     [SerializeField] GameObject _decisionManagerPrefab;
-    [SerializeField] GameObject _gameOverManagerPrefab;
     DecisionManager _decisionManager;
-    bool _isSessionLock = false;
     bool _isBotGenerateLock = false;
-    bool _isSessionEndLock = false;
     bool _isDecisionLock = false;
     public List<Wizard> wizards;
     public Wizard playerWizard;
@@ -42,11 +38,6 @@ public class SessionManager : MonoBehaviourPunCallbacks
         if (Tweaks.BotModeActive)
         {
             CreateBots();
-        }
-        if (wizards.Count == GameManager.Instance.NumOfPlayers && IsSessionEnd() && !_isSessionEndLock)
-        {
-            _isSessionEndLock = true;
-            StartCoroutine("HandleSessionEndEvent");
         }
     }
 
@@ -93,14 +84,14 @@ public class SessionManager : MonoBehaviourPunCallbacks
     {
         playerWizard.ReviveWizard();
     }
-    bool IsSessionEnd()
+    public void SessionEnd()
     {
-        return _counter.IsCounterEnd();
+        StartCoroutine("HandleSessionEndEvent");
     }
     public IEnumerator HandleSessionEndEvent()
     {
         SoundManager.Instance.StopBattleBackgroundSound();
-        // wizards.Sort((wizard1, wizard2) => DateTime.Compare(wizard2.DeathTime, wizard1.DeathTime));
+        wizards.Sort((wizard1, wizard2) => wizard2.Hits - wizard1.Hits);
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
         LocalStorage.SetLastSessionResult((GameResult)myWizard);
         UpdateMMR((GameResult)myWizard);

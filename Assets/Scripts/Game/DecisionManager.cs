@@ -16,6 +16,7 @@ public class DecisionManager : MonoBehaviour
     string OpponentId;
     bool isPlayerChoseAttack;
     bool isDecisionOver;
+    bool reviveLock;
 
     void Start()
     {
@@ -29,11 +30,13 @@ public class DecisionManager : MonoBehaviour
     {
         if (player.IsWizardAlive())
         {
+            reviveLock = false;
             _reviveButton.SetActive(false);
         }
-        else 
+        else if (!reviveLock)
         {
-            _reviveButton.SetActive(true);
+            reviveLock = true;
+            StartCoroutine(RenderReviveButton());
         }
         if (isPlayerChoseAttack && Input.GetMouseButtonDown(0))
         {
@@ -96,7 +99,7 @@ public class DecisionManager : MonoBehaviour
 
     public void ChooseMagic(string magicName, bool isAttackMagic)
     {
-        if (!IsDecisionMakingOver())
+        if (_sessionManager.playerWizard.IsWizardAlive())
         {
             _option = magicName;
             foreach (Transform child in _btnContainer.transform)
@@ -118,6 +121,11 @@ public class DecisionManager : MonoBehaviour
             }
         }
 
+    }
+    IEnumerator RenderReviveButton()
+    {
+        yield return new WaitForSeconds(3);
+        _reviveButton.SetActive(true);
     }
 
     IEnumerator EnableDecision()
