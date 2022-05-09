@@ -6,29 +6,29 @@ using UnityEngine;
 public class WizardStatsData
 {
     public ItemStatsData StaffStatsData = new ItemStatsData(
-        "Blue_Staff",
-        new List<string> {"blue"},
+        "Staff_Default",
+        new List<string> {"green-basic"},
         new DefenceStatsData(0, 0, 0),
-        new AttackStatsData(5, 0, 0, 0),
-        new ManaStatsData(0, 5, 3, 0)
+        new AttackStatsData(0, 0, 0, 0),
+        new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData CapeStatsData = new ItemStatsData(
-        "Blue_Orb",
-        new List<string> {"blue"},
+        "Orb_Default",
+        new List<string> {"green-basic"},
         new DefenceStatsData(0, 0, 0),
         new AttackStatsData(0, 0, 0, 0),
-        new ManaStatsData(5, 5, 5, 0)
+        new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData OrbStatsData = new ItemStatsData(
-        "Blue_Cape",
-        new List<string> {"blue"},
-        new DefenceStatsData(15, 0, 0),
+        "Cape_Default",
+        new List<string> {"green-basic"},
+        new DefenceStatsData(0, 0, 0),
         new AttackStatsData(0, 0, 0, 0),
-        new ManaStatsData(0, 5, 5, 0)
+        new ManaStatsData(0, 0, 0, 0)
     );
-    public AttackStatsData BaseAttackStatsData = new AttackStatsData(3, 0.1f, 0.1f, 0);
-    public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(25, 0, 0);
-    public ManaStatsData BaseManaStatsData = new ManaStatsData(20, 0, 3, 0);
+    public AttackStatsData BaseAttackStatsData = new AttackStatsData(15, 0.05f, 0.5f, 0);
+    public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(100, 0, 0);
+    public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 5, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
         new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
         new MagicStatsData("MagicChargeBlue", Magic.MagicType.Mana),

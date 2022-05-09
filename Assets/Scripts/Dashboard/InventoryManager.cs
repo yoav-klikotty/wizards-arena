@@ -26,6 +26,9 @@ public class InventoryManager : MonoBehaviour
             new InventoryPrefabs("Red_Cape", ItemType.Cape),
             new InventoryPrefabs("Red_Orb", ItemType.Orb),
             new InventoryPrefabs("Red_Staff", ItemType.Staff),
+            new InventoryPrefabs("Cape_Default", ItemType.Cape),
+            new InventoryPrefabs("Orb_Default", ItemType.Orb),
+            new InventoryPrefabs("Staff_Default", ItemType.Staff),
     };
     void Start()
     {
@@ -46,7 +49,7 @@ public class InventoryManager : MonoBehaviour
         for (int i = 0; i < totalItems.Length; i++)
         {
             var prefab = Resources.Load("Prefabs/Items/" + totalItems[i].Type.ToString() + "/" + totalItems[i].Name);
-            var item = Instantiate(prefab, _slots[i].transform.position, _slots[i].transform.rotation, _slots[i].transform) as GameObject;
+            var item = Instantiate(prefab, _slots[0].transform.position, _slots[0].transform.rotation, _slots[0].transform) as GameObject;
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
         }
     }
