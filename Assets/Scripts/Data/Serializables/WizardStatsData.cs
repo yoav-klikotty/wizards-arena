@@ -33,7 +33,6 @@ public class WizardStatsData
         new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
         new MagicStatsData("MagicChargeBlue", Magic.MagicType.Mana),
         new MagicStatsData("MagicShieldBlue", Magic.MagicType.Defence),
-
     };
     public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
     {
