@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public bool IsSFXOn = true;
     public int ActivePlayers = 0;
     public int NumOfPlayers = 2;
-    public int TimeToPlay = 2;
+    public int TimeToPlay = 120;
     public int EnergyCost = 1;
     public bool IsPrivateGame = false;
 

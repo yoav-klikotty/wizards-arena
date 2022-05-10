@@ -46,8 +46,8 @@ public class Magic : MonoBehaviour
     public void ActivateFirePrefab(Vector3 FromPoint, Vector3 ToPoint)
     {
         GameObject instanceBullet = Instantiate(_firePrefab, FromPoint, Quaternion.identity);
-        instanceBullet.GetComponent<ProjectileMover>().wizardStats = gameObject.GetComponentInParent<Wizard>().WizardStatsData;
-        instanceBullet.GetComponent<ProjectileMover>().AttackStatsData = AttackStatsData;
+        instanceBullet.GetComponent<ProjectileMover>().Attacker = gameObject.GetComponentInParent<Wizard>();
+        instanceBullet.GetComponent<ProjectileMover>().MagicAttackStatsData = AttackStatsData;
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
     public Sprite GetThumbnail()
@@ -60,8 +60,8 @@ public class Magic : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
-        var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().AttackStatsData;
+        var attacker = collision.gameObject.GetComponent<ProjectileMover>().Attacker;
+        var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackStatsData;
         gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker, attackerMagic, DefenceStatsData.HP);
     }
     public string GetPattern()

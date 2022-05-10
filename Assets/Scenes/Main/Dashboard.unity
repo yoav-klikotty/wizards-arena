@@ -19277,6 +19277,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2474731003030833301, guid: 4c6300753bfb3b743a791c25f091a9c5, type: 3}
+      propertyPath: IsSFXOn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474731003030833301, guid: 4c6300753bfb3b743a791c25f091a9c5, type: 3}
       propertyPath: TimeToPlay
       value: 3
       objectReference: {fileID: 0}
@@ -19630,11 +19634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5246030803509764818, guid: cf861ffbbe062364ab86a593d5509feb, type: 3}
       propertyPath: isSfxOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5246030803509764818, guid: cf861ffbbe062364ab86a593d5509feb, type: 3}
       propertyPath: isMusicOn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf861ffbbe062364ab86a593d5509feb, type: 3}

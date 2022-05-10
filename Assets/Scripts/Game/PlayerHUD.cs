@@ -13,6 +13,8 @@ public class PlayerHUD : MonoBehaviour
     Transform _camera;
     [SerializeField] Image _manaBar;
     [SerializeField] TMP_Text _manaText;
+    [SerializeField] TMP_Text _hits;
+
     private float _barSpeed = 0.05f;
 
     void Start()
@@ -42,6 +44,10 @@ public class PlayerHUD : MonoBehaviour
         _healthLabel.text = (int) health + "/" + maxHP;
         float barFillAmountTarget = health / maxHP;
         StartCoroutine(AdjustBar(_healthBar, barFillAmountTarget));
+    }
+    public void UpdateHits(int hits)
+    {
+        _hits.text = "Hits: " + hits;
     }
 
     void LateUpdate()

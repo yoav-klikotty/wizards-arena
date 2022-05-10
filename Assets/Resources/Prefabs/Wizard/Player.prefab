@@ -682,6 +682,7 @@ MonoBehaviour:
   wizardIndex: 0
   wizardId: 0
   isBot: 0
+  Hits: 0
 --- !u!65 &8212514550521930822
 BoxCollider:
   m_ObjectHideFlags: 0

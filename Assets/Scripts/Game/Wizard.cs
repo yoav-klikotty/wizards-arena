@@ -19,7 +19,7 @@ public class Wizard : MonoBehaviour
     [SerializeField] WizardSoundManager _wizardSoundManager;
     [SerializeField] int _currentHealth;
     [SerializeField] int _currentMana;
-    public DateTime DeathTime;
+    private bool _isWizardAlive = true;
     [SerializeField] Item _staff;
     [SerializeField] Item _cape;
     [SerializeField] Item _orb;
@@ -38,6 +38,8 @@ public class Wizard : MonoBehaviour
     public WizardMove move = new WizardMove(null, Vector3.zero);
     public Dictionary<string, Magic> magics = new Dictionary<string, Magic>();
     public bool isBot;
+    public int Hits;
+
     void Awake()
     {
         PlayerStatsData = _playerStatsController.GetPlayerStatsData();
@@ -128,6 +130,7 @@ public class Wizard : MonoBehaviour
         if (PlayerHUD != null)
         {
             PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+            PlayerHUD.UpdateHits(0);
             _currentMana = WizardStatsData.GetTotalStartMana();
             PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
         }
@@ -179,6 +182,7 @@ public class Wizard : MonoBehaviour
     public void ChooseMoveRPC(string option, string id)
     {
         move = new WizardMove(option, _sessionManager.GetWizardById(id).wizardLocation);
+        RenderDecision();
     }
     public float GetHealth()
     {
@@ -186,7 +190,7 @@ public class Wizard : MonoBehaviour
     }
 
     [PunRPC]
-    public void ReduceHealth(int health, bool isCrit, bool isAvoided)
+    public void ReduceHealth(int health, bool isCrit, bool isAvoided, string wizradId)
     {
         if (isAvoided)
         {
@@ -195,10 +199,11 @@ public class Wizard : MonoBehaviour
         else if (health > 0)
         {
             _currentHealth = (_currentHealth - health);
-            if (_currentHealth < 0)
+            if (_currentHealth <= 0)
             {
+                _sessionManager.UpdateWizardHits(wizradId);
                 _currentHealth = 0;
-                DeathTime = DateTime.Now;
+                _isWizardAlive = false;
                 DeathAni();
             }
             else
@@ -221,7 +226,11 @@ public class Wizard : MonoBehaviour
         yield return new WaitForSeconds(animationDuration);
         PlayerHUD.ActivateIndication("" + dmg, indicationEvents.shield);
     }
-
+    public void IncreaseHits()
+    {
+        Hits += 1;
+        PlayerHUD.UpdateHits(Hits);
+    }
     public void IncreaseHealth(int health)
     {
         int newVal = (_currentHealth + health);
@@ -236,7 +245,24 @@ public class Wizard : MonoBehaviour
         PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
         if (health > 0) PlayerHUD.ActivateIndication("" + health, indicationEvents.heal);
     }
+    public void ReviveWizard()
+    {
+        if (_photonView.IsMine)
+        {
+            _photonView.RPC("ReviveWizardRPC", RpcTarget.All);
+        }
 
+    }
+    [PunRPC]
+    public void ReviveWizardRPC()
+    {
+        _currentHealth = WizardStatsData.GetTotalHP();
+        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+        _currentMana = WizardStatsData.GetTotalStartMana();
+        PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
+        _isWizardAlive = true;
+        IdleAni();
+    }
     public int GetMana()
     {
         return _currentMana;
@@ -323,35 +349,19 @@ public class Wizard : MonoBehaviour
         _wizardSoundManager.PlayWizardHitSound();
         if (_photonView && _photonView.IsMine)
         {
-            var attacker = collision.gameObject.GetComponent<ProjectileMover>().wizardStats;
-            var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().AttackStatsData;
-            Damage damage = CalculateDamage(attacker, attackerMagic);
-            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided);
+            var attacker = collision.gameObject.GetComponent<ProjectileMover>().Attacker;
+            var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackStatsData;
+            Damage damage = CalculateDamage(attacker.WizardStatsData, attackerMagic);
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided, attacker.wizardId);
         }
     }
     public bool IsWizardAlive()
     {
-        return DeathTime == DateTime.MinValue;
+        return _isWizardAlive;
     }
     public void StopAni()
     {
         _anim.Stop();
-    }
-
-    public void ResetLocation()
-    {
-        // EnableWizard();
-        // Vector3 newLocation = new Vector3(-0.9f, -1.09f, 0);
-        // transform.position = newLocation;
-        // transform.localRotation = Quaternion.Euler(0, 180, 0);
-    }
-    public void TiltLocation()
-    {
-        // EnableWizard();
-        // Vector3 newLocation = new Vector3(-0.9f, -1.09f, 0);
-        // transform.position = newLocation;
-        // transform.localRotation = Quaternion.Euler(20, 150, -10);
-        IdleAni();
     }
     public void DisabledWizard()
     {
@@ -450,62 +460,62 @@ public class Wizard : MonoBehaviour
         public bool avoided;
     }
 
-    public void OnShieldCollision(WizardStatsData attacker, AttackStatsData attackerMagic, int shieldHP)
+    public void OnShieldCollision(Wizard attacker, AttackStatsData attackerMagic, int shieldHP)
     {
         _wizardSoundManager.PlayShieldHitSound();
         if (_photonView && _photonView.IsMine)
         {
-            Damage damage = CalculateDamage(attacker, attackerMagic);
+            Damage damage = CalculateDamage(attacker.WizardStatsData, attackerMagic);
             int shieldDmg = 0;
             if (damage.damage > shieldHP)
             {
-                damage.damage = (damage.damage - shieldHP) + ((int)(shieldHP * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration)));
+                damage.damage = (damage.damage - shieldHP) + ((int)(shieldHP * (attacker.WizardStatsData.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration)));
                 shieldDmg = shieldHP;
             }
             else
             {
                 shieldDmg = damage.damage;
-                damage.damage = (int)(damage.damage * (attacker.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration));
+                damage.damage = (int)(damage.damage * (attacker.WizardStatsData.GetTotalArmorPenetration() + attackerMagic.ArmorPenetration));
             }
-            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided);
+            _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided, attacker.wizardId);
             _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg);
         }
     }
 
     public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
     {
-        switch(myPlace)
+        switch (myPlace)
         {
             case SessionManager.GameResult.First:
                 PlayerStatsData.RankStatsData.rank += rankDelta;
                 break;
             case SessionManager.GameResult.Second:
-                switch(numOfplayers)
+                switch (numOfplayers)
                 {
                     case 2:
-                        PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
                         break;
                     case 3:
                         break;
                     case 4:
-                        PlayerStatsData.RankStatsData.rank += ( rankDelta / 2 );
+                        PlayerStatsData.RankStatsData.rank += (rankDelta / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Third:
-                switch(numOfplayers)
+                switch (numOfplayers)
                 {
                     case 3:
-                        PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
+                        PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
                         break;
                     case 4:
-                        PlayerStatsData.RankStatsData.rank += ( ( rankDelta * -1 ) / 2);
+                        PlayerStatsData.RankStatsData.rank += ((rankDelta * -1) / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Fourth:
-                PlayerStatsData.RankStatsData.rank += ( rankDelta * -1 );
-                break;                
+                PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
+                break;
         }
 
         _wizardStatsController.SaveWizardStatsData(WizardStatsData);
@@ -527,14 +537,15 @@ public class Wizard : MonoBehaviour
             {
                 manaMagic = magicStats.name;
             }
-            else if(magicStats.type == Magic.MagicType.Defence)
+            else if (magicStats.type == Magic.MagicType.Defence)
             {
                 if (magics[magicStats.name].GetRequiredMana() < _currentMana)
                 {
                     defenceMagic = magicStats.name;
                 }
             }
-            else {
+            else
+            {
                 if (magics[magicStats.name].GetRequiredMana() < _currentMana)
                 {
                     attackMagic = magicStats.name;
