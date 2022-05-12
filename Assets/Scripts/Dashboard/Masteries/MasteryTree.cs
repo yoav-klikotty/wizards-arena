@@ -26,12 +26,12 @@ public class MasteryTree : MonoBehaviour
     }
     public void UpdateSkill(InventoryMastery inventoryMastery)
     {
-        if (playerStatsData.GetXP() > 0)
+        if (playerStatsData.GetMasteriesPoints() > 0)
         {
             inventoryMastery.SetCurrentPoints(inventoryMastery.GetCurrentPoints() + 1);
             wizardStatsData.UpdateMasteryPoints(inventoryMastery);
             _wizardStatsController.SaveWizardStatsData(wizardStatsData);
-            playerStatsData.SetXP(playerStatsData.GetXP() - 1);
+            playerStatsData.ReduceMasteriesPoints();
             _playerStatsController.SavePlayerStatsData(playerStatsData, true);
             RefreshTree();
         }

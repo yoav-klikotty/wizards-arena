@@ -33,9 +33,10 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         _coinsInput.text = playerStatsData.GetCoins() + "";
-        _XPInput.text = playerStatsData.GetLevelPoints() + "/" + "100";
+        _XPInput.text = playerStatsData.GetXP() + "/" + playerStatsData.GetMaxXP();
+        _levelBar.value = playerStatsData.GetXP();
+        _levelBar.maxValue = playerStatsData.GetMaxXP();
         _energyInput.text = playerStatsData.GetCrystals() + "/" + playerStatsData.GetMaxCrystals();
         _levelInput.text = "" + playerStatsData.GetLevel();
-        _levelBar.value = playerStatsData.GetLevelPoints();
     }
 }

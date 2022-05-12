@@ -112,7 +112,7 @@ public class EndSession : MonoBehaviourPunCallbacks
         {
             PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
             playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
-            playerStatsData.AddLevelPoints(50);
+            playerStatsData.AddXP(10);
             _playerStatsController.SavePlayerStatsData(playerStatsData, false);
         }
         SceneManager.LoadScene("Dashboard");

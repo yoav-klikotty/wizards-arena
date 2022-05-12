@@ -35,7 +35,7 @@ public class InventoryMastery : MonoBehaviour
     **/
     public void Validate(WizardStatsData wizardStatsData, PlayerStatsData playerStatsData)
     {
-        if (!IsLevelSufficient(playerStatsData._level))
+        if (!IsLevelSufficient(playerStatsData.GetLevel()))
         {
             RenderLevelNotSufficient();
         }

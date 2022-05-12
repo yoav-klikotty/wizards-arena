@@ -11208,6 +11208,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 35230525}
     m_Modifications:
+    - target: {fileID: 1464912072142067024, guid: a5e3c907a381d724b9b2e30049ba0687, type: 3}
+      propertyPath: m_Name
+      value: XP
+      objectReference: {fileID: 0}
     - target: {fileID: 1655327148893447529, guid: a5e3c907a381d724b9b2e30049ba0687, type: 3}
       propertyPath: m_fontSize
       value: 40
@@ -14970,13 +14974,6 @@ MonoBehaviour:
   playerStatsData:
     RankStatsData:
       rank: 1000
-    _name: 
-    _level: 30
-    _levelPoints: 0
-    _coins: 100000
-    _crystals: 5
-    _maxCrystals: 20
-    _xp: 30
   wizardStatsData:
     StaffStatsData:
       Name: Blue_Staff
