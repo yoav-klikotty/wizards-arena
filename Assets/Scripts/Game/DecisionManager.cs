@@ -14,8 +14,6 @@ public class DecisionManager : MonoBehaviour
     [SerializeField] GameObject _reviveButton;
     Wizard player;
     string OpponentId;
-    bool isPlayerChoseAttack;
-    bool isDecisionOver;
     bool reviveLock;
 
     void Start()
@@ -23,6 +21,7 @@ public class DecisionManager : MonoBehaviour
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
         player = _sessionManager.playerWizard;
         OpponentId = _sessionManager.GetRandomOpponentId(player.wizardId).wizardId;
+        SelectOpponent(OpponentId);
         player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
         UpdateValidMagicsByMana();
     }
@@ -38,21 +37,16 @@ public class DecisionManager : MonoBehaviour
             reviveLock = true;
             StartCoroutine(RenderReviveButton());
         }
-        if (isPlayerChoseAttack && Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                if (hit.transform.gameObject.name == "Opponent" && !IsDecisionMakingOver())
+                if (hit.transform.gameObject.name == "Opponent")
                 {
                     OpponentId = hit.transform.gameObject.GetComponent<Wizard>().wizardId;
                     SelectOpponent(OpponentId);
-                    player.ChooseMove(_option, OpponentId);
-                    isDecisionOver = true;
-                    isPlayerChoseAttack = false;
-                    StartCoroutine(EnableDecision());
-
                 }
             }
 
@@ -107,18 +101,8 @@ public class DecisionManager : MonoBehaviour
                 var btn = child.GetComponent<Button>();
                 btn.interactable = false;
             }
-            if (!isAttackMagic)
-            {
-                player.ChooseMove(_option, OpponentId);
-                isDecisionOver = true;
-                StartCoroutine(EnableDecision());
-
-            }
-            else
-            {
-                isPlayerChoseAttack = true;
-                SelectOpponent(OpponentId);
-            }
+            player.ChooseMove(_option, OpponentId);
+            StartCoroutine(EnableDecision());
         }
 
     }
@@ -131,7 +115,6 @@ public class DecisionManager : MonoBehaviour
     IEnumerator EnableDecision()
     {
         yield return new WaitForSeconds(1);
-        isDecisionOver = false;
         int childs = _btnContainer.transform.childCount;
         for (int i = 0; i < childs; i++)
         {
@@ -140,21 +123,6 @@ public class DecisionManager : MonoBehaviour
         UpdateValidMagicsByMana();
     }
 
-
-    public void ChooseRandom()
-    {
-        if (_option == null)
-        {
-            _option = "MagicChargeBlue";
-        }
-        player.ChooseMove(_option, OpponentId);
-        isDecisionOver = true;
-    }
-
-    public bool IsDecisionMakingOver()
-    {
-        return isDecisionOver;
-    }
     public void ReviveWizard()
     {
         this._sessionManager.ReviveWizard();

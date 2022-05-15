@@ -28,7 +28,7 @@ public class MasteryModal : MonoBehaviour
     }
     private void CheckPlayerXP()
     {
-        if (masteryTree.playerStatsData.GetXP() == 0)
+        if (masteryTree.playerStatsData.GetMasteriesPoints() == 0)
         {
             _message.SetActive(true);
             _unlock.interactable = false;
