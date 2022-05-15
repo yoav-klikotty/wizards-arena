@@ -7,17 +7,18 @@ public class PlayerStatsData
 {
     public RankStatsData RankStatsData = new RankStatsData(0);
     public string _name = "";
-    public int _coins = 0;
+    public int _coins = 1000000;
     public int _crystals = 20;
     public int _maxCrystals = 20;
-    public int _level = 1;
+    public int _level = 11;
     public int _xp = 0;
     public Dictionary<int, int> _maxXP = new Dictionary<int, int>(){
         {1, 15},
         {2, 37},
         {3, 70},
         {4, 115},
-        {5, 169}
+        {5, 169},
+        {10, 1000}
     };
     public int _masteriesPoints = 0;
     public string GetName()

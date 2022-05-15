@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3318649195512489337}
   - component: {fileID: 3318649195512489342}
   m_Layer: 0
-  m_Name: Fireball
+  m_Name: SpreadShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,8 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 220af04df95c0a64d8a6985931668fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _firePrefab: {fileID: 1254724754748870, guid: ead2eb1ec6d8ee54fa5d36c7f5e30eef, type: 3}
-  _skillThumbnail: {fileID: 21300000, guid: 195dbf64e020d7c4f8dd6cb051ba6fc4, type: 3}
+  _firePrefab: {fileID: 128572, guid: 9ecaaaf6bb59a7645bc9e6f01a959471, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: 8888dd3b897a82e4db94290c2b09db5f, type: 3}
   _boxCollider: {fileID: 0}
-  _requiredMana: 3
+  _requiredMana: 10
+  _requiredHp: 0
+  AOE: 1
   _magicType: 0
+  DefenceStatsData:
+    HP: 0
+    Recovery: 0
+    Avoidability: 0
+  AttackStatsData:
+    BaseDamage: 0
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0
+  ManaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
+  _pattern: 
+  sound: {fileID: 8300000, guid: b4ce975868fff68458a47704dd4a8cdf, type: 3}

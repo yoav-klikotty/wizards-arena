@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &224100392656306049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4945830121740289281}
+  m_Layer: 0
+  m_Name: CenterShootPlayer (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4945830121740289281
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224100392656306049}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.5, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8211849973541473738}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5147411503487060454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6779613579580815791}
+  m_Layer: 0
+  m_Name: CenterShootPlayer (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6779613579580815791
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5147411503487060454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8211849973541473738}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5342276470697163418
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +616,8 @@ Transform:
   - {fileID: 2939543156930024530}
   - {fileID: 2223239369785258703}
   - {fileID: 5665749112765468597}
+  - {fileID: 4945830121740289281}
+  - {fileID: 6779613579580815791}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 27.33, z: 0}
@@ -599,7 +663,10 @@ MonoBehaviour:
   _orb: {fileID: 1624774397813552589}
   _isDashboardWizard: 0
   m_SpriteRenderer: {fileID: 2333571046302198844}
-  _shootCenter: {fileID: 8212514550241884948}
+  _shootCenter:
+  - {fileID: 8212514550241884948}
+  - {fileID: 224100392656306049}
+  - {fileID: 5147411503487060454}
   WizardStatsData:
     StaffStatsData:
       Name: 
@@ -672,15 +739,16 @@ MonoBehaviour:
     RankStatsData:
       rank: 1000
     _name: 
-    _level: 30
-    _levelPoints: 0
     _coins: 100000
     _crystals: 5
     _maxCrystals: 20
+    _level: 30
     _xp: 30
+    _masteriesPoints: 0
   PlayerHUD: {fileID: 601630423890107937}
   wizardIndex: 0
   wizardId: 0
+  wizardLocation: {x: 59.5, y: 4.4, z: 2.1}
   isBot: 0
   Hits: 0
 --- !u!65 &8212514550521930822

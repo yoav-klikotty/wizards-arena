@@ -10,6 +10,7 @@ public class Magic : MonoBehaviour
     [SerializeField] BoxCollider _boxCollider;
     [SerializeField] int _requiredMana;
     [SerializeField] int _requiredHp;
+    public bool AOE;
     [SerializeField] MagicType _magicType;
     public DefenceStatsData DefenceStatsData;
     public AttackStatsData AttackStatsData;

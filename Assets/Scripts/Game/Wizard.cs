@@ -25,7 +25,7 @@ public class Wizard : MonoBehaviour
     [SerializeField] Item _orb;
     [SerializeField] bool _isDashboardWizard;
     [SerializeField] SpriteRenderer m_SpriteRenderer;
-    [SerializeField] GameObject _shootCenter;
+    [SerializeField] GameObject[] _shootCenter;
     public WizardStatsData WizardStatsData;
     WizardStatsController _wizardStatsController = new WizardStatsController();
     public PlayerStatsData PlayerStatsData;
@@ -34,7 +34,7 @@ public class Wizard : MonoBehaviour
     SessionManager _sessionManager;
     public int wizardIndex;
     public string wizardId;
-    Vector3 wizardLocation = new Vector3(59.5f, 4.4f, 2.1f);
+    public Vector3 wizardLocation = new Vector3(59.5f, 4.4f, 2.1f);
     public WizardMove move = new WizardMove(null, Vector3.zero);
     public Dictionary<string, Magic> magics = new Dictionary<string, Magic>();
     public bool isBot;
@@ -147,12 +147,22 @@ public class Wizard : MonoBehaviour
             Magic magic = magics[move.wizardOption];
             if (magic.GetMagicType() == Magic.MagicType.Attack)
             {
-                magic.ActivateFirePrefab(_shootCenter.transform.position, move.wizardOpponentPosition);
+                if(magic.AOE){
+                    for(int i = 0; i < _sessionManager.wizards.Count; i++) {
+                        if(wizardId != _sessionManager.wizards[i].wizardId)
+                        {
+                            magic.ActivateFirePrefab(_shootCenter[i].transform.position, _sessionManager.wizards[i].wizardLocation);     
+                        }
+                    }
+                }
+                else {
+                    magic.ActivateFirePrefab(_shootCenter[0].transform.position, move.wizardOpponentPosition);
+                }
                 AttackAni();
                 if((magic.GetRequiredHp() > 0)){
                     _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
                 }
-                ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
+                ReduceMana(magic.GetRequiredMana());
             }
             else if (magic.GetMagicType() == Magic.MagicType.Mana)
             {
