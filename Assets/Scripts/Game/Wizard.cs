@@ -121,7 +121,8 @@ public class Wizard : MonoBehaviour
         _currentHealth = WizardStatsData.GetTotalHP();
         foreach (MagicStatsData magicStats in wizardStatsData.MagicsStatsData)
         {
-            var magic = (GameObject)Instantiate(Resources.Load("Prefabs/" + "Magics/" + magicStats.type.ToString() + "/" + magicStats.name), transform.position, Quaternion.identity, gameObject.transform);
+            var magicPrefab = Resources.Load("Prefabs/" + "Magics/" + magicStats.type.ToString() + "/" + magicStats.name);
+            var magic = (GameObject)Instantiate(magicPrefab, transform.position, Quaternion.identity, gameObject.transform);
             if (!magics.ContainsKey(magicStats.name))
             {
                 magics.Add(magicStats.name, magic.GetComponent<Magic>());
@@ -148,17 +149,26 @@ public class Wizard : MonoBehaviour
             {
                 magic.ActivateFirePrefab(_shootCenter.transform.position, move.wizardOpponentPosition);
                 AttackAni();
-                ReduceMana(magic.GetRequiredMana());
+                if((magic.GetRequiredHp() > 0)){
+                    _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
+                }
+                ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
             }
             else if (magic.GetMagicType() == Magic.MagicType.Mana)
             {
                 magic.Activate();
+                if((magic.GetRequiredHp() > 0)){
+                    _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
+                }
                 IncreaseMana(WizardStatsData.GetTotalManaRegeneration() + magic.ManaStatsData.ManaRegeneration);
             }
             else
             {
                 magic.Activate();
                 ReduceMana(magic.GetRequiredMana());
+                if((magic.GetRequiredHp() > 0)){
+                    _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
+                }
                 IncreaseHealth(WizardStatsData.GetTotalRecovery() + magic.DefenceStatsData.Recovery);
             }
             if (isBot)
@@ -539,14 +549,14 @@ public class Wizard : MonoBehaviour
             }
             else if (magicStats.type == Magic.MagicType.Defence)
             {
-                if (magics[magicStats.name].GetRequiredMana() < _currentMana)
+                if (magics[magicStats.name].GetRequiredMana() < _currentMana && magics[magicStats.name].GetRequiredHp() < _currentHealth)
                 {
                     defenceMagic = magicStats.name;
                 }
             }
             else
             {
-                if (magics[magicStats.name].GetRequiredMana() < _currentMana)
+                if (magics[magicStats.name].GetRequiredMana() < _currentMana && magics[magicStats.name].GetRequiredHp() < _currentHealth)
                 {
                     attackMagic = magicStats.name;
                 }

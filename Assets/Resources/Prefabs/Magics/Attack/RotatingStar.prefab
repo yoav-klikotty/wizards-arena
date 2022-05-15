@@ -27,6 +27,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -45,3 +46,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _firePrefab: {fileID: 1533846767962012, guid: bc2714e5c329c764dbedba866cc02850, type: 3}
   _skillThumbnail: {fileID: 0}
+  _boxCollider: {fileID: 0}
+  _requiredMana: 0
+  _magicType: 0
+  DefenceStatsData:
+    HP: 0
+    Recovery: 0
+    Avoidability: 0
+  AttackStatsData:
+    BaseDamage: 0
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0
+  ManaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
+  _pattern: 
+  sound: {fileID: 0}

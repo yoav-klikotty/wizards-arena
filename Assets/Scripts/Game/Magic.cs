@@ -9,6 +9,7 @@ public class Magic : MonoBehaviour
     [SerializeField] Sprite _skillThumbnail;
     [SerializeField] BoxCollider _boxCollider;
     [SerializeField] int _requiredMana;
+    [SerializeField] int _requiredHp;
     [SerializeField] MagicType _magicType;
     public DefenceStatsData DefenceStatsData;
     public AttackStatsData AttackStatsData;
@@ -32,6 +33,11 @@ public class Magic : MonoBehaviour
     public int GetRequiredMana()
     {
         return _requiredMana;
+    }
+
+    public int GetRequiredHp()
+    {
+        return _requiredHp;
     }
 
     private void EnableBoxCollider()
