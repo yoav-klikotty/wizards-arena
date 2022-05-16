@@ -77,7 +77,7 @@ public class DecisionManager : MonoBehaviour
             elem.transform.SetParent(_btnContainer.transform, false);
             elem.GetComponent<Image>().sprite = magic.GetThumbnail();
             elem.GetComponent<Button>().onClick.AddListener(() => ChooseMagic(key, magic.GetMagicType() == Magic.MagicType.Attack));
-            if (magic.GetRequiredMana() <= player.GetMana())
+            if (magic.GetRequiredMana() <= player.GetMana() && magic.GetRequiredHp() < player.GetHealth())
             {
                 elem.GetComponent<Button>().interactable = true;
             }

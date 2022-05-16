@@ -48,6 +48,8 @@ MonoBehaviour:
   _skillThumbnail: {fileID: 21300000, guid: c00c584e2e5dc0a4da5c17e67db6acd6, type: 3}
   _boxCollider: {fileID: 0}
   _requiredMana: 5
+  _requiredHp: 0
+  AOE: 0
   _magicType: 0
   DefenceStatsData:
     HP: 0

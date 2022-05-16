@@ -7,7 +7,7 @@ public class Counter : MonoBehaviour
     bool isCountingOver = false;
     void Start()
     {
-        countdownRoot.SetStartTime(12);
+        countdownRoot.SetStartTime(120);
         countdownRoot.StartCountdown();
     }
     public void DoneCounting(){

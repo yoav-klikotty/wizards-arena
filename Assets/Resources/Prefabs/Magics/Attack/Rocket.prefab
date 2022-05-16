@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &247015284077530336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247015284077530366}
+  - component: {fileID: 247015284077530337}
+  m_Layer: 0
+  m_Name: Rocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &247015284077530366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247015284077530336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &247015284077530337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247015284077530336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220af04df95c0a64d8a6985931668fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firePrefab: {fileID: 128572, guid: 24d83fc5abc3e4c419faeea215137384, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: bc94b9fd4e65841a58603e462db43761, type: 3}
+  _boxCollider: {fileID: 0}
+  _requiredMana: 10
+  _magicType: 0
+  DefenceStatsData:
+    HP: 0
+    Recovery: 0
+    Avoidability: 0
+  AttackStatsData:
+    BaseDamage: 10
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0.1
+  ManaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
+  _pattern: 
+  sound: {fileID: 8300000, guid: 31d4354cef3a92a4481b8c1464e22afd, type: 3}
