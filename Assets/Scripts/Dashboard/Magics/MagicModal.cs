@@ -7,7 +7,7 @@ public class MagicModal : MonoBehaviour
 {
     [SerializeField] Image _icon;
     private InventoryMagic _inventoryMagic;
-    [SerializeField] MagicBook _magicBook;
+    [SerializeField] MagicBooks _magicBooks;
     [SerializeField] TMP_Text _attributes;
     [SerializeField] TMP_Text _title;
     [SerializeField] Button _learnBtn;
@@ -41,7 +41,7 @@ public class MagicModal : MonoBehaviour
     public void OnLearn()
     {
         SoundManager.Instance.PlayMagicLearnedSound();
-        _magicBook.LearnMagic(_inventoryMagic);
+        _magicBooks.GetCurrentBook().LearnMagic(_inventoryMagic);
         gameObject.SetActive(false);
     }
     public void OnExit()

@@ -25,7 +25,7 @@ public class MagicBook : MonoBehaviour
                 inventoryMagic.EnableState(true);
                 inventoryMagic.PurchasedState(true);
             }
-            else if(inventoryMagic.GetRequiredLevel() < playerStatsData.GetLevel() && inventoryMagic.GetPrice() < playerStatsData.GetCoins())
+            else if(inventoryMagic.GetRequiredLevel() <= playerStatsData.GetLevel() && inventoryMagic.GetPrice() <= playerStatsData.GetCoins())
             {
                 inventoryMagic.EnableState(true);
             }

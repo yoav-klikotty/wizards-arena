@@ -25,7 +25,7 @@ public class PlayerStatsData
         {10, 569},
         {11, 672}
     };
-    public int _masteriesPoints = 10;
+    public int _masteriesPoints = 1;
     public string GetName()
     {
         return _name;
@@ -133,6 +133,5 @@ public class RankStatsData
             this.rank = 0;
         }
     }
-
     public int rank;
 }

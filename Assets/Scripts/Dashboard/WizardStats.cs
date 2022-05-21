@@ -123,7 +123,6 @@ public class WizardStats : MonoBehaviour
     {
         _passiveManaRegeneration.text = "Passive Regeneration: " + _wizardStatsData.BaseManaStatsData.PassiveManaRegeneration;
         float append = _wizardStatsData.GetTotalPassiveManaRegeneration() - _wizardStatsData.BaseManaStatsData.PassiveManaRegeneration;
-        Debug.Log(append);
         if (append > 0)
         {
             _passiveManaRegeneration.text += " [+" + append + "]";

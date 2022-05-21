@@ -41,9 +41,4 @@ public class MagicBooks : MonoBehaviour
             return _manaBook.GetComponent<MagicBook>();
         }
     }
-    public void GoToDashboard()
-    {
-        SoundManager.Instance.PlayNegativeButtonSound();
-        SceneManager.LoadScene("Dashboard");
-    }
 }
