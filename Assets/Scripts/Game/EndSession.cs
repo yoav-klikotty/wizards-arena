@@ -9,9 +9,6 @@ public class EndSession : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text Result;
     [SerializeField] TMP_Text ClaimButtonText;
     SessionManager.GameResult result;
-    [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
-    [SerializeField] Material _victoryMaterial;
-    [SerializeField] Material _defeatMaterial;
     [SerializeField] Animation _starsAnim;
     [SerializeField] bool _debug;
     [SerializeField] bool _isWon;
@@ -39,7 +36,6 @@ public class EndSession : MonoBehaviourPunCallbacks
     {
         RenderTextScore();
         RenderSoundScore();
-        RenderWizardScore();
         StartStarsAnim();
         RenderPrizes();
 
@@ -79,24 +75,6 @@ public class EndSession : MonoBehaviourPunCallbacks
         {
             SoundManager.Instance.PlayYouWinSound();
         }
-    }
-    void RenderWizardScore()
-    {
-        Material materialToAdd;
-        if (!_isWon)
-        {
-            materialToAdd = _defeatMaterial;
-        }
-        else
-        {
-            materialToAdd = _victoryMaterial;
-        }
-        Material[] mts = 
-        {
-            materialToAdd
-        };
-        _skinnedMeshRenderer.materials = mts;
-
     }
 
     void StartStarsAnim()

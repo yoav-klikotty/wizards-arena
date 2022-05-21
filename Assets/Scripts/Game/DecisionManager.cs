@@ -11,7 +11,6 @@ public class DecisionManager : MonoBehaviour
     [SerializeField] TMP_Text _manaText;
     [SerializeField] GameObject _magicOption;
     [SerializeField] GameObject _btnContainer;
-    [SerializeField] GameObject _reviveButton;
     Wizard player;
     string OpponentId;
     bool reviveLock;
@@ -27,16 +26,6 @@ public class DecisionManager : MonoBehaviour
     }
     void Update()
     {
-        if (player.IsWizardAlive())
-        {
-            reviveLock = false;
-            _reviveButton.SetActive(false);
-        }
-        else if (!reviveLock)
-        {
-            reviveLock = true;
-            StartCoroutine(RenderReviveButton());
-        }
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -106,11 +95,6 @@ public class DecisionManager : MonoBehaviour
         }
 
     }
-    IEnumerator RenderReviveButton()
-    {
-        yield return new WaitForSeconds(3);
-        _reviveButton.SetActive(true);
-    }
 
     IEnumerator EnableDecision()
     {
@@ -121,11 +105,6 @@ public class DecisionManager : MonoBehaviour
             GameObject.Destroy(_btnContainer.transform.GetChild(i).gameObject);
         }
         UpdateValidMagicsByMana();
-    }
-
-    public void ReviveWizard()
-    {
-        this._sessionManager.ReviveWizard();
     }
 
 }

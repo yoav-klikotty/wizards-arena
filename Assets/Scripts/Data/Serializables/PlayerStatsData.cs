@@ -7,10 +7,10 @@ public class PlayerStatsData
 {
     public RankStatsData RankStatsData = new RankStatsData(0);
     public string _name = "";
-    public int _coins = 1000000;
+    public int _coins = 500;
     public int _crystals = 20;
     public int _maxCrystals = 20;
-    public int _level = 11;
+    public int _level = 1;
     public int _xp = 0;
     public Dictionary<int, int> _maxXP = new Dictionary<int, int>(){
         {1, 15},
@@ -18,7 +18,12 @@ public class PlayerStatsData
         {3, 70},
         {4, 115},
         {5, 169},
-        {10, 1000}
+        {6, 231},
+        {7, 305},
+        {8, 384},
+        {9, 474},
+        {10, 569},
+        {11, 672}
     };
     public int _masteriesPoints = 0;
     public string GetName()
@@ -120,6 +125,13 @@ public class RankStatsData
     public RankStatsData(int initialRank)
     {
         this.rank = initialRank;
+    }
+    public void AddRank(int rankDiff)
+    {
+        this.rank += rankDiff;
+        if (this.rank < 0) {
+            this.rank = 0;
+        }
     }
 
     public int rank;

@@ -265,24 +265,6 @@ public class Wizard : MonoBehaviour
         PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
         if (health > 0) PlayerHUD.ActivateIndication("" + health, indicationEvents.heal);
     }
-    public void ReviveWizard()
-    {
-        if (_photonView.IsMine)
-        {
-            _photonView.RPC("ReviveWizardRPC", RpcTarget.All);
-        }
-
-    }
-    [PunRPC]
-    public void ReviveWizardRPC()
-    {
-        _currentHealth = WizardStatsData.GetTotalHP();
-        PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
-        _currentMana = WizardStatsData.GetTotalStartMana();
-        PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
-        _isWizardAlive = true;
-        IdleAni();
-    }
     public int GetMana()
     {
         return _currentMana;
@@ -507,18 +489,18 @@ public class Wizard : MonoBehaviour
         switch (myPlace)
         {
             case SessionManager.GameResult.First:
-                PlayerStatsData.RankStatsData.rank += rankDelta;
+                PlayerStatsData.RankStatsData.AddRank(rankDelta);
                 break;
             case SessionManager.GameResult.Second:
                 switch (numOfplayers)
                 {
                     case 2:
-                        PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
+                        PlayerStatsData.RankStatsData.AddRank(rankDelta * -1);
                         break;
                     case 3:
                         break;
                     case 4:
-                        PlayerStatsData.RankStatsData.rank += (rankDelta / 2);
+                        PlayerStatsData.RankStatsData.AddRank(rankDelta / 2);
                         break;
                 }
                 break;
@@ -526,19 +508,19 @@ public class Wizard : MonoBehaviour
                 switch (numOfplayers)
                 {
                     case 3:
-                        PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
+                        PlayerStatsData.RankStatsData.AddRank(rankDelta * -1);
                         break;
                     case 4:
-                        PlayerStatsData.RankStatsData.rank += ((rankDelta * -1) / 2);
+                        PlayerStatsData.RankStatsData.AddRank((rankDelta * -1) / 2);
                         break;
                 }
                 break;
             case SessionManager.GameResult.Fourth:
-                PlayerStatsData.RankStatsData.rank += (rankDelta * -1);
+                PlayerStatsData.RankStatsData.AddRank(rankDelta * -1);
                 break;
         }
 
-        _wizardStatsController.SaveWizardStatsData(WizardStatsData);
+        _playerStatsController.SavePlayerStatsData(PlayerStatsData, false);
     }
     private void CreateBotMove()
     {

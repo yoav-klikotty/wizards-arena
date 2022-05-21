@@ -8,9 +8,11 @@ using System;
 public class SessionManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject _decisionManagerPrefab;
+    [SerializeField] GameObject _scorePanel;
     DecisionManager _decisionManager;
     bool _isBotGenerateLock = false;
     bool _isDecisionLock = false;
+    bool _isSessionEndLock = false;
     public List<Wizard> wizards;
     public Wizard playerWizard;
     public int MaxRankDiff = 50;
@@ -38,6 +40,30 @@ public class SessionManager : MonoBehaviourPunCallbacks
         if (Tweaks.BotModeActive)
         {
             CreateBots();
+        }
+        if (wizards.Count == GameManager.Instance.NumOfPlayers && IsSessionEnd() && !_isSessionEndLock)
+        {
+            _isSessionEndLock = true;
+            StartCoroutine("HandleSessionEndEvent");
+        }
+    }
+    bool IsSessionEnd()
+    {
+        int numberOfAliveWizards = wizards.Count;
+        foreach (var wizard in wizards)
+        {
+            if (!wizard.IsWizardAlive())
+            {
+                numberOfAliveWizards -= 1;
+            }
+        }
+        if (numberOfAliveWizards < 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -80,23 +106,20 @@ public class SessionManager : MonoBehaviourPunCallbacks
     {
         wizards.Add(wizard);
     }
-    public void ReviveWizard()
-    {
-        playerWizard.ReviveWizard();
-    }
+
     public void SessionEnd()
     {
-        StartCoroutine("HandleSessionEndEvent");
+        HandleSessionEndEvent();
     }
-    public IEnumerator HandleSessionEndEvent()
+    public void HandleSessionEndEvent()
     {
         SoundManager.Instance.StopBattleBackgroundSound();
         wizards.Sort((wizard1, wizard2) => wizard2.Hits - wizard1.Hits);
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
         LocalStorage.SetLastSessionResult((GameResult)myWizard);
         UpdateMMR((GameResult)myWizard);
-        yield return new WaitForSeconds(4);
-        SceneManager.LoadScene("Score");
+        _scorePanel.SetActive(true);
+        _decisionManager.gameObject.SetActive(false);
     }
 
     public Wizard GetWizardById(string id)

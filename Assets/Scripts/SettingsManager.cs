@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -34,10 +35,14 @@ public class SettingsManager : MonoBehaviour
     {
         _languages.SetActive(true);
     }
-
     public void OpenGraphics()
     {
         _languages.SetActive(false);
+    }
+    public void ResetGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("Dashboard");
     }
 
     public void CloseSettings()

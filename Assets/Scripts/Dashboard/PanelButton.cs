@@ -8,6 +8,8 @@ public class PanelButton : MonoBehaviour
     [SerializeField] PageSwiper _pageSwiper;
     [SerializeField] int _panelNum;
     [SerializeField] GameObject _activeFiller;
+    [SerializeField] GameObject _text;
+
     private bool _isActive;
 
     void Start()
@@ -42,9 +44,11 @@ public class PanelButton : MonoBehaviour
         if (active)
         {
             gameObject.transform.localScale = new Vector3(1.3f, 1.3f, 0);
+            _text.SetActive(true);
         }
         else
         {
+            _text.SetActive(false);
             gameObject.transform.localScale = new Vector3(1f, 1f, 0);
         }
     }

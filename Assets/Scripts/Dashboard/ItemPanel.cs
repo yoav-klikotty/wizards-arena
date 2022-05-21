@@ -7,7 +7,7 @@ public class ItemPanel : MonoBehaviour
     [SerializeField] Button _actionButton;
     [SerializeField] TMP_Text _priceText;
     [SerializeField] TMP_Text _requiredLevelInput;
-    [SerializeField] TMP_Text _itemType;
+    [SerializeField] TMP_Text _itemDisplayName;
     [SerializeField] InventoryManager _inventoryManager;
     [SerializeField] WizardStats _wizardStats;
     private InventoryItem _itemSelected;
@@ -22,7 +22,7 @@ public class ItemPanel : MonoBehaviour
         playerStatsData = _playerStatsController.GetPlayerStatsData();
         wizardStatsData = _wizardStatsController.GetWizardStatsData();
         _itemSelected = itemSelected;
-        _itemType.text = itemSelected.GetItemType().ToString();
+        _itemDisplayName.text = itemSelected.GetDisplayName().ToString();
         _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
         _isPlayerLevelSufficient = itemSelected.GetRequiredLevel() <= playerStatsData.GetLevel();
         _isPlayerFundsSufficient = itemSelected.GetPrice() <= playerStatsData.GetCoins();
@@ -82,7 +82,7 @@ public class ItemPanel : MonoBehaviour
 
     public void RenderActionButton()
     {
-        if (_isPlayerLevelSufficient && _isPlayerLevelSufficient && !IsInventoryItemEquiped())
+        if (_isPlayerLevelSufficient && _isPlayerFundsSufficient && !IsInventoryItemEquiped())
         {
             _actionButton.gameObject.SetActive(true);
         }

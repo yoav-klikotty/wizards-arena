@@ -12,14 +12,8 @@ public class WizardDeath : MonoBehaviour
         _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
 
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void Leave()
     {
-        StartCoroutine(_sessionManager.HandleSessionEndEvent());
+        _sessionManager.HandleSessionEndEvent();
     }
 }

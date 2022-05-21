@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
 {
     [SerializeField] GameObject _unfilteredContaier;
     [SerializeField] Wizard _wizard;
-    private GameObject[] _slots;
+    [SerializeField] GameObject _btnContainer;
     private InventoryItem[] _inventoryItems;
     WizardStatsController _wizardStatsController = new WizardStatsController();
     [SerializeField] WizardStats _wizardStats;
@@ -45,11 +45,11 @@ public class InventoryManager : MonoBehaviour
     private void InitializeInventory()
     {
         _inventoryItems = new InventoryItem[totalItems.Length];
-        _slots = GameObject.FindGameObjectsWithTag("ItemSlot");
         for (int i = 0; i < totalItems.Length; i++)
         {
             var prefab = Resources.Load("Prefabs/Items/" + totalItems[i].Type.ToString() + "/" + totalItems[i].Name);
-            var item = Instantiate(prefab, _slots[0].transform.position, _slots[0].transform.rotation, _slots[0].transform) as GameObject;
+            var item = Instantiate(prefab,  Vector3.zero, Quaternion.identity) as GameObject;
+            item.transform.SetParent(_btnContainer.transform, false);
             _inventoryItems[i] = item.GetComponent<InventoryItem>();
         }
     }
@@ -66,7 +66,7 @@ public class InventoryManager : MonoBehaviour
         }
         for (int i = 0; i < filteredItems.Count; i++)
         {
-            filteredItems[i].transform.SetParent(_slots[i].transform, false);
+            filteredItems[i].transform.SetParent(_btnContainer.transform, false);
         }
     }
 
