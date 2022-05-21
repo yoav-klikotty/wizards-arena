@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class WizardStatsController
 {
+    public delegate void DataChangedAction();
+    public static event DataChangedAction UpdateEvent;
     private WizardStatsData _wizardStatsData;
     public WizardStatsData GetWizardStatsData()
     {
@@ -20,5 +22,9 @@ public class WizardStatsController
     public void SaveWizardStatsData(WizardStatsData wizardStatsData)
     {
         LocalStorage.SaveWizardStatsData(wizardStatsData);
+        if (UpdateEvent != null)
+        {
+            UpdateEvent();
+        }
     }
 }

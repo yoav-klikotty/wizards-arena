@@ -25,7 +25,7 @@ public class StoreItem : MonoBehaviour
         SoundManager.Instance.PlayButtonSound();
         PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
         playerStatsData.SetCrystals(playerStatsData.GetCrystals() + _amount);
-        _playerStatsController.SavePlayerStatsData(playerStatsData, true);
+        _playerStatsController.SavePlayerStatsData(playerStatsData);
     }
 
 }

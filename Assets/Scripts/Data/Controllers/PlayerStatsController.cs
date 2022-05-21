@@ -17,10 +17,10 @@ public class PlayerStatsController
         return LocalStorage.LoadPlayerStatsData();
     }
 
-    public void SavePlayerStatsData(PlayerStatsData playerStatsData, bool isUpdate)
+    public void SavePlayerStatsData(PlayerStatsData playerStatsData)
     {
         LocalStorage.SavePlayerStatsData(playerStatsData);
-        if (isUpdate)
+        if (UpdateEvent != null)
         {
             UpdateEvent();
         }
@@ -29,7 +29,7 @@ public class PlayerStatsController
     private PlayerStatsData CreateNewPlayer()
     {
         _playerStatsData = new PlayerStatsData();
-        SavePlayerStatsData(_playerStatsData, true);
+        SavePlayerStatsData(_playerStatsData);
         return _playerStatsData;
     }
 }

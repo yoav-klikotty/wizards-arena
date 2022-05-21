@@ -123,10 +123,19 @@ public class WizardStats : MonoBehaviour
     {
         _passiveManaRegeneration.text = "Passive Regeneration: " + _wizardStatsData.BaseManaStatsData.PassiveManaRegeneration;
         float append = _wizardStatsData.GetTotalPassiveManaRegeneration() - _wizardStatsData.BaseManaStatsData.PassiveManaRegeneration;
+        Debug.Log(append);
         if (append > 0)
         {
-            _recovery.text += " [+" + append + "]";
+            _passiveManaRegeneration.text += " [+" + append + "]";
         }
+    }
+    void OnEnable()
+    {
+        PlayerStatsController.UpdateEvent += WriteWizardStats;
+    }
+    void OnDisable()
+    {
+        PlayerStatsController.UpdateEvent -= WriteWizardStats;
     }
     public void WriteWizardStats()
     {

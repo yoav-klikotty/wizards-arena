@@ -16,14 +16,14 @@ public class PlayerStats : MonoBehaviour
     {
         PlayerStatsController.UpdateEvent += UpdatePlayerStats;
     }
-
-
     void OnDisable()
     {
         PlayerStatsController.UpdateEvent -= UpdatePlayerStats;
     }
-
-
+    private void OnDestory()
+    {
+        PlayerStatsController.UpdateEvent -= UpdatePlayerStats;
+    }
     void Start()
     {   
         UpdatePlayerStats();

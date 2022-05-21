@@ -520,7 +520,7 @@ public class Wizard : MonoBehaviour
                 break;
         }
 
-        _playerStatsController.SavePlayerStatsData(PlayerStatsData, false);
+        _playerStatsController.SavePlayerStatsData(PlayerStatsData);
     }
     private void CreateBotMove()
     {

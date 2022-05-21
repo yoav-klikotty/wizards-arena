@@ -44,7 +44,7 @@ public class MagicBook : MonoBehaviour
             wizardStatsData.LearnMagic(inventoryMagic.GetID(), inventoryMagic.GetMagicType());
             _wizardStatsController.SaveWizardStatsData(wizardStatsData);
             playerStatsData.SetCoins(playerStatsData.GetCoins() - inventoryMagic.GetPrice());
-            _playerStatsController.SavePlayerStatsData(playerStatsData, true);
+            _playerStatsController.SavePlayerStatsData(playerStatsData);
             RefreshBook();
         }
 

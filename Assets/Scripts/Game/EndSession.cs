@@ -91,7 +91,7 @@ public class EndSession : MonoBehaviourPunCallbacks
             PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
             playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
             playerStatsData.AddXP(10);
-            _playerStatsController.SavePlayerStatsData(playerStatsData, false);
+            _playerStatsController.SavePlayerStatsData(playerStatsData);
         }
         SceneManager.LoadScene("Dashboard");
     }

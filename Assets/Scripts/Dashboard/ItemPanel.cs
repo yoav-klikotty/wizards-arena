@@ -76,7 +76,7 @@ public class ItemPanel : MonoBehaviour
         SoundManager.Instance.PlayEquipItemSound();
         _inventoryManager.EquipItem(_itemSelected);
         playerStatsData.SetCoins(playerStatsData.GetCoins() - _itemSelected.GetPrice());
-        _playerStatsController.SavePlayerStatsData(playerStatsData, true);
+        _playerStatsController.SavePlayerStatsData(playerStatsData);
         gameObject.SetActive(false);
     }
 
