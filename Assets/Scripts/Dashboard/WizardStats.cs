@@ -130,11 +130,11 @@ public class WizardStats : MonoBehaviour
     }
     void OnEnable()
     {
-        PlayerStatsController.UpdateEvent += WriteWizardStats;
+        EventManager.Instance.updateWizardStats += WriteWizardStats;
     }
     void OnDisable()
     {
-        PlayerStatsController.UpdateEvent -= WriteWizardStats;
+        EventManager.Instance.updateWizardStats -= WriteWizardStats;
     }
     public void WriteWizardStats()
     {

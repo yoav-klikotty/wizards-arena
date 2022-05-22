@@ -12,8 +12,10 @@ public class EndSession : MonoBehaviourPunCallbacks
     [SerializeField] Animation _starsAnim;
     [SerializeField] bool _debug;
     [SerializeField] bool _isWon;
-    [SerializeField] GameObject PrizeContainer;
-
+    [SerializeField] TMP_Text MMRAmount;
+    [SerializeField] TMP_Text XPAmount;
+    [SerializeField] TMP_Text CoinAmount;
+    private int rankDiff = 0;
     private PlayerStatsController _playerStatsController = new PlayerStatsController();
 
     void Start()
@@ -25,6 +27,46 @@ public class EndSession : MonoBehaviourPunCallbacks
         }
         RenderScore();
         InvokeRepeating("Disconnect", 1, 0);
+    }
+
+    public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
+    {
+        var playerStatsData = _playerStatsController.GetPlayerStatsData();
+        switch (myPlace)
+        {
+            case SessionManager.GameResult.First:
+                rankDiff = rankDelta;
+                break;
+            case SessionManager.GameResult.Second:
+                switch (numOfplayers)
+                {
+                    case 2:
+                        rankDiff = rankDelta * -1;
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        rankDiff = rankDelta / 2;
+                        break;
+                }
+                break;
+            case SessionManager.GameResult.Third:
+                switch (numOfplayers)
+                {
+                    case 3:
+                        rankDiff = rankDelta * -1;
+                        break;
+                    case 4:
+                        rankDiff = (rankDelta * -1) / 2;
+                        break;
+                }
+                break;
+            case SessionManager.GameResult.Fourth:
+                rankDiff = rankDelta * -1;
+                break;
+        }
+        playerStatsData.RankStatsData.AddRank(rankDiff);
+        _playerStatsController.SavePlayerStatsData(playerStatsData);
     }
 
     public void Collect()
@@ -43,13 +85,16 @@ public class EndSession : MonoBehaviourPunCallbacks
 
     void RenderPrizes()
     {
+        MMRAmount.text = rankDiff + "";
         if (!_isWon)
         {
-            PrizeContainer.SetActive(false);
+            XPAmount.text = 0 + "";
+            CoinAmount.text = 0 + "";
         }
         else
         {
-            PrizeContainer.SetActive(true);
+            XPAmount.text = 10 + "";
+            CoinAmount.text = 100 + "";
         }
     }
 
@@ -96,5 +141,5 @@ public class EndSession : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Dashboard");
     }
 
-    
+
 }

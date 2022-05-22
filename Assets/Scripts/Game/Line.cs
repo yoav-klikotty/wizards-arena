@@ -9,7 +9,7 @@ public class Line : MonoBehaviour
     private Vector2 _currentDotPosition;
     private bool _passedMinimalDistance = true;
     private string _patternPhrase = "";
-    async void Awake()
+    void Awake()
     {
         _dots = GameObject.FindGameObjectsWithTag("dot");
     }

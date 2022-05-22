@@ -14,15 +14,15 @@ public class PlayerStats : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerStatsController.UpdateEvent += UpdatePlayerStats;
+        EventManager.Instance.updatePlayerStats += UpdatePlayerStats;
     }
     void OnDisable()
     {
-        PlayerStatsController.UpdateEvent -= UpdatePlayerStats;
+        EventManager.Instance.updatePlayerStats -= UpdatePlayerStats;
     }
     private void OnDestory()
     {
-        PlayerStatsController.UpdateEvent -= UpdatePlayerStats;
+        EventManager.Instance.updatePlayerStats -= UpdatePlayerStats;
     }
     void Start()
     {   

@@ -79,7 +79,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         int myRankDiff = avgOpponentsWizardsRank - playerWizard.PlayerStatsData.RankStatsData.rank;
         int myBonus = myRankDiff / (MaxRankDiff / _maxRankPointBonus);
         int rankDelta = myBonus + _baseRankPointsChange;
-        playerWizard.UpdateWizardRank(wizards.Count, wizardPlace, rankDelta);
+        _scorePanel.GetComponent<EndSession>().UpdateWizardRank(wizards.Count, wizardPlace, rankDelta);
     }
 
     private void RenderDecisionManger()
@@ -117,8 +117,8 @@ public class SessionManager : MonoBehaviourPunCallbacks
         wizards.Sort((wizard1, wizard2) => wizard2.Hits - wizard1.Hits);
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
         LocalStorage.SetLastSessionResult((GameResult)myWizard);
-        UpdateMMR((GameResult)myWizard);
         _scorePanel.SetActive(true);
+        UpdateMMR((GameResult)myWizard);
         _decisionManager.gameObject.SetActive(false);
     }
 

@@ -68,6 +68,7 @@ public class PlayerStatsData
     {
         this._level += 1;
         IncreaseMasteriesPoints(1);
+        EventManager.Instance.LevelUpgrade();
     }
 
     public int GetCoins()

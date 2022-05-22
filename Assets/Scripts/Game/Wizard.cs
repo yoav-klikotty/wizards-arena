@@ -483,45 +483,6 @@ public class Wizard : MonoBehaviour
             _photonView.RPC("ReduceShield", RpcTarget.All, shieldDmg);
         }
     }
-
-    public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
-    {
-        switch (myPlace)
-        {
-            case SessionManager.GameResult.First:
-                PlayerStatsData.RankStatsData.AddRank(rankDelta);
-                break;
-            case SessionManager.GameResult.Second:
-                switch (numOfplayers)
-                {
-                    case 2:
-                        PlayerStatsData.RankStatsData.AddRank(rankDelta * -1);
-                        break;
-                    case 3:
-                        break;
-                    case 4:
-                        PlayerStatsData.RankStatsData.AddRank(rankDelta / 2);
-                        break;
-                }
-                break;
-            case SessionManager.GameResult.Third:
-                switch (numOfplayers)
-                {
-                    case 3:
-                        PlayerStatsData.RankStatsData.AddRank(rankDelta * -1);
-                        break;
-                    case 4:
-                        PlayerStatsData.RankStatsData.AddRank((rankDelta * -1) / 2);
-                        break;
-                }
-                break;
-            case SessionManager.GameResult.Fourth:
-                PlayerStatsData.RankStatsData.AddRank(rankDelta * -1);
-                break;
-        }
-
-        _playerStatsController.SavePlayerStatsData(PlayerStatsData);
-    }
     private void CreateBotMove()
     {
         var opponentId = _sessionManager.GetRandomOpponentId(wizardId).wizardId;

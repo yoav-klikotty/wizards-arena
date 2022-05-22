@@ -1,8 +1,6 @@
+using System;
 public class PlayerStatsController
 {
-    public delegate void DataChangedAction();
-    public static event DataChangedAction UpdateEvent;
-
     private PlayerStatsData _playerStatsData;
     public PlayerStatsData GetPlayerStatsData()
     {
@@ -20,10 +18,7 @@ public class PlayerStatsController
     public void SavePlayerStatsData(PlayerStatsData playerStatsData)
     {
         LocalStorage.SavePlayerStatsData(playerStatsData);
-        if (UpdateEvent != null)
-        {
-            UpdateEvent();
-        }
+        EventManager.Instance.UpdatePlayerStats();
     }
 
     private PlayerStatsData CreateNewPlayer()
@@ -32,4 +27,5 @@ public class PlayerStatsController
         SavePlayerStatsData(_playerStatsData);
         return _playerStatsData;
     }
+    
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 public class WizardStatsController
 {
-    public delegate void DataChangedAction();
-    public static event DataChangedAction UpdateEvent;
     private WizardStatsData _wizardStatsData;
     public WizardStatsData GetWizardStatsData()
     {
@@ -22,9 +20,25 @@ public class WizardStatsController
     public void SaveWizardStatsData(WizardStatsData wizardStatsData)
     {
         LocalStorage.SaveWizardStatsData(wizardStatsData);
-        if (UpdateEvent != null)
-        {
-            UpdateEvent();
-        }
+        EventManager.Instance.UpdateWizardStats();
+
+    }
+    void OnEnable()
+    {
+        EventManager.Instance.levelUpgrade += UpgardeLevel;
+    }
+    void OnDisable()
+    {
+        EventManager.Instance.levelUpgrade -= UpgardeLevel;
+    }
+
+    public void UpgardeLevel()
+    {
+        Debug.Log("upgrade level");
+        WizardStatsData _wizardStatsData = GetWizardStatsData();
+        _wizardStatsData.BaseAttackStatsData.BaseDamage += 3;
+        _wizardStatsData.BaseDefenceStatsData.HP += 3;
+        _wizardStatsData.BaseManaStatsData.MaxMana += 2;
+        SaveWizardStatsData(_wizardStatsData);
     }
 }

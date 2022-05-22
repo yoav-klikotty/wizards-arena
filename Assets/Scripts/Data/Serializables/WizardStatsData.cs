@@ -26,9 +26,9 @@ public class WizardStatsData
         new AttackStatsData(0, 0, 0, 0),
         new ManaStatsData(0, 0, 0, 0)
     );
-    public AttackStatsData BaseAttackStatsData = new AttackStatsData(15, 0, 0, 0);
+    public AttackStatsData BaseAttackStatsData = new AttackStatsData(60, 0, 0, 0);
     public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(100, 0, 0);
-    public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 3, 0);
+    public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 20, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
         new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
         new MagicStatsData("MagicChargeBlue", Magic.MagicType.Mana),
