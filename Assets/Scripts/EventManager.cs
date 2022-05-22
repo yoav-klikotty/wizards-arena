@@ -32,7 +32,6 @@ public class EventManager : MonoBehaviour
     }
     public void LevelUpgrade()
     {
-        Debug.Log("level upgrade");
         levelUpgrade?.Invoke();
     }
 }

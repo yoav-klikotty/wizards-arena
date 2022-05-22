@@ -41,7 +41,7 @@ public class SettingsManager : MonoBehaviour
     }
     public void ResetGame()
     {
-        PlayerPrefs.DeleteAll();
+        WizardStatsController.Instance.ResetData();
         SceneManager.LoadScene("Dashboard");
     }
 

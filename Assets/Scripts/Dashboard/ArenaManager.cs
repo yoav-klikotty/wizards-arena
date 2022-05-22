@@ -6,7 +6,6 @@ using Photon.Realtime;
 
 public class ArenaManager : MonoBehaviourPunCallbacks
 {
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
     [SerializeField] NavigationPanel _navigationPanel;
     PlayerStatsData playerStatsData;
     [SerializeField] GameObject _settings;
@@ -18,7 +17,7 @@ public class ArenaManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        playerStatsData = _playerStatsController.GetPlayerStatsData();
+        playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
         _mmr.text = playerStatsData.RankStatsData.rank + "";
         SoundManager.Instance.PlayGameThemeSound();
         if (!PhotonNetwork.IsConnected)

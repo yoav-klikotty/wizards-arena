@@ -13,14 +13,12 @@ public class ItemPanel : MonoBehaviour
     private InventoryItem _itemSelected;
     private bool _isPlayerLevelSufficient;
     private bool _isPlayerFundsSufficient;
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
-    private WizardStatsController _wizardStatsController = new WizardStatsController();
     PlayerStatsData playerStatsData;
     WizardStatsData wizardStatsData;
     public void OpenPanel(InventoryItem itemSelected)
     {
-        playerStatsData = _playerStatsController.GetPlayerStatsData();
-        wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
+        wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         _itemSelected = itemSelected;
         _itemDisplayName.text = itemSelected.GetDisplayName().ToString();
         _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
@@ -76,7 +74,7 @@ public class ItemPanel : MonoBehaviour
         SoundManager.Instance.PlayEquipItemSound();
         _inventoryManager.EquipItem(_itemSelected);
         playerStatsData.SetCoins(playerStatsData.GetCoins() - _itemSelected.GetPrice());
-        _playerStatsController.SavePlayerStatsData(playerStatsData);
+        PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
         gameObject.SetActive(false);
     }
 

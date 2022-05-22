@@ -9,9 +9,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TMP_Text _energyInput;
     [SerializeField] TMP_Text _XPInput;
     [SerializeField] Slider _levelBar;
-
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
-
     void OnEnable()
     {
         EventManager.Instance.updatePlayerStats += UpdatePlayerStats;
@@ -31,7 +28,7 @@ public class PlayerStats : MonoBehaviour
 
     void UpdatePlayerStats()
     {
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+        PlayerStatsData playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
         _coinsInput.text = playerStatsData.GetCoins() + "";
         _XPInput.text = playerStatsData.GetXP() + "/" + playerStatsData.GetMaxXP();
         _levelBar.value = playerStatsData.GetXP();

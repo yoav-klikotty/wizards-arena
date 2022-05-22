@@ -6,9 +6,7 @@ using TMPro;
 
 public class MasteryTree : MonoBehaviour
 {
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
     public PlayerStatsData playerStatsData;
-    private WizardStatsController _wizardStatsController = new WizardStatsController();
     public WizardStatsData wizardStatsData;
     [SerializeField] List<InventoryMastery> _masteries = new List<InventoryMastery>();
     [SerializeField] TMP_Text masteriesPoints;
@@ -19,8 +17,8 @@ public class MasteryTree : MonoBehaviour
     }
     public void RefreshTree()
     {
-        playerStatsData = _playerStatsController.GetPlayerStatsData();
-        wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
+        wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         masteriesPoints.text = "x " + playerStatsData.GetMasteriesPoints();
         foreach (var mastery in _masteries)
         {
@@ -33,9 +31,9 @@ public class MasteryTree : MonoBehaviour
         {
             inventoryMastery.SetCurrentPoints(inventoryMastery.GetCurrentPoints() + 1);
             wizardStatsData.UpdateMasteryPoints(inventoryMastery);
-            _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+            WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
             playerStatsData.ReduceMasteriesPoints();
-            _playerStatsController.SavePlayerStatsData(playerStatsData);
+            PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
             RefreshTree();
         }
 

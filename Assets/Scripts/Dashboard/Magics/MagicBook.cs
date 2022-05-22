@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class MagicBook : MonoBehaviour
 {
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
     PlayerStatsData playerStatsData;
-    private WizardStatsController _wizardStatsController = new WizardStatsController();
     WizardStatsData wizardStatsData;
     [SerializeField] List<InventoryMagic> _magics = new List<InventoryMagic>();
     // Start is called before the first frame update
@@ -16,8 +14,8 @@ public class MagicBook : MonoBehaviour
     }
     public void RefreshBook()
     {
-        playerStatsData = _playerStatsController.GetPlayerStatsData();
-        wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
+        wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         foreach (var inventoryMagic in _magics)
         {
             if (wizardStatsData.FindMagic(inventoryMagic.GetID()) != null)
@@ -42,9 +40,9 @@ public class MagicBook : MonoBehaviour
         if (playerStatsData.GetCoins() > inventoryMagic.GetPrice())
         {
             wizardStatsData.LearnMagic(inventoryMagic.GetID(), inventoryMagic.GetMagicType());
-            _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+            WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
             playerStatsData.SetCoins(playerStatsData.GetCoins() - inventoryMagic.GetPrice());
-            _playerStatsController.SavePlayerStatsData(playerStatsData);
+            PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
             RefreshBook();
         }
 

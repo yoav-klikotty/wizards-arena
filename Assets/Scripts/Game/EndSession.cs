@@ -16,7 +16,6 @@ public class EndSession : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text XPAmount;
     [SerializeField] TMP_Text CoinAmount;
     private int rankDiff = 0;
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
 
     void Start()
     {
@@ -31,7 +30,7 @@ public class EndSession : MonoBehaviourPunCallbacks
 
     public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
     {
-        var playerStatsData = _playerStatsController.GetPlayerStatsData();
+        var playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
         switch (myPlace)
         {
             case SessionManager.GameResult.First:
@@ -66,7 +65,7 @@ public class EndSession : MonoBehaviourPunCallbacks
                 break;
         }
         playerStatsData.RankStatsData.AddRank(rankDiff);
-        _playerStatsController.SavePlayerStatsData(playerStatsData);
+        PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
     }
 
     public void Collect()
@@ -133,10 +132,10 @@ public class EndSession : MonoBehaviourPunCallbacks
     {
         if (_isWon)
         {
-            PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+            PlayerStatsData playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
             playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
             playerStatsData.AddXP(10);
-            _playerStatsController.SavePlayerStatsData(playerStatsData);
+            PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
         }
         SceneManager.LoadScene("Dashboard");
     }

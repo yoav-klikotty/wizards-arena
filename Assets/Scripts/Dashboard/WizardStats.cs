@@ -27,7 +27,6 @@ public class WizardStats : MonoBehaviour
     [SerializeField] TMP_Text _manaRegenrationDiff;
     [SerializeField] TMP_Text _passiveManaRegeneration;
     [SerializeField] TMP_Text _passiveManaRegenerationDiff;
-    WizardStatsController _wizardStatsController = new WizardStatsController();
     WizardStatsData _wizardStatsData;
     public void SetDmg()
     {
@@ -138,7 +137,7 @@ public class WizardStats : MonoBehaviour
     }
     public void WriteWizardStats()
     {
-        _wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        _wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         SetDmg();
         SetCritDmg();
         SetCritRate();

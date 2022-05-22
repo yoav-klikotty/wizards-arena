@@ -8,7 +8,6 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] Wizard _wizard;
     [SerializeField] GameObject _btnContainer;
     private InventoryItem[] _inventoryItems;
-    WizardStatsController _wizardStatsController = new WizardStatsController();
     [SerializeField] WizardStats _wizardStats;
     private InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
             new InventoryPrefabs("Blue_Cape", ItemType.Cape),
@@ -38,8 +37,8 @@ public class InventoryManager : MonoBehaviour
 
     private void InitializeWizardSavedItems()
     {
-        WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
-        _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+        WizardStatsData wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
+        WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
         _wizardStats.WriteWizardStats();
     }
     private void InitializeInventory()
@@ -72,9 +71,9 @@ public class InventoryManager : MonoBehaviour
 
     public void EquipItem(InventoryItem itemSelected)
     {
-        WizardStatsData wizardStatsData = _wizardStatsController.GetWizardStatsData();
+        WizardStatsData wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         wizardStatsData.EquipItem(itemSelected);
-        _wizardStatsController.SaveWizardStatsData(wizardStatsData);
+        WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
         _wizard.UpdateWizard(wizardStatsData);
         _wizardStats.WriteWizardStats();
     }

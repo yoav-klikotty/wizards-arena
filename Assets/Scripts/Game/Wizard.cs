@@ -27,9 +27,7 @@ public class Wizard : MonoBehaviour
     [SerializeField] SpriteRenderer m_SpriteRenderer;
     [SerializeField] GameObject[] _shootCenter;
     public WizardStatsData WizardStatsData;
-    WizardStatsController _wizardStatsController = new WizardStatsController();
     public PlayerStatsData PlayerStatsData;
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
     public PlayerHUD PlayerHUD;
     SessionManager _sessionManager;
     public int wizardIndex;
@@ -42,16 +40,16 @@ public class Wizard : MonoBehaviour
 
     void Awake()
     {
-        PlayerStatsData = _playerStatsController.GetPlayerStatsData();
+        PlayerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
         _photonView = PhotonView.Get(this);
-        WizardStatsData = _wizardStatsController.GetWizardStatsData();
+        WizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         if (!_isDashboardWizard)
         {
             _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
             if (_photonView && _photonView.IsMine)
             {
-                WizardStatsData = _wizardStatsController.GetWizardStatsData();
+                WizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
                 string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
                 _photonView.RPC("UpdateWizardStats", RpcTarget.All, isBot ? PhotonNetwork.LocalPlayer.UserId + wizardIndex : PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
             }
@@ -83,7 +81,7 @@ public class Wizard : MonoBehaviour
     {
         if (_isDashboardWizard)
         {
-            UpdateWizard(_wizardStatsController.GetWizardStatsData());
+            UpdateWizard(WizardStatsController.Instance.GetWizardStatsData());
         }
         _anim = GetComponent<Animation>();
     }
