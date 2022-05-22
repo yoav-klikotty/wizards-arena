@@ -19,7 +19,6 @@ public class EndSession : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        result = LocalStorage.GetLastSessionResult();
         if (!_debug)
         {
             _isWon = result == SessionManager.GameResult.First;
@@ -71,6 +70,11 @@ public class EndSession : MonoBehaviourPunCallbacks
     public void Collect()
     {
         PhotonNetwork.Disconnect();
+    }
+
+    public void SetResult(SessionManager.GameResult result)
+    {
+        this.result = result;
     }
 
     void RenderScore()
