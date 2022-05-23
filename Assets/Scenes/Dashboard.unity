@@ -4528,7 +4528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _price
-      value: 1
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _magicModal
@@ -4544,7 +4544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _requiredLevel
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _attributes.Array.size
