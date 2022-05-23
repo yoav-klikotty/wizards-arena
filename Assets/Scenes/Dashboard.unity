@@ -4528,7 +4528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _price
-      value: 1000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _magicModal
@@ -4544,7 +4544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _requiredLevel
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _attributes.Array.size
@@ -15534,7 +15534,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _attributes.Array.data[0]
-      value: Shield by 20% of max HP
+      value: Shield by 25% of max HP
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3289714673014874495a7d89026025e1, type: 3}
@@ -15841,11 +15841,13 @@ MonoBehaviour:
         HP: 0
         Recovery: 0
         Avoidability: 0
+        ScaledValue: 0
       AttackStatsData:
         BaseDamage: 5
         CriticalRate: 0
         CriticalDmg: 0
         ArmorPenetration: 0
+        ScaledValue: 0
       ManaStatsData:
         MaxMana: 0
         StartMana: 5
@@ -15859,11 +15861,13 @@ MonoBehaviour:
         HP: 0
         Recovery: 0
         Avoidability: 0
+        ScaledValue: 0
       AttackStatsData:
         BaseDamage: 0
         CriticalRate: 0
         CriticalDmg: 0
         ArmorPenetration: 0
+        ScaledValue: 0
       ManaStatsData:
         MaxMana: 5
         StartMana: 5
@@ -15877,11 +15881,13 @@ MonoBehaviour:
         HP: 15
         Recovery: 0
         Avoidability: 0
+        ScaledValue: 0
       AttackStatsData:
         BaseDamage: 0
         CriticalRate: 0
         CriticalDmg: 0
         ArmorPenetration: 0
+        ScaledValue: 0
       ManaStatsData:
         MaxMana: 0
         StartMana: 5
@@ -15892,10 +15898,12 @@ MonoBehaviour:
       CriticalRate: 0.1
       CriticalDmg: 0.1
       ArmorPenetration: 0
+      ScaledValue: 0
     BaseDefenceStatsData:
       HP: 25
       Recovery: 0
       Avoidability: 0
+      ScaledValue: 0
     BaseManaStatsData:
       MaxMana: 20
       StartMana: 0

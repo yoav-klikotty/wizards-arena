@@ -158,7 +158,7 @@ public class Wizard : MonoBehaviour
                 }
                 AttackAni();
                 if((magic.GetRequiredHp() > 0)){
-                    _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
+                    ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
                 }
                 ReduceMana(magic.GetRequiredMana());
             }
@@ -166,7 +166,7 @@ public class Wizard : MonoBehaviour
             {
                 magic.Activate();
                 if((magic.GetRequiredHp() > 0)){
-                    _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
+                    ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
                 }
                 IncreaseMana(WizardStatsData.GetTotalManaRegeneration() + magic.ManaStatsData.ManaRegeneration);
             }
@@ -175,7 +175,7 @@ public class Wizard : MonoBehaviour
                 magic.Activate();
                 ReduceMana(magic.GetRequiredMana());
                 if((magic.GetRequiredHp() > 0)){
-                    _photonView.RPC("ReduceHealth", RpcTarget.All, (magic.GetRequiredHp()), false, false, wizardId);
+                    ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
                 }
                 IncreaseHealth(WizardStatsData.GetTotalRecovery() + magic.DefenceStatsData.Recovery);
             }
@@ -267,6 +267,7 @@ public class Wizard : MonoBehaviour
     {
         return _currentMana;
     }
+    [PunRPC]
     public void ReduceMana(int mana)
     {
         int newVal = _currentMana - mana;
@@ -351,8 +352,12 @@ public class Wizard : MonoBehaviour
         {
             var attacker = collision.gameObject.GetComponent<ProjectileMover>().Attacker;
             var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackStatsData;
+            var attackerMagicSpecialEffects = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackSpecialEffects;
             Damage damage = CalculateDamage(attacker.WizardStatsData, attackerMagic);
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided, attacker.wizardId);
+            if(attackerMagicSpecialEffects.ManaBurn > 0) {
+                _photonView.RPC("ReduceMana", RpcTarget.All, attackerMagicSpecialEffects.ManaBurn);
+            }
         }
     }
     public bool IsWizardAlive()
@@ -409,8 +414,14 @@ public class Wizard : MonoBehaviour
         {
             damage.avoided = true;
         }
-
-        damage.damage = attacker.GetTotalBaseDamage() + attackerMagic.BaseDamage;
+        if(attackerMagic.ScaledValue)
+        {   
+            damage.damage = (int)(attacker.GetTotalBaseDamage() * (float)attackerMagic.BaseDamage/100);
+        }
+        else
+        {
+            damage.damage = attacker.GetTotalBaseDamage() + attackerMagic.BaseDamage;
+        }
         if (randomFactor <= (attacker.GetTotalCriticalRate() + attackerMagic.CriticalRate))
         {
             damage.criticalHit = true;
@@ -461,7 +472,7 @@ public class Wizard : MonoBehaviour
     }
 
     public void OnShieldCollision(Wizard attacker, AttackStatsData attackerMagic, int shieldHP)
-    {
+    {   
         _wizardSoundManager.PlayShieldHitSound();
         if (_photonView && _photonView.IsMine)
         {

@@ -56,10 +56,11 @@ MonoBehaviour:
     Recovery: 0
     Avoidability: 0
   AttackStatsData:
-    BaseDamage: 20
+    BaseDamage: 150
     CriticalRate: 0
     CriticalDmg: 0
     ArmorPenetration: 0
+    ScaledValue: 1
   ManaStatsData:
     MaxMana: 0
     StartMana: 0

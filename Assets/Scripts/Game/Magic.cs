@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 public class Magic : MonoBehaviour
 {
     GameObject ToPoint;
@@ -14,6 +16,7 @@ public class Magic : MonoBehaviour
     [SerializeField] MagicType _magicType;
     public DefenceStatsData DefenceStatsData;
     public AttackStatsData AttackStatsData;
+    public AttackSpecialEffects AttackSpecialEffects;
     public ManaStatsData ManaStatsData;
     public enum MagicType { Attack, Mana, Defence };
     [SerializeField] string _pattern;
@@ -55,6 +58,7 @@ public class Magic : MonoBehaviour
         GameObject instanceBullet = Instantiate(_firePrefab, FromPoint, Quaternion.identity);
         instanceBullet.GetComponent<ProjectileMover>().Attacker = gameObject.GetComponentInParent<Wizard>();
         instanceBullet.GetComponent<ProjectileMover>().MagicAttackStatsData = AttackStatsData;
+        instanceBullet.GetComponent<ProjectileMover>().MagicAttackSpecialEffects = AttackSpecialEffects;
         instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
     public Sprite GetThumbnail()
@@ -69,7 +73,16 @@ public class Magic : MonoBehaviour
     {
         var attacker = collision.gameObject.GetComponent<ProjectileMover>().Attacker;
         var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackStatsData;
-        gameObject.transform.parent.GetComponent<Wizard>().OnShieldCollision(attacker, attackerMagic, DefenceStatsData.HP);
+        var defender = gameObject.transform.parent.GetComponent<Wizard>();
+        int shieldHP;
+        if(DefenceStatsData.ScaledValue) {
+            shieldHP = (int)(defender.WizardStatsData.GetTotalHP() * (float)DefenceStatsData.HP/100);
+        }
+        else {
+            shieldHP = DefenceStatsData.HP;
+        }
+        Debug.Log(shieldHP);
+        defender.OnShieldCollision(attacker, attackerMagic, shieldHP);
     }
     public string GetPattern()
     {
@@ -80,4 +93,10 @@ public class Magic : MonoBehaviour
     {
         return sound;
     }
+}
+
+[Serializable]
+public class AttackSpecialEffects
+{
+    public int ManaBurn;
 }

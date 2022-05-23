@@ -675,11 +675,13 @@ MonoBehaviour:
         HP: 25
         Recovery: 0
         Avoidability: 0
+        ScaledValue: 0
       AttackStatsData:
         BaseDamage: 3
         CriticalRate: 0.1
         CriticalDmg: 0.1
         ArmorPenetration: 0
+        ScaledValue: 0
       ManaStatsData:
         MaxMana: 20
         StartMana: 0
@@ -692,11 +694,13 @@ MonoBehaviour:
         HP: 25
         Recovery: 0
         Avoidability: 0
+        ScaledValue: 0
       AttackStatsData:
         BaseDamage: 3
         CriticalRate: 0.1
         CriticalDmg: 0.1
         ArmorPenetration: 0
+        ScaledValue: 0
       ManaStatsData:
         MaxMana: 20
         StartMana: 0
@@ -709,11 +713,13 @@ MonoBehaviour:
         HP: 25
         Recovery: 0
         Avoidability: 0
+        ScaledValue: 0
       AttackStatsData:
         BaseDamage: 3
         CriticalRate: 0.1
         CriticalDmg: 0.1
         ArmorPenetration: 0
+        ScaledValue: 0
       ManaStatsData:
         MaxMana: 20
         StartMana: 0
@@ -724,10 +730,12 @@ MonoBehaviour:
       CriticalRate: 0.1
       CriticalDmg: 0.1
       ArmorPenetration: 0
+      ScaledValue: 0
     BaseDefenceStatsData:
       HP: 25
       Recovery: 0
       Avoidability: 0
+      ScaledValue: 0
     BaseManaStatsData:
       MaxMana: 20
       StartMana: 0

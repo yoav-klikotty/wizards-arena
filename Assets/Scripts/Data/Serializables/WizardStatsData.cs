@@ -8,26 +8,26 @@ public class WizardStatsData
     public ItemStatsData StaffStatsData = new ItemStatsData(
         "Staff_Default",
         new List<string> {"green-basic"},
-        new DefenceStatsData(0, 0, 0),
-        new AttackStatsData(0, 0, 0, 0),
+        new DefenceStatsData(0, 0, 0, false),
+        new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData CapeStatsData = new ItemStatsData(
         "Orb_Default",
         new List<string> {"green-basic"},
-        new DefenceStatsData(0, 0, 0),
-        new AttackStatsData(0, 0, 0, 0),
+        new DefenceStatsData(0, 0, 0, false),
+        new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData OrbStatsData = new ItemStatsData(
         "Cape_Default",
         new List<string> {"green-basic"},
-        new DefenceStatsData(0, 0, 0),
-        new AttackStatsData(0, 0, 0, 0),
+        new DefenceStatsData(0, 0, 0, false),
+        new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
-    public AttackStatsData BaseAttackStatsData = new AttackStatsData(15, 0, 0, 0);
-    public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(100, 0, 0);
+    public AttackStatsData BaseAttackStatsData = new AttackStatsData(15, 0, 0, 0, false);
+    public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(100, 0, 0, false);
     public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 5, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
         new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
@@ -250,31 +250,35 @@ public class WizardStatsData
 [Serializable]
 public class AttackStatsData
 {
-    public AttackStatsData(int baseDamage, float criticalRate, float criticalDamage, float armorPenetration)
+    public AttackStatsData(int baseDamage, float criticalRate, float criticalDamage, float armorPenetration, bool scaledValue)
     {
         this.BaseDamage = baseDamage;
         this.CriticalDmg = criticalDamage;
         this.CriticalRate = criticalRate;
         this.ArmorPenetration = armorPenetration;
+        this.ScaledValue = scaledValue;
     }
     public int BaseDamage;
     public float CriticalRate;
     public float CriticalDmg;
     public float ArmorPenetration;
+    public bool ScaledValue; 
 }
 
 [Serializable]
 public class DefenceStatsData
 {
-    public DefenceStatsData(int HP, int Recovery, float Avoidability)
+    public DefenceStatsData(int HP, int Recovery, float Avoidability, bool scaledValue)
     {
         this.HP = HP;
         this.Recovery = Recovery;
         this.Avoidability = Avoidability;
+        this.ScaledValue = scaledValue;
     }
     public int HP;
     public int Recovery;
     public float Avoidability;
+    public bool ScaledValue; 
 }
 
 [Serializable]

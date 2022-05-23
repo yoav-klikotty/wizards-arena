@@ -14,6 +14,7 @@ public class ProjectileMover : MonoBehaviour
     public GameObject[] Detached;
     public Wizard Attacker;
     public AttackStatsData MagicAttackStatsData;
+    public AttackSpecialEffects MagicAttackSpecialEffects;
     void Start()
     {
         rb = GetComponent<Rigidbody>();

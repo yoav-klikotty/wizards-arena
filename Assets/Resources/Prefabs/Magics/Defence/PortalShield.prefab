@@ -19022,16 +19022,19 @@ MonoBehaviour:
   _boxCollider: {fileID: -4858678709848584362}
   _requiredMana: 5
   _requiredHp: 0
+  AOE: 0
   _magicType: 2
   DefenceStatsData:
-    HP: 30
+    HP: 25
     Recovery: 0
     Avoidability: 0
+    ScaledValue: 1
   AttackStatsData:
     BaseDamage: 0
     CriticalRate: 0
     CriticalDmg: 0
     ArmorPenetration: 0
+    ScaledValue: 0
   ManaStatsData:
     MaxMana: 0
     StartMana: 0
