@@ -19,7 +19,7 @@ public class Wizard : MonoBehaviour
     [SerializeField] WizardSoundManager _wizardSoundManager;
     [SerializeField] int _currentHealth;
     [SerializeField] int _currentMana;
-    private bool _isWizardAlive = true;
+    public DateTime DeathTime;
     [SerializeField] Item _staff;
     [SerializeField] Item _cape;
     [SerializeField] Item _orb;
@@ -221,7 +221,7 @@ public class Wizard : MonoBehaviour
             {
                 _sessionManager.UpdateWizardHits(wizradId);
                 _currentHealth = 0;
-                _isWizardAlive = false;
+                DeathTime = DateTime.Now;
                 DeathAni();
             }
             else
@@ -362,7 +362,7 @@ public class Wizard : MonoBehaviour
     }
     public bool IsWizardAlive()
     {
-        return _isWizardAlive;
+        return DeathTime == DateTime.MinValue;
     }
     public void StopAni()
     {

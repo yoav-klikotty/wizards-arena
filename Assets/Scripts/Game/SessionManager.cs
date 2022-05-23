@@ -113,10 +113,17 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     public void HandleSessionEndEvent()
     {
+        wizards.ForEach(wizard =>
+        {
+            if (wizard.IsWizardAlive())
+            {
+                wizard.DeathTime = DateTime.Now;
+            }
+        });
         SoundManager.Instance.StopBattleBackgroundSound();
-        wizards.Sort((wizard1, wizard2) => wizard2.Hits - wizard1.Hits);
+        wizards.Sort((wizard1, wizard2) => DateTime.Compare(wizard2.DeathTime, wizard1.DeathTime));
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
-        LocalStorage.SetLastSessionResult((GameResult)myWizard);
+        _scorePanel.GetComponent<EndSession>().SetResult((GameResult)myWizard);
         _scorePanel.SetActive(true);
         UpdateMMR((GameResult)myWizard);
         _decisionManager.gameObject.SetActive(false);
@@ -160,7 +167,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
             if (wizard.IsWizardAlive())
             {
                 wizard.move = new WizardMove("game over", Vector3.forward);
-                wizard.Hits = 0;
+                wizard.DeathTime = DateTime.Now;
             }
         }
     }
