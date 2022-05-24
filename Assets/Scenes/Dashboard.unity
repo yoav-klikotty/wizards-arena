@@ -394,14 +394,14 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a7b186159c27a7f4bb349504977570ec, type: 3}
+      objectReference: {fileID: 21300000, guid: defba34cca839224da631a425fdae7f1, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: fa00065d5d503b8459b8fec7a74383d1, type: 3}
+      objectReference: {fileID: 21300000, guid: 93172c1be07ba474a893d54eb1f265cf, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
-      value: MagicChargeBlue
+      value: LesserCharge
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _magicType
@@ -413,7 +413,7 @@ PrefabInstance:
       objectReference: {fileID: 133635928}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _displayName
-      value: Magic Charge
+      value: Lesser Charge
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _requiredMana
@@ -2845,11 +2845,11 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d3de66f23b159134ba212974b6e60f46, type: 3}
+      objectReference: {fileID: 21300000, guid: 82a634c89d8444215a1b6f0fd355b9f8, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: d871013cef9306c439381d60c0136814, type: 3}
+      objectReference: {fileID: 21300000, guid: 256ab34b7836a4992b34ebd68e6fe010, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
       value: LesserHeal
@@ -3699,11 +3699,11 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a4622c164af655047b87a7383cb5cb8f, type: 3}
+      objectReference: {fileID: 21300000, guid: 757a2be5d7e9c40489037bac99cc501a, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 574a7aa40853fa64b8eb1387938a3153, type: 3}
+      objectReference: {fileID: 21300000, guid: a9723ef62964fd04e917aee82aff67a7, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
       value: BigBang
@@ -4517,11 +4517,11 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 3f518bd017e81aa44a2e0395f789d013, type: 3}
+      objectReference: {fileID: 21300000, guid: c31e3c7cbda6add4ba72889d3b1d3730, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 9e6ea762b60fa6649b7ce15020b13385, type: 3}
+      objectReference: {fileID: 21300000, guid: 3ba8d3d83c5990b419ded334429451d6, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
       value: ZapShot
@@ -7978,14 +7978,14 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a4622c164af655047b87a7383cb5cb8f, type: 3}
+      objectReference: {fileID: 21300000, guid: c764386e62f78fe48ab9a59e73470b86, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 574a7aa40853fa64b8eb1387938a3153, type: 3}
+      objectReference: {fileID: 21300000, guid: 4290c952046113f41a27aeb3b6d46e41, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
-      value: Rocket
+      value: SpitFire
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _price
@@ -7997,7 +7997,7 @@ PrefabInstance:
       objectReference: {fileID: 133635928}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _displayName
-      value: Rocket
+      value: Spit Fire
       objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _requiredMana
@@ -12197,11 +12197,11 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a7b186159c27a7f4bb349504977570ec, type: 3}
+      objectReference: {fileID: 21300000, guid: 9a974fe3f2ef67c43a215a3844dbcbca, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: fa00065d5d503b8459b8fec7a74383d1, type: 3}
+      objectReference: {fileID: 21300000, guid: c75aa14e27c995a4b9783c4cfdd3b139, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
       value: LifeTap
@@ -14824,7 +14824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9470cc532b73b374982c66810e788b8b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b5a0ea094e674572a95bde0bd97fa5a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -15495,11 +15495,11 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: d3de66f23b159134ba212974b6e60f46, type: 3}
+      objectReference: {fileID: 21300000, guid: 26700f64c76398541b68f879a1249604, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: d871013cef9306c439381d60c0136814, type: 3}
+      objectReference: {fileID: 21300000, guid: d7e67a28d750ebb41b47f24c292fb46b, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
       value: PortalShield
@@ -16852,11 +16852,11 @@ PrefabInstance:
     - target: {fileID: 1815847218044494456, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: a4622c164af655047b87a7383cb5cb8f, type: 3}
+      objectReference: {fileID: 21300000, guid: c365f02ddf99fd7448ba7fd4deb346fc, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _icon
       value: 
-      objectReference: {fileID: 21300000, guid: 574a7aa40853fa64b8eb1387938a3153, type: 3}
+      objectReference: {fileID: 21300000, guid: 1514a79a56443bf44b8bafd696d43768, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _name
       value: SpreadShot
@@ -17854,6 +17854,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c00c584e2e5dc0a4da5c17e67db6acd6, type: 3}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
+      propertyPath: _name
+      value: WaterSplash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _price
       value: 0
       objectReference: {fileID: 0}
@@ -17861,6 +17865,10 @@ PrefabInstance:
       propertyPath: _magicModal
       value: 
       objectReference: {fileID: 133635928}
+    - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
+      propertyPath: _displayName
+      value: Water Splash
+      objectReference: {fileID: 0}
     - target: {fileID: 1815847218044494458, guid: 3289714673014874495a7d89026025e1, type: 3}
       propertyPath: _attributes.Array.size
       value: 2

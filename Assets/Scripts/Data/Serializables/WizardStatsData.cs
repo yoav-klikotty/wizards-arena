@@ -30,7 +30,7 @@ public class WizardStatsData
     public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(100, 0, 0, false);
     public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 5, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
-        new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
+        new MagicStatsData("WaterSplash", Magic.MagicType.Attack),
         new MagicStatsData("LesserCharge", Magic.MagicType.Mana),
         new MagicStatsData("MagicShieldBlue", Magic.MagicType.Defence),
     };
