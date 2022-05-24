@@ -81,7 +81,6 @@ public class Magic : MonoBehaviour
         else {
             shieldHP = DefenceStatsData.HP;
         }
-        Debug.Log(shieldHP);
         defender.OnShieldCollision(attacker, attackerMagic, shieldHP);
     }
     public string GetPattern()

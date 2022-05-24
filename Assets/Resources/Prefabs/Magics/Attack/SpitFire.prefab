@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 247015284077530366}
   - component: {fileID: 247015284077530337}
   m_Layer: 0
-  m_Name: Rocket
+  m_Name: SpitFire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,19 +45,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePrefab: {fileID: 128572, guid: 24d83fc5abc3e4c419faeea215137384, type: 3}
-  _skillThumbnail: {fileID: 21300000, guid: bc94b9fd4e65841a58603e462db43761, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: 4290c952046113f41a27aeb3b6d46e41, type: 3}
   _boxCollider: {fileID: 0}
   _requiredMana: 10
+  _requiredHp: 0
+  AOE: 0
   _magicType: 0
   DefenceStatsData:
     HP: 0
     Recovery: 0
     Avoidability: 0
+    ScaledValue: 0
   AttackStatsData:
     BaseDamage: 10
     CriticalRate: 0
     CriticalDmg: 0
     ArmorPenetration: 0.1
+    ScaledValue: 0
+  AttackSpecialEffects:
+    ManaBurn: 0
   ManaStatsData:
     MaxMana: 0
     StartMana: 0
