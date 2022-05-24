@@ -166,8 +166,8 @@ MonoBehaviour:
     materials:
     - advanced_green
     DefenceStatsData:
-      HP: 0
-      Recovery: 0
+      HP: 20
+      Recovery: 2
       Avoidability: 0
       ScaledValue: 0
     AttackStatsData:

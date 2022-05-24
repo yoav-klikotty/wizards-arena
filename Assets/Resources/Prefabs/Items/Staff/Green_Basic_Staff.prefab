@@ -158,7 +158,7 @@ MonoBehaviour:
   _name: Green_Basic_Staff
   _displayName: 
   _price: 0
-  _requiredLevel: 1
+  _requiredLevel: 5
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _itemStatsData:
@@ -166,14 +166,14 @@ MonoBehaviour:
     materials:
     - basic_green
     DefenceStatsData:
-      HP: 10
+      HP: 3
       Recovery: 0
       Avoidability: 0
       ScaledValue: 0
     AttackStatsData:
       BaseDamage: 3
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
+      CriticalRate: 0
+      CriticalDmg: 0
       ArmorPenetration: 0
       ScaledValue: 0
     ManaStatsData:

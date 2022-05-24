@@ -33,6 +33,16 @@ public class InventoryManager : MonoBehaviour
             new InventoryPrefabs("Purple_Advanced_Orb", ItemType.Orb),
             new InventoryPrefabs("Yellow_Basic_Orb", ItemType.Orb),
             new InventoryPrefabs("Yellow_Advanced_Orb", ItemType.Orb),
+            new InventoryPrefabs("Green_Basic_Staff", ItemType.Staff),
+            new InventoryPrefabs("Green_Advanced_Staff", ItemType.Staff),
+            new InventoryPrefabs("Blue_Basic_Staff", ItemType.Staff),
+            new InventoryPrefabs("Blue_Advanced_Staff", ItemType.Staff),
+            new InventoryPrefabs("Red_Basic_Staff", ItemType.Staff),
+            new InventoryPrefabs("Red_Advanced_Staff", ItemType.Staff),
+            new InventoryPrefabs("Purple_Basic_Staff", ItemType.Staff),
+            new InventoryPrefabs("Purple_Advanced_Staff", ItemType.Staff),
+            new InventoryPrefabs("Yellow_Basic_Staff", ItemType.Staff),
+            new InventoryPrefabs("Yellow_Advanced_Staff", ItemType.Staff),
     };
     void Start()
     {

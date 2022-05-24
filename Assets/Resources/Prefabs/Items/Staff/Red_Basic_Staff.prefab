@@ -33,6 +33,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -131,7 +132,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 763b3a1baa85bc24fb0dc78d2a2f8ff3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9eb49a68d296a5d468300969b3db3c05, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -153,26 +154,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05374f7937ae226439e99793bbfc6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 0
-  _name: Red_Cape
+  _type: 1
+  _name: Red_Basic_Staff
   _displayName: 
-  _price: 500
-  _requiredLevel: 20
+  _price: 0
+  _requiredLevel: 5
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _itemStatsData:
     Name: 
     materials:
-    - red
+    - basic_red
     DefenceStatsData:
       HP: 10
       Recovery: 0
       Avoidability: 0
+      ScaledValue: 0
     AttackStatsData:
-      BaseDamage: 3
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
+      BaseDamage: 5
+      CriticalRate: 0
+      CriticalDmg: 0
       ArmorPenetration: 0
+      ScaledValue: 0
     ManaStatsData:
       MaxMana: 0
       StartMana: 0

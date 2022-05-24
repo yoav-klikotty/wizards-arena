@@ -166,7 +166,7 @@ MonoBehaviour:
     materials:
     - advanced_red
     DefenceStatsData:
-      HP: 10
+      HP: 0
       Recovery: 0
       Avoidability: 0
       ScaledValue: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 0
+      ManaRegeneration: 3
       PassiveManaRegeneration: 0
 --- !u!114 &4151859189108725862
 MonoBehaviour:

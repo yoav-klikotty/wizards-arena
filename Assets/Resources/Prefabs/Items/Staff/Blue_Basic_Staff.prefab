@@ -132,7 +132,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 763b3a1baa85bc24fb0dc78d2a2f8ff3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ed83e1dea6b450d4fb5660be654c4c6d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -155,31 +155,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 1
-  _name: Red_Cape
+  _name: Blue_Basic_Staff
   _displayName: 
-  _price: 500
-  _requiredLevel: 20
+  _price: 0
+  _requiredLevel: 5
   _icon: {fileID: 0}
   _itemPanel: {fileID: 0}
   _itemStatsData:
     Name: 
     materials:
-    - red
+    - basic_blue
     DefenceStatsData:
-      HP: 10
+      HP: 0
       Recovery: 0
       Avoidability: 0
       ScaledValue: 0
     AttackStatsData:
       BaseDamage: 3
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
+      CriticalRate: 0
+      CriticalDmg: 0
       ArmorPenetration: 0
       ScaledValue: 0
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 0
+      ManaRegeneration: 1
       PassiveManaRegeneration: 0
 --- !u!114 &4151859189108725862
 MonoBehaviour:

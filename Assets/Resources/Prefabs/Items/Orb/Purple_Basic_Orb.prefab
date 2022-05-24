@@ -166,20 +166,20 @@ MonoBehaviour:
     materials:
     - basic_purple
     DefenceStatsData:
-      HP: 10
+      HP: 3
       Recovery: 0
       Avoidability: 0
       ScaledValue: 0
     AttackStatsData:
-      BaseDamage: 3
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
+      BaseDamage: 1
+      CriticalRate: 0
+      CriticalDmg: 0
       ArmorPenetration: 0
       ScaledValue: 0
     ManaStatsData:
       MaxMana: 0
       StartMana: 0
-      ManaRegeneration: 0
+      ManaRegeneration: 2
       PassiveManaRegeneration: 0
 --- !u!114 &4151859189108725862
 MonoBehaviour:

@@ -166,14 +166,14 @@ MonoBehaviour:
     materials:
     - advanced_red
     DefenceStatsData:
-      HP: 10
+      HP: 15
       Recovery: 0
       Avoidability: 0
       ScaledValue: 0
     AttackStatsData:
       BaseDamage: 3
-      CriticalRate: 0.1
-      CriticalDmg: 0.1
+      CriticalRate: 0.03
+      CriticalDmg: 0
       ArmorPenetration: 0
       ScaledValue: 0
     ManaStatsData:
