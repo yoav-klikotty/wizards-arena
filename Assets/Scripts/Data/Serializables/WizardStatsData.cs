@@ -6,22 +6,22 @@ using UnityEngine;
 public class WizardStatsData
 {
     public ItemStatsData StaffStatsData = new ItemStatsData(
-        "Staff_Default",
-        new List<string> {"green-basic"},
+        "Grey_Basic_Staff",
+        new List<string> {"basic_gray"},
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData CapeStatsData = new ItemStatsData(
-        "Orb_Default",
-        new List<string> {"green-basic"},
+        "Grey_Basic_Cape",
+        new List<string> {"basic_gray"},
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData OrbStatsData = new ItemStatsData(
-        "Cape_Default",
-        new List<string> {"green-basic"},
+        "Grey_Basic_Orb",
+        new List<string> { "basic_gray" },
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
@@ -31,7 +31,7 @@ public class WizardStatsData
     public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 5, 0);
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
         new MagicStatsData("BlueMissile", Magic.MagicType.Attack),
-        new MagicStatsData("MagicChargeBlue", Magic.MagicType.Mana),
+        new MagicStatsData("LesserCharge", Magic.MagicType.Mana),
         new MagicStatsData("MagicShieldBlue", Magic.MagicType.Defence),
     };
     public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
