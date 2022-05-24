@@ -19018,20 +19018,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firePrefab: {fileID: 0}
-  _skillThumbnail: {fileID: 21300000, guid: 976ef393fcfdd8a49a7faf188190c154, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: d7e67a28d750ebb41b47f24c292fb46b, type: 3}
   _boxCollider: {fileID: -4858678709848584362}
   _requiredMana: 5
   _requiredHp: 0
+  AOE: 0
   _magicType: 2
   DefenceStatsData:
-    HP: 30
+    HP: 25
     Recovery: 0
     Avoidability: 0
+    ScaledValue: 1
   AttackStatsData:
     BaseDamage: 0
     CriticalRate: 0
     CriticalDmg: 0
     ArmorPenetration: 0
+    ScaledValue: 0
+  AttackSpecialEffects:
+    ManaBurn: 0
   ManaStatsData:
     MaxMana: 0
     StartMana: 0

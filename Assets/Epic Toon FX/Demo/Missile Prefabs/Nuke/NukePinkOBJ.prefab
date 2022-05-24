@@ -102,7 +102,8 @@ MonoBehaviour:
   Detached: []
   Attacker: {fileID: 0}
   MagicAttackStatsData:
-    BaseDamage: 20
+    BaseDamage: 0
     CriticalRate: 0
     CriticalDmg: 0
     ArmorPenetration: 0
+    ScaledValue: 0
