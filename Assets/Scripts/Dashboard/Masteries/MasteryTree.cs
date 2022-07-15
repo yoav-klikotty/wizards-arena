@@ -30,8 +30,7 @@ public class MasteryTree : MonoBehaviour
         if (playerStatsData.GetMasteriesPoints() > 0)
         {
             inventoryMastery.SetCurrentPoints(inventoryMastery.GetCurrentPoints() + 1);
-            wizardStatsData.UpdateMasteryPoints(inventoryMastery);
-            WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
+            WizardStatsController.Instance.UpdateMasteryPoints(inventoryMastery);
             playerStatsData.ReduceMasteriesPoints();
             PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
             RefreshTree();

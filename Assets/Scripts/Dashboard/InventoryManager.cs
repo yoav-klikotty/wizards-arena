@@ -5,10 +5,8 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     [SerializeField] GameObject _unfilteredContaier;
-    [SerializeField] Wizard _wizard;
     [SerializeField] GameObject _btnContainer;
     private InventoryItem[] _inventoryItems;
-    [SerializeField] WizardStats _wizardStats;
     private InventoryPrefabs[] totalItems = new InventoryPrefabs[] {
             new InventoryPrefabs("Grey_Basic_Cape", ItemType.Cape),
             new InventoryPrefabs("Grey_Basic_Orb", ItemType.Orb),
@@ -54,7 +52,6 @@ public class InventoryManager : MonoBehaviour
     {
         WizardStatsData wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
-        _wizardStats.WriteWizardStats();
     }
     private void InitializeInventory()
     {
@@ -86,10 +83,6 @@ public class InventoryManager : MonoBehaviour
 
     public void EquipItem(InventoryItem itemSelected)
     {
-        WizardStatsData wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
-        wizardStatsData.EquipItem(itemSelected);
-        WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
-        _wizard.UpdateWizard(wizardStatsData);
-        _wizardStats.WriteWizardStats();
+        WizardStatsController.Instance.EquipItem(itemSelected);
     }
 }

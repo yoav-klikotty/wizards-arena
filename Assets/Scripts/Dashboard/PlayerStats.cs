@@ -17,10 +17,6 @@ public class PlayerStats : MonoBehaviour
     {
         EventManager.Instance.updatePlayerStats -= UpdatePlayerStats;
     }
-    private void OnDestory()
-    {
-        EventManager.Instance.updatePlayerStats -= UpdatePlayerStats;
-    }
     void Start()
     {   
         UpdatePlayerStats();

@@ -18,7 +18,7 @@ public class MagicBook : MonoBehaviour
         wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         foreach (var inventoryMagic in _magics)
         {
-            if (wizardStatsData.FindMagic(inventoryMagic.GetID()) != null)
+            if (WizardStatsController.Instance.FindMagic(wizardStatsData.MagicsStatsData, inventoryMagic.GetID()) != null)
             {
                 inventoryMagic.EnableState(true);
                 inventoryMagic.PurchasedState(true);
@@ -39,8 +39,7 @@ public class MagicBook : MonoBehaviour
     {
         if (playerStatsData.GetCoins() > inventoryMagic.GetPrice())
         {
-            wizardStatsData.LearnMagic(inventoryMagic.GetID(), inventoryMagic.GetMagicType());
-            WizardStatsController.Instance.SaveWizardStatsData(wizardStatsData);
+            WizardStatsController.Instance.LearnMagic(inventoryMagic.GetID(), inventoryMagic.GetMagicType());
             playerStatsData.SetCoins(playerStatsData.GetCoins() - inventoryMagic.GetPrice());
             PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
             RefreshBook();

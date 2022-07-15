@@ -37,59 +37,6 @@ public class WizardStatsData
     public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
     {
     };
-    public void EquipItem(InventoryItem equipedItem)
-    {
-        if (equipedItem.GetItemType() == ItemType.Cape)
-        {
-            this.CapeStatsData = equipedItem.GetItemStatsData();
-        }
-        if (equipedItem.GetItemType() == ItemType.Staff)
-        {
-            this.StaffStatsData = equipedItem.GetItemStatsData();
-        }
-        if (equipedItem.GetItemType() == ItemType.Orb)
-        {
-            this.OrbStatsData = equipedItem.GetItemStatsData();
-        }
-    }
-
-    public void UpdateMasteryPoints(InventoryMastery inventoryMastery)
-    {
-        var mastery = FindMastery(inventoryMastery.GetID());
-        if (mastery == null && inventoryMastery.GetCurrentPoints() > 0)
-        {
-            mastery = new MasteryStatsData(inventoryMastery.GetID());
-            mastery.points = inventoryMastery.GetCurrentPoints();
-            mastery.maxPoints = inventoryMastery.GetMaxPoints();
-            mastery.AttackStatsData = inventoryMastery.AttackStatsData;
-            mastery.DefenceStatsData = inventoryMastery.DefenceStatsData;
-            mastery.ManaStatsData = inventoryMastery.ManaStatsData;
-            MasteriesStatsData.Add(mastery);
-        }
-        else if (inventoryMastery.GetCurrentPoints() > 0)
-        {
-            mastery.points = inventoryMastery.GetCurrentPoints();
-        }
-        else
-        {
-            MasteriesStatsData.RemoveAll(masteryToRemove => masteryToRemove.name == inventoryMastery.GetID());
-        }
-    }
-    public void LearnMagic(string magicName, Magic.MagicType type)
-    {
-        if (FindMagic(magicName) == null)
-        {
-            this.MagicsStatsData.Add(new MagicStatsData(magicName, type));
-        }
-    }
-    public MagicStatsData FindMagic(string name)
-    {
-        return MagicsStatsData.Find(magic => magic.name.Equals(name));
-    }
-    public MasteryStatsData FindMastery(string name)
-    {
-        return MasteriesStatsData.Find(skill => skill.name.Equals(name));
-    }
     public int GetTotalBaseDamage()
     {
         int masteriesBaseDamage = 0;

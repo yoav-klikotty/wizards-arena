@@ -137,6 +137,38 @@ public class Wizard : MonoBehaviour
         _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
         _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
     }
+    void OnEnable()
+    {
+        EventManager.Instance.updateWizardStats += UpdateWizard;
+    }
+    void OnDisable()
+    {
+        EventManager.Instance.updateWizardStats -= UpdateWizard;
+    }
+    public void UpdateWizard()
+    {
+        WizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
+        _currentHealth = WizardStatsData.GetTotalHP();
+        foreach (MagicStatsData magicStats in WizardStatsData.MagicsStatsData)
+        {
+            var magicPrefab = Resources.Load("Prefabs/" + "Magics/" + magicStats.type.ToString() + "/" + magicStats.name);
+            var magic = (GameObject)Instantiate(magicPrefab, transform.position, Quaternion.identity, gameObject.transform);
+            if (!magics.ContainsKey(magicStats.name))
+            {
+                magics.Add(magicStats.name, magic.GetComponent<Magic>());
+            }
+        }
+        if (PlayerHUD != null)
+        {
+            PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
+            PlayerHUD.UpdateHits(0);
+            _currentMana = WizardStatsData.GetTotalStartMana();
+            PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
+        }
+        _staff.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
+        _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
+        _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
+    }
 
     public void RenderDecision()
     {
@@ -363,45 +395,6 @@ public class Wizard : MonoBehaviour
     public bool IsWizardAlive()
     {
         return DeathTime == DateTime.MinValue;
-    }
-    public void StopAni()
-    {
-        _anim.Stop();
-    }
-    public void DisabledWizard()
-    {
-        gameObject.SetActive(false);
-    }
-
-    public void EnableWizard()
-    {
-        gameObject.SetActive(true);
-    }
-
-    public void setStaff(Item staff)
-    {
-        this._staff = staff;
-    }
-    public Item getStaff()
-    {
-        return this._staff;
-    }
-
-    public void setCape(Item cape)
-    {
-        this._cape = cape;
-    }
-    public Item getCape()
-    {
-        return this._cape;
-    }
-    public void setOrb(Item orb)
-    {
-        this._orb = orb;
-    }
-    public Item getOrb()
-    {
-        return this._orb;
     }
     public Damage CalculateDamage(WizardStatsData attacker, AttackStatsData attackerMagic)
     {

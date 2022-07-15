@@ -50,7 +50,7 @@ public class InventoryMastery : MonoBehaviour
         else
         {
             EnableMastery();
-            var mastery = wizardStatsData.FindMastery(GetID());
+            var mastery = WizardStatsController.Instance.FindMastery(wizardStatsData.MasteriesStatsData,GetID());
             if (mastery == null)
             {
                 _plusIcon.SetActive(true);
