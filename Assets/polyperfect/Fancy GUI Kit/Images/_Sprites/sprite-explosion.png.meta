@@ -140,6 +140,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -148,9 +150,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -171,9 +173,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
@@ -726,6 +731,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      sprite-explosion_12: 21300050
+      sprite-explosion_19: 21300064
+      sprite-explosion_14: 21300054
+      sprite-explosion_10: 21300046
+      sprite-explosion_2: 21300030
+      sprite-explosion_4: 21300034
+      sprite-explosion_0: 21300026
+      sprite-explosion_18: 21300062
+      sprite-explosion_24: 21300074
+      sprite-explosion_7: 21300040
+      sprite-explosion_9: 21300044
+      sprite-explosion_23: 21300072
+      sprite-explosion_22: 21300070
+      sprite-explosion_5: 21300036
+      sprite-explosion_21: 21300068
+      sprite-explosion_11: 21300048
+      sprite-explosion_13: 21300052
+      sprite-explosion_20: 21300066
+      sprite-explosion_6: 21300038
+      sprite-explosion_17: 21300060
+      sprite-explosion_15: 21300056
+      sprite-explosion_1: 21300028
+      sprite-explosion_16: 21300058
+      sprite-explosion_3: 21300032
+      sprite-explosion_8: 21300042
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

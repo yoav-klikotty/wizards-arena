@@ -11,8 +11,6 @@ public class StoreItem : MonoBehaviour
     [SerializeField] TMP_Text _amountText;
     [SerializeField] string _description;
     [SerializeField] TMP_Text _descriptionText;
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
-
     void Start()
     {
         _costText.text = _cost + "";
@@ -23,9 +21,9 @@ public class StoreItem : MonoBehaviour
     public void OnPurchase()
     {
         SoundManager.Instance.PlayButtonSound();
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+        PlayerStatsData playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
         playerStatsData.SetCrystals(playerStatsData.GetCrystals() + _amount);
-        _playerStatsController.SavePlayerStatsData(playerStatsData, true);
+        PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
     }
 
 }

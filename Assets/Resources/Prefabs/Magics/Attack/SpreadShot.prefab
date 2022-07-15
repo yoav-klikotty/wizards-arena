@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3318649195512489343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3318649195512489337}
+  - component: {fileID: 3318649195512489342}
+  m_Layer: 0
+  m_Name: SpreadShot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3318649195512489337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318649195512489343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3318649195512489342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3318649195512489343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 220af04df95c0a64d8a6985931668fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _firePrefab: {fileID: 128572, guid: 9ecaaaf6bb59a7645bc9e6f01a959471, type: 3}
+  _skillThumbnail: {fileID: 21300000, guid: 1514a79a56443bf44b8bafd696d43768, type: 3}
+  _boxCollider: {fileID: 0}
+  _requiredMana: 10
+  _requiredHp: 0
+  AOE: 1
+  _magicType: 0
+  DefenceStatsData:
+    HP: 0
+    Recovery: 0
+    Avoidability: 0
+    ScaledValue: 0
+  AttackStatsData:
+    BaseDamage: 70
+    CriticalRate: 0
+    CriticalDmg: 0
+    ArmorPenetration: 0
+    ScaledValue: 1
+  AttackSpecialEffects:
+    ManaBurn: 0
+  ManaStatsData:
+    MaxMana: 0
+    StartMana: 0
+    ManaRegeneration: 0
+    PassiveManaRegeneration: 0
+  _pattern: 
+  sound: {fileID: 8300000, guid: b4ce975868fff68458a47704dd4a8cdf, type: 3}

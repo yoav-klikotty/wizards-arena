@@ -1,9 +1,22 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class WizardStatsController
+public class WizardStatsController: MonoBehaviour
 {
     private WizardStatsData _wizardStatsData;
+    public static WizardStatsController Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public WizardStatsData GetWizardStatsData()
     {
         if (_wizardStatsData == null)
@@ -11,7 +24,7 @@ public class WizardStatsController
             _wizardStatsData = LocalStorage.LoadWizardStatsData();
             if (_wizardStatsData == null)
             {
-                return createNewWizard();
+                return new WizardStatsData();
             }
         }
         return LocalStorage.LoadWizardStatsData();
@@ -20,48 +33,89 @@ public class WizardStatsController
     public void SaveWizardStatsData(WizardStatsData wizardStatsData)
     {
         LocalStorage.SaveWizardStatsData(wizardStatsData);
+        EventManager.Instance.UpdateWizardStats();
     }
 
-    private WizardStatsData createNewWizard()
+    public void ResetData()
     {
-        WizardStatsData newWizardStats = new WizardStatsData();
-        newWizardStats.StaffStatsData = new ItemStatsData();
-        newWizardStats.StaffStatsData.materials = new List<string> { "blue" };
-        newWizardStats.StaffStatsData.SoftMagicStats = new MagicStatsData();
-        newWizardStats.StaffStatsData.SoftMagicStats.name = "BlueArrow";
-        newWizardStats.StaffStatsData.SoftMagicStats.requiredMana = 10;
-        newWizardStats.StaffStatsData.SoftMagicStats.multiple = 1;
-        newWizardStats.StaffStatsData.ModerateMagicStats = new MagicStatsData();
-        newWizardStats.StaffStatsData.ModerateMagicStats.name = "PurpleLightning";
-        newWizardStats.StaffStatsData.ModerateMagicStats.requiredMana = 20;
-        newWizardStats.StaffStatsData.ModerateMagicStats.multiple = 2;        
-        newWizardStats.StaffStatsData.HardMagicStats = new MagicStatsData();
-        newWizardStats.StaffStatsData.HardMagicStats.name = "BlueMissile";
-        newWizardStats.StaffStatsData.HardMagicStats.requiredMana = 30;
-        newWizardStats.StaffStatsData.HardMagicStats.multiple = 3;       
-        newWizardStats.CapeStatsData = new ItemStatsData();
-        newWizardStats.CapeStatsData.materials = new List<string> { "blue" };
-        newWizardStats.CapeStatsData.SoftMagicStats = new MagicStatsData();
-        newWizardStats.CapeStatsData.SoftMagicStats.name = "MagicShieldBlue";
-        newWizardStats.CapeStatsData.SoftMagicStats.requiredMana = 3;
-        newWizardStats.CapeStatsData.ModerateMagicStats = new MagicStatsData();
-        newWizardStats.CapeStatsData.ModerateMagicStats.name = "MagicShieldBlue";
-        newWizardStats.CapeStatsData.ModerateMagicStats.requiredMana = 3;
-        newWizardStats.CapeStatsData.HardMagicStats = new MagicStatsData();
-        newWizardStats.CapeStatsData.HardMagicStats.name = "MagicShieldBlue";
-        newWizardStats.CapeStatsData.HardMagicStats.requiredMana = 3;
-        newWizardStats.OrbStatsData = new ItemStatsData();
-        newWizardStats.OrbStatsData.materials = new List<string> { "blue" };
-        newWizardStats.OrbStatsData.SoftMagicStats = new MagicStatsData();
-        newWizardStats.OrbStatsData.SoftMagicStats.name = "MagicChargeBlue";
-        newWizardStats.OrbStatsData.ModerateMagicStats = new MagicStatsData();
-        newWizardStats.OrbStatsData.ModerateMagicStats.name = "MagicChargeBlue";
-        newWizardStats.OrbStatsData.HardMagicStats = new MagicStatsData();
-        newWizardStats.OrbStatsData.HardMagicStats.name = "MagicChargeBlue";
-        newWizardStats.AttackStatsData = new AttackStatsData();
-        newWizardStats.DefenceStatsData = new DefenceStatsData();
-        newWizardStats.ManaStatsData = new ManaStatsData();
-        SaveWizardStatsData(newWizardStats);
-        return newWizardStats;
+        _wizardStatsData = null;
+        PlayerStatsController.Instance.ResetData();
+        PlayerPrefs.DeleteAll();
+    }
+    void OnEnable()
+    {
+        EventManager.Instance.levelUpgrade += UpgardeLevel;
+    }
+    void OnDisable()
+    {
+        EventManager.Instance.levelUpgrade -= UpgardeLevel;
+    }
+
+    public void UpgardeLevel()
+    {
+        WizardStatsData _wizardStatsData = GetWizardStatsData();
+        _wizardStatsData.BaseAttackStatsData.BaseDamage += 3;
+        _wizardStatsData.BaseDefenceStatsData.HP += 3;
+        _wizardStatsData.BaseManaStatsData.MaxMana += 2;
+        SaveWizardStatsData(_wizardStatsData);
+    }
+    
+    public void EquipItem(InventoryItem equipedItem)
+    {
+        WizardStatsData _wizardStatsData = GetWizardStatsData();
+        if (equipedItem.GetItemType() == ItemType.Cape)
+        {
+            _wizardStatsData.CapeStatsData = equipedItem.GetItemStatsData();
+        }
+        if (equipedItem.GetItemType() == ItemType.Staff)
+        {
+            _wizardStatsData.StaffStatsData = equipedItem.GetItemStatsData();
+        }
+        if (equipedItem.GetItemType() == ItemType.Orb)
+        {
+            _wizardStatsData.OrbStatsData = equipedItem.GetItemStatsData();
+        }
+        SaveWizardStatsData(_wizardStatsData);
+    }
+    public void UpdateMasteryPoints(InventoryMastery inventoryMastery)
+    {
+        WizardStatsData _wizardStatsData = GetWizardStatsData();
+        var mastery = FindMastery(_wizardStatsData.MasteriesStatsData, inventoryMastery.GetID());
+        if (mastery == null && inventoryMastery.GetCurrentPoints() > 0)
+        {
+            mastery = new MasteryStatsData(inventoryMastery.GetID());
+            mastery.points = inventoryMastery.GetCurrentPoints();
+            mastery.maxPoints = inventoryMastery.GetMaxPoints();
+            mastery.AttackStatsData = inventoryMastery.AttackStatsData;
+            mastery.DefenceStatsData = inventoryMastery.DefenceStatsData;
+            mastery.ManaStatsData = inventoryMastery.ManaStatsData;
+            _wizardStatsData.MasteriesStatsData.Add(mastery);
+        }
+        else if (inventoryMastery.GetCurrentPoints() > 0)
+        {
+            mastery.points = inventoryMastery.GetCurrentPoints();
+        }
+        else
+        {
+            _wizardStatsData.MasteriesStatsData.RemoveAll(masteryToRemove => masteryToRemove.name == inventoryMastery.GetID());
+        }
+        SaveWizardStatsData(_wizardStatsData);
+    }
+    public MasteryStatsData FindMastery(List<MasteryStatsData> Masteries, string name)
+    {
+        return Masteries.Find(skill => skill.name.Equals(name));
+    }
+    public void LearnMagic(string magicName, Magic.MagicType type)
+    {
+        WizardStatsData _wizardStatsData = GetWizardStatsData();
+        if (FindMagic(_wizardStatsData.MagicsStatsData, magicName) == null)
+        {
+            _wizardStatsData.MagicsStatsData.Add(new MagicStatsData(magicName, type));
+        }
+        SaveWizardStatsData(_wizardStatsData);
+    }
+    public MagicStatsData FindMagic(List<MagicStatsData> magicsStatsData, string name)
+    {
+        return magicsStatsData.Find(magic => magic.name.Equals(name));
     }
 }

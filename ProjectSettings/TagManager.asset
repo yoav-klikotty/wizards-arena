@@ -6,6 +6,8 @@ TagManager:
   tags:
   - FxTemporaire
   - ItemSlot
+  - New tag
+  - dot
   layers:
   - Default
   - TransparentFX

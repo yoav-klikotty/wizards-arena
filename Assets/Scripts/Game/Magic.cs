@@ -1,42 +1,47 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 public class Magic : MonoBehaviour
 {
     GameObject ToPoint;
     GameObject FromPoint;
     [SerializeField] GameObject _firePrefab;
     ParticleSystem _particalSystem;
-    [SerializeField] Image _skillThumbnail;
+    [SerializeField] Sprite _skillThumbnail;
     [SerializeField] BoxCollider _boxCollider;
-
+    [SerializeField] int _requiredMana;
+    [SerializeField] int _requiredHp;
+    public bool AOE;
+    [SerializeField] MagicType _magicType;
+    public DefenceStatsData DefenceStatsData;
+    public AttackStatsData AttackStatsData;
+    public AttackSpecialEffects AttackSpecialEffects;
+    public ManaStatsData ManaStatsData;
+    public enum MagicType { Attack, Mana, Defence };
+    [SerializeField] string _pattern;
+    [SerializeField] AudioClip sound;
     void Start()
     {
-        if(transform.parent.gameObject.transform.parent.gameObject.name == "Opponent")
-        {
-            ToPoint = GameObject.Find("Player");
-            FromPoint = GameObject.Find("CenterShootOpponent");
-        }
-        else
-        {
-            ToPoint = GameObject.Find("Opponent");
-            FromPoint = GameObject.Find("CenterShootPlayer");
-        }
         _particalSystem = GetComponent<ParticleSystem>();
     }
     public void Activate()
     {
-        if (_firePrefab != null)
-        {
-            ActivateFirePrefab();
-        }
-        else
-        {
-            _particalSystem.Play();
-        }
+        _particalSystem.Play();
         if (_boxCollider != null)
         {
             EnableBoxCollider();
         }
+    }
+
+    public int GetRequiredMana()
+    {
+        return _requiredMana;
+    }
+
+    public int GetRequiredHp()
+    {
+        return _requiredHp;
     }
 
     private void EnableBoxCollider()
@@ -48,13 +53,49 @@ public class Magic : MonoBehaviour
     {
         _boxCollider.enabled = false;
     }
-    void ActivateFirePrefab()
+    public void ActivateFirePrefab(Vector3 FromPoint, Vector3 ToPoint)
     {
-        GameObject instanceBullet = Instantiate(_firePrefab, FromPoint.transform.position, Quaternion.identity);
-        instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint.transform.position - FromPoint.transform.position);
+        GameObject instanceBullet = Instantiate(_firePrefab, FromPoint, Quaternion.identity);
+        instanceBullet.GetComponent<ProjectileMover>().Attacker = gameObject.GetComponentInParent<Wizard>();
+        instanceBullet.GetComponent<ProjectileMover>().MagicAttackStatsData = AttackStatsData;
+        instanceBullet.GetComponent<ProjectileMover>().MagicAttackSpecialEffects = AttackSpecialEffects;
+        instanceBullet.transform.rotation = Quaternion.LookRotation(ToPoint - FromPoint);
     }
-    public Image GetThumbnail()
+    public Sprite GetThumbnail()
     {
         return _skillThumbnail;
     }
+    public MagicType GetMagicType()
+    {
+        return _magicType;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        var attacker = collision.gameObject.GetComponent<ProjectileMover>().Attacker;
+        var attackerMagic = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackStatsData;
+        var defender = gameObject.transform.parent.GetComponent<Wizard>();
+        int shieldHP;
+        if(DefenceStatsData.ScaledValue) {
+            shieldHP = (int)(defender.WizardStatsData.GetTotalHP() * (float)DefenceStatsData.HP/100);
+        }
+        else {
+            shieldHP = DefenceStatsData.HP;
+        }
+        defender.OnShieldCollision(attacker, attackerMagic, shieldHP);
+    }
+    public string GetPattern()
+    {
+        return _pattern;
+    }
+
+    public AudioClip getSound()
+    {
+        return sound;
+    }
+}
+
+[Serializable]
+public class AttackSpecialEffects
+{
+    public int ManaBurn;
 }

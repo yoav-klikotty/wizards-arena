@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
-public class PlayerStatsController
+public class PlayerStatsController: MonoBehaviour
 {
-    public delegate void DataChangedAction();
-    public static event DataChangedAction UpdateEvent;
-
     private PlayerStatsData _playerStatsData;
+    public static PlayerStatsController Instance { get; private set; }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     public PlayerStatsData GetPlayerStatsData()
     {
         if (_playerStatsData == null)
@@ -21,22 +28,21 @@ public class PlayerStatsController
         return LocalStorage.LoadPlayerStatsData();
     }
 
-    public void SavePlayerStatsData(PlayerStatsData playerStatsData, bool isUpdate)
+    public void SavePlayerStatsData(PlayerStatsData playerStatsData)
     {
         LocalStorage.SavePlayerStatsData(playerStatsData);
-        if (isUpdate)
-        {
-            UpdateEvent();
-        }
+        EventManager.Instance.UpdatePlayerStats();
+    }
+    public void ResetData()
+    {
+        _playerStatsData = null;
     }
 
     private PlayerStatsData CreateNewPlayer()
     {
         _playerStatsData = new PlayerStatsData();
-        _playerStatsData._items.Add("Blue_Cape");
-        _playerStatsData._items.Add("Blue_Orb");
-        _playerStatsData._items.Add("Blue_Staff");
-        SavePlayerStatsData(_playerStatsData, true);
+        SavePlayerStatsData(_playerStatsData);
         return _playerStatsData;
     }
+    
 }

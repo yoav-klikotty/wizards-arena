@@ -5,140 +5,302 @@ using UnityEngine;
 [Serializable]
 public class WizardStatsData
 {
-    public ItemStatsData StaffStatsData;
-    public ItemStatsData CapeStatsData;
-    public ItemStatsData OrbStatsData;
-    public AttackStatsData AttackStatsData;
-    public DefenceStatsData DefenceStatsData;
-    public ManaStatsData ManaStatsData;
-
-    public void WriteWizardStats(){
-        WizardStats wizardStatsObject = GameObject.Find("WizardStats").GetComponent<WizardStats>();
-        wizardStatsObject.SetDmg(AttackStatsData.MinBaseDamage, AttackStatsData.MaxBaseDamage);
-        wizardStatsObject.SetCritDmg(AttackStatsData.CriticalDmg);
-        wizardStatsObject.SetCritRate(AttackStatsData.CriticalRate);
-        wizardStatsObject.SetArmorPenetration(AttackStatsData.ArmorPenetration);
-        wizardStatsObject.SetMaxHP(DefenceStatsData.MaxHP);
-        wizardStatsObject.SetRecovery(DefenceStatsData.Recovery);
-        wizardStatsObject.SetMirroring(DefenceStatsData.Mirroring);
-        wizardStatsObject.SetAvoidability(DefenceStatsData.Avoidability);
-        wizardStatsObject.SetMaxMana(ManaStatsData.MaxMana);
-        wizardStatsObject.SetStartMana(ManaStatsData.StartMana);
-        wizardStatsObject.SetManaRegeneration(ManaStatsData.ManaRegeneration);
-        wizardStatsObject.SetPassiveManaRegeneration(ManaStatsData.PassiveManaRegeneration);
-    }
-
-    public void EquipItem(InventoryItem equipedItem) {
-        if (equipedItem.GetItemType() == ItemType.Cape)
+    public ItemStatsData StaffStatsData = new ItemStatsData(
+        "Grey_Basic_Staff",
+        new List<string> {"basic_gray"},
+        new DefenceStatsData(0, 0, 0, false),
+        new AttackStatsData(0, 0, 0, 0, false),
+        new ManaStatsData(0, 0, 0, 0)
+    );
+    public ItemStatsData CapeStatsData = new ItemStatsData(
+        "Grey_Basic_Cape",
+        new List<string> {"basic_gray"},
+        new DefenceStatsData(0, 0, 0, false),
+        new AttackStatsData(0, 0, 0, 0, false),
+        new ManaStatsData(0, 0, 0, 0)
+    );
+    public ItemStatsData OrbStatsData = new ItemStatsData(
+        "Grey_Basic_Orb",
+        new List<string> { "basic_gray" },
+        new DefenceStatsData(0, 0, 0, false),
+        new AttackStatsData(0, 0, 0, 0, false),
+        new ManaStatsData(0, 0, 0, 0)
+    );
+    public AttackStatsData BaseAttackStatsData = new AttackStatsData(15, 0, 0, 0, false);
+    public DefenceStatsData BaseDefenceStatsData = new DefenceStatsData(100, 0, 0, false);
+    public ManaStatsData BaseManaStatsData = new ManaStatsData(25, 0, 5, 0);
+    public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
+        new MagicStatsData("WaterSplash", Magic.MagicType.Attack),
+        new MagicStatsData("LesserCharge", Magic.MagicType.Mana),
+        new MagicStatsData("MagicShieldBlue", Magic.MagicType.Defence),
+    };
+    public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>
+    {
+    };
+    public int GetTotalBaseDamage()
+    {
+        int masteriesBaseDamage = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
         {
-            this.CapeStatsData = equipedItem.GetItemStatsData();
+            masteriesBaseDamage += masteriesStatsData.points * masteriesStatsData.AttackStatsData.BaseDamage;
         }
-        if (equipedItem.GetItemType() == ItemType.Staff)
+        return (BaseAttackStatsData.BaseDamage +
+                CapeStatsData.AttackStatsData.BaseDamage +
+                OrbStatsData.AttackStatsData.BaseDamage +
+                StaffStatsData.AttackStatsData.BaseDamage +
+                masteriesBaseDamage
+                );
+    }
+    public float GetTotalCriticalDmg()
+    {
+        float smasteriesCritDamage = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
         {
-            this.StaffStatsData = equipedItem.GetItemStatsData();
+            smasteriesCritDamage += masteriesStatsData.points * masteriesStatsData.AttackStatsData.CriticalDmg;
         }
-        if (equipedItem.GetItemType() == ItemType.Orb)
-        {
-            this.OrbStatsData = equipedItem.GetItemStatsData();
-        }
-        UpdateAttackStatsData(equipedItem.GetAttackStatsData(), 1);
-        UpdateDefenceStatsData(equipedItem.GetDefenceStatsData(), 1);
-        UpdateManaStatsData(equipedItem.GetManaStatsData(), 1);
+        return (BaseAttackStatsData.CriticalDmg +
+                CapeStatsData.AttackStatsData.CriticalDmg +
+                OrbStatsData.AttackStatsData.CriticalDmg +
+                StaffStatsData.AttackStatsData.CriticalDmg +
+                smasteriesCritDamage
+                );
     }
 
-    public void RemoveItem(InventoryItem removedItem) {
-        UpdateAttackStatsData(removedItem.GetAttackStatsData(), -1);
-        UpdateDefenceStatsData(removedItem.GetDefenceStatsData(), -1);
-        UpdateManaStatsData(removedItem.GetManaStatsData(), -1);
+    public float GetTotalCriticalRate()
+    {
+        float masteriesCritRate = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesCritRate += masteriesStatsData.points * masteriesStatsData.AttackStatsData.CriticalRate;
+        }
+        return (BaseAttackStatsData.CriticalRate +
+                CapeStatsData.AttackStatsData.CriticalRate +
+                OrbStatsData.AttackStatsData.CriticalRate +
+                StaffStatsData.AttackStatsData.CriticalRate + 
+                masteriesCritRate
+                );
     }
-
-    private void UpdateAttackStatsData(AttackStatsData equipedItem, int factor){
-        AttackStatsData.CriticalDmg += (equipedItem.CriticalDmg*factor);
-        AttackStatsData.CriticalRate += (equipedItem.CriticalRate*factor);
-        AttackStatsData.MinBaseDamage += (equipedItem.MinBaseDamage*factor);
-        AttackStatsData.MaxBaseDamage += (equipedItem.MaxBaseDamage*factor);
-        AttackStatsData.ArmorPenetration += (equipedItem.ArmorPenetration*factor);
+    public float GetTotalArmorPenetration()
+    {
+        float masteriesArmorPenetration = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesArmorPenetration += masteriesStatsData.points * masteriesStatsData.AttackStatsData.ArmorPenetration;
+        }
+        return (BaseAttackStatsData.ArmorPenetration +
+                CapeStatsData.AttackStatsData.ArmorPenetration +
+                OrbStatsData.AttackStatsData.ArmorPenetration +
+                StaffStatsData.AttackStatsData.ArmorPenetration +
+                masteriesArmorPenetration
+                );
     }
-    private void UpdateStaffStatsData(ItemStatsData staffStaffData){
-        this.StaffStatsData = staffStaffData;
+    public int GetTotalHP()
+    {
+        int masteriesHP = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesHP += masteriesStatsData.points * masteriesStatsData.DefenceStatsData.HP;
+        }
+        return (BaseDefenceStatsData.HP +
+                CapeStatsData.DefenceStatsData.HP +
+                OrbStatsData.DefenceStatsData.HP +
+                StaffStatsData.DefenceStatsData.HP + 
+                masteriesHP
+                );
     }
-    private void UpdateDefenceStatsData(DefenceStatsData equipedItem, int factor){
-        DefenceStatsData.MaxHP += (equipedItem.MaxHP*factor);
-        DefenceStatsData.Recovery += (equipedItem.Recovery*factor);
-        DefenceStatsData.Mirroring += (equipedItem.Mirroring*factor);
-        DefenceStatsData.Avoidability += (equipedItem.Avoidability*factor);
+    public int GetTotalRecovery()
+    {
+        int masteriesRecovery = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesRecovery += masteriesStatsData.points * masteriesStatsData.DefenceStatsData.Recovery;
+        }
+        return (BaseDefenceStatsData.Recovery +
+                CapeStatsData.DefenceStatsData.Recovery +
+                OrbStatsData.DefenceStatsData.Recovery +
+                StaffStatsData.DefenceStatsData.Recovery + 
+                masteriesRecovery
+                );
     }
-    private void UpdateCapeStatsData(ItemStatsData capeStatsData){
-        this.CapeStatsData = capeStatsData;
+    public float GetTotalAvoidability()
+    {
+        float masteriesAvoidability = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesAvoidability += masteriesStatsData.points * masteriesStatsData.DefenceStatsData.Avoidability;
+        }
+        return (BaseDefenceStatsData.Avoidability +
+                CapeStatsData.DefenceStatsData.Avoidability +
+                OrbStatsData.DefenceStatsData.Avoidability +
+                StaffStatsData.DefenceStatsData.Avoidability + 
+                masteriesAvoidability
+                );
     }
-    private void UpdateManaStatsData(ManaStatsData equipedItem, int factor){
-        ManaStatsData.MaxMana += (equipedItem.MaxMana*factor);
-        ManaStatsData.StartMana += (equipedItem.StartMana*factor);
-        ManaStatsData.ManaRegeneration += (equipedItem.ManaRegeneration*factor);
-        ManaStatsData.PassiveManaRegeneration += (equipedItem.PassiveManaRegeneration*factor);
+    public int GetTotalMaxMana()
+    {
+        int masteriesMaxMana = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesMaxMana += masteriesStatsData.points * masteriesStatsData.ManaStatsData.MaxMana;
+        }
+        return (BaseManaStatsData.MaxMana +
+                CapeStatsData.ManaStatsData.MaxMana +
+                OrbStatsData.ManaStatsData.MaxMana +
+                StaffStatsData.ManaStatsData.MaxMana + 
+                masteriesMaxMana
+                );
     }
-    private void UpdateOrbStatsData(ItemStatsData orbStatsData){
-        this.OrbStatsData = orbStatsData;
+    public int GetTotalManaRegeneration()
+    {
+        int masteriesManaRegeneration = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesManaRegeneration += masteriesStatsData.points * masteriesStatsData.ManaStatsData.ManaRegeneration;
+        }
+        return (BaseManaStatsData.ManaRegeneration +
+                CapeStatsData.ManaStatsData.ManaRegeneration +
+                OrbStatsData.ManaStatsData.ManaRegeneration +
+                StaffStatsData.ManaStatsData.ManaRegeneration +
+                masteriesManaRegeneration
+                );
+    }
+    public int GetTotalPassiveManaRegeneration()
+    {
+        int masteriesPassive = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesPassive += masteriesStatsData.points * masteriesStatsData.ManaStatsData.PassiveManaRegeneration;
+        }
+        return (BaseManaStatsData.PassiveManaRegeneration +
+                CapeStatsData.ManaStatsData.PassiveManaRegeneration +
+                OrbStatsData.ManaStatsData.PassiveManaRegeneration +
+                StaffStatsData.ManaStatsData.PassiveManaRegeneration +
+                masteriesPassive
+                );
+    }
+    public int GetTotalStartMana()
+    {
+        int masteriesStartMana = 0;
+        foreach (var masteriesStatsData in MasteriesStatsData)
+        {
+            masteriesStartMana += masteriesStatsData.points * masteriesStatsData.ManaStatsData.StartMana;
+        }
+        return (BaseManaStatsData.StartMana +
+                CapeStatsData.ManaStatsData.StartMana +
+                OrbStatsData.ManaStatsData.StartMana +
+                StaffStatsData.ManaStatsData.StartMana +
+                masteriesStartMana
+                );
     }
 }
 
 [Serializable]
 public class AttackStatsData
-{ 
-    public int MinBaseDamage = 7;
-    public int MaxBaseDamage = 15;
-    public float CriticalRate = 0.1f;
-    public float CriticalDmg = 0;
-    public float ArmorPenetration = 0;
+{
+    public AttackStatsData(int baseDamage, float criticalRate, float criticalDamage, float armorPenetration, bool scaledValue)
+    {
+        this.BaseDamage = baseDamage;
+        this.CriticalDmg = criticalDamage;
+        this.CriticalRate = criticalRate;
+        this.ArmorPenetration = armorPenetration;
+        this.ScaledValue = scaledValue;
+    }
+    public int BaseDamage;
+    public float CriticalRate;
+    public float CriticalDmg;
+    public float ArmorPenetration;
+    public bool ScaledValue; 
 }
 
 [Serializable]
 public class DefenceStatsData
-{ 
-    public int MaxHP = 20;
-    public int Recovery = 0;
-    public float Avoidability = 0;
-    public float Mirroring = 0;
+{
+    public DefenceStatsData(int HP, int Recovery, float Avoidability, bool scaledValue)
+    {
+        this.HP = HP;
+        this.Recovery = Recovery;
+        this.Avoidability = Avoidability;
+        this.ScaledValue = scaledValue;
+    }
+    public int HP;
+    public int Recovery;
+    public float Avoidability;
+    public bool ScaledValue; 
 }
 
 [Serializable]
 public class ManaStatsData
-{ 
-    public int MaxMana = 50;
-    public int StartMana = 40;
-    public int ManaRegeneration = 7;
-    public int PassiveManaRegeneration = 0;
+{
+    public ManaStatsData(int MaxMana, int StartMana, int ManaRegeneration, int PassiveManaRegeneration)
+    {
+        this.MaxMana = MaxMana;
+        this.StartMana = StartMana;
+        this.ManaRegeneration = ManaRegeneration;
+        this.PassiveManaRegeneration = PassiveManaRegeneration;
+    }
+    public int MaxMana;
+    public int StartMana;
+    public int ManaRegeneration;
+    public int PassiveManaRegeneration;
 }
 
 [Serializable]
 public class MagicStatsData
 {
     public string name;
-    public int multiple;
-    public int requiredMana;
+    public Magic.MagicType type;
+
+    public MagicStatsData(string name, Magic.MagicType type)
+    {
+        this.name = name;
+        this.type = type;
+    }
 }
 
 [Serializable]
+public class MasteryStatsData
+{
+    public string name;
+    public int points;
+    public int maxPoints;
+    public DefenceStatsData DefenceStatsData;
+    public AttackStatsData AttackStatsData;
+    public ManaStatsData ManaStatsData;
+    public MasteryStatsData(string name)
+    {
+        this.name = name;
+    }
+}
+[Serializable]
 public class ItemStatsData
 {
+    public ItemStatsData(
+        string name, 
+        List<string> materials, 
+        DefenceStatsData defenceStatsData, 
+        AttackStatsData attackStatsData, 
+        ManaStatsData manaStatsData
+    )
+    {
+        this.Name = name;
+        this.materials = materials;
+        this.DefenceStatsData = defenceStatsData;
+        this.AttackStatsData = attackStatsData;
+        this.ManaStatsData = manaStatsData;
+    }
+    public string Name;
     public List<string> materials;
-    public MagicStatsData SoftMagicStats;
-    public MagicStatsData ModerateMagicStats;
-    public MagicStatsData HardMagicStats;
+    public DefenceStatsData DefenceStatsData;
+    public AttackStatsData AttackStatsData;
+    public ManaStatsData ManaStatsData;
     public Material[] GetMaterials()
     {
         return new Material[] {
             Resources.Load<Material>("Materials/" + materials[0]),
         };
     }
-
     public bool IsContainInventoryItem(InventoryItem inventoryItem)
     {
-        if (materials.Contains(inventoryItem.GetItemStatsData().materials[0]))
-        {
-            return true;
-        }
-        return false;
+        return Name.Equals(inventoryItem.GetName());
     }
-
 }

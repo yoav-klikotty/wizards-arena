@@ -6,62 +6,65 @@ using TMPro;
 
 public class PlayerHUD : MonoBehaviour
 {
-    [SerializeField] Slider _healthBar;
+    
+    [SerializeField] GameObject _indicationText;
+    [SerializeField] Image _healthBar;
     [SerializeField] TMP_Text _healthLabel;
-    [SerializeField] Transform _camera;
-    public float requiredManaForSoftAttack;
-    [SerializeField] GameObject _softAttackMagic;
-    public float requiredManaForModerateAttack;
-    [SerializeField] GameObject _moderateAttackMagic;
-    public float requiredManaForHardAttack;
-    [SerializeField] GameObject _hardAttackMagic;
-    [SerializeField] Animation _animation;
-    [SerializeField] TMP_Text _indicationText;
+    Transform _camera;
+    [SerializeField] Image _manaBar;
+    [SerializeField] TMP_Text _manaText;
+    [SerializeField] TMP_Text _hits;
 
-    public void SetHealthBar(float health, float maxHP)
+    private float _barSpeed = 0.05f;
+
+    void Start()
     {
-        _healthBar.maxValue = maxHP;
-        _healthBar.value = health;
-        _healthLabel.text = health + "/" + maxHP;
+        _camera = GameObject.Find("Camera").GetComponent<Transform>();
     }
-    // Update is called once per frame
+
+    IEnumerator AdjustBar(Image bar, float targetValue)
+    {
+        yield return new WaitForSeconds(_barSpeed);
+        float direction = (targetValue - bar.fillAmount) > 0 ? 1 : -1;
+        float newFillAmount = bar.fillAmount + (_barSpeed*direction);
+        if (direction == 1 && newFillAmount > targetValue) {
+            bar.fillAmount = targetValue;
+        }
+        else if (direction == -1 && newFillAmount < targetValue) {
+            bar.fillAmount = targetValue;
+        }
+        else {
+            bar.fillAmount = newFillAmount;
+            StartCoroutine(AdjustBar(bar, targetValue));
+        }
+    }
+
+    public void UpdateHealth(float health, float maxHP)
+    {
+        _healthLabel.text = (int) health + "/" + maxHP;
+        float barFillAmountTarget = health / maxHP;
+        StartCoroutine(AdjustBar(_healthBar, barFillAmountTarget));
+    }
+    public void UpdateHits(int hits)
+    {
+        _hits.text = "Hits: " + hits;
+    }
+
     void LateUpdate()
     {
         transform.LookAt(transform.position + _camera.forward);
     }
 
-    public void RenderAvailableAttacks(float mana)
+    public void UpdateMana(float mana, float maxMana)
     {
-        if (mana >= requiredManaForSoftAttack)
-        {
-            _softAttackMagic.SetActive(true);
-        }
-        else
-        {
-            _softAttackMagic.SetActive(false);
-        }
-        if (mana >= requiredManaForModerateAttack)
-        {
-            _moderateAttackMagic.SetActive(true);
-        }
-        else
-        {
-            _moderateAttackMagic.SetActive(false);
-        }
-        if (mana >= requiredManaForHardAttack)
-        {
-            _hardAttackMagic.SetActive(true);
-        }
-        else
-        {
-            _hardAttackMagic.SetActive(false);
-        }
-
+        _manaText.text = (int) mana + " / " + maxMana;
+        float barFillAmountTarget = mana / maxMana;
+        StartCoroutine(AdjustBar(_manaBar, barFillAmountTarget));
     }
 
-    public void ActivateIndication(string indicationText)
+    public void ActivateIndication(string indicationText, indicationEvents indicationEvent)
     {
-        _indicationText.text = indicationText;
-        _animation.Play();
+        GameObject indicationTextObj = Instantiate(_indicationText, transform.position, Quaternion.identity, gameObject.transform);
+        indicationTextObj.GetComponent<TextIndication>().Activate(indicationText, indicationEvent);
     }
 }

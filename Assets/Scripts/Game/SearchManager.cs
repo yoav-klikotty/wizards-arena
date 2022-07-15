@@ -1,73 +1,62 @@
 ﻿using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using System.Collections;
+using TMPro;
+using System;
 
 public class SearchManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] Slider _progressBar;
-
+    [SerializeField] TMP_Text _roomCode;
+    [SerializeField] TMP_Text _progressText;
+    int timeLimit = 10;
+    DateTime start;
+    bool flag;
     void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
-    }
-    // Multiplayer methods
-    public override void OnConnectedToMaster()
-    {
-        IncreaseProgressBar(3);
-        Invoke("StartBotGame", 10);
-        PhotonNetwork.AutomaticallySyncScene = true;
-        PhotonNetwork.JoinRandomRoom();
-    }
-    void StartBotGame()
-    {
-        PhotonNetwork.Disconnect();
-    }
-    void IncreaseProgressBar(int value)
-    {
-        _progressBar.value = value;
+        UpdatePlayersCount();
+        GameManager.Instance.TimeToPlay = (int)PhotonNetwork.CurrentRoom.CustomProperties["s"];
+        GameManager.Instance.NumOfPlayers = (int)PhotonNetwork.CurrentRoom.MaxPlayers;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            start = DateTime.Now;
+            _roomCode.text = "Room code: " + PhotonNetwork.CurrentRoom.Name;
+        }
     }
 
-    public override void OnJoinRandomFailed(short returnCode, string message)
+    void Update()
     {
-        CreateRoom();
-    }
-
-    void CreateRoom()
-    {
-        IncreaseProgressBar(6);
-        int randomRoomNumber = Random.Range(0, 10000);
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
-        PhotonNetwork.CreateRoom("Room" + randomRoomNumber, roomOps);
-    }
-
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        CreateRoom();
-    }
-
-    public override void OnEnable()
-    {
-        PhotonNetwork.AddCallbackTarget(this);
-    }
-
-    public override void OnDisable()
-    {
-        PhotonNetwork.RemoveCallbackTarget(this);
+        if (Tweaks.BotModeActive)
+        {
+            if (PhotonNetwork.IsMasterClient && !GameManager.Instance.IsPrivateGame && ((DateTime.Now - start).TotalSeconds > timeLimit) && !flag)
+            {
+                flag = true;
+                StartCoroutine(StartGame());
+            }
+        }
     }
 
     public override void OnPlayerEnteredRoom(Photon.Realtime.Player player)
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 2 && PhotonNetwork.IsMasterClient)
+        UpdatePlayersCount();
+        if (PhotonNetwork.CurrentRoom.PlayerCount == GameManager.Instance.NumOfPlayers && PhotonNetwork.IsMasterClient && !flag)
         {
-            IncreaseProgressBar(9);
-            PhotonNetwork.LoadLevel("Game");
+            flag = true;
+            StartCoroutine(StartGame());
         }
     }
-    public override void OnDisconnected(DisconnectCause cause)
+    private void UpdatePlayersCount()
     {
-        IncreaseProgressBar(9);
-        SceneManager.LoadScene("Game");
+        GameManager.Instance.ActivePlayers = PhotonNetwork.CurrentRoom.PlayerCount;
+        var playersLeftToFind = PhotonNetwork.CurrentRoom.MaxPlayers - PhotonNetwork.CurrentRoom.PlayerCount;
+        _progressText.text = "waiting for " + playersLeftToFind + " more players";
+    }
+    IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(1);
+        PhotonNetwork.AutomaticallySyncScene = true;
+        PhotonNetwork.CurrentRoom.IsOpen = false;
+        PhotonNetwork.CurrentRoom.IsVisible = false;
+        PhotonNetwork.LoadLevel("Game");
     }
 }

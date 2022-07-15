@@ -2,181 +2,109 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using System.Collections;
+
 public class DecisionManager : MonoBehaviour
 {
-    [SerializeField] Counter _counter;
-    [SerializeField] Option _option;
-    Syncronizer _syncronizer;
-    [SerializeField] Button _softAttackMagic;
-    [SerializeField] Button _moderateAttackMagic;
-    [SerializeField] Button _hardAttackMagic;
-
-    [SerializeField] Button _ammoBtn;
-    [SerializeField] Button _shieldBtn;
-    [SerializeField] Slider _manaBar;
+    string _option;
+    SessionManager _sessionManager;
     [SerializeField] TMP_Text _manaText;
-
+    [SerializeField] GameObject _magicOption;
+    [SerializeField] GameObject _btnContainer;
     Wizard player;
-    public enum Option
-    {
-        Reload,
-        Protect,
-        SoftAttack,
-        ModerateAttack,
-        HardAttack,
-        None
-    }
+    string OpponentId;
+    bool reviveLock;
 
     void Start()
     {
-        _syncronizer = GameObject.Find("Syncronizer").GetComponent<Syncronizer>();
-        player = GameObject.Find("Player").GetComponent<Wizard>();
-        player.IncreaseMana(player.WizardStatsData.ManaStatsData.PassiveManaRegeneration);
-        SetManaBar();
+        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        player = _sessionManager.playerWizard;
+        OpponentId = _sessionManager.GetRandomOpponentId(player.wizardId).wizardId;
+        SelectOpponent(OpponentId);
+        player.IncreaseMana(player.WizardStatsData.GetTotalPassiveManaRegeneration());
         UpdateValidMagicsByMana();
     }
     void Update()
     {
-        if (_counter.IsCounterEnd() && _option == Option.None)
+        if (Input.GetMouseButtonDown(0))
         {
-            ChooseRandom();
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.gameObject.name == "Opponent")
+                {
+                    OpponentId = hit.transform.gameObject.GetComponent<Wizard>().wizardId;
+                    SelectOpponent(OpponentId);
+                }
+            }
+
+        }
+    }
+
+    void SelectOpponent(string wizardId)
+    {
+        foreach (var wizard in _sessionManager.wizards)
+        {
+            if (wizard.wizardId == wizardId)
+            {
+                wizard.IsWizardSelected(true);
+            }
+            else
+            {
+                wizard.TurnWizardSelection(false);
+            }
         }
     }
 
     void UpdateValidMagicsByMana()
     {
-        if (player.WizardStatsData.StaffStatsData.SoftMagicStats.requiredMana <= player.GetMana())
+        foreach (string key in player.magics.Keys)
         {
-            _softAttackMagic.interactable = true;
+            var magic = player.magics[key];
+            var elem = Instantiate(_magicOption, Vector3.zero, Quaternion.identity);
+            elem.transform.SetParent(_btnContainer.transform, false);
+            elem.GetComponent<Image>().sprite = magic.GetThumbnail();
+            elem.GetComponent<Button>().onClick.AddListener(() => ChooseMagic(key, magic.GetMagicType() == Magic.MagicType.Attack));
+            if (magic.GetRequiredMana() <= player.GetMana() && magic.GetRequiredHp() < player.GetHealth())
+            {
+                elem.GetComponent<Button>().interactable = true;
+            }
         }
-        else
-        {
-            _softAttackMagic.interactable = false;
-        }
-        if (player.WizardStatsData.StaffStatsData.ModerateMagicStats.requiredMana <= player.GetMana())
-        {
-            _moderateAttackMagic.interactable = true;
-        }
-        else
-        {
-            _moderateAttackMagic.interactable = false;
-        }
-        if (player.WizardStatsData.StaffStatsData.HardMagicStats.requiredMana <= player.GetMana())
-        {
-            _hardAttackMagic.interactable = true;
-        }
-        else
-        {
-            _hardAttackMagic.interactable = false;
-        }
-        if (player.WizardStatsData.CapeStatsData.SoftMagicStats.requiredMana <= player.GetMana())
-        {
-            _shieldBtn.interactable = true;
-        }
-        else
-        {
-            _shieldBtn.interactable = false;
-        }
-    }
-    public void SetManaBar()
-    {
-        _manaBar.maxValue = player.WizardStatsData.ManaStatsData.MaxMana;
-        _manaBar.value = player.GetMana();
-        _manaText.text = _manaBar.value + "/" + _manaBar.maxValue;
     }
 
-    public Option GetOption()
+    public string GetOption()
     {
 
         return _option;
 
     }
 
-    public void ChooseAmmo()
+    public void ChooseMagic(string magicName, bool isAttackMagic)
     {
-
-        if (!IsDecisionMakingOver())
+        if (_sessionManager.playerWizard.IsWizardAlive())
         {
-            _syncronizer.UpdatePlayersDecision(Option.Reload);
-            _option = Option.Reload;
-            _softAttackMagic.interactable = false;
-            _moderateAttackMagic.interactable = false;
-            _hardAttackMagic.interactable = false;
-            _shieldBtn.interactable = false;
+            _option = magicName;
+            foreach (Transform child in _btnContainer.transform)
+            {
+                var btn = child.GetComponent<Button>();
+                btn.interactable = false;
+            }
+            player.ChooseMove(_option, OpponentId);
+            StartCoroutine(EnableDecision());
         }
 
     }
 
-    public void ChooseShield()
+    IEnumerator EnableDecision()
     {
-
-        if (!IsDecisionMakingOver())
+        yield return new WaitForSeconds(1);
+        int childs = _btnContainer.transform.childCount;
+        for (int i = 0; i < childs; i++)
         {
-            _syncronizer.UpdatePlayersDecision(Option.Protect);
-            _option = Option.Protect;
-            _ammoBtn.interactable = false;
-            _softAttackMagic.interactable = false;
-            _moderateAttackMagic.interactable = false;
-            _hardAttackMagic.interactable = false;
+            GameObject.Destroy(_btnContainer.transform.GetChild(i).gameObject);
         }
-
-    }
-
-    public void ChooseSoftAttack()
-    {
-
-        if (!IsDecisionMakingOver())
-        {
-            _syncronizer.UpdatePlayersDecision(Option.SoftAttack);
-            _option = Option.SoftAttack;
-            _ammoBtn.interactable = false;
-            _shieldBtn.interactable = false;
-            _moderateAttackMagic.interactable = false;
-            _hardAttackMagic.interactable = false;
-        }
-    }
-
-    public void ChooseModerateAttack()
-    {
-
-        if (!IsDecisionMakingOver())
-        {
-            _syncronizer.UpdatePlayersDecision(Option.ModerateAttack);
-            _option = Option.ModerateAttack;
-            _ammoBtn.interactable = false;
-            _shieldBtn.interactable = false;
-            _softAttackMagic.interactable = false;
-            _hardAttackMagic.interactable = false;
-        }
-    }
-
-    public void ChooseHardAttack()
-    {
-
-        if (!IsDecisionMakingOver())
-        {
-            _syncronizer.UpdatePlayersDecision(Option.HardAttack);
-            _option = Option.HardAttack;
-            _ammoBtn.interactable = false;
-            _shieldBtn.interactable = false;
-            _softAttackMagic.interactable = false;
-            _moderateAttackMagic.interactable = false;
-        }
-    }
-
-    public void ChooseRandom()
-    {
-
-        _syncronizer.UpdatePlayersDecision(Option.Reload);
-        _option = Option.Reload;
-
-    }
-
-    public bool IsDecisionMakingOver()
-    {
-
-        return _option != Option.None;
-
+        UpdateValidMagicsByMana();
     }
 
 }

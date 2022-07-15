@@ -2,7 +2,17 @@ using System.Collections;
 using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
+    public bool isMusicOn = true;
+    public bool isSfxOn = true;
     [SerializeField] AudioSource _buttonPressSound;
+    [SerializeField] AudioSource _negativeButtonPressSound;
+    [SerializeField] AudioSource _battleButtonPressSound;
+    [SerializeField] AudioSource _switchItemsTabSound;
+    [SerializeField] AudioSource _magicLearnedSound;
+    [SerializeField] AudioSource _masteryOpenedSound;
+    [SerializeField] AudioSource _battleBackgroundSound;
+    [SerializeField] AudioSource _equipItemSound;
+    [SerializeField] AudioSource _purchaseSound;
     [SerializeField] AudioSource _youWinSound;
     [SerializeField] AudioSource _youLoseSound;
     [SerializeField] AudioSource _timesUpSound;
@@ -24,27 +34,69 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayButtonSound()
     {
-        _buttonPressSound.Play();
+        if(isSfxOn) _buttonPressSound.Play();
+    }
+    public void PlayNegativeButtonSound()
+    {
+        if(isSfxOn) _negativeButtonPressSound.Play();
+    }
+    public void PlayBattleButtonSound()
+    {
+        if(isSfxOn) _battleButtonPressSound.Play();
+    }
+    public void PlaySwitchTabSound()
+    {
+        if(isSfxOn) _switchItemsTabSound.Play();
+    }
+    public void PlayMagicLearnedSound()
+    {
+        if(isSfxOn) _magicLearnedSound.Play();
+    }
+    public void PlayMasteryUpgradeSound()
+    {
+        if(isSfxOn) _masteryOpenedSound.Play();
+    }
+    public void PlayBattleBackgroundSound()
+    {
+        if(isMusicOn)
+        {
+            _battleBackgroundSound.Play();
+        }
+    }
+    public void PlayEquipItemSound()
+    {
+        if(isSfxOn) _equipItemSound.Play();
+    }
+    public void PlayPurchaseSound()
+    {
+        if(isSfxOn) _purchaseSound.Play();
     }
     public void PlayYouWinSound()
     {
-        _youWinSound.Play();
+        if(isSfxOn) _youWinSound.Play();
     }
     public void PlayYouLoseSound()
     {
-        _youLoseSound.Play();
+        if(isSfxOn) _youLoseSound.Play();
     }
     public void PlayTimesUpSound()
     {
-        _timesUpSound.Play();
+        // if(isSfxOn) _timesUpSound.Play();
     }
     public void PlayGameThemeSound()
     {
-        _gameThemeSound.Play();
+        if(isMusicOn)
+        {
+            _gameThemeSound.Play();
+        }
     }
     public void StopGameThemeSound()
     {
         _gameThemeSound.Stop();
+    }
+    public void StopBattleBackgroundSound()
+    {
+        _battleBackgroundSound.Stop();
     }
     public IEnumerator FadeOutGameThemeSong(float FadeTime)
     {
@@ -62,7 +114,7 @@ public class SoundManager : MonoBehaviour
     }
     public void PlayClockTickingSound()
     {
-        _clockTickingSound.Play();
+        // _clockTickingSound.Play();
     }
     public void StopClockTickingSound()
     {

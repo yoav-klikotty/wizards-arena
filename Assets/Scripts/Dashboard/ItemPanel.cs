@@ -1,115 +1,92 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ItemPanel : MonoBehaviour
 {
-    [SerializeField] Image _itemIcon;
     [SerializeField] Button _actionButton;
-    [SerializeField] TMP_Text _actionButtonText;
-    [SerializeField] TMP_Text _nameInput;
     [SerializeField] TMP_Text _priceText;
-    [SerializeField] GameObject _price;
     [SerializeField] TMP_Text _requiredLevelInput;
-    [SerializeField] TMP_Text _itemType;
-    [SerializeField] TMP_Text _itemDescription;
-    [SerializeField] TMP_Text[] _attributesInputs = new TMP_Text[4];
+    [SerializeField] TMP_Text _itemDisplayName;
     [SerializeField] InventoryManager _inventoryManager;
+    [SerializeField] WizardStats _wizardStats;
     private InventoryItem _itemSelected;
     private bool _isPlayerLevelSufficient;
     private bool _isPlayerFundsSufficient;
-    private bool _isPlayerPurchasedItem;
-    private bool _isPlayerEquipedItem;
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
-
+    PlayerStatsData playerStatsData;
+    WizardStatsData wizardStatsData;
     public void OpenPanel(InventoryItem itemSelected)
     {
-        PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
+        playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
+        wizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
         _itemSelected = itemSelected;
-        _itemIcon.sprite = itemSelected.GetIcon();
-        _nameInput.text = itemSelected.GetDisplayName();
-        _itemType.text = itemSelected.GetItemType().ToString();
-        _itemDescription.text = itemSelected.GetDescription();
+        _itemDisplayName.text = itemSelected.GetDisplayName().ToString();
         _requiredLevelInput.text = "Level required: " + itemSelected.GetRequiredLevel().ToString();
         _isPlayerLevelSufficient = itemSelected.GetRequiredLevel() <= playerStatsData.GetLevel();
         _isPlayerFundsSufficient = itemSelected.GetPrice() <= playerStatsData.GetCoins();
-        _isPlayerPurchasedItem = playerStatsData.IsPurchasedItem(itemSelected.GetName());
-        _isPlayerEquipedItem = itemSelected.GetEquipedStatus();
-        List<string> attributes = itemSelected.GetAttributes();
-        for (int i = 0; i < _attributesInputs.Length; i++)
-        {
-            _attributesInputs[i].text = "";
-        }
-        for (int i = 0; i < attributes.Count; i++)
-        {
-            _attributesInputs[i].text = attributes[i];
-        }
-        RenderActionButton();
         RenderPrice();
+        RenderActionButton();
         gameObject.SetActive(true);
+        if (itemSelected.GetItemType() == ItemType.Cape)
+        {
+            _wizardStats.SetAllDiff(_itemSelected, wizardStatsData.CapeStatsData.AttackStatsData, wizardStatsData.CapeStatsData.DefenceStatsData, wizardStatsData.CapeStatsData.ManaStatsData);
+        }
+        if (itemSelected.GetItemType() == ItemType.Orb)
+        {
+            _wizardStats.SetAllDiff(_itemSelected, wizardStatsData.OrbStatsData.AttackStatsData, wizardStatsData.OrbStatsData.DefenceStatsData, wizardStatsData.OrbStatsData.ManaStatsData);
+        }
+        if (itemSelected.GetItemType() == ItemType.Staff)
+        {
+            _wizardStats.SetAllDiff(_itemSelected, wizardStatsData.StaffStatsData.AttackStatsData, wizardStatsData.StaffStatsData.DefenceStatsData, wizardStatsData.StaffStatsData.ManaStatsData);
+        }
+    }
+    private bool IsInventoryItemEquiped()
+    {
+        if (_itemSelected.GetItemType() == ItemType.Cape)
+        {
+            return wizardStatsData.CapeStatsData.Name.Equals(_itemSelected.GetName());
+        }
+        if (_itemSelected.GetItemType() == ItemType.Staff)
+        {
+            return wizardStatsData.StaffStatsData.Name.Equals(_itemSelected.GetName());
+        }
+        if (_itemSelected.GetItemType() == ItemType.Orb)
+        {
+            return wizardStatsData.OrbStatsData.Name.Equals(_itemSelected.GetName());
+        }
+        return true;
     }
 
     private void RenderPrice()
     {
-        if (!_isPlayerPurchasedItem)
-        {
-            _price.SetActive(true);
-            _priceText.text = _itemSelected.GetPrice() + "";
-        }
-        else 
-        {
-            _price.SetActive(false);
-        }
-    }
-
-    private void RenderActionButton()
-    {
-        if (!_isPlayerPurchasedItem)
-        {
-            _actionButtonText.text = "Buy";
-            if (!_isPlayerLevelSufficient || !_isPlayerFundsSufficient)
-            {
-                _actionButton.interactable = false;
-            }
-            else
-            {
-                _actionButton.interactable = true;
-            }
-
-        }
-        else
-        {
-            _actionButtonText.text = "Equip";
-            if (_isPlayerEquipedItem)
-            {
-                _actionButton.interactable = false;
-            }
-            else
-            {
-                _actionButton.interactable = true;
-            }
-
-        }
-
+        _priceText.text = _itemSelected.GetPrice() + "";
     }
 
     public void ClosePanel()
     {
+        SoundManager.Instance.PlayNegativeButtonSound();
+        _wizardStats.RemoveAllDiff();
         gameObject.SetActive(false);
     }
 
     public void HandleActionButton()
     {
-        if (!_isPlayerPurchasedItem)
+        SoundManager.Instance.PlayEquipItemSound();
+        _inventoryManager.EquipItem(_itemSelected);
+        playerStatsData.SetCoins(playerStatsData.GetCoins() - _itemSelected.GetPrice());
+        PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
+        gameObject.SetActive(false);
+    }
+
+    public void RenderActionButton()
+    {
+        if (_isPlayerLevelSufficient && _isPlayerFundsSufficient && !IsInventoryItemEquiped())
         {
-            _inventoryManager.PurchaseItem(_itemSelected);
+            _actionButton.gameObject.SetActive(true);
         }
         else
         {
-            _inventoryManager.EquipItem(_itemSelected);
+            _actionButton.gameObject.SetActive(false);
         }
-        gameObject.SetActive(false);
     }
 }

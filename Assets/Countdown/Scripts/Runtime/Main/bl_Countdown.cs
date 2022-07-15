@@ -9,7 +9,7 @@ namespace Lovatto.Countdown
     public class bl_Countdown : MonoBehaviour
     {
         #region Public members      
-        public int startTime = 10;
+        private int startTime;
         public int finishTime = 0;
         public float countSpeed = 1;
         public float startDelay = 0;
@@ -28,7 +28,12 @@ namespace Lovatto.Countdown
         #region Public properties
         public bool IsCounting { get; set; } = false;
         public int CurrentCountValue { get; set; } = 0;
-
+        public void SetStartTime(int time){
+            this.startTime = time;
+        }
+        public int GetStartTime(){
+            return this.startTime;
+        }
         #endregion
 
         #region Private members

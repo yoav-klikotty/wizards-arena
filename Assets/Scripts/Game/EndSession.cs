@@ -2,61 +2,85 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using UnityEngine.UI;
-public class EndSession : MonoBehaviour
+using Photon.Realtime;
+public class EndSession : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
     [SerializeField] TMP_Text Result;
     [SerializeField] TMP_Text ClaimButtonText;
-    [SerializeField] Button PlayAgainBtn;
     SessionManager.GameResult result;
-    [SerializeField] SkinnedMeshRenderer _skinnedMeshRenderer;
-    [SerializeField] Material _victoryMaterial;
-    [SerializeField] Material _defeatMaterial;
-    
     [SerializeField] Animation _starsAnim;
     [SerializeField] bool _debug;
     [SerializeField] bool _isWon;
-    [SerializeField] GameObject PrizeContainer;
-
-    private PlayerStatsController _playerStatsController = new PlayerStatsController();
+    [SerializeField] TMP_Text MMRAmount;
+    [SerializeField] TMP_Text XPAmount;
+    [SerializeField] TMP_Text CoinAmount;
+    private int rankDiff = 0;
 
     void Start()
     {
-        result = LocalStorage.GetLastSessionResult();
         if (!_debug)
         {
-            _isWon = result == SessionManager.GameResult.Win;
+            _isWon = result == SessionManager.GameResult.First;
         }
         RenderScore();
         InvokeRepeating("Disconnect", 1, 0);
     }
 
-    public void Collect()
+    public void UpdateWizardRank(int numOfplayers, SessionManager.GameResult myPlace, int rankDelta)
     {
-        if (_isWon)
+        var playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
+        switch (myPlace)
         {
-            PlayerStatsData playerStatsData = _playerStatsController.GetPlayerStatsData();
-            playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
-            playerStatsData.AddLevelPoints(50);
-            _playerStatsController.SavePlayerStatsData(playerStatsData, false);
+            case SessionManager.GameResult.First:
+                rankDiff = rankDelta;
+                break;
+            case SessionManager.GameResult.Second:
+                switch (numOfplayers)
+                {
+                    case 2:
+                        rankDiff = rankDelta * -1;
+                        break;
+                    case 3:
+                        break;
+                    case 4:
+                        rankDiff = rankDelta / 2;
+                        break;
+                }
+                break;
+            case SessionManager.GameResult.Third:
+                switch (numOfplayers)
+                {
+                    case 3:
+                        rankDiff = rankDelta * -1;
+                        break;
+                    case 4:
+                        rankDiff = (rankDelta * -1) / 2;
+                        break;
+                }
+                break;
+            case SessionManager.GameResult.Fourth:
+                rankDiff = rankDelta * -1;
+                break;
         }
-        SceneManager.LoadScene("Dashboard");
+        playerStatsData.RankStatsData.AddRank(rankDiff);
+        PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
     }
 
-    void Disconnect(){
-        if (PhotonNetwork.IsConnected)
-        {
-            PhotonNetwork.Disconnect();
-        }
-        PlayAgainBtn.interactable = true;
+    public void Collect()
+    {
+        PhotonNetwork.Disconnect();
+    }
+
+    public void SetResult(SessionManager.GameResult result)
+    {
+        this.result = result;
     }
 
     void RenderScore()
     {
         RenderTextScore();
         RenderSoundScore();
-        RenderWizardScore();
         StartStarsAnim();
         RenderPrizes();
 
@@ -64,13 +88,16 @@ public class EndSession : MonoBehaviour
 
     void RenderPrizes()
     {
+        MMRAmount.text = rankDiff + "";
         if (!_isWon)
         {
-            PrizeContainer.SetActive(false);
+            XPAmount.text = 0 + "";
+            CoinAmount.text = 0 + "";
         }
         else
         {
-            PrizeContainer.SetActive(true);
+            XPAmount.text = 10 + "";
+            CoinAmount.text = 100 + "";
         }
     }
 
@@ -78,14 +105,13 @@ public class EndSession : MonoBehaviour
     {
         if (!_isWon)
         {
-            Result.text = "Defeat";
             ClaimButtonText.text = "Retry";
         }
         else
         {
-            Result.text = "Victory";
             ClaimButtonText.text = "Claim";
         }
+        Result.text = result.ToString();
     }
     void RenderSoundScore()
     {
@@ -98,24 +124,6 @@ public class EndSession : MonoBehaviour
             SoundManager.Instance.PlayYouWinSound();
         }
     }
-    void RenderWizardScore()
-    {
-        Material materialToAdd;
-        if (!_isWon)
-        {
-            materialToAdd = _defeatMaterial;
-        }
-        else
-        {
-            materialToAdd = _victoryMaterial;
-        }
-        Material[] mts = 
-        {
-            materialToAdd
-        };
-        _skinnedMeshRenderer.materials = mts;
-
-    }
 
     void StartStarsAnim()
     {
@@ -124,6 +132,17 @@ public class EndSession : MonoBehaviour
             _starsAnim.Play();
         }
     }
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        if (_isWon)
+        {
+            PlayerStatsData playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
+            playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
+            playerStatsData.AddXP(10);
+            PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
+        }
+        SceneManager.LoadScene("Dashboard");
+    }
 
-    
+
 }
