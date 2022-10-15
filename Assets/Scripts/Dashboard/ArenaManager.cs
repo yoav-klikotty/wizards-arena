@@ -6,14 +6,11 @@ using Photon.Realtime;
 
 public class ArenaManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] NavigationPanel _navigationPanel;
     PlayerStatsData playerStatsData;
-    [SerializeField] GameObject _settings;
     [SerializeField] GameObject _modesButton;
     [SerializeField] GameObject _battlePanel;
     [SerializeField] GameObject _playVsFriendPanel;
     [SerializeField] GameObject _wizardSelection;
-    [SerializeField] TMP_Text _mmr;
     [SerializeField] TMP_InputField iField;
 
     void Start()
@@ -104,16 +101,9 @@ public class ArenaManager : MonoBehaviourPunCallbacks
     public void OpenBattlePanel()
     {
         SoundManager.Instance.PlayButtonSound();
-        if (playerStatsData.GetCrystals() > 0)
-        {
-            _modesButton.SetActive(false);
-            _battlePanel.SetActive(true);
-            _playVsFriendPanel.SetActive(false);
-        }
-        else
-        {
-            _navigationPanel.PageChange(3);
-        }
+        _modesButton.SetActive(false);
+        _battlePanel.SetActive(true);
+        _playVsFriendPanel.SetActive(false);
 
     }
     public void OpenPlayVSFriendPanel()
@@ -130,11 +120,6 @@ public class ArenaManager : MonoBehaviourPunCallbacks
         _battlePanel.SetActive(false);
         _playVsFriendPanel.SetActive(false);
         _wizardSelection.SetActive(true);
-    }
-
-    public void OpenSettings()
-    {
-        _settings.SetActive(true);
     }
 
     public override void OnDisconnected(DisconnectCause cause)

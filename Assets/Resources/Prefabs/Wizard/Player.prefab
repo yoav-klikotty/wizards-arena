@@ -473,7 +473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMeshRenderer: {fileID: 8079310157998274450}
-  _itemType: 0
 --- !u!1 &8213291338580741922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,7 +1207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMeshRenderer: {fileID: 8075199084810965188}
-  _itemType: 2
 --- !u!1 &8213825245836633588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,7 +1374,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemMeshRenderer: {fileID: 8079023034909360936}
-  _itemType: 1
 --- !u!1 &8213884258380069566
 GameObject:
   m_ObjectHideFlags: 0

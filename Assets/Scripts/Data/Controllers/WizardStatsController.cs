@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class WizardStatsController: MonoBehaviour
+public class WizardStatsController : MonoBehaviour
 {
     private WizardStatsData _wizardStatsData;
     public static WizardStatsController Instance { get; private set; }
@@ -62,64 +62,5 @@ public class WizardStatsController: MonoBehaviour
     public void SaveDashboardWizard(DashboardWizard dw)
     {
         SaveWizardStatsData(dw.WizardStatsData);
-    }
-    
-    public void EquipItem(InventoryItem equipedItem)
-    {
-        WizardStatsData _wizardStatsData = GetWizardStatsData();
-        if (equipedItem.GetItemType() == ItemType.Cape)
-        {
-            _wizardStatsData.CapeStatsData = equipedItem.GetItemStatsData();
-        }
-        if (equipedItem.GetItemType() == ItemType.Staff)
-        {
-            _wizardStatsData.StaffStatsData = equipedItem.GetItemStatsData();
-        }
-        if (equipedItem.GetItemType() == ItemType.Orb)
-        {
-            _wizardStatsData.OrbStatsData = equipedItem.GetItemStatsData();
-        }
-        SaveWizardStatsData(_wizardStatsData);
-    }
-    public void UpdateMasteryPoints(InventoryMastery inventoryMastery)
-    {
-        WizardStatsData _wizardStatsData = GetWizardStatsData();
-        var mastery = FindMastery(_wizardStatsData.MasteriesStatsData, inventoryMastery.GetID());
-        if (mastery == null && inventoryMastery.GetCurrentPoints() > 0)
-        {
-            mastery = new MasteryStatsData(inventoryMastery.GetID());
-            mastery.points = inventoryMastery.GetCurrentPoints();
-            mastery.maxPoints = inventoryMastery.GetMaxPoints();
-            mastery.AttackStatsData = inventoryMastery.AttackStatsData;
-            mastery.DefenceStatsData = inventoryMastery.DefenceStatsData;
-            mastery.ManaStatsData = inventoryMastery.ManaStatsData;
-            _wizardStatsData.MasteriesStatsData.Add(mastery);
-        }
-        else if (inventoryMastery.GetCurrentPoints() > 0)
-        {
-            mastery.points = inventoryMastery.GetCurrentPoints();
-        }
-        else
-        {
-            _wizardStatsData.MasteriesStatsData.RemoveAll(masteryToRemove => masteryToRemove.name == inventoryMastery.GetID());
-        }
-        SaveWizardStatsData(_wizardStatsData);
-    }
-    public MasteryStatsData FindMastery(List<MasteryStatsData> Masteries, string name)
-    {
-        return Masteries.Find(skill => skill.name.Equals(name));
-    }
-    public void LearnMagic(string magicName, Magic.MagicType type)
-    {
-        WizardStatsData _wizardStatsData = GetWizardStatsData();
-        if (FindMagic(_wizardStatsData.MagicsStatsData, magicName) == null)
-        {
-            _wizardStatsData.MagicsStatsData.Add(new MagicStatsData(magicName, type));
-        }
-        SaveWizardStatsData(_wizardStatsData);
-    }
-    public MagicStatsData FindMagic(List<MagicStatsData> magicsStatsData, string name)
-    {
-        return magicsStatsData.Find(magic => magic.name.Equals(name));
     }
 }

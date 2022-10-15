@@ -15,6 +15,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     bool _isSessionEndLock = false;
     public List<Wizard> wizards;
     public Wizard playerWizard;
+    public UnityEngine.Object wizardPref;
     public int MaxRankDiff = 50;
     private int _baseRankPointsChange = 10;
     private int _maxRankPointBonus = 5;
@@ -32,7 +33,18 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     private void CreatePlayer()
     {
-        PhotonNetwork.Instantiate("Prefabs/Wizard/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
+        if (GameManager.Instance.Offline)
+        {
+            Instantiate(wizardPref, new Vector3(56, 4.7f, -3), Quaternion.identity);
+            Instantiate(wizardPref, new Vector3(56, 4.7f, -3), Quaternion.identity);
+            Instantiate(wizardPref, new Vector3(56, 4.7f, -3), Quaternion.identity);
+            Instantiate(wizardPref, new Vector3(56, 4.7f, -3), Quaternion.identity);
+
+        }
+        else
+        {
+            PhotonNetwork.Instantiate("Prefabs/Wizard/Player", new Vector3(56, 4.7f, -3), Quaternion.identity);
+        }
     }
     void Update()
     {
