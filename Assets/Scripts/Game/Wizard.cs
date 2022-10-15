@@ -42,17 +42,20 @@ public class Wizard : MonoBehaviour
     {
         PlayerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
         wizardIndex = GameObject.FindGameObjectsWithTag("Player").Length;
-        _photonView = PhotonView.Get(this);
         WizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
-        if (!_isDashboardWizard)
+        string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
+        _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+        if (!GameManager.Instance.Offline)
         {
-            _sessionManager = GameObject.Find("SessionManager").GetComponent<SessionManager>();
+            _photonView = PhotonView.Get(this);
             if (_photonView && _photonView.IsMine)
             {
-                WizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
-                string WizardStatsDataRaw = JsonUtility.ToJson(WizardStatsData);
                 _photonView.RPC("UpdateWizardStats", RpcTarget.All, isBot ? PhotonNetwork.LocalPlayer.UserId + wizardIndex : PhotonNetwork.LocalPlayer.UserId, WizardStatsDataRaw);
             }
+        }
+        else
+        {
+            UpdateWizardStats(wizardIndex + "", WizardStatsDataRaw);
         }
     }
 
@@ -63,6 +66,20 @@ public class Wizard : MonoBehaviour
         UpdateWizard(JsonUtility.FromJson<WizardStatsData>(wizardStatsRaw));
         LocateWizard();
         _sessionManager.RegisterWizard(this);
+        if (GameManager.Instance.Offline)
+        {
+            if (id == "1")
+            {
+                _sessionManager.playerWizard = this;
+                this.gameObject.name = "Player";
+            }
+            else
+            {
+                this.gameObject.name = "Opponent";
+
+            }
+            return;
+        }
         if (_photonView.IsMine && !isBot)
         {
             _sessionManager.playerWizard = this;
@@ -79,10 +96,6 @@ public class Wizard : MonoBehaviour
     }
     void Start()
     {
-        if (_isDashboardWizard)
-        {
-            UpdateWizard(WizardStatsController.Instance.GetWizardStatsData());
-        }
         _anim = GetComponent<Animation>();
     }
 
@@ -137,39 +150,6 @@ public class Wizard : MonoBehaviour
         _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
         _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
     }
-    void OnEnable()
-    {
-        EventManager.Instance.updateWizardStats += UpdateWizard;
-    }
-    void OnDisable()
-    {
-        EventManager.Instance.updateWizardStats -= UpdateWizard;
-    }
-    public void UpdateWizard()
-    {
-        WizardStatsData = WizardStatsController.Instance.GetWizardStatsData();
-        _currentHealth = WizardStatsData.GetTotalHP();
-        foreach (MagicStatsData magicStats in WizardStatsData.MagicsStatsData)
-        {
-            var magicPrefab = Resources.Load("Prefabs/" + "Magics/" + magicStats.type.ToString() + "/" + magicStats.name);
-            var magic = (GameObject)Instantiate(magicPrefab, transform.position, Quaternion.identity, gameObject.transform);
-            if (!magics.ContainsKey(magicStats.name))
-            {
-                magics.Add(magicStats.name, magic.GetComponent<Magic>());
-            }
-        }
-        if (PlayerHUD != null)
-        {
-            PlayerHUD.UpdateHealth(_currentHealth, WizardStatsData.GetTotalHP());
-            PlayerHUD.UpdateHits(0);
-            _currentMana = WizardStatsData.GetTotalStartMana();
-            PlayerHUD.UpdateMana(_currentMana, WizardStatsData.GetTotalMaxMana());
-        }
-        _staff.SetMaterials(WizardStatsData.StaffStatsData.GetMaterials());
-        _cape.SetMaterials(WizardStatsData.CapeStatsData.GetMaterials());
-        _orb.SetMaterials(WizardStatsData.OrbStatsData.GetMaterials());
-    }
-
     public void RenderDecision()
     {
         if (move.wizardOption != "game over")
@@ -177,19 +157,23 @@ public class Wizard : MonoBehaviour
             Magic magic = magics[move.wizardOption];
             if (magic.GetMagicType() == Magic.MagicType.Attack)
             {
-                if(magic.AOE){
-                    for(int i = 0; i < _sessionManager.wizards.Count; i++) {
-                        if(wizardId != _sessionManager.wizards[i].wizardId)
+                if (magic.AOE)
+                {
+                    for (int i = 0; i < _sessionManager.wizards.Count; i++)
+                    {
+                        if (wizardId != _sessionManager.wizards[i].wizardId)
                         {
-                            magic.ActivateFirePrefab(_shootCenter[i].transform.position, _sessionManager.wizards[i].wizardLocation);     
+                            magic.ActivateFirePrefab(_shootCenter[i].transform.position, _sessionManager.wizards[i].wizardLocation);
                         }
                     }
                 }
-                else {
+                else
+                {
                     magic.ActivateFirePrefab(_shootCenter[0].transform.position, move.wizardOpponentPosition);
                 }
                 AttackAni();
-                if((magic.GetRequiredHp() > 0)){
+                if ((magic.GetRequiredHp() > 0))
+                {
                     ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
                 }
                 ReduceMana(magic.GetRequiredMana());
@@ -197,7 +181,8 @@ public class Wizard : MonoBehaviour
             else if (magic.GetMagicType() == Magic.MagicType.Mana)
             {
                 magic.Activate();
-                if((magic.GetRequiredHp() > 0)){
+                if ((magic.GetRequiredHp() > 0))
+                {
                     ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
                 }
                 IncreaseMana(WizardStatsData.GetTotalManaRegeneration() + magic.ManaStatsData.ManaRegeneration);
@@ -206,7 +191,8 @@ public class Wizard : MonoBehaviour
             {
                 magic.Activate();
                 ReduceMana(magic.GetRequiredMana());
-                if((magic.GetRequiredHp() > 0)){
+                if ((magic.GetRequiredHp() > 0))
+                {
                     ReduceHealth((magic.GetRequiredHp()), false, false, wizardId);
                 }
                 IncreaseHealth(WizardStatsData.GetTotalRecovery() + magic.DefenceStatsData.Recovery);
@@ -223,6 +209,11 @@ public class Wizard : MonoBehaviour
     }
     public void ChooseMove(string option, string id)
     {
+        if (GameManager.Instance.Offline)
+        {
+            ChooseMoveRPC(option, id);
+            return;
+        }
         if (_photonView.IsMine)
         {
             _photonView.RPC("ChooseMoveRPC", RpcTarget.All, option, id);
@@ -387,7 +378,8 @@ public class Wizard : MonoBehaviour
             var attackerMagicSpecialEffects = collision.gameObject.GetComponent<ProjectileMover>().MagicAttackSpecialEffects;
             Damage damage = CalculateDamage(attacker.WizardStatsData, attackerMagic);
             _photonView.RPC("ReduceHealth", RpcTarget.All, damage.damage, damage.criticalHit, damage.avoided, attacker.wizardId);
-            if(attackerMagicSpecialEffects.ManaBurn > 0) {
+            if (attackerMagicSpecialEffects.ManaBurn > 0)
+            {
                 _photonView.RPC("ReduceMana", RpcTarget.All, attackerMagicSpecialEffects.ManaBurn);
             }
         }
@@ -407,9 +399,9 @@ public class Wizard : MonoBehaviour
         {
             damage.avoided = true;
         }
-        if(attackerMagic.ScaledValue)
-        {   
-            damage.damage = (int)(attacker.GetTotalBaseDamage() * (float)attackerMagic.BaseDamage/100);
+        if (attackerMagic.ScaledValue)
+        {
+            damage.damage = (int)(attacker.GetTotalBaseDamage() * (float)attackerMagic.BaseDamage / 100);
         }
         else
         {
@@ -465,7 +457,7 @@ public class Wizard : MonoBehaviour
     }
 
     public void OnShieldCollision(Wizard attacker, AttackStatsData attackerMagic, int shieldHP)
-    {   
+    {
         _wizardSoundManager.PlayShieldHitSound();
         if (_photonView && _photonView.IsMine)
         {

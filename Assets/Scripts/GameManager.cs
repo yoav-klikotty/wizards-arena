@@ -5,6 +5,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour
 {
     public bool IsSFXOn = true;
+    public bool Offline;
     public int ActivePlayers = 0;
     public int NumOfPlayers = 2;
     public int TimeToPlay = 120;
@@ -33,7 +34,8 @@ public class GameManager : MonoBehaviour
     {
         yield return LocalizationSettings.InitializationOperation;
         int languageIndex = 0;
-        switch(Application.systemLanguage){
+        switch (Application.systemLanguage)
+        {
             case SystemLanguage.English:
                 languageIndex = 0;
                 break;

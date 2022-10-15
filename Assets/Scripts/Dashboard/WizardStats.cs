@@ -165,37 +165,7 @@ public class WizardStats : MonoBehaviour
         _manaRegenrationDiff.gameObject.SetActive(false);
         _passiveManaRegenerationDiff.gameObject.SetActive(false);
     }
-    public void SetAllDiff(InventoryItem inventoryItem,
-                            AttackStatsData wizardItemAttackStatsData,
-                            DefenceStatsData wizardItemDefenceStatsData,
-                            ManaStatsData wizardItemManaStatsData)
-    {
-        AttackStatsData attackStatsData = inventoryItem.GetItemStatsData().AttackStatsData;
-        var baseDamageDiff = attackStatsData.BaseDamage - wizardItemAttackStatsData.BaseDamage;
-        SetDiff(_baseDmgDiff, baseDamageDiff);
-        var criticalDmgDiff = attackStatsData.CriticalDmg - wizardItemAttackStatsData.CriticalDmg;
-        SetDiff(_critDmgDiff, criticalDmgDiff);
-        var critRateDiff = attackStatsData.CriticalRate - wizardItemAttackStatsData.CriticalRate;
-        SetDiff(_critRateDiff, critRateDiff);
-        var armorPenetrationDiff = attackStatsData.ArmorPenetration - wizardItemAttackStatsData.ArmorPenetration;
-        SetDiff(_armorPenDiff, armorPenetrationDiff);
-        DefenceStatsData defenceStatsData = inventoryItem.GetItemStatsData().DefenceStatsData;
-        var hpDiff = defenceStatsData.HP - wizardItemDefenceStatsData.HP;
-        SetDiff(_maxHPDiff, hpDiff);
-        var recoveryDiff = defenceStatsData.Recovery - wizardItemDefenceStatsData.Recovery;
-        SetDiff(_recoveryDiff, recoveryDiff);
-        var avoidabilityDiff = defenceStatsData.Avoidability - wizardItemDefenceStatsData.Avoidability;
-        SetDiff(_avoidabilityDiff, avoidabilityDiff);
-        ManaStatsData manaStatsData = inventoryItem.GetItemStatsData().ManaStatsData;
-        var maxManaDiff = manaStatsData.MaxMana - wizardItemManaStatsData.MaxMana;
-        SetDiff(_maxManaDiff, maxManaDiff);
-        var startingManaDiff = manaStatsData.StartMana - wizardItemManaStatsData.StartMana;
-        SetDiff(_startManaDiff, startingManaDiff);
-        var regenerationDiff = manaStatsData.ManaRegeneration - wizardItemManaStatsData.ManaRegeneration;
-        SetDiff(_manaRegenrationDiff, regenerationDiff);
-        var passiveRegenerationDiff = manaStatsData.PassiveManaRegeneration - wizardItemManaStatsData.PassiveManaRegeneration;
-        SetDiff(_passiveManaRegenerationDiff, passiveRegenerationDiff);
-    }
+
 
     public void SetDiff(TMP_Text diffText, float diff)
     {

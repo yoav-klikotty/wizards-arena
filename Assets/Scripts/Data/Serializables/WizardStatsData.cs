@@ -7,14 +7,14 @@ public class WizardStatsData
 {
     public ItemStatsData StaffStatsData = new ItemStatsData(
         "basic_gray",
-        new List<string> {"basic_gray"},
+        new List<string> { "basic_gray" },
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData CapeStatsData = new ItemStatsData(
         "basic_gray",
-        new List<string> {"basic_gray"},
+        new List<string> { "basic_gray" },
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
@@ -77,7 +77,7 @@ public class WizardStatsData
         return (BaseAttackStatsData.CriticalRate +
                 CapeStatsData.AttackStatsData.CriticalRate +
                 OrbStatsData.AttackStatsData.CriticalRate +
-                StaffStatsData.AttackStatsData.CriticalRate + 
+                StaffStatsData.AttackStatsData.CriticalRate +
                 masteriesCritRate
                 );
     }
@@ -105,7 +105,7 @@ public class WizardStatsData
         return (BaseDefenceStatsData.HP +
                 CapeStatsData.DefenceStatsData.HP +
                 OrbStatsData.DefenceStatsData.HP +
-                StaffStatsData.DefenceStatsData.HP + 
+                StaffStatsData.DefenceStatsData.HP +
                 masteriesHP
                 );
     }
@@ -119,7 +119,7 @@ public class WizardStatsData
         return (BaseDefenceStatsData.Recovery +
                 CapeStatsData.DefenceStatsData.Recovery +
                 OrbStatsData.DefenceStatsData.Recovery +
-                StaffStatsData.DefenceStatsData.Recovery + 
+                StaffStatsData.DefenceStatsData.Recovery +
                 masteriesRecovery
                 );
     }
@@ -133,7 +133,7 @@ public class WizardStatsData
         return (BaseDefenceStatsData.Avoidability +
                 CapeStatsData.DefenceStatsData.Avoidability +
                 OrbStatsData.DefenceStatsData.Avoidability +
-                StaffStatsData.DefenceStatsData.Avoidability + 
+                StaffStatsData.DefenceStatsData.Avoidability +
                 masteriesAvoidability
                 );
     }
@@ -147,7 +147,7 @@ public class WizardStatsData
         return (BaseManaStatsData.MaxMana +
                 CapeStatsData.ManaStatsData.MaxMana +
                 OrbStatsData.ManaStatsData.MaxMana +
-                StaffStatsData.ManaStatsData.MaxMana + 
+                StaffStatsData.ManaStatsData.MaxMana +
                 masteriesMaxMana
                 );
     }
@@ -210,7 +210,7 @@ public class AttackStatsData
     public float CriticalRate;
     public float CriticalDmg;
     public float ArmorPenetration;
-    public bool ScaledValue; 
+    public bool ScaledValue;
 }
 
 [Serializable]
@@ -226,7 +226,7 @@ public class DefenceStatsData
     public int HP;
     public int Recovery;
     public float Avoidability;
-    public bool ScaledValue; 
+    public bool ScaledValue;
 }
 
 [Serializable]
@@ -276,10 +276,10 @@ public class MasteryStatsData
 public class ItemStatsData
 {
     public ItemStatsData(
-        string name, 
-        List<string> materials, 
-        DefenceStatsData defenceStatsData, 
-        AttackStatsData attackStatsData, 
+        string name,
+        List<string> materials,
+        DefenceStatsData defenceStatsData,
+        AttackStatsData attackStatsData,
         ManaStatsData manaStatsData
     )
     {
@@ -299,9 +299,5 @@ public class ItemStatsData
         return new Material[] {
             Resources.Load<Material>("Materials/" + materials[0]),
         };
-    }
-    public bool IsContainInventoryItem(InventoryItem inventoryItem)
-    {
-        return Name.Equals(inventoryItem.GetName());
     }
 }
