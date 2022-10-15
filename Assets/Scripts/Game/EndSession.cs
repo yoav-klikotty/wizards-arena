@@ -137,8 +137,8 @@ public class EndSession : MonoBehaviourPunCallbacks
         if (_isWon)
         {
             PlayerStatsData playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
-            playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
-            playerStatsData.AddXP(10);
+            // playerStatsData.SetCoins(playerStatsData.GetCoins() + 100);
+            // playerStatsData.AddXP(10);
             PlayerStatsController.Instance.SavePlayerStatsData(playerStatsData);
         }
         SceneManager.LoadScene("Dashboard");

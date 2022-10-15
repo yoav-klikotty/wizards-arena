@@ -70,12 +70,14 @@ public class SessionManager : MonoBehaviourPunCallbacks
     private void UpdateMMR(GameResult wizardPlace)
     {
         int opponentsWizardsRankSum = 0;
-        for(int i = 0; i < wizards.Count; i++) {
-            if(wizards[i].wizardId != playerWizard.wizardId){
+        for (int i = 0; i < wizards.Count; i++)
+        {
+            if (wizards[i].wizardId != playerWizard.wizardId)
+            {
                 opponentsWizardsRankSum += wizards[i].PlayerStatsData.RankStatsData.rank;
             }
         }
-        int avgOpponentsWizardsRank = opponentsWizardsRankSum / (wizards.Count-1);
+        int avgOpponentsWizardsRank = opponentsWizardsRankSum / (wizards.Count - 1);
         int myRankDiff = avgOpponentsWizardsRank - playerWizard.PlayerStatsData.RankStatsData.rank;
         int myBonus = myRankDiff / (MaxRankDiff / _maxRankPointBonus);
         int rankDelta = myBonus + _baseRankPointsChange;
@@ -125,7 +127,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
         var myWizard = wizards.FindIndex(wizard => wizard.wizardId == playerWizard.wizardId);
         _scorePanel.GetComponent<EndSession>().SetResult((GameResult)myWizard);
         _scorePanel.SetActive(true);
-        UpdateMMR((GameResult)myWizard);
+        // UpdateMMR((GameResult)myWizard);
         _decisionManager.gameObject.SetActive(false);
     }
 
@@ -156,7 +158,7 @@ public class SessionManager : MonoBehaviourPunCallbacks
     }
     public Wizard GetRandomOpponentId(string id)
     {
-        return wizards.Find((wizard) => wizard.wizardId != id && wizard.IsWizardAlive());;
+        return wizards.Find((wizard) => wizard.wizardId != id && wizard.IsWizardAlive()); ;
     }
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player player)
