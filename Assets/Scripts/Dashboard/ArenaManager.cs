@@ -12,13 +12,13 @@ public class ArenaManager : MonoBehaviourPunCallbacks
     [SerializeField] GameObject _modesButton;
     [SerializeField] GameObject _battlePanel;
     [SerializeField] GameObject _playVsFriendPanel;
+    [SerializeField] GameObject _wizardSelection;
     [SerializeField] TMP_Text _mmr;
     [SerializeField] TMP_InputField iField;
 
     void Start()
     {
         playerStatsData = PlayerStatsController.Instance.GetPlayerStatsData();
-        _mmr.text = playerStatsData.RankStatsData.rank + "";
         SoundManager.Instance.PlayGameThemeSound();
         if (!PhotonNetwork.IsConnected)
         {
@@ -90,6 +90,7 @@ public class ArenaManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
+        Debug.Log(message);
     }
     public void ChangeNumberOfPlayers(int players)
     {
@@ -107,7 +108,7 @@ public class ArenaManager : MonoBehaviourPunCallbacks
         {
             _modesButton.SetActive(false);
             _battlePanel.SetActive(true);
-            _playVsFriendPanel.SetActive(false);        
+            _playVsFriendPanel.SetActive(false);
         }
         else
         {
@@ -121,12 +122,14 @@ public class ArenaManager : MonoBehaviourPunCallbacks
         _modesButton.SetActive(false);
         _battlePanel.SetActive(false);
         _playVsFriendPanel.SetActive(true);
+        _wizardSelection.SetActive(false);
     }
     public void ClosePanels()
     {
         _modesButton.SetActive(true);
         _battlePanel.SetActive(false);
         _playVsFriendPanel.SetActive(false);
+        _wizardSelection.SetActive(true);
     }
 
     public void OpenSettings()

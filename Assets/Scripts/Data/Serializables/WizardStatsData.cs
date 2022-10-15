@@ -6,21 +6,21 @@ using UnityEngine;
 public class WizardStatsData
 {
     public ItemStatsData StaffStatsData = new ItemStatsData(
-        "Grey_Basic_Staff",
+        "basic_gray",
         new List<string> {"basic_gray"},
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData CapeStatsData = new ItemStatsData(
-        "Grey_Basic_Cape",
+        "basic_gray",
         new List<string> {"basic_gray"},
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
         new ManaStatsData(0, 0, 0, 0)
     );
     public ItemStatsData OrbStatsData = new ItemStatsData(
-        "Grey_Basic_Orb",
+        "basic_gray",
         new List<string> { "basic_gray" },
         new DefenceStatsData(0, 0, 0, false),
         new AttackStatsData(0, 0, 0, 0, false),
@@ -32,6 +32,7 @@ public class WizardStatsData
     public List<MagicStatsData> MagicsStatsData = new List<MagicStatsData> {
         new MagicStatsData("WaterSplash", Magic.MagicType.Attack),
         new MagicStatsData("LesserCharge", Magic.MagicType.Mana),
+        new MagicStatsData("LesserHeal", Magic.MagicType.Defence),
         new MagicStatsData("MagicShieldBlue", Magic.MagicType.Defence),
     };
     public List<MasteryStatsData> MasteriesStatsData = new List<MasteryStatsData>

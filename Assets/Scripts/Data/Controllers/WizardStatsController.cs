@@ -59,6 +59,10 @@ public class WizardStatsController: MonoBehaviour
         _wizardStatsData.BaseManaStatsData.MaxMana += 2;
         SaveWizardStatsData(_wizardStatsData);
     }
+    public void SaveDashboardWizard(DashboardWizard dw)
+    {
+        SaveWizardStatsData(dw.WizardStatsData);
+    }
     
     public void EquipItem(InventoryItem equipedItem)
     {
